@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$busWeb-primary: mat-palette($mat-gray, 100);
+$busWeb-accent: mat-palette($mat-pink, A200, A100, A400);
+$busWeb-warn: mat-palette($mat-red);
+
+$busWeb-theme: mat-light-theme((
+  color: (
+    primary: $busWeb-primary,
+    accent: $busWeb-accent,
+    warn: $busWeb-warn,
+  )
+));
+
+@include angular-material-theme($busWeb-theme);
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Montserrat, sans-serif',
+);
+
+@include mat-base-typography($custom-typography);
+@include mat-checkbox-typography($custom-typography);
+@include angular-material-typography($custom-typography);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Montserrat', sans-serif;}
+
