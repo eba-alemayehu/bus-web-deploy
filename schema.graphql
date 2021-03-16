@@ -1,0 +1,875 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+input ArchiveAccountInput {
+  clientMutationId: String
+  password: String!
+}
+
+type ArchiveAccountPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+type BankAccountNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  bankName: String!
+  accountName: String!
+  accountNumber: String!
+  paymentorderSet(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
+}
+
+type BankAccountNodeConnection {
+  pageInfo: PageInfo!
+  edges: [BankAccountNodeEdge]!
+}
+
+type BankAccountNodeEdge {
+  node: BankAccountNode
+  cursor: String!
+}
+
+input BusMutationInput {
+  plateNumber: String
+  busNumber: String
+  carrier: ID
+  busSeatConfiguration: ID
+  id: ID
+  clientMutationId: String
+}
+
+type BusMutationPayload {
+  bus: BusNode
+  clientMutationId: String
+}
+
+type BusNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  plateNumber: String!
+  busNumber: String!
+  carrier: CarrierNode!
+  busSeatConfiguration: BusSeatConfigurationNode!
+  busseatsSet(offset: Int, before: String, after: String, first: Int, last: Int): BusSeatsConnection!
+  tripSet(offset: Int, before: String, after: String, first: Int, last: Int, route_LeavingFrom: ID, route_Destination: ID): TripNodeConnection!
+}
+
+type BusNodeConnection {
+  pageInfo: PageInfo!
+  edges: [BusNodeEdge]!
+}
+
+type BusNodeEdge {
+  node: BusNode
+  cursor: String!
+}
+
+input BusSeatConfigurationMutationInput {
+  name: String!
+  id: ID
+  clientMutationId: String
+}
+
+type BusSeatConfigurationMutationPayload {
+  busSeatConfiguration: BusSeatConfigurationNode
+  clientMutationId: String
+}
+
+type BusSeatConfigurationNode implements Node {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  busseatconfigurationseatSet(offset: Int, before: String, after: String, first: Int, last: Int): BusSeatConfigurationSeatNodeConnection!
+  busSet(offset: Int, before: String, after: String, first: Int, last: Int): BusNodeConnection!
+}
+
+type BusSeatConfigurationNodeConnection {
+  pageInfo: PageInfo!
+  edges: [BusSeatConfigurationNodeEdge]!
+}
+
+type BusSeatConfigurationNodeEdge {
+  node: BusSeatConfigurationNode
+  cursor: String!
+}
+
+input BusSeatConfigurationSeatMutationInput {
+  name: String!
+  busSeatConfiguration: ID!
+  row: Int!
+  col: Int!
+  windowSeat: Boolean
+  id: ID
+  clientMutationId: String
+}
+
+type BusSeatConfigurationSeatMutationPayload {
+  busSeatConfigurationSeat: BusSeatConfigurationSeatNode
+  clientMutationId: String
+}
+
+type BusSeatConfigurationSeatNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  busSeatConfiguration: BusSeatConfigurationNode!
+  windowSeat: Boolean!
+  row: Int!
+  col: Int!
+  busseatsSet(offset: Int, before: String, after: String, first: Int, last: Int): BusSeatsConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+}
+
+type BusSeatConfigurationSeatNodeConnection {
+  pageInfo: PageInfo!
+  edges: [BusSeatConfigurationSeatNodeEdge]!
+}
+
+type BusSeatConfigurationSeatNodeEdge {
+  node: BusSeatConfigurationSeatNode
+  cursor: String!
+}
+
+type BusSeats implements Node {
+  createdAt: DateTime!
+  id: ID!
+  bus: BusNode!
+  busSeatConfigurationSeat: BusSeatConfigurationSeatNode!
+}
+
+type BusSeatsConnection {
+  pageInfo: PageInfo!
+  edges: [BusSeatsEdge]!
+}
+
+type BusSeatsEdge {
+  node: BusSeats
+  cursor: String!
+}
+
+type BusStopNode implements Node {
+  createdAt: DateTime!
+  latitude: Decimal
+  longitude: Decimal
+  id: ID!
+  name: String!
+  city: CityNode!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+}
+
+type BusStopNodeConnection {
+  pageInfo: PageInfo!
+  edges: [BusStopNodeEdge]!
+}
+
+type BusStopNodeEdge {
+  node: BusStopNode
+  cursor: String!
+}
+
+type BusUserNode implements Node {
+  id: ID!
+  lastLogin: DateTime
+  email: String
+  emailVerificationCode: String
+  emailVerificationRequestedAt: DateTime
+  emailVerifiedAt: DateTime
+  phone: String
+  phoneVerificationCode: String
+  phoneVerificationRequestedAt: DateTime
+  phoneVerifiedAt: DateTime
+  firstName: String
+  lastName: String
+  isStaff: Boolean!
+  isActive: Boolean!
+  profilePic: String
+  createdAt: DateTime!
+  carrierSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
+  CarrierRating(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
+  carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
+  carrierratingSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierRatingNodeConnection!
+  tripSet(offset: Int, before: String, after: String, first: Int, last: Int, route_LeavingFrom: ID, route_Destination: ID): TripNodeConnection!
+  orderedBy(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
+  paymentorderSet(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  password: String!
+  isRegistered: Boolean!
+  isSuperuser: Boolean!
+}
+
+type BusUserNodeConnection {
+  pageInfo: PageInfo!
+  edges: [BusUserNodeEdge]!
+}
+
+type BusUserNodeEdge {
+  node: BusUserNode
+  cursor: String!
+}
+
+input CancelTripMutationInput {
+  trip: ID!
+  clientMutationId: String
+}
+
+type CancelTripMutationPayload {
+  trip: TripNode
+  clientMutationId: String
+}
+
+type CarrierAdminNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  carrier: CarrierNode!
+  user: BusUserNode!
+  readPermission: Boolean!
+}
+
+type CarrierAdminNodeConnection {
+  pageInfo: PageInfo!
+  edges: [CarrierAdminNodeEdge]!
+}
+
+type CarrierAdminNodeEdge {
+  node: CarrierAdminNode
+  cursor: String!
+}
+
+input CarrierMutationInput {
+  name: String!
+  phones: [String]
+  id: ID
+  clientMutationId: String
+}
+
+type CarrierMutationPayload {
+  carrier: CarrierNode
+  clientMutationId: String
+}
+
+type CarrierNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  logo: String
+  admins(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
+  ratings(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
+  carrierphoneSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierPhoneNodeConnection!
+  carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
+  carrierratingSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierRatingNodeConnection!
+  busSet(offset: Int, before: String, after: String, first: Int, last: Int): BusNodeConnection!
+}
+
+type CarrierNodeConnection {
+  pageInfo: PageInfo!
+  edges: [CarrierNodeEdge]!
+}
+
+type CarrierNodeEdge {
+  node: CarrierNode
+  cursor: String!
+}
+
+type CarrierPhoneNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  carrier: CarrierNode!
+  phone: String!
+}
+
+type CarrierPhoneNodeConnection {
+  pageInfo: PageInfo!
+  edges: [CarrierPhoneNodeEdge]!
+}
+
+type CarrierPhoneNodeEdge {
+  node: CarrierPhoneNode
+  cursor: String!
+}
+
+input CarrierRatingMutationInput {
+  carrier: ID!
+  rating: Int!
+  clientMutationId: String
+}
+
+type CarrierRatingMutationPayload {
+  rating: CarrierRatingNode
+  clientMutationId: String
+}
+
+type CarrierRatingNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  carrier: CarrierNode!
+  user: BusUserNode!
+  rating: Int!
+}
+
+type CarrierRatingNodeConnection {
+  pageInfo: PageInfo!
+  edges: [CarrierRatingNodeEdge]!
+}
+
+type CarrierRatingNodeEdge {
+  node: CarrierRatingNode
+  cursor: String!
+}
+
+type CityNode implements Node {
+  createdAt: DateTime!
+  latitude: Decimal
+  longitude: Decimal
+  id: ID!
+  name: String!
+  region: RegionNode!
+  busstopSet(offset: Int, before: String, after: String, first: Int, last: Int): BusStopNodeConnection!
+  leavingFrom(offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection!
+  destination(offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection!
+  routeSet(offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection!
+}
+
+type CityNodeConnection {
+  pageInfo: PageInfo!
+  edges: [CityNodeEdge]!
+}
+
+type CityNodeEdge {
+  node: CityNode
+  cursor: String!
+}
+
+type CountryNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  latitude: Decimal
+  longitude: Decimal
+  name: String!
+  countryCode: String!
+  regionSet(offset: Int, before: String, after: String, first: Int, last: Int): RegionNodeConnection!
+}
+
+type CountryNodeConnection {
+  pageInfo: PageInfo!
+  edges: [CountryNodeEdge]!
+}
+
+type CountryNodeEdge {
+  node: CountryNode
+  cursor: String!
+}
+
+input CreateAnonymousUserMutationInput {
+  clientMutationId: String
+}
+
+type CreateAnonymousUserMutationPayload {
+  user: BusUserNode
+  token: String
+  refreshToken: String
+  clientMutationId: String
+}
+
+scalar DateTime
+
+scalar Decimal
+
+input DeleteAccountInput {
+  clientMutationId: String
+  password: String!
+}
+
+type DeleteAccountPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+scalar ExpectedErrorType
+
+scalar GenericScalar
+
+type Mutation {
+  trip(input: TripMutationInput!): TripMutationPayload
+  cancelTrip(input: CancelTripMutationInput!): CancelTripMutationPayload
+  ticket(input: TicketMutationInput!): TicketMutationPayload
+  carrier(input: CarrierMutationInput!): CarrierMutationPayload
+  carrierRating(input: CarrierRatingMutationInput!): CarrierRatingMutationPayload
+  busSeatConfiguration(input: BusSeatConfigurationMutationInput!): BusSeatConfigurationMutationPayload
+  busSeatConfigurationSeat(input: BusSeatConfigurationSeatMutationInput!): BusSeatConfigurationSeatMutationPayload
+  bus(input: BusMutationInput!): BusMutationPayload
+  register(input: RegisterInput!): RegisterPayload
+  verifyAccount(input: VerifyAccountInput!): VerifyAccountPayload
+  resendActivationEmail(input: ResendActivationEmailInput!): ResendActivationEmailPayload
+  sendPasswordResetEmail(input: SendPasswordResetEmailInput!): SendPasswordResetEmailPayload
+  passwordReset(input: PasswordResetInput!): PasswordResetPayload
+  passwordChange(input: PasswordChangeInput!): PasswordChangePayload
+  archiveAccount(input: ArchiveAccountInput!): ArchiveAccountPayload
+  deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
+  updateAccount(input: UpdateAccountInput!): UpdateAccountPayload
+  sendSecondaryEmailActivation(input: SendSecondaryEmailActivationInput!): SendSecondaryEmailActivationPayload
+  verifySecondaryEmail(input: VerifySecondaryEmailInput!): VerifySecondaryEmailPayload
+  swapEmails(input: SwapEmailsInput!): SwapEmailsPayload
+  tokenAuth(input: ObtainJSONWebTokenInput!): ObtainJSONWebTokenPayload
+  verifyToken(input: VerifyTokenInput!): VerifyTokenPayload
+  refreshToken(input: RefreshTokenInput!): RefreshTokenPayload
+  revokeToken(input: RevokeTokenInput!): RevokeTokenPayload
+  createAnonymousUser(input: CreateAnonymousUserMutationInput!): CreateAnonymousUserMutationPayload
+  user(input: UserMutationInput!): UserMutationPayload
+  sendPhoneVerificationCode(input: SendVerificationCodeMutationInput!): SendVerificationCodeMutationPayload
+  verifyPhoneVerificationCode(input: ValidatePhoneMutationInput!): ValidatePhoneMutationPayload
+}
+
+interface Node {
+  id: ID!
+}
+
+input ObtainJSONWebTokenInput {
+  clientMutationId: String
+  password: String!
+  email: String
+  phone: String
+}
+
+type ObtainJSONWebTokenPayload {
+  token: String
+  success: Boolean
+  errors: ExpectedErrorType
+  user: UserNode
+  unarchiving: Boolean
+  clientMutationId: String
+  refreshToken: String
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+input PasswordChangeInput {
+  clientMutationId: String
+  oldPassword: String!
+  newPassword1: String!
+  newPassword2: String!
+}
+
+type PasswordChangePayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+  refreshToken: String
+  token: String
+}
+
+input PasswordResetInput {
+  clientMutationId: String
+  token: String!
+  newPassword1: String!
+  newPassword2: String!
+}
+
+type PasswordResetPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+type PaymentOrderNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  orderedBy: BusUserNode!
+  price: Decimal!
+  transactionId: String
+  bankAccount: BankAccountNode
+  verifiedAt: DateTime
+  verifiedBy: BusUserNode
+  verification: Boolean
+  isChecked: Boolean
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+}
+
+type PaymentOrderNodeConnection {
+  pageInfo: PageInfo!
+  edges: [PaymentOrderNodeEdge]!
+}
+
+type PaymentOrderNodeEdge {
+  node: PaymentOrderNode
+  cursor: String!
+}
+
+type Query {
+  routes(offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection
+  route(id: ID!): RouteNode
+  trips(offset: Int, before: String, after: String, first: Int, last: Int, route_LeavingFrom: ID, route_Destination: ID): TripNodeConnection
+  trip(id: ID!): TripNode
+  tickets(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection
+  ticket(id: ID!): TicketNode
+  bankAccounts(offset: Int, before: String, after: String, first: Int, last: Int): BankAccountNodeConnection
+  bankAccount(id: ID!): BankAccountNode
+  paymentOrders(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection
+  paymentOrder(id: ID!): PaymentOrderNode
+  countries(offset: Int, before: String, after: String, first: Int, last: Int): CountryNodeConnection
+  country(id: ID!): CountryNode
+  regions(offset: Int, before: String, after: String, first: Int, last: Int): RegionNodeConnection
+  region(id: ID!): RegionNode
+  cities(offset: Int, before: String, after: String, first: Int, last: Int): CityNodeConnection
+  city(id: ID!): CityNode
+  busStops(offset: Int, before: String, after: String, first: Int, last: Int): BusStopNodeConnection
+  busStop(id: ID!): BusStopNode
+  carriers(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection
+  carrier(id: ID!): CarrierNode
+  carrierAdmins(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection
+  carrierAdmin(id: ID!): CarrierAdminNode
+  busSeatConfigurations(offset: Int, before: String, after: String, first: Int, last: Int): BusSeatConfigurationNodeConnection
+  busSeatConfiguration(id: ID!): BusSeatConfigurationNode
+  busSeatConfigurationSeats(offset: Int, before: String, after: String, first: Int, last: Int): BusSeatConfigurationSeatNodeConnection
+  busSeatConfigurationSeat(id: ID!): BusSeatConfigurationSeatNode
+  buses(offset: Int, before: String, after: String, first: Int, last: Int): BusNodeConnection
+  bus(id: ID!): BusNode
+  busSeats(offset: Int, before: String, after: String, first: Int, last: Int): BusSeatsConnection
+  busSeat(id: ID!): BusSeats
+  me: UserNode
+  user(id: ID!): UserNode
+  users(offset: Int, before: String, after: String, first: Int, last: Int, email: String, phone: String, firstName: String, firstName_Icontains: String, firstName_Istartswith: String, lastName: String, lastName_Icontains: String, lastName_Istartswith: String, isActive: Boolean): UserNodeConnection
+}
+
+input RefreshTokenInput {
+  refreshToken: String!
+  clientMutationId: String
+}
+
+type RefreshTokenPayload {
+  token: String
+  payload: GenericScalar
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+  refreshToken: String
+}
+
+type RegionNode implements Node {
+  createdAt: DateTime!
+  latitude: Decimal
+  longitude: Decimal
+  id: ID!
+  name: String!
+  country: CountryNode!
+  citySet(offset: Int, before: String, after: String, first: Int, last: Int): CityNodeConnection!
+}
+
+type RegionNodeConnection {
+  pageInfo: PageInfo!
+  edges: [RegionNodeEdge]!
+}
+
+type RegionNodeEdge {
+  node: RegionNode
+  cursor: String!
+}
+
+input RegisterInput {
+  clientMutationId: String
+  firstName: String
+  lastName: String
+  phone: String
+  email: String
+}
+
+type RegisterPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+  refreshToken: String
+  token: String
+}
+
+input ResendActivationEmailInput {
+  clientMutationId: String
+  email: String!
+}
+
+type ResendActivationEmailPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+input RevokeTokenInput {
+  refreshToken: String!
+  clientMutationId: String
+}
+
+type RevokeTokenPayload {
+  revoked: Int
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+type RouteNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  leavingFrom: CityNode!
+  destination: CityNode!
+  distance: Int!
+  price: Decimal!
+  crossingCities(offset: Int, before: String, after: String, first: Int, last: Int): CityNodeConnection!
+  tripSet(offset: Int, before: String, after: String, first: Int, last: Int, route_LeavingFrom: ID, route_Destination: ID): TripNodeConnection!
+}
+
+type RouteNodeConnection {
+  pageInfo: PageInfo!
+  edges: [RouteNodeEdge]!
+}
+
+type RouteNodeEdge {
+  node: RouteNode
+  cursor: String!
+}
+
+input SendPasswordResetEmailInput {
+  clientMutationId: String
+  email: String!
+}
+
+type SendPasswordResetEmailPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+input SendSecondaryEmailActivationInput {
+  clientMutationId: String
+  email: String!
+  password: String!
+}
+
+type SendSecondaryEmailActivationPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+input SendVerificationCodeMutationInput {
+  phone: String!
+  clientMutationId: String
+}
+
+type SendVerificationCodeMutationPayload {
+  user: BusUserNode
+  clientMutationId: String
+}
+
+input SwapEmailsInput {
+  clientMutationId: String
+  password: String!
+}
+
+type SwapEmailsPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+input TicketMutationInput {
+  id: ID
+  trip: ID!
+  busStop: ID!
+  busSeatConfigurationSeat: ID!
+  firstName: String
+  lastName: String
+  clientMutationId: String
+}
+
+type TicketMutationPayload {
+  ticket: TicketNode
+  clientMutationId: String
+}
+
+type TicketNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  user: BusUserNode!
+  firstName: String!
+  lastName: String!
+  trip: TripNode!
+  busStop: BusStopNode!
+  busSeatConfigurationSeat: BusSeatConfigurationSeatNode!
+  order: PaymentOrderNode!
+  ticketNumber: UUID!
+}
+
+type TicketNodeConnection {
+  pageInfo: PageInfo!
+  edges: [TicketNodeEdge]!
+}
+
+type TicketNodeEdge {
+  node: TicketNode
+  cursor: String!
+}
+
+input TripMutationInput {
+  id: ID
+  route: ID!
+  bus: ID!
+  departureDatetime: String!
+  arrivalDatetime: String!
+  reputation: Int
+  clientMutationId: String
+}
+
+type TripMutationPayload {
+  trips: [TripNode]
+  clientMutationId: String
+}
+
+type TripNode implements Node {
+  createdAt: DateTime!
+  id: ID!
+  route: RouteNode!
+  bus: BusNode
+  departureTime: DateTime!
+  bulkRef: String
+  canceledBy: BusUserNode
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+}
+
+type TripNodeConnection {
+  pageInfo: PageInfo!
+  edges: [TripNodeEdge]!
+}
+
+type TripNodeEdge {
+  node: TripNode
+  cursor: String!
+}
+
+scalar UUID
+
+input UpdateAccountInput {
+  clientMutationId: String
+  email: String
+  phone: String
+  firstName: String
+  lastName: String
+}
+
+type UpdateAccountPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+input UserMutationInput {
+  id: ID
+  firstName: String
+  lastName: String
+  phone: String
+  password: String!
+  clientMutationId: String
+}
+
+type UserMutationPayload {
+  user: BusUserNode
+  token: String
+  refreshToken: String
+  clientMutationId: String
+}
+
+type UserNode implements Node {
+  id: ID!
+  lastLogin: DateTime
+  email: String
+  emailVerificationCode: String
+  emailVerificationRequestedAt: DateTime
+  emailVerifiedAt: DateTime
+  phone: String
+  phoneVerificationCode: String
+  phoneVerificationRequestedAt: DateTime
+  phoneVerifiedAt: DateTime
+  firstName: String
+  lastName: String
+  isStaff: Boolean!
+  isActive: Boolean!
+  profilePic: String
+  createdAt: DateTime!
+  carrierSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
+  CarrierRating(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
+  carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
+  carrierratingSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierRatingNodeConnection!
+  tripSet(offset: Int, before: String, after: String, first: Int, last: Int, route_LeavingFrom: ID, route_Destination: ID): TripNodeConnection!
+  orderedBy(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
+  paymentorderSet(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  pk: Int
+  archived: Boolean
+  verified: Boolean
+  secondaryEmail: String
+}
+
+type UserNodeConnection {
+  pageInfo: PageInfo!
+  edges: [UserNodeEdge]!
+}
+
+type UserNodeEdge {
+  node: UserNode
+  cursor: String!
+}
+
+input ValidatePhoneMutationInput {
+  phone: String!
+  verificationCode: String!
+  password: String
+  confirmPassword: String
+  clientMutationId: String
+}
+
+type ValidatePhoneMutationPayload {
+  user: BusUserNode
+  token: String
+  refreshToken: String
+  clientMutationId: String
+}
+
+input VerifyAccountInput {
+  clientMutationId: String
+  token: String!
+}
+
+type VerifyAccountPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+input VerifySecondaryEmailInput {
+  clientMutationId: String
+  token: String!
+}
+
+type VerifySecondaryEmailPayload {
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}
+
+input VerifyTokenInput {
+  token: String!
+  clientMutationId: String
+}
+
+type VerifyTokenPayload {
+  payload: GenericScalar
+  success: Boolean
+  errors: ExpectedErrorType
+  clientMutationId: String
+}

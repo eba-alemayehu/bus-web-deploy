@@ -7,4 +7,4 @@ if (isDevMode()){
 }
 
 export const SERVER_URI   = _SERVER_URI;
-export const GRAPHQL_URL  = _SERVER_URI + 'graphql';
+export const GRAPHQL_URL: string  = _SERVER_URI + 'graphql';
