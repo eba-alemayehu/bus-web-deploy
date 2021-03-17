@@ -1,0 +1,12 @@
+.time{
+  font-weight: 600;
+  font-size: 1.6em;
+}
+.time-city-container{
+  margin: 1em 1em;
+}
+.duration:after,
+.duration:before{
+  content:"\00a0\00a0\00a0\00a0\00a\00a0\00a0";
+  text-decoration:line-through;
+}
