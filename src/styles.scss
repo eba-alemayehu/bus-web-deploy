@@ -27,3 +27,6 @@ $custom-typography: mat-typography-config(
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Montserrat', sans-serif;}
 
+.mat-card:not([class*=mat-elevation-z]){
+  @include mat-elevation(6, var(--web-wash), 1);
+}
