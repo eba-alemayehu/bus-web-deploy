@@ -1,35 +1,43 @@
-<div fxLayout="col">
-  <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()">
-    <div fxLayout="column">
+<div fxLayout="column">
+  <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto">
+    <div [fxLayout]="!(isHandset$ | async)? layout: 'column'"
+         [class.align-items]="layout === 'row' && !(isHandset$ | async)">
       <div fxLayout="row">
         <mat-form-field appearance="outline">
           <mat-label>Leaving from</mat-label>
           <input matInput type="text" formControlName="leavingFrom">
         </mat-form-field>
-        <button mat-icon-button><mat-icon>compare_arrows</mat-icon></button>
+        <button mat-icon-button>
+          <mat-icon>compare_arrows</mat-icon>
+        </button>
         <mat-form-field appearance="outline">
           <mat-label>Destination</mat-label>
           <input matInput type="text" formControlName="destination">
         </mat-form-field>
       </div>
+
       <div fxLayout="row">
-        <mat-radio-group aria-label="Select an option" formControlName="roundTrip" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; margin-bottom: 1em">
-            <mat-radio-button [value]="false">One way</mat-radio-button>
-            <mat-radio-button [value]="true">Round trip</mat-radio-button>
-        </mat-radio-group>
-      </div>
-      <div fxLayout="row" gdAlignRows="stretch">
         <mat-form-field appearance="outline">
-          <mat-label>Choose a date</mat-label>
+          <mat-label>Departure date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="departureDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Return date</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="departureDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
       <div fxLayout="row" style="justify-content: center">
-        <button mat-icon-button><mat-icon>remove</mat-icon></button>
-        <button mat-button>Passengers 1</button>
-        <button mat-icon-button><mat-icon>add</mat-icon></button>
+        <button mat-icon-button (click)="subtractPassenger()">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <button mat-button>{{passengers}} Passengers</button>
+        <button mat-icon-button (click)="addPassenger()">
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
       <div fxLayout="row-reverse">
         <button mat-flat-button type="submit" color="primary">Search</button>

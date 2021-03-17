@@ -31,7 +31,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatRadioModule
   ],
   providers: [
-    MatNativeDateModule
+    MatDatepickerModule,
+    MatNativeDateModule,
   ]
 })
 export class TripFormModule { }
