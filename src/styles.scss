@@ -2,7 +2,7 @@
 
 @include mat-core();
 
-$busWeb-primary: mat-palette($mat-gray, 100);
+$busWeb-primary: mat-palette($mat-green, 400);
 $busWeb-accent: mat-palette($mat-pink, A200, A100, A400);
 $busWeb-warn: mat-palette($mat-red);
 
@@ -28,5 +28,32 @@ html, body { height: 100%; }
 body { margin: 0; font-family: 'Montserrat', sans-serif;}
 
 .mat-card:not([class*=mat-elevation-z]){
-  @include mat-elevation(6, var(--web-wash), 1);
+  @include mat-elevation(16, #eee, .8);
+}
+.mat-toolbar.mat-primary{
+  background: white;
+}
+h1,.mat-h1,.mat-headline{
+  font-family: 'Redressed', cursive !important;
+}
+
+.mat-flat-button.mat-primary {background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC  51%, #02AAB0  100%)}
+.mat-flat-button.mat-primary {
+  font-weight: 600;
+  margin: 10px;
+  padding: 3px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 20px;
+  display: block;
+}
+
+.mat-flat-button.mat-primary:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }

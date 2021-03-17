@@ -1,4 +1,7 @@
 <div  fxLayout="row" fxLayoutAlign="space-between" >
-  <div style="border: 1px solid red">One</div>
-  <mat-card></mat-card>
+  <div>image</div>
+  <mat-card style="margin: 8% 5%">
+    <h1>Search</h1>
+    <app-trip-form (submit)="search($event)"></app-trip-form>
+  </mat-card>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {echo} from '../../../util/print';
 
 @Component({
   selector: 'app-home',
@@ -12,4 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  search($event: any): void {
+    echo($event);
+  }
 }
