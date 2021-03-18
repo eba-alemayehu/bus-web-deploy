@@ -262,6 +262,8 @@ type CarrierNode implements Node {
   carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
   carrierratingSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierRatingNodeConnection!
   busSet(offset: Int, before: String, after: String, first: Int, last: Int): BusNodeConnection!
+  routeSet(offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection!
+  tripSet(offset: Int, before: String, after: String, first: Int, last: Int, route_LeavingFrom: ID, route_Destination: ID): TripNodeConnection!
 }
 
 type CarrierNodeConnection {
@@ -535,6 +537,8 @@ type Query {
   bus(id: ID!): BusNode
   busSeats(offset: Int, before: String, after: String, first: Int, last: Int): BusSeatsConnection
   busSeat(id: ID!): BusSeats
+  busUsers(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection
+  busUser(id: ID!): BusUserNode
   me: UserNode
   user(id: ID!): UserNode
   users(offset: Int, before: String, after: String, first: Int, last: Int, email: String, phone: String, firstName: String, firstName_Icontains: String, firstName_Istartswith: String, lastName: String, lastName_Icontains: String, lastName_Istartswith: String, isActive: Boolean): UserNodeConnection
@@ -619,7 +623,7 @@ type RouteNode implements Node {
   leavingFrom: CityNode!
   destination: CityNode!
   distance: Int!
-  price: Decimal!
+  prices(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   crossingCities(offset: Int, before: String, after: String, first: Int, last: Int): CityNodeConnection!
   tripSet(offset: Int, before: String, after: String, first: Int, last: Int, route_LeavingFrom: ID, route_Destination: ID): TripNodeConnection!
 }
@@ -719,6 +723,7 @@ type TicketNodeEdge {
 input TripMutationInput {
   id: ID
   route: ID!
+  carrier: ID!
   bus: ID!
   departureDatetime: String!
   arrivalDatetime: String!
@@ -735,6 +740,7 @@ type TripNode implements Node {
   createdAt: DateTime!
   id: ID!
   route: RouteNode!
+  carrier: CarrierNode!
   bus: BusNode
   departureTime: DateTime!
   bulkRef: String

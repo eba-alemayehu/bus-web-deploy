@@ -1,0 +1,13 @@
+query Users($phoneContains: String, $phone: String){
+  busUsers(phone_Icontains: $phoneContains, phone: $phone){
+    edges{
+      node{
+        id
+        firstName
+        lastName
+        profilePic
+      }
+    }
+
+  }
+}

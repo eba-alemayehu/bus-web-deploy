@@ -9,12 +9,12 @@ import {TripFormModule} from '../../trip/forms/trip-form/trip-form.module';
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FlexModule,
-    MatCardModule,
-    TripFormModule,
-  ]
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        FlexModule,
+        MatCardModule,
+        TripFormModule,
+    ]
 })
 export class HomeModule { }

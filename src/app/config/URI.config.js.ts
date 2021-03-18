@@ -3,8 +3,8 @@ import {isDevMode} from '@angular/core';
 let _SERVER_URI = 'http://api.gozo.com/';
 
 if (isDevMode()){
-    _SERVER_URI   = 'https://localhost:8000/';
+    _SERVER_URI   = 'http://localhost:8000/';
 }
 
 export const SERVER_URI   = _SERVER_URI;
-export const GRAPHQL_URL: string  = _SERVER_URI + 'graphql';
+export const GRAPHQL_URL: string  = _SERVER_URI + 'graphql/';

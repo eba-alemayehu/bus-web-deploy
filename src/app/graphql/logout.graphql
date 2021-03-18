@@ -1,0 +1,7 @@
+mutation LogoutMutation($input: RevokeTokenInput!){
+  revokeToken(input: $input){
+    revoked
+    success
+    errors
+  }
+}

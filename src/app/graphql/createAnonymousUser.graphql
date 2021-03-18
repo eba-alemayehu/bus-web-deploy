@@ -1,0 +1,9 @@
+mutation UserCreateAnonimusUser($input: CreateAnonymousUserMutationInput!){
+  createAnonymousUser(input: $input){
+    user{
+      id
+    }
+    token
+    refreshToken
+  }
+}

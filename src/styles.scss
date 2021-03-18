@@ -26,7 +26,9 @@ $custom-typography: mat-typography-config(
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Montserrat', sans-serif;}
-
+.spacer {
+  flex: 1 1 auto;
+}
 .mat-card:not([class*=mat-elevation-z]){
   @include mat-elevation(16, #eee, .8);
 }
@@ -55,5 +57,17 @@ h1,.mat-h1,.mat-headline{
 .mat-flat-button.mat-primary:hover {
   background-position: right center; /* change the direction of the change here */
   color: #fff;
+  text-decoration: none;
+}
+.mat-dialog-container{
+  overflow-x: hidden !important;
+}
+
+.mat-flat-button.mat-primary.mat-button-disabled {
+  opacity: .4;
+}
+.mat-flat-button.mat-primary.mat-button-disabled:hover {
+  background-position: center center; /* change the direction of the change here */
+  color: gray;
   text-decoration: none;
 }
