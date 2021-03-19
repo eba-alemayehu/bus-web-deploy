@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {TripNodeEdge} from '../../../../generated/graphql';
 
 @Component({
   selector: 'app-trip-list-item',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trip-list-item.component.scss']
 })
 export class TripListItemComponent implements OnInit {
-
+  @Input() trip: TripNodeEdge;
   constructor() { }
 
   ngOnInit(): void {

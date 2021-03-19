@@ -5,7 +5,7 @@ import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
-import {TripFormModule} from '../../../trip/forms/trip-form/trip-form.module';
+import {TripSearchFormModule} from '../../../trip/forms/trip-search-form/trip-search-form.module';
 import {TripListItemModule} from '../../../trip/components/trip-list-item/trip-list-item.module';
 
 
@@ -16,7 +16,7 @@ import {TripListItemModule} from '../../../trip/components/trip-list-item/trip-l
         SearchRoutingModule,
         FlexModule,
         MatCardModule,
-        TripFormModule,
+        TripSearchFormModule,
         TripListItemModule
     ]
 })

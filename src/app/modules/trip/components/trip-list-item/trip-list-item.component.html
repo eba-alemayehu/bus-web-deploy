@@ -1,21 +1,22 @@
 <div fxLayout="row" style="max-width: 900px; margin: auto">
   <div fxLayout="column">
     <img src="/assets/yenabus.png" style="width: 60px"/>
-    <p>Yenabus</p>
+    <p>{{trip?.node.carrier.name}}</p>
   </div>
   <div fxLayout="column" fxFlex="grow" style="margin-left: 1.5em">
     <div fxLayout="row" style="align-items: center">
       <div fxLayout="column" class="time-city-container">
-        <span class="time">4:00</span>
-        <span>Adis Ababa</span>
+        <span class="time">{{trip?.node.departureTime | date:'shortTime'}}</span>
+        <span>{{trip?.node.route.leavingFrom.name}}</span>
       </div>
       <span class="duration">4h3m</span>
       <div fxLayout="column" class="time-city-container">
-        <span class="time">11:00</span>
-        <span>Bahir dar</span>
+        <span class="time">{{trip?.node.arrivalTime | date:'shortTime'}}</span>
+        <span>{{trip?.node.route.destination.name}}</span>
       </div>
     </div>
   </div>
+  <span class="spacer"></span>
   <div fxLayout="column">
     2345 ETB
     <button mat-flat-button color="primary">Reserve seat</button>

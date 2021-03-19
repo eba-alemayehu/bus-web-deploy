@@ -1,0 +1,15 @@
+query Buses($carrier: ID!){
+  buses(carrier: $carrier){
+    edges{
+      node{
+        id
+        busNumber
+        plateNumber
+        carrier{
+          id
+          name
+        }
+      }
+    }
+  }
+}

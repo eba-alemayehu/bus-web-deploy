@@ -1,0 +1,34 @@
+query Trips($carrier: ID){
+  trips(carrier: $carrier){
+    edges{
+      node{
+        id
+        departureTime
+        arrivalTime
+        bus{
+          id
+          plateNumber
+          busNumber
+        }
+        route{
+          id
+          leavingFrom{
+            id
+            name
+          }
+          destination{
+            id
+            name
+          }
+          distance
+        }
+        carrier{
+          id
+          name
+          logo
+        }
+        createdAt
+      }
+    }
+  }
+}

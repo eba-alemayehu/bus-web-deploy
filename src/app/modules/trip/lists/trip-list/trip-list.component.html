@@ -1,0 +1,8 @@
+<mat-card>
+  <div fxLayout="column">
+    <div fxLayout="row" *ngFor="let trip of trips$ | async" >
+      <app-trip-list-item [trip]="trip" style="width: 100%; margin: auto"></app-trip-list-item>
+    </div>
+  </div>
+</mat-card>
+

@@ -1,0 +1,19 @@
+query Cities{
+  cities{
+    edges{
+      node{
+        id
+        name
+        region{
+          id
+          name
+          country{
+            id
+            name
+            countryCode
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+query Carrier($id: ID!, $getTrips: Boolean!){
+  carrier(id: $id){
+    id
+    name
+    logo
+    tripSet @include(if: $getTrips) {
+      edges{
+        node{
+          id
+          route{
+            createdAt
+            leavingFrom{
+              id
+              name
+            }
+            destination{
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

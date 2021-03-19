@@ -107,6 +107,7 @@ export type BusNodeTripSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -160,6 +161,7 @@ export type BusSeatConfigurationNodeBusSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 export type BusSeatConfigurationNodeConnection = {
@@ -359,6 +361,7 @@ export type BusUserNodeTripSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -533,6 +536,7 @@ export type CarrierNodeBusSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -553,6 +557,7 @@ export type CarrierNodeTripSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -1080,6 +1085,7 @@ export type QueryTripsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -1250,6 +1256,7 @@ export type QueryBusesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1412,7 +1419,7 @@ export type RouteNode = Node & {
   id: Scalars['ID'];
   leavingFrom: CityNode;
   destination: CityNode;
-  distance: Scalars['Int'];
+  distance?: Maybe<Scalars['Int']>;
   prices: CarrierNodeConnection;
   crossingCities: CityNodeConnection;
   tripSet: TripNodeConnection;
@@ -1443,6 +1450,7 @@ export type RouteNodeTripSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -1551,9 +1559,11 @@ export type TicketNodeEdge = {
 
 export type TripMutationInput = {
   id?: Maybe<Scalars['ID']>;
-  route: Scalars['ID'];
+  route?: Maybe<Scalars['ID']>;
+  leavingFrom?: Maybe<Scalars['ID']>;
+  destination?: Maybe<Scalars['ID']>;
   carrier: Scalars['ID'];
-  bus: Scalars['ID'];
+  bus?: Maybe<Scalars['ID']>;
   departureDatetime: Scalars['String'];
   arrivalDatetime: Scalars['String'];
   reputation?: Maybe<Scalars['Int']>;
@@ -1574,6 +1584,7 @@ export type TripNode = Node & {
   carrier: CarrierNode;
   bus?: Maybe<BusNode>;
   departureTime: Scalars['DateTime'];
+  arrivalTime: Scalars['DateTime'];
   bulkRef?: Maybe<Scalars['String']>;
   canceledBy?: Maybe<BusUserNode>;
   ticketSet: TicketNodeConnection;
@@ -1708,6 +1719,7 @@ export type UserNodeTripSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -1804,6 +1816,129 @@ export type VerifyTokenPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type BusesQueryVariables = Exact<{
+  carrier: Scalars['ID'];
+}>;
+
+
+export type BusesQuery = (
+  { __typename?: 'Query' }
+  & { buses?: Maybe<(
+    { __typename?: 'BusNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'BusNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'BusNode' }
+        & Pick<BusNode, 'id' | 'busNumber' | 'plateNumber'>
+        & { carrier: (
+          { __typename?: 'CarrierNode' }
+          & Pick<CarrierNode, 'id' | 'name'>
+        ) }
+      )> }
+    )>> }
+  )> }
+);
+
+export type CarrierQueryVariables = Exact<{
+  id: Scalars['ID'];
+  getTrips: Scalars['Boolean'];
+}>;
+
+
+export type CarrierQuery = (
+  { __typename?: 'Query' }
+  & { carrier?: Maybe<(
+    { __typename?: 'CarrierNode' }
+    & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+    & { tripSet?: Maybe<(
+      { __typename?: 'TripNodeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripNodeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripNode' }
+          & Pick<TripNode, 'id'>
+          & { route: (
+            { __typename?: 'RouteNode' }
+            & Pick<RouteNode, 'createdAt'>
+            & { leavingFrom: (
+              { __typename?: 'CityNode' }
+              & Pick<CityNode, 'id' | 'name'>
+            ), destination: (
+              { __typename?: 'CityNode' }
+              & Pick<CityNode, 'id' | 'name'>
+            ) }
+          ) }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type CarriersQueryVariables = Exact<{
+  getTrips: Scalars['Boolean'];
+}>;
+
+
+export type CarriersQuery = (
+  { __typename?: 'Query' }
+  & { carriers?: Maybe<(
+    { __typename?: 'CarrierNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'CarrierNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'CarrierNode' }
+        & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+        & { tripSet?: Maybe<(
+          { __typename?: 'TripNodeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TripNodeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TripNode' }
+              & Pick<TripNode, 'id'>
+              & { route: (
+                { __typename?: 'RouteNode' }
+                & Pick<RouteNode, 'createdAt'>
+                & { leavingFrom: (
+                  { __typename?: 'CityNode' }
+                  & Pick<CityNode, 'id' | 'name'>
+                ), destination: (
+                  { __typename?: 'CityNode' }
+                  & Pick<CityNode, 'id' | 'name'>
+                ) }
+              ) }
+            )> }
+          )>> }
+        )> }
+      )> }
+    )>> }
+  )> }
+);
+
+export type CitiesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CitiesQuery = (
+  { __typename?: 'Query' }
+  & { cities?: Maybe<(
+    { __typename?: 'CityNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'CityNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'CityNode' }
+        & Pick<CityNode, 'id' | 'name'>
+        & { region: (
+          { __typename?: 'RegionNode' }
+          & Pick<RegionNode, 'id' | 'name'>
+          & { country: (
+            { __typename?: 'CountryNode' }
+            & Pick<CountryNode, 'id' | 'name' | 'countryCode'>
+          ) }
+        ) }
+      )> }
+    )>> }
+  )> }
+);
+
 export type UserCreateAnonimusUserMutationVariables = Exact<{
   input: CreateAnonymousUserMutationInput;
 }>;
@@ -1892,6 +2027,58 @@ export type LoginMutationMutation = (
   )> }
 );
 
+export type TripMutationMutationVariables = Exact<{
+  input: TripMutationInput;
+}>;
+
+
+export type TripMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { trip?: Maybe<(
+    { __typename?: 'TripMutationPayload' }
+    & { trips?: Maybe<Array<Maybe<(
+      { __typename?: 'TripNode' }
+      & Pick<TripNode, 'id' | 'departureTime'>
+    )>>> }
+  )> }
+);
+
+export type TripsQueryVariables = Exact<{
+  carrier?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type TripsQuery = (
+  { __typename?: 'Query' }
+  & { trips?: Maybe<(
+    { __typename?: 'TripNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TripNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TripNode' }
+        & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'createdAt'>
+        & { bus?: Maybe<(
+          { __typename?: 'BusNode' }
+          & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
+        )>, route: (
+          { __typename?: 'RouteNode' }
+          & Pick<RouteNode, 'id' | 'distance'>
+          & { leavingFrom: (
+            { __typename?: 'CityNode' }
+            & Pick<CityNode, 'id' | 'name'>
+          ), destination: (
+            { __typename?: 'CityNode' }
+            & Pick<CityNode, 'id' | 'name'>
+          ) }
+        ), carrier: (
+          { __typename?: 'CarrierNode' }
+          & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+        ) }
+      )> }
+    )>> }
+  )> }
+);
+
 export type UsersQueryVariables = Exact<{
   phoneContains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
@@ -1912,6 +2099,146 @@ export type UsersQuery = (
   )> }
 );
 
+export const BusesDocument = gql`
+    query Buses($carrier: ID!) {
+  buses(carrier: $carrier) {
+    edges {
+      node {
+        id
+        busNumber
+        plateNumber
+        carrier {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BusesGQL extends Apollo.Query<BusesQuery, BusesQueryVariables> {
+    document = BusesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CarrierDocument = gql`
+    query Carrier($id: ID!, $getTrips: Boolean!) {
+  carrier(id: $id) {
+    id
+    name
+    logo
+    tripSet @include(if: $getTrips) {
+      edges {
+        node {
+          id
+          route {
+            createdAt
+            leavingFrom {
+              id
+              name
+            }
+            destination {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CarrierGQL extends Apollo.Query<CarrierQuery, CarrierQueryVariables> {
+    document = CarrierDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CarriersDocument = gql`
+    query Carriers($getTrips: Boolean!) {
+  carriers {
+    edges {
+      node {
+        id
+        name
+        logo
+        tripSet @include(if: $getTrips) {
+          edges {
+            node {
+              id
+              route {
+                createdAt
+                leavingFrom {
+                  id
+                  name
+                }
+                destination {
+                  id
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CarriersGQL extends Apollo.Query<CarriersQuery, CarriersQueryVariables> {
+    document = CarriersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CitiesDocument = gql`
+    query Cities {
+  cities {
+    edges {
+      node {
+        id
+        name
+        region {
+          id
+          name
+          country {
+            id
+            name
+            countryCode
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CitiesGQL extends Apollo.Query<CitiesQuery, CitiesQueryVariables> {
+    document = CitiesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UserCreateAnonimusUserDocument = gql`
     mutation UserCreateAnonimusUser($input: CreateAnonymousUserMutationInput!) {
   createAnonymousUser(input: $input) {
@@ -2044,6 +2371,74 @@ export const LoginMutationDocument = gql`
   })
   export class LoginMutationGQL extends Apollo.Mutation<LoginMutationMutation, LoginMutationMutationVariables> {
     document = LoginMutationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const TripMutationDocument = gql`
+    mutation TripMutation($input: TripMutationInput!) {
+  trip(input: $input) {
+    trips {
+      id
+      departureTime
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class TripMutationGQL extends Apollo.Mutation<TripMutationMutation, TripMutationMutationVariables> {
+    document = TripMutationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const TripsDocument = gql`
+    query Trips($carrier: ID) {
+  trips(carrier: $carrier) {
+    edges {
+      node {
+        id
+        departureTime
+        arrivalTime
+        bus {
+          id
+          plateNumber
+          busNumber
+        }
+        route {
+          id
+          leavingFrom {
+            id
+            name
+          }
+          destination {
+            id
+            name
+          }
+          distance
+        }
+        carrier {
+          id
+          name
+          logo
+        }
+        createdAt
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class TripsGQL extends Apollo.Query<TripsQuery, TripsQueryVariables> {
+    document = TripsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
