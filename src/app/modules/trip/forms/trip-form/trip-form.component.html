@@ -1,47 +1,91 @@
 <div fxLayout="column">
   <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto">
-    <div [fxLayout]="!(isHandset$ | async)? layout: 'column'"
-         [class.align-items]="layout === 'row' && !(isHandset$ | async)">
-      <div fxLayout="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Leaving from</mat-label>
-          <input matInput type="text" formControlName="leavingFrom">
-        </mat-form-field>
-        <button mat-icon-button>
-          <mat-icon>compare_arrows</mat-icon>
-        </button>
-        <mat-form-field appearance="outline">
-          <mat-label>Destination</mat-label>
-          <input matInput type="text" formControlName="destination">
-        </mat-form-field>
-      </div>
+    <div fxLayout="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Leaving from</mat-label>
+        <mat-select formControlName="leavingFrom" (opened)="leavingFromCitiesOpened(); searchFieldOfStudy.focus()">
+          <mat-option disabled>
+            <input
+              type="text"
+              [formControl]="leavingFromCityFilter"
+              #searchFieldOfStudy
+              placeholder="Search"
+              style="
+              color: black;
+              width: 95%;
+              padding: .5em;
+            "/>
+          </mat-option>
+          <mat-option *ngFor="let city of leavingFromCity" [value]="city.node.id">
+            {{city.node.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="tripFomGroup.controls['leavingFrom'].hasError('required')">
+          Leaving from city is required.
+        </mat-error>
+      </mat-form-field>
+      <button mat-icon-button>
+        <mat-icon>compare_arrows</mat-icon>
+      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>Destination</mat-label>
+        <mat-select formControlName="destination" (opened)="destinationCitiesOpened(); searchFieldOfStudy.focus()">
+          <mat-option disabled>
+            <input
+              type="text"
+              [formControl]="destinationCityFilter"
+              #searchFieldOfStudy
+              placeholder="Search"
+              style="
+              color: black;
+              width: 95%;
+              padding: .5em;
+            "/>
+          </mat-option>
+          <mat-option *ngFor="let city of destinationCity" [value]="city.node.id">
+            {{city.node.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-      <div fxLayout="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Departure date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="departureDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Return date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="departureDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div fxLayout="row" style="justify-content: center">
-        <button mat-icon-button (click)="subtractPassenger()">
-          <mat-icon>remove</mat-icon>
-        </button>
-        <button mat-button>{{passengers}} Passengers</button>
-        <button mat-icon-button (click)="addPassenger()">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-      <div fxLayout="row-reverse">
-        <button mat-flat-button type="submit" color="primary">Search</button>
-      </div>
+    <div fxLayout="row">
+      <mat-form-field appearance="fill" fxFill>
+        <mat-label>Departure time</mat-label>
+        <input matInput type="datetime-local"  formControlName="departureDatetime">
+        <mat-error *ngIf="tripFomGroup.controls['departureDatetime'].hasError('required')">
+          Departure date is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field appearance="fill" fxFill>
+        <mat-label>Arrival time</mat-label>
+        <input matInput type="datetime-local"  formControlName="arrivalDatetime">
+        <mat-error *ngIf="tripFomGroup.controls['arrivalDatetime'].hasError('required')">
+          Departure date is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+<!--      <mat-form-field appearance="outline">-->
+<!--        <mat-label>Pattern</mat-label>-->
+<!--        <mat-select formControlName="pattern">-->
+<!--          <mat-option value="food.value">  dayliy </mat-option>-->
+<!--          <mat-option value="food.value">  dayliy </mat-option>-->
+<!--          <mat-option value="food.value">  dayliy </mat-option>-->
+<!--          <mat-option value="food.value">  dayliy </mat-option>-->
+<!--        </mat-select>-->
+<!--      </mat-form-field>-->
+<!--      <span class="spacer"></span>-->
+      <mat-form-field appearance="outline">
+        <mat-label>Reputation</mat-label>
+        <input matInput type="number" formControlName="reputation">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <span class="spacer"></span>
+      <button mat-flat-button color="primary" type="submit">Submit</button>
     </div>
   </form>
 </div>

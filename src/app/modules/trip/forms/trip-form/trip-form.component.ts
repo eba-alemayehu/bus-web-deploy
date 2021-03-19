@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {map, shareReplay} from 'rxjs/operators';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+// @ts-ignore
+import {BusesGQL, CitiesGQL, TripMutationGQL, TripsGQL} from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
 
 @Component({
@@ -11,42 +10,75 @@ import {echo} from '../../../../util/print';
   styleUrls: ['./trip-form.component.scss']
 })
 export class TripFormComponent implements OnInit {
-  @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
-  @Input() layout = 'column';
-  @Input('input') set input(value){
-    echo(value);
-    this.tripFomGroup.patchValue(value);
-    this.tripFomGroup.controls.departureDate.setValue(new Date(value.departureDate).toISOString());
-    this.tripFomGroup.controls.roundTrip.setValue(value.roundTrip === 'true');
-    this.passengers = value.passengers;
-  }
+  @Input() carrier;
+  @Output() submitted: EventEmitter<any> = new EventEmitter<any>();
   tripFomGroup = this.formBuilder.group({
-    leavingFrom: [''],
-    destination: [''],
-    roundTrip: [false],
-    departureDate: [''],
-    roundTripDepartureDate: [],
+    leavingFrom: ['', Validators.required],
+    destination: ['', Validators.required],
+    departureDatetime: ['', Validators.required],
+    arrivalDatetime: ['', Validators.required],
+    reputation: ['']
   });
-  passengers = 1;
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
+  leavingFromCityFilter = new FormControl();
+  destinationCityFilter = new FormControl();
+
+  leavingFromCity = null;
+  destinationCity = null;
+
+  allLeavingFromCity = [];
+  allDestinationCity = [];
+
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private tripMutationGQL: TripMutationGQL,
+    private busesGQL: BusesGQL,
+    private citiesGQL: CitiesGQL) {
+    this.citiesGQL.watch({}).valueChanges.subscribe(
+      (response) => {
+        const cities = response.data.cities.edges;
+        this.leavingFromCity = cities;
+        this.allLeavingFromCity = cities;
+        this.destinationCity = cities;
+        this.allDestinationCity = cities;
+      }
     );
-  constructor(private formBuilder: FormBuilder, private breakpointObserver: BreakpointObserver) { }
+  }
 
   ngOnInit(): void {
-  }
-  _submit(): void{
-    const input = this.tripFomGroup.value;
-    input.passengers = this.passengers;
-    this.formSubmit.emit(input);
+    this.leavingFromCityFilter.valueChanges.subscribe(
+      (value) => {
+        this.leavingFromCity = this.allLeavingFromCity.filter( e => e.node.name.toLowerCase().startsWith(value.toLowerCase()));
+      }
+    );
+    this.destinationCityFilter.valueChanges.subscribe(
+      (value) => {
+        this.destinationCity = this.allDestinationCity.filter( e => e.node.name.toLowerCase().startsWith(value.toLowerCase()));
+      }
+    );
   }
 
-  subtractPassenger(): void {
-    this.passengers -= 1;
+  _submit(): void {
+    const value = this.tripFomGroup.value;
+    value.carrier = this.carrier.id;
+    echo(value);
+    this.tripMutationGQL.mutate({
+      input: this.tripFomGroup.value
+    }).subscribe(
+      (response) => {
+        this.submitted.emit(response.data.trip);
+      }
+    );
   }
-  addPassenger(): void {
-    this.passengers += 1;
+
+  leavingFromCitiesOpened(): void {
+    this.leavingFromCity = this.allLeavingFromCity;
+    this.leavingFromCityFilter.setValue('');
   }
+
+  destinationCitiesOpened(): void {
+    this.destinationCity = this.allDestinationCity;
+    this.destinationCityFilter.setValue('');
+  }
+
 }

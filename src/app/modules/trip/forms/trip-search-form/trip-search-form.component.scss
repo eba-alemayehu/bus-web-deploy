@@ -1,0 +1,22 @@
+.align-items{
+  align-items: center;
+}
+.round-trip-radio-in-row{
+  margin-right: 12px;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 1em;
+  .mat-radio-button{
+    margin: 3px;
+  }
+}
+.round-trip-radio-in-col{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 1em
+}
