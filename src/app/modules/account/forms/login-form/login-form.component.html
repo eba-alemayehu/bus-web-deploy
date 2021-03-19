@@ -1,0 +1,35 @@
+<h1 class="mat-h1" style="margin: 1em 0.5;text-align: center;font-family: 'Lobster', cursive;">Login</h1>
+<form [formGroup]="loginForm" (ngSubmit)="submit()" [class.loading-form]="isLoading">
+  <div class="flex-col">
+    <mat-error *ngIf="invalidCredentialsErrors" style="text-align: center; margin-bottom: 1em">
+      Invalid username or password
+    </mat-error>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone number</mat-label>
+        <input matInput placeholder="Enter your phone number" formControlName="phone">
+        <mat-icon matSuffix>user</mat-icon>
+        <mat-error *ngIf="loginForm.controls['phone'].hasError('required')">
+          Phone number is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Enter your password" formControlName="password">
+        <mat-icon matSuffix>eye</mat-icon>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </div>
+</form>
+<div fxLayout="row">
+  <a color="link" routerLink="/user/forgot-password/" (click)="dialog.getDialogById('login-or-signup-dialog').close({login:false})">Forget password?</a>
+  <span class="spacer"></span>
+  <button mat-flat-button (click)="close.emit()">Cancel</button>
+  <button mat-flat-button type="submit" color="primary" (click)="submit()" [disabled]="loginForm.invalid">Login</button>
+</div>

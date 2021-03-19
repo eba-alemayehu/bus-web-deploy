@@ -4,6 +4,8 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map, shareReplay, tap} from 'rxjs/operators';
 import {UserCreateAnonimusUserGQL} from './generated/graphql';
 import {StorageService} from './core/service/storage.service';
+import {AuthGuard} from './guards/auth/auth.guard';
+import {echo} from './util/print';
 
 @Component({
   selector: 'app-root',
@@ -23,13 +25,16 @@ export class AppComponent implements OnInit, AfterViewInit{
   constructor(
     private breakpointObserver: BreakpointObserver,
     private createAnonymousUserGQL: UserCreateAnonimusUserGQL,
+    private authGuard: AuthGuard,
     private storage: StorageService) {
   }
   async ngOnInit(): Promise<void> {
-    await this.createAnonymousUserGQL.mutate({input: {}}).pipe(
-      tap(({data}) => (data.createAnonymousUser.user !== null) ?
-        this.storage.setToken(data.createAnonymousUser.token, data.createAnonymousUser.refreshToken) : throwError('Invalid username or password'))
-    ).toPromise();
+    if (!this.authGuard.canActivate(null, null)){
+      await this.createAnonymousUserGQL.mutate({input: {}}).pipe(
+        tap(({data}) => (data.createAnonymousUser.user !== null) ?
+          this.storage.setToken(data.createAnonymousUser.token, data.createAnonymousUser.refreshToken) : throwError('Invalid username or password'))
+      ).toPromise();
+    }
   }
   ngAfterViewInit(): void {
   }

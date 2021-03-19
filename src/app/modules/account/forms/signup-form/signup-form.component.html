@@ -1,0 +1,122 @@
+<div>
+  <h1 class="mat-h1" style="margin-bottom: .4em;margin-right: 0;font-family: 'Lobster', cursive;text-align: center;">Sign up</h1>
+  <form [formGroup]="signupForm" (ngSubmit)="submit()" [class.loading-form]="isLoading">
+    <div class="flex-col">
+      <h3>
+        <mat-error>{{error}}</mat-error>
+      </h3>
+      <div fxLayout="row">
+        <mat-form-field appearance="outline" style="width: 49%">
+          <mat-label>First name</mat-label>
+          <input matInput placeholder="First name" formControlName="firstName" required>
+          <mat-icon matSuffix>user</mat-icon>
+          <mat-error *ngIf="signupForm.controls['firstName'].hasError('required')">
+            First name is required.
+          </mat-error>
+        </mat-form-field>
+        <span class="spacer"></span>
+        <mat-form-field appearance="outline" style="width: 49%">
+          <mat-label>Last name</mat-label>
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+          <mat-icon matSuffix>user</mat-icon>
+          <mat-error *ngIf="signupForm.controls['lastName'].hasError('required')">
+            First name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <!--      <mat-form-field appearance="outline">-->
+      <!--        <mat-label>Email</mat-label>-->
+      <!--        <input matInput placeholder="Enter your email address" formControlName="email">-->
+      <!--        <mat-icon matSuffix>user</mat-icon>-->
+      <!--        <mat-error *ngIf="signupForm.controls['email'].hasError('required')">-->
+      <!--          Either email or phone number is required.-->
+      <!--        </mat-error>-->
+      <!--        <mat-error *ngIf="signupForm.controls['email'].hasError('exist')">-->
+      <!--          This email already exists.-->
+      <!--        </mat-error>-->
+      <!--        <mat-error *ngIf="signupForm.controls['email'].hasError('email')">-->
+      <!--          Invalid email address.-->
+      <!--        </mat-error>-->
+      <!--      </mat-form-field>-->
+
+      <mat-form-field appearance="outline" fxFill>
+        <mat-label>Phone number</mat-label>
+        <input matInput placeholder="Enter your phone number" formControlName="phone" required>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="signupForm.controls['phone'].hasError('required')">
+          Phone number is required.
+        </mat-error>
+        <mat-error *ngIf="signupForm.controls['phone'].hasError('exist')">
+          This phone number already exist
+        </mat-error>
+        <mat-error *ngIf="signupForm.controls['phone'].hasError('pattern')">
+          Invalid phone number.
+        </mat-error>
+      </mat-form-field>
+      <div fxLayout="row" id="password">
+        <mat-form-field appearance="outline" style="width: 49%">
+          <mat-label>Password</mat-label>
+          <input matInput minLength='6' type="password" placeholder="Enter your password" formControlName="password" required>
+          <mat-icon matSuffix>key</mat-icon>
+          <mat-error *ngIf="signupForm.controls['password'].hasError('required')">
+            Password is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls['password'].hasError('minLength')">
+            Password must be more than 6 characters
+          </mat-error>
+        </mat-form-field>
+        <span class="spacer"></span>
+        <mat-form-field appearance="outline" style="width: 49%;">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword" required>
+          <mat-icon matSuffix>key</mat-icon>
+          <mat-error *ngIf="signupForm.controls['confirmPassword'].hasError('required')">
+            Confirm password is required.
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls['confirmPassword'].hasError('match')">
+            Confirmation doesn't match.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="example-full-width" fxFill>
+        <mat-label>Who told you about serdo? Enter phone number. (optional)</mat-label>
+        <input
+          type="text"
+          matInput
+          [matAutocomplete]="auto"
+          formControlName="referredBy"
+          (focusout)="referredByFocusOut($event)">
+        <mat-error *ngIf="!!selectedUserError">{{selectedUserError}}</mat-error>
+        <mat-hint>Please mention who told you about us. Your friend will get credits.</mat-hint>
+        <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption (optionSelected)="referredBy($event)">
+          <mat-option *ngFor="let user of filteredUsers" [value]="user.node">
+            <div class="flex" style="justify-content: space-between">
+              <span>{{user.node.name}}</span>
+              <span class="secondery">{{user.node.phone}}</span>
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="flex flat-card" style="margin-top: 1em" *ngIf="selectedUser">
+        <div class="flex">
+          <app-profile-pic [upload]="false" [pic]="selectedUser?.profilePic" size="30px"></app-profile-pic>
+          <div class="flex-col" style="margin-left: 1em">
+            <b>{{selectedUser?.name}}</b>
+            <i>{{selectedUser?.phone}}</i>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" style="margin-top: .5em">
+        <span class="spacer"></span>
+        <button mat-flat-button (click)="close.emit()">Cancel</button>
+        <button mat-flat-button type="submit" color="primary" [disabled]="signupForm.invalid">Sign up</button>
+      </div>
+    </div>
+  </form>
+</div>
+<!--<div *ngIf="step == 2">-->
+<!--  <app-confirm-user (finish)="finish()" (confirmed)="finish()" [user]="registeredUser"></app-confirm-user>-->
+<!--</div>-->
+

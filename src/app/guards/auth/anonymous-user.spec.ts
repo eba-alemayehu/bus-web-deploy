@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UnregisteredUserGuard } from './unregistered-user.guard';
+import { AnonymousUserGuard } from './anonymous-user.guard';
 
 describe('UnregisteredUserGuard', () => {
-  let guard: UnregisteredUserGuard;
+  let guard: AnonymousUserGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(UnregisteredUserGuard);
+    guard = TestBed.inject(AnonymousUserGuard);
   });
 
   it('should be created', () => {

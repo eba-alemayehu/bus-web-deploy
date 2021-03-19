@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import {UNREGISTERED_USER_ROLE} from '../../../config/URI.config';
-import {AuthService} from '../../../modules/auth/service/auth.service';
+
+import {ANONYMOUS_USER} from '../../config/role.config.js';
+import {AuthService} from '../../modules/account/service/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UnregisteredUserGuard implements CanActivate {
+export class AnonymousUserGuard implements CanActivate {
   constructor(private auth: AuthService) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.auth.roles().indexOf(UNREGISTERED_USER_ROLE) !== -1;
+    return this.auth.roles().indexOf(ANONYMOUS_USER) !== -1;
   }
 }

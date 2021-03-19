@@ -1,0 +1,47 @@
+<div fxLayout="row" style="align-items: center; justify-content: space-between; width: 100%">
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <span>busWeb</span>
+  <span class="spacer"></span>
+  <ul class="nav-list" style="list-style: none; display: flex; align-items: center;font-size: 1em">
+    <li *ngIf="!this.registeredGuard.canActivate(null, null)">
+      <button mat-button (click)="login()">Login</button>
+    </li>
+    <li *ngIf="this.registeredGuard.canActivate(null, null)">
+      <app-profile-pic [matMenuTriggerFor]="menu"></app-profile-pic>
+    </li>
+  </ul>
+</div>
+<mat-menu #menu="matMenu">
+  <div class="flex-col" style="padding: 1em 1.7em">
+    <div class="flex" style="width: 100%; justify-content: space-around">
+      <div fxLayout="row" style="justify-content: space-around">
+        <app-profile-pic size="100"></app-profile-pic>
+      </div>
+    </div>
+    <div>
+      <h3 style="text-align: center">{{authUser?.firstName}} {{authUser?.lastName}}</h3>
+      <p>{{authUser?.phone}}</p>
+    </div>
+    <!--    <button mat-menu-item routerLink="/user/profile">-->
+    <!--      <mat-icon>person</mat-icon>-->
+    <!--      <span>Your profile</span>-->
+    <!--    </button>-->
+    <!--    <button mat-menu-item routerLink="/resume">-->
+    <!--      <mat-icon>work</mat-icon>-->
+    <!--      <span>Your resume</span>-->
+    <!--    </button>-->
+    <button
+      (click)="logout()"
+      mat-menu-item
+      class="flex" style="align-items: center; display: flex">
+      <img src="/assets/logout.svg" alt="" style="width: 20px; height: 20px;">
+      <span style="margin-left: 0.5em"> Logout</span>
+    </button>
+  </div>
+</mat-menu>
