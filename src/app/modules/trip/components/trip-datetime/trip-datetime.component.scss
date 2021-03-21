@@ -10,3 +10,13 @@
   content:"\00a0\00a0\00a0\00a0\00a\00a0\00a0";
   text-decoration:line-through;
 }
+@media (max-width: 780px) {
+  .duration:before{
+    content:"\00a0\00a0";
+  }
+}
+@media (max-width: 480px) {
+  .duration:before{
+    content:"\00a0";
+  }
+}

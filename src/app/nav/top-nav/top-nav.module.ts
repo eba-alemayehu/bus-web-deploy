@@ -9,6 +9,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {AuthenticationDialogModule} from '../../modules/account/dialogs/authentication-dialog/authentication-dialog.module';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -17,16 +18,17 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     exports: [
         TopNavComponent
     ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    ProfilePicModule,
-    FlexModule,
-    AuthenticationDialogModule,
-    MatSnackBarModule,
-  ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        ProfilePicModule,
+        FlexModule,
+        AuthenticationDialogModule,
+        MatSnackBarModule,
+        RouterModule,
+    ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ]

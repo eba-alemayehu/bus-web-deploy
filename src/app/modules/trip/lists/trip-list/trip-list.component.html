@@ -1,10 +1,9 @@
-<mat-card>
-  <div fxLayout="column">
-    <div fxLayout="row" *ngFor="let trip of trips$ | async" (click)="onSelect(trip)">
-      <app-trip-list-item [trip]="trip.node" style="width: 100%; margin: auto">
 
-      </app-trip-list-item> <ng-content select="[buttons]"></ng-content>
-    </div>
+  <div fxLayout="column">
+    <mat-card fxLayout="row" *ngFor="let trip of trips$ | async" (click)="onSelect(trip)" style="margin-bottom: 1em">
+      <app-trip-list-item [trip]="trip.node" style="width: 100%; margin: auto">
+      </app-trip-list-item>
+    </mat-card>
   </div>
-</mat-card>
+
 

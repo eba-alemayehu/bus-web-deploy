@@ -1,16 +1,18 @@
 <div fxLayout="row" style="max-width: 900px; margin: auto">
   <div fxLayout="column">
-    <img src="/assets/yenabus.png" style="width: 60px"/>
-    <p>{{trip?.carrier.name}}</p>
+    <img src="/assets/yenabus.png" style="width: 60px; margin-bottom: 1em"/>
+    <mat-card-title style="font-size: 1.1em">{{trip?.carrier.name}}</mat-card-title>
   </div>
   <div fxLayout="column" style="margin-left: 2em">
     <app-trip-datetime [trip]="trip"></app-trip-datetime>
-    <p>{{trip?.busSeatConfiguration.busseatconfigurationseatSet.edges.length | json}} seats</p>
+    <div>
+      <i style="background: #fff1ff; color: #12005e; padding: .3em 1em; border-radius: 6px">{{trip?.busSeatConfiguration.busseatconfigurationseatSet.edges.length | json}} seats</i>
+    </div>
   </div>
 
   <span class="spacer"></span>
   <div fxLayout="column">
-    2345 ETB
+    <app-price [price]="2300"></app-price>
     <ng-content select="[buttons]"></ng-content>
   </div>
 </div>
