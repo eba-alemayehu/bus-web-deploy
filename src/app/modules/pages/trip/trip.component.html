@@ -1,0 +1,23 @@
+<div fxLayout="column">
+  <div fxLayout="row" style="margin-top: 1em; justify-content: space-around ">
+    <mat-card>
+      <app-bus-tumb *ngIf="trip?.bus !== null" [row]="true" [bus]="trip.bus"></app-bus-tumb>
+      <div *ngIf="!trip?.bus" fxLayout="row">
+        <img src="/assets/bus.svg" alt="" style="width: 70px">
+        <div fxLayout="column" style="margin-left: 2.5em;">
+          <i>No bus is assigned.</i>
+          <button mat-flat-button color="primary" (click)="addBus()">Add bus</button>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card>
+      <app-trip-datetime [trip]="trip"></app-trip-datetime>
+    </mat-card>
+  </div>
+  <div fxLayout="row" style="margin-top: 2em; justify-content: space-around">
+    <mat-card *ngIf="trip?.busSeatConfiguration !== null">
+      <h1>{{trip?.busSeatConfiguration.name}}</h1>
+      <app-bus-seat-configuration [busSeatConfiguration]="trip?.busSeatConfiguration"></app-bus-seat-configuration>
+    </mat-card>
+  </div>
+</div>

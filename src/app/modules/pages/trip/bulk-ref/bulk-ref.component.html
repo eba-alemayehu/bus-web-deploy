@@ -1,0 +1,4 @@
+<mat-card>
+  <app-trip-list *ngIf="bulkRef !== null" [uuid]="bulkRef" (selected)="selectTrip($event)"></app-trip-list>
+</mat-card>
+

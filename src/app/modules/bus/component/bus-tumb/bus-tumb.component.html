@@ -1,0 +1,11 @@
+<div *ngIf="!add" [fxLayout]="row? 'row': 'column'" style="align-items: center">
+  <img src="/assets/bus.svg" alt="" style="width: 70px">
+  <div fxLayout="column" [style.margin-left]="row? '2em': '0'">
+    <span>{{bus.busNumber}}</span>
+    <span>{{bus.plateNumber}}</span>
+  </div>
+</div>
+<div *ngIf="add" fxLayout="column">
+  <img src="/assets/add.svg" width="70px"/>
+  <span>Add bus</span>
+</div>

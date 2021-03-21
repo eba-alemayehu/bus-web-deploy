@@ -1,8 +1,17 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {Observable} from 'rxjs';
 // @ts-ignore
-import {BusesGQL, CitiesGQL, TripMutationGQL, TripsGQL} from '../../../../generated/graphql';
+import {
+  BusesGQL,
+  BusSeatConfigurationGQL,
+  BusSeatConfigurationsGQL,
+  CitiesGQL,
+  TripMutationGQL,
+  TripsGQL
+} from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-trip-form',
@@ -27,13 +36,19 @@ export class TripFormComponent implements OnInit {
 
   allLeavingFromCity = [];
   allDestinationCity = [];
+  busSeatConfigurations$: Observable<any>;
+  busSeatConfiguration: any;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private tripMutationGQL: TripMutationGQL,
     private busesGQL: BusesGQL,
+    private busSeatConfigurationGQL: BusSeatConfigurationsGQL,
     private citiesGQL: CitiesGQL) {
+    this.busSeatConfigurations$ = busSeatConfigurationGQL
+      .watch({}).valueChanges
+      .pipe(map((response) => response.data.busSeatConfigurations.edges));
     this.citiesGQL.watch({}).valueChanges.subscribe(
       (response) => {
         const cities = response.data.cities.edges;
@@ -61,7 +76,8 @@ export class TripFormComponent implements OnInit {
   _submit(): void {
     const value = this.tripFomGroup.value;
     value.carrier = this.carrier.id;
-    echo(value);
+    value.busSeatConfiguration = this.busSeatConfiguration.node.id;
+
     this.tripMutationGQL.mutate({
       input: this.tripFomGroup.value
     }).subscribe(
@@ -81,4 +97,7 @@ export class TripFormComponent implements OnInit {
     this.destinationCityFilter.setValue('');
   }
 
+  selectBusSeatConfiguration(config: any): void {
+    this.busSeatConfiguration = config;
+  }
 }

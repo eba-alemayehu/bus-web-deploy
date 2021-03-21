@@ -20,3 +20,9 @@
   width: 100%;
   margin-bottom: 1em
 }
+@media (max-width: 780px) {
+  .mat-form-field{
+    width: 12em;
+}
+
+}

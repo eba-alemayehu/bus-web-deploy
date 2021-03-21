@@ -1,0 +1,11 @@
+<div fxLayout="row-wrap" style="justify-content: center;flex-flow: wrap">
+  <mat-card
+    style="margin: .5em 1.5em" *ngFor="let bus of buses$ | async"
+    (click)="_selected(bus.node)"
+  >
+    <app-bus-tumb [bus]="bus.node"></app-bus-tumb>
+  </mat-card>
+  <mat-card style="margin: .5em 1.5em" routerLink="form">
+    <app-bus-tumb [add]="true"></app-bus-tumb>
+  </mat-card>
+</div>

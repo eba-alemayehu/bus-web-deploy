@@ -1,0 +1,19 @@
+<mat-form-field class="example-full-width" fxFill>
+  <mat-label>Number</mat-label>
+  <input type="text"
+         placeholder="Pick one"
+         aria-label="Number"
+         matInput
+         [formControl]="searchInputControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selected($event)"  [displayWith]="displayFn">
+    <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+      <div fxLayout="row" style="align-items: center">
+        <img src="/assets/avatar.png"
+             style="width: 30px; height: 30px;">
+        <span style="margin-left: .5em">{{user.node.firstName}} {{user.node.lastName}}</span>
+        <span class="spacer"></span> <i>{{user.node.phone}}</i>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

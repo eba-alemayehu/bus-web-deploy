@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TripListItemComponent } from './trip-list-item.component';
 import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
+import {TripDatetimeModule} from '../trip-datetime/trip-datetime.module';
 
 
 
@@ -11,10 +12,11 @@ import {MatButtonModule} from '@angular/material/button';
     exports: [
         TripListItemComponent
     ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    MatButtonModule,
-  ]
+    imports: [
+        CommonModule,
+        FlexModule,
+        MatButtonModule,
+        TripDatetimeModule,
+    ]
 })
 export class TripListItemModule { }

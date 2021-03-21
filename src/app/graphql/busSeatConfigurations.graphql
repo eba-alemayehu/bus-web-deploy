@@ -1,0 +1,23 @@
+query BusSeatConfigurations{
+  busSeatConfigurations{
+    edges{
+      node{
+        id
+        name
+        busseatconfigurationseatSet{
+          edges{
+            node{
+              id
+              windowSeat
+              name
+              row
+              col
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+

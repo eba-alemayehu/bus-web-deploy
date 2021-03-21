@@ -1,8 +1,23 @@
 <div fxLayout="row" style="justify-content: center">
   <h1>{{carrier?.name}}</h1>
 </div>
-<div fxLayout="row">
-  <mat-card routerLink="trips">
-    <h1>Trip</h1>
+<div fxLayout="row wrap" style="justify-content: space-around;">
+  <mat-card routerLink="trips" style="margin: 1em">
+    <div fxLayout="row" style="width: 350px">
+      <img src="/assets/trip.svg" alt="" style="width: 100px">
+      <div fxLayout="column" style="margin-left: 2em">
+        <h2>Trips</h2>
+        <p class="mat-card-subtitle"></p>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card routerLink="buses" style="margin: 1em">
+    <div fxLayout="row" style="width: 350px">
+      <img src="/assets/bus2.svg" alt="" style="width: 100px">
+      <div fxLayout="column" style="margin-left: 2em">
+        <h2>Buses</h2>
+        <p class="mat-card-subtitle"></p>
+      </div>
+    </div>
   </mat-card>
 </div>

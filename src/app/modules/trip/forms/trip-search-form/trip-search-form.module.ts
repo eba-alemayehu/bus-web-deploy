@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -17,19 +18,20 @@ import {MatRadioModule} from '@angular/material/radio';
   exports: [
     TripSearchFormComponent
   ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    GridModule,
-    MatRadioModule
-  ],
+    imports: [
+        CommonModule,
+        FlexModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        GridModule,
+        MatRadioModule,
+        MatSelectModule
+    ],
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,

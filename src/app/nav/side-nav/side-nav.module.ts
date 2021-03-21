@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SideNavComponent } from './side-nav.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -14,7 +16,9 @@ import {MatListModule} from '@angular/material/list';
   imports: [
     CommonModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatIconModule,
+    RouterModule
   ]
 })
 export class SideNavModule { }

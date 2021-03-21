@@ -1,0 +1,37 @@
+query Bus($id: ID!){
+  bus(id: $id){
+        id
+        busNumber
+        plateNumber
+        carrier{
+          id
+          name
+        }
+        busSeatConfiguration{
+          id
+          name
+        }
+        drivers{
+          edges{
+            node{
+              id
+              firstName
+              lastName
+              profilePic
+              phone
+            }
+          }
+        }
+      assistants{
+        edges{
+          node{
+            id
+            firstName
+            lastName
+            profilePic
+            phone
+          }
+        }
+      }
+  }
+}

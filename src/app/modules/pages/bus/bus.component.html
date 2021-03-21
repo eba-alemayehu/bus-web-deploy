@@ -1,0 +1,46 @@
+<mat-card style="margin-top: 2em">
+  <div fxLayout="column">
+    <div fxLayout="row" style="justify-content: space-around; margin-bottom: 1em">
+      <b>Bus number: {{bus?.busNumber}} </b>
+      <b>Plate number: {{bus?.plateNumber}}</b>
+    </div>
+    <div fxLayout="row" style="justify-content: space-around">
+      <mat-card style="background: #efefef;">
+        <div>
+          <app-bus-seat-configuration
+            [orientation]="'row'"
+            [busSeatConfiguration]="bus?.busSeatConfiguration"></app-bus-seat-configuration>
+        </div>
+      </mat-card>
+    </div>
+    <div fxLayout="row" style="justify-content: space-around; margin-top: 1em">
+      <mat-card>
+        <h3 matSubheader>Drivers</h3>
+        <div fxLayout="row" *ngFor="let user of bus?.drivers.edges">
+          <app-user-tumb [user]="user.node"></app-user-tumb>
+          <button mat-button color="warn" (click)="removeDriver(user.node)"><mat-icon>remove</mat-icon>Remove</button>
+        </div>
+
+        <div fxLayout="row">
+          <span class="spacer"></span>
+          <button mat-flat-button color="primary" (click)="addDriver()">Add</button>
+        </div>
+      </mat-card>
+      <mat-card>
+        <h3 matSubheader>Assistants</h3>
+        <div fxLayout="row" *ngFor="let user of bus?.assistants.edges">
+          <app-user-tumb [user]="user.node"></app-user-tumb>
+          <div fxLayout="row">
+            <span class="spacer"></span>
+            <button mat-button color="warn" (click)="removeAssistant(user.node)"><mat-icon>remove</mat-icon>Remove</button>
+          </div>
+        </div>
+        <div fxLayout="row">
+          <span class="spacer"></span>
+          <button mat-flat-button color="primary" (click)="addAssistant()">Add</button>
+        </div>
+
+      </mat-card>
+    </div>
+  </div>
+</mat-card>

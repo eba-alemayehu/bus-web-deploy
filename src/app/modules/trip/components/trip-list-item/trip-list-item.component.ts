@@ -7,7 +7,7 @@ import {TripNodeEdge} from '../../../../generated/graphql';
   styleUrls: ['./trip-list-item.component.scss']
 })
 export class TripListItemComponent implements OnInit {
-  @Input() trip: TripNodeEdge;
+  @Input() trip: any;
   constructor() { }
 
   ngOnInit(): void {

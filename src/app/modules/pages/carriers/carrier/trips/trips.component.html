@@ -1,9 +1,9 @@
 <div fxLayout="column">
   <div fxLayout="row">
     <span class="spacer"></span>
-    <button mat-flat-button color="primary" (click)="addTripDialog()"><mat-icon>add</mat-icon> Add trip</button>
+    <button mat-flat-button color="primary" routerLink="form"><mat-icon>add</mat-icon> Add trip</button>
   </div>
 </div>
 <div fxLayout="column">
-  <app-trip-list></app-trip-list>
+  <app-trip-list (selected)="tripClick($event)"></app-trip-list>
 </div>

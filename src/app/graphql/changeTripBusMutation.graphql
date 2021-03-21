@@ -1,0 +1,40 @@
+mutation ChangeTripBusMutation($input: ChangeTripBusMutationInput!) {
+  changeTripBus(input: $input){
+    trip{
+      id
+      departureTime
+      arrivalTime
+      busSeatConfiguration{
+        id
+        name
+      }
+      bus{
+        id
+        plateNumber
+        busNumber
+        busSeatConfiguration{
+          id
+          name
+        }
+      }
+      route{
+        id
+        leavingFrom{
+          id
+          name
+        }
+        destination{
+          id
+          name
+        }
+        distance
+      }
+      carrier{
+        id
+        name
+        logo
+      }
+      createdAt
+    }
+  }
+}

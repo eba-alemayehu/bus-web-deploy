@@ -11,6 +11,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatCardModule} from '@angular/material/card';
+import {BusSeatConfigurationModule} from '../../../bus/component/bus-seat-configuration/bus-seat-configuration.module';
 
 
 
@@ -31,7 +33,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatNativeDateModule,
     MatOptionModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCardModule,
+    BusSeatConfigurationModule
   ],
   providers: [
     MatDatepickerModule,

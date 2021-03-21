@@ -1,1 +1,1 @@
-<p>buses works!</p>
+<app-bus-list *ngIf="carrier" [carrier]="carrier" (selected)="busSelected($event)"></app-bus-list>

@@ -1,0 +1,17 @@
+query BusSeatConfiguration($id: ID!){
+  busSeatConfiguration(id: $id){
+    id
+    name
+    busseatconfigurationseatSet{
+      edges{
+        node{
+          id
+          windowSeat
+          name
+          row
+          col
+        }
+      }
+    }
+  }
+}

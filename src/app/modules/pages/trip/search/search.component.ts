@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {echo} from '../../../../util/print';
 
 @Component({
@@ -8,15 +8,24 @@ import {echo} from '../../../../util/print';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  tripSearchData;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  tripSearchQuery;
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(
       (queryParams) => {
-        this.tripSearchData = queryParams;
+        echo(queryParams);
+        this.tripSearchQuery = queryParams;
       }
     );
   }
-
+  searchChanged(trip: any): void {
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: trip,
+        // queryParamsHandling: 'merge', // remove to replace all query params by provided
+      });
+  }
 }

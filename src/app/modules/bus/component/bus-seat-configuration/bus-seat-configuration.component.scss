@@ -1,0 +1,8 @@
+.path {
+  transform: rotate(90deg);
+
+  /* doesn't work as intended in Firefox
+   * % values are taken relative to the SVG, not the element
+   * which actually seems to be correct */
+  transform-origin: 50% 50%;
+}

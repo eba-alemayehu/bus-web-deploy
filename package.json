@@ -25,6 +25,7 @@
     "@angular/router": "~10.2.0",
     "@apollo/client": "^3.0.0",
     "@auth0/angular-jwt": "^5.0.2",
+    "@material/typography": "^10.0.0",
     "@ngx-tiny/date-picker": "^10.0.2",
     "apollo-angular": "^2.4.0",
     "apollo-angular-link-http": "^1.11.0",

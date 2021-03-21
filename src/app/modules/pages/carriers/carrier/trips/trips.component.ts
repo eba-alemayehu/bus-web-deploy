@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {CarrierGQL} from '../../../../../generated/graphql';
 import {MatDialog} from '@angular/material/dialog';
 import {TripDialogComponent} from '../../../../trip/dialog/trip-dialog/trip-dialog.component';
@@ -13,7 +13,7 @@ import {TripDialogComponent} from '../../../../trip/dialog/trip-dialog/trip-dial
 export class TripsComponent implements OnInit {
   carrier;
 
-  constructor(private activatedRoute: ActivatedRoute, private carrierGQL: CarrierGQL, private matDialog: MatDialog) {
+  constructor(private activatedRoute: ActivatedRoute, private carrierGQL: CarrierGQL, private matDialog: MatDialog, private route: Router) {
     this.activatedRoute.params.subscribe(
       (params) => {
         this.carrierGQL
@@ -35,6 +35,10 @@ export class TripsComponent implements OnInit {
       data: {
         carrier: this.carrier,
       },
-    },);
+    });
+  }
+
+  tripClick(trip: any): void{
+    this.route.navigate(['/trip/' + trip.node.id]);
   }
 }

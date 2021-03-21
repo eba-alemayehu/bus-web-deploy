@@ -1,0 +1,39 @@
+mutation BusDriverMutation($input: BusDriverMutationInput!){
+  busDriver(input: $input){
+      bus{
+        id
+        busNumber
+        plateNumber
+        carrier{
+          id
+          name
+        }
+        busSeatConfiguration{
+          id
+          name
+        }
+        drivers{
+          edges{
+            node{
+              id
+              firstName
+              lastName
+              profilePic
+              phone
+            }
+          }
+        }
+        assistants{
+          edges{
+            node{
+              id
+              firstName
+              lastName
+              profilePic
+              phone
+            }
+          }
+        }
+      }
+  }
+}

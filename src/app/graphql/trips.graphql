@@ -1,5 +1,9 @@
-query Trips($carrier: ID){
-  trips(carrier: $carrier){
+query Trips($carrier: ID, $bulkRef: String, $leavingFrom: ID, $destination:ID){
+  trips(
+    carrier: $carrier,
+    bulkRef: $bulkRef,
+    route_LeavingFrom: $leavingFrom,
+    route_Destination: $destination){
     edges{
       node{
         id
@@ -9,6 +13,16 @@ query Trips($carrier: ID){
           id
           plateNumber
           busNumber
+        }
+        busSeatConfiguration{
+          busseatconfigurationseatSet{
+            edges{
+              node{
+                id
+                name
+              }
+            }
+          }
         }
         route{
           id

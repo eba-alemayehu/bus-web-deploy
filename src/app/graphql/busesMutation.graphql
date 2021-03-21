@@ -1,0 +1,13 @@
+mutation BusMutation($input: BusMutationInput!){
+  bus(input: $input){
+    bus{
+      id
+      plateNumber
+      busNumber
+      busSeatConfiguration{
+        id
+        name
+      }
+    }
+  }
+}

@@ -64,6 +64,19 @@ export type BankAccountNodeEdge = {
   cursor: Scalars['String'];
 };
 
+export type BusDriverMutationInput = {
+  bus?: Maybe<Scalars['ID']>;
+  driver?: Maybe<Scalars['ID']>;
+  assistant?: Maybe<Scalars['ID']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type BusDriverMutationPayload = {
+  __typename?: 'BusDriverMutationPayload';
+  bus?: Maybe<BusNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type BusMutationInput = {
   plateNumber?: Maybe<Scalars['String']>;
   busNumber?: Maybe<Scalars['String']>;
@@ -87,8 +100,46 @@ export type BusNode = Node & {
   busNumber: Scalars['String'];
   carrier: CarrierNode;
   busSeatConfiguration: BusSeatConfigurationNode;
+  drivers: BusUserNodeConnection;
+  assistants: BusUserNodeConnection;
   busseatsSet: BusSeatsConnection;
   tripSet: TripNodeConnection;
+};
+
+
+export type BusNodeDriversArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['ID']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+};
+
+
+export type BusNodeAssistantsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['ID']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Icontains?: Maybe<Scalars['String']>;
 };
 
 
@@ -108,6 +159,7 @@ export type BusNodeTripSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -143,6 +195,7 @@ export type BusSeatConfigurationNode = Node & {
   name: Scalars['String'];
   busseatconfigurationseatSet: BusSeatConfigurationSeatNodeConnection;
   busSet: BusNodeConnection;
+  tripSet: TripNodeConnection;
 };
 
 
@@ -162,6 +215,20 @@ export type BusSeatConfigurationNodeBusSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  busSeatConfiguration?: Maybe<Scalars['ID']>;
+};
+
+
+export type BusSeatConfigurationNodeTripSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  route_LeavingFrom?: Maybe<Scalars['ID']>;
+  route_Destination?: Maybe<Scalars['ID']>;
 };
 
 export type BusSeatConfigurationNodeConnection = {
@@ -309,6 +376,8 @@ export type BusUserNode = Node & {
   CarrierRating: CarrierNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
   carrierratingSet: CarrierRatingNodeConnection;
+  drivers: BusNodeConnection;
+  assistants: BusNodeConnection;
   tripSet: TripNodeConnection;
   orderedBy: PaymentOrderNodeConnection;
   paymentorderSet: PaymentOrderNodeConnection;
@@ -355,6 +424,28 @@ export type BusUserNodeCarrierratingSetArgs = {
 };
 
 
+export type BusUserNodeDriversArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
+  busSeatConfiguration?: Maybe<Scalars['ID']>;
+};
+
+
+export type BusUserNodeAssistantsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
+  busSeatConfiguration?: Maybe<Scalars['ID']>;
+};
+
+
 export type BusUserNodeTripSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -362,6 +453,7 @@ export type BusUserNodeTripSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -537,6 +629,7 @@ export type CarrierNodeBusSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  busSeatConfiguration?: Maybe<Scalars['ID']>;
 };
 
 
@@ -558,6 +651,7 @@ export type CarrierNodeTripSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -625,6 +719,18 @@ export type CarrierRatingNodeEdge = {
   __typename?: 'CarrierRatingNodeEdge';
   node?: Maybe<CarrierRatingNode>;
   cursor: Scalars['String'];
+};
+
+export type ChangeTripBusMutationInput = {
+  trip: Scalars['ID'];
+  bus: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type ChangeTripBusMutationPayload = {
+  __typename?: 'ChangeTripBusMutationPayload';
+  trip?: Maybe<TripNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CityNode = Node & {
@@ -758,6 +864,7 @@ export type DeleteAccountPayload = {
 export type Mutation = {
   __typename?: 'Mutation';
   trip?: Maybe<TripMutationPayload>;
+  changeTripBus?: Maybe<ChangeTripBusMutationPayload>;
   cancelTrip?: Maybe<CancelTripMutationPayload>;
   ticket?: Maybe<TicketMutationPayload>;
   carrier?: Maybe<CarrierMutationPayload>;
@@ -765,6 +872,7 @@ export type Mutation = {
   busSeatConfiguration?: Maybe<BusSeatConfigurationMutationPayload>;
   busSeatConfigurationSeat?: Maybe<BusSeatConfigurationSeatMutationPayload>;
   bus?: Maybe<BusMutationPayload>;
+  busDriver?: Maybe<BusDriverMutationPayload>;
   register?: Maybe<RegisterPayload>;
   verifyAccount?: Maybe<VerifyAccountPayload>;
   resendActivationEmail?: Maybe<ResendActivationEmailPayload>;
@@ -790,6 +898,11 @@ export type Mutation = {
 
 export type MutationTripArgs = {
   input: TripMutationInput;
+};
+
+
+export type MutationChangeTripBusArgs = {
+  input: ChangeTripBusMutationInput;
 };
 
 
@@ -825,6 +938,11 @@ export type MutationBusSeatConfigurationSeatArgs = {
 
 export type MutationBusArgs = {
   input: BusMutationInput;
+};
+
+
+export type MutationBusDriverArgs = {
+  input: BusDriverMutationInput;
 };
 
 
@@ -1086,6 +1204,7 @@ export type QueryTripsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -1257,6 +1376,7 @@ export type QueryBusesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  busSeatConfiguration?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1451,6 +1571,7 @@ export type RouteNodeTripSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -1562,10 +1683,11 @@ export type TripMutationInput = {
   route?: Maybe<Scalars['ID']>;
   leavingFrom?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
-  carrier: Scalars['ID'];
   bus?: Maybe<Scalars['ID']>;
+  carrier: Scalars['ID'];
   departureDatetime: Scalars['String'];
   arrivalDatetime: Scalars['String'];
+  busSeatConfiguration: Scalars['ID'];
   reputation?: Maybe<Scalars['Int']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -1573,6 +1695,7 @@ export type TripMutationInput = {
 export type TripMutationPayload = {
   __typename?: 'TripMutationPayload';
   trips?: Maybe<Array<Maybe<TripNode>>>;
+  bulkRef?: Maybe<Scalars['String']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -1583,6 +1706,7 @@ export type TripNode = Node & {
   route: RouteNode;
   carrier: CarrierNode;
   bus?: Maybe<BusNode>;
+  busSeatConfiguration: BusSeatConfigurationNode;
   departureTime: Scalars['DateTime'];
   arrivalTime: Scalars['DateTime'];
   bulkRef?: Maybe<Scalars['String']>;
@@ -1666,6 +1790,8 @@ export type UserNode = Node & {
   CarrierRating: CarrierNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
   carrierratingSet: CarrierRatingNodeConnection;
+  drivers: BusNodeConnection;
+  assistants: BusNodeConnection;
   tripSet: TripNodeConnection;
   orderedBy: PaymentOrderNodeConnection;
   paymentorderSet: PaymentOrderNodeConnection;
@@ -1713,6 +1839,28 @@ export type UserNodeCarrierratingSetArgs = {
 };
 
 
+export type UserNodeDriversArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
+  busSeatConfiguration?: Maybe<Scalars['ID']>;
+};
+
+
+export type UserNodeAssistantsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
+  busSeatConfiguration?: Maybe<Scalars['ID']>;
+};
+
+
 export type UserNodeTripSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -1720,6 +1868,7 @@ export type UserNodeTripSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
   route_LeavingFrom?: Maybe<Scalars['ID']>;
   route_Destination?: Maybe<Scalars['ID']>;
 };
@@ -1816,6 +1965,135 @@ export type VerifyTokenPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type BusQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type BusQuery = (
+  { __typename?: 'Query' }
+  & { bus?: Maybe<(
+    { __typename?: 'BusNode' }
+    & Pick<BusNode, 'id' | 'busNumber' | 'plateNumber'>
+    & { carrier: (
+      { __typename?: 'CarrierNode' }
+      & Pick<CarrierNode, 'id' | 'name'>
+    ), busSeatConfiguration: (
+      { __typename?: 'BusSeatConfigurationNode' }
+      & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+    ), drivers: (
+      { __typename?: 'BusUserNodeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'BusUserNodeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'BusUserNode' }
+          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'profilePic' | 'phone'>
+        )> }
+      )>> }
+    ), assistants: (
+      { __typename?: 'BusUserNodeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'BusUserNodeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'BusUserNode' }
+          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'profilePic' | 'phone'>
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type BusDriverMutationMutationVariables = Exact<{
+  input: BusDriverMutationInput;
+}>;
+
+
+export type BusDriverMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { busDriver?: Maybe<(
+    { __typename?: 'BusDriverMutationPayload' }
+    & { bus?: Maybe<(
+      { __typename?: 'BusNode' }
+      & Pick<BusNode, 'id' | 'busNumber' | 'plateNumber'>
+      & { carrier: (
+        { __typename?: 'CarrierNode' }
+        & Pick<CarrierNode, 'id' | 'name'>
+      ), busSeatConfiguration: (
+        { __typename?: 'BusSeatConfigurationNode' }
+        & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+      ), drivers: (
+        { __typename?: 'BusUserNodeConnection' }
+        & { edges: Array<Maybe<(
+          { __typename?: 'BusUserNodeEdge' }
+          & { node?: Maybe<(
+            { __typename?: 'BusUserNode' }
+            & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'profilePic' | 'phone'>
+          )> }
+        )>> }
+      ), assistants: (
+        { __typename?: 'BusUserNodeConnection' }
+        & { edges: Array<Maybe<(
+          { __typename?: 'BusUserNodeEdge' }
+          & { node?: Maybe<(
+            { __typename?: 'BusUserNode' }
+            & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'profilePic' | 'phone'>
+          )> }
+        )>> }
+      ) }
+    )> }
+  )> }
+);
+
+export type BusSeatConfigurationQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type BusSeatConfigurationQuery = (
+  { __typename?: 'Query' }
+  & { busSeatConfiguration?: Maybe<(
+    { __typename?: 'BusSeatConfigurationNode' }
+    & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+    & { busseatconfigurationseatSet: (
+      { __typename?: 'BusSeatConfigurationSeatNodeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'BusSeatConfigurationSeatNodeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'BusSeatConfigurationSeatNode' }
+          & Pick<BusSeatConfigurationSeatNode, 'id' | 'windowSeat' | 'name' | 'row' | 'col'>
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type BusSeatConfigurationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BusSeatConfigurationsQuery = (
+  { __typename?: 'Query' }
+  & { busSeatConfigurations?: Maybe<(
+    { __typename?: 'BusSeatConfigurationNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'BusSeatConfigurationNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'BusSeatConfigurationNode' }
+        & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+        & { busseatconfigurationseatSet: (
+          { __typename?: 'BusSeatConfigurationSeatNodeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'BusSeatConfigurationSeatNodeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'BusSeatConfigurationSeatNode' }
+              & Pick<BusSeatConfigurationSeatNode, 'id' | 'windowSeat' | 'name' | 'row' | 'col'>
+            )> }
+          )>> }
+        ) }
+      )> }
+    )>> }
+  )> }
+);
+
 export type BusesQueryVariables = Exact<{
   carrier: Scalars['ID'];
 }>;
@@ -1836,6 +2114,26 @@ export type BusesQuery = (
         ) }
       )> }
     )>> }
+  )> }
+);
+
+export type BusMutationMutationVariables = Exact<{
+  input: BusMutationInput;
+}>;
+
+
+export type BusMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { bus?: Maybe<(
+    { __typename?: 'BusMutationPayload' }
+    & { bus?: Maybe<(
+      { __typename?: 'BusNode' }
+      & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
+      & { busSeatConfiguration: (
+        { __typename?: 'BusSeatConfigurationNode' }
+        & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+      ) }
+    )> }
   )> }
 );
 
@@ -1911,6 +2209,46 @@ export type CarriersQuery = (
         )> }
       )> }
     )>> }
+  )> }
+);
+
+export type ChangeTripBusMutationMutationVariables = Exact<{
+  input: ChangeTripBusMutationInput;
+}>;
+
+
+export type ChangeTripBusMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { changeTripBus?: Maybe<(
+    { __typename?: 'ChangeTripBusMutationPayload' }
+    & { trip?: Maybe<(
+      { __typename?: 'TripNode' }
+      & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'createdAt'>
+      & { busSeatConfiguration: (
+        { __typename?: 'BusSeatConfigurationNode' }
+        & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+      ), bus?: Maybe<(
+        { __typename?: 'BusNode' }
+        & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
+        & { busSeatConfiguration: (
+          { __typename?: 'BusSeatConfigurationNode' }
+          & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+        ) }
+      )>, route: (
+        { __typename?: 'RouteNode' }
+        & Pick<RouteNode, 'id' | 'distance'>
+        & { leavingFrom: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name'>
+        ), destination: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name'>
+        ) }
+      ), carrier: (
+        { __typename?: 'CarrierNode' }
+        & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+      ) }
+    )> }
   )> }
 );
 
@@ -2027,6 +2365,43 @@ export type LoginMutationMutation = (
   )> }
 );
 
+export type TripQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type TripQuery = (
+  { __typename?: 'Query' }
+  & { trip?: Maybe<(
+    { __typename?: 'TripNode' }
+    & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'createdAt'>
+    & { busSeatConfiguration: (
+      { __typename?: 'BusSeatConfigurationNode' }
+      & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+    ), bus?: Maybe<(
+      { __typename?: 'BusNode' }
+      & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
+      & { busSeatConfiguration: (
+        { __typename?: 'BusSeatConfigurationNode' }
+        & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+      ) }
+    )>, route: (
+      { __typename?: 'RouteNode' }
+      & Pick<RouteNode, 'id' | 'distance'>
+      & { leavingFrom: (
+        { __typename?: 'CityNode' }
+        & Pick<CityNode, 'id' | 'name'>
+      ), destination: (
+        { __typename?: 'CityNode' }
+        & Pick<CityNode, 'id' | 'name'>
+      ) }
+    ), carrier: (
+      { __typename?: 'CarrierNode' }
+      & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+    ) }
+  )> }
+);
+
 export type TripMutationMutationVariables = Exact<{
   input: TripMutationInput;
 }>;
@@ -2036,6 +2411,7 @@ export type TripMutationMutation = (
   { __typename?: 'Mutation' }
   & { trip?: Maybe<(
     { __typename?: 'TripMutationPayload' }
+    & Pick<TripMutationPayload, 'bulkRef'>
     & { trips?: Maybe<Array<Maybe<(
       { __typename?: 'TripNode' }
       & Pick<TripNode, 'id' | 'departureTime'>
@@ -2045,6 +2421,9 @@ export type TripMutationMutation = (
 
 export type TripsQueryVariables = Exact<{
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  leavingFrom?: Maybe<Scalars['ID']>;
+  destination?: Maybe<Scalars['ID']>;
 }>;
 
 
@@ -2060,7 +2439,19 @@ export type TripsQuery = (
         & { bus?: Maybe<(
           { __typename?: 'BusNode' }
           & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
-        )>, route: (
+        )>, busSeatConfiguration: (
+          { __typename?: 'BusSeatConfigurationNode' }
+          & { busseatconfigurationseatSet: (
+            { __typename?: 'BusSeatConfigurationSeatNodeConnection' }
+            & { edges: Array<Maybe<(
+              { __typename?: 'BusSeatConfigurationSeatNodeEdge' }
+              & { node?: Maybe<(
+                { __typename?: 'BusSeatConfigurationSeatNode' }
+                & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
+              )> }
+            )>> }
+          ) }
+        ), route: (
           { __typename?: 'RouteNode' }
           & Pick<RouteNode, 'id' | 'distance'>
           & { leavingFrom: (
@@ -2093,12 +2484,178 @@ export type UsersQuery = (
       { __typename?: 'BusUserNodeEdge' }
       & { node?: Maybe<(
         { __typename?: 'BusUserNode' }
-        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'profilePic'>
+        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'profilePic' | 'phone'>
       )> }
     )>> }
   )> }
 );
 
+export const BusDocument = gql`
+    query Bus($id: ID!) {
+  bus(id: $id) {
+    id
+    busNumber
+    plateNumber
+    carrier {
+      id
+      name
+    }
+    busSeatConfiguration {
+      id
+      name
+    }
+    drivers {
+      edges {
+        node {
+          id
+          firstName
+          lastName
+          profilePic
+          phone
+        }
+      }
+    }
+    assistants {
+      edges {
+        node {
+          id
+          firstName
+          lastName
+          profilePic
+          phone
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BusGQL extends Apollo.Query<BusQuery, BusQueryVariables> {
+    document = BusDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const BusDriverMutationDocument = gql`
+    mutation BusDriverMutation($input: BusDriverMutationInput!) {
+  busDriver(input: $input) {
+    bus {
+      id
+      busNumber
+      plateNumber
+      carrier {
+        id
+        name
+      }
+      busSeatConfiguration {
+        id
+        name
+      }
+      drivers {
+        edges {
+          node {
+            id
+            firstName
+            lastName
+            profilePic
+            phone
+          }
+        }
+      }
+      assistants {
+        edges {
+          node {
+            id
+            firstName
+            lastName
+            profilePic
+            phone
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BusDriverMutationGQL extends Apollo.Mutation<BusDriverMutationMutation, BusDriverMutationMutationVariables> {
+    document = BusDriverMutationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const BusSeatConfigurationDocument = gql`
+    query BusSeatConfiguration($id: ID!) {
+  busSeatConfiguration(id: $id) {
+    id
+    name
+    busseatconfigurationseatSet {
+      edges {
+        node {
+          id
+          windowSeat
+          name
+          row
+          col
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BusSeatConfigurationGQL extends Apollo.Query<BusSeatConfigurationQuery, BusSeatConfigurationQueryVariables> {
+    document = BusSeatConfigurationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const BusSeatConfigurationsDocument = gql`
+    query BusSeatConfigurations {
+  busSeatConfigurations {
+    edges {
+      node {
+        id
+        name
+        busseatconfigurationseatSet {
+          edges {
+            node {
+              id
+              windowSeat
+              name
+              row
+              col
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BusSeatConfigurationsGQL extends Apollo.Query<BusSeatConfigurationsQuery, BusSeatConfigurationsQueryVariables> {
+    document = BusSeatConfigurationsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const BusesDocument = gql`
     query Buses($carrier: ID!) {
   buses(carrier: $carrier) {
@@ -2122,6 +2679,32 @@ export const BusesDocument = gql`
   })
   export class BusesGQL extends Apollo.Query<BusesQuery, BusesQueryVariables> {
     document = BusesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const BusMutationDocument = gql`
+    mutation BusMutation($input: BusMutationInput!) {
+  bus(input: $input) {
+    bus {
+      id
+      plateNumber
+      busNumber
+      busSeatConfiguration {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BusMutationGQL extends Apollo.Mutation<BusMutationMutation, BusMutationMutationVariables> {
+    document = BusMutationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -2202,6 +2785,59 @@ export const CarriersDocument = gql`
   })
   export class CarriersGQL extends Apollo.Query<CarriersQuery, CarriersQueryVariables> {
     document = CarriersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ChangeTripBusMutationDocument = gql`
+    mutation ChangeTripBusMutation($input: ChangeTripBusMutationInput!) {
+  changeTripBus(input: $input) {
+    trip {
+      id
+      departureTime
+      arrivalTime
+      busSeatConfiguration {
+        id
+        name
+      }
+      bus {
+        id
+        plateNumber
+        busNumber
+        busSeatConfiguration {
+          id
+          name
+        }
+      }
+      route {
+        id
+        leavingFrom {
+          id
+          name
+        }
+        destination {
+          id
+          name
+        }
+        distance
+      }
+      carrier {
+        id
+        name
+        logo
+      }
+      createdAt
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ChangeTripBusMutationGQL extends Apollo.Mutation<ChangeTripBusMutationMutation, ChangeTripBusMutationMutationVariables> {
+    document = ChangeTripBusMutationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -2376,9 +3012,61 @@ export const LoginMutationDocument = gql`
       super(apollo);
     }
   }
+export const TripDocument = gql`
+    query Trip($id: ID!) {
+  trip(id: $id) {
+    id
+    departureTime
+    arrivalTime
+    busSeatConfiguration {
+      id
+      name
+    }
+    bus {
+      id
+      plateNumber
+      busNumber
+      busSeatConfiguration {
+        id
+        name
+      }
+    }
+    route {
+      id
+      leavingFrom {
+        id
+        name
+      }
+      destination {
+        id
+        name
+      }
+      distance
+    }
+    carrier {
+      id
+      name
+      logo
+    }
+    createdAt
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class TripGQL extends Apollo.Query<TripQuery, TripQueryVariables> {
+    document = TripDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const TripMutationDocument = gql`
     mutation TripMutation($input: TripMutationInput!) {
   trip(input: $input) {
+    bulkRef
     trips {
       id
       departureTime
@@ -2398,8 +3086,13 @@ export const TripMutationDocument = gql`
     }
   }
 export const TripsDocument = gql`
-    query Trips($carrier: ID) {
-  trips(carrier: $carrier) {
+    query Trips($carrier: ID, $bulkRef: String, $leavingFrom: ID, $destination: ID) {
+  trips(
+    carrier: $carrier
+    bulkRef: $bulkRef
+    route_LeavingFrom: $leavingFrom
+    route_Destination: $destination
+  ) {
     edges {
       node {
         id
@@ -2409,6 +3102,16 @@ export const TripsDocument = gql`
           id
           plateNumber
           busNumber
+        }
+        busSeatConfiguration {
+          busseatconfigurationseatSet {
+            edges {
+              node {
+                id
+                name
+              }
+            }
+          }
         }
         route {
           id
@@ -2453,6 +3156,7 @@ export const UsersDocument = gql`
         firstName
         lastName
         profilePic
+        phone
       }
     }
   }

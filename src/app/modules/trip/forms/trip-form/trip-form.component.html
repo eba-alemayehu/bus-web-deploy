@@ -83,6 +83,20 @@
         <input matInput type="number" formControlName="reputation">
       </mat-form-field>
     </div>
+    <div fxLayout="column" style="align-items: center">
+      <mat-card
+        *ngFor="let config of busSeatConfigurations$ | async"
+        (click)="selectBusSeatConfiguration(config)"
+        [style.border]="config == busSeatConfiguration? '2px solid green': 'none'"
+        style="background: #efefef">
+        <h3>{{config.node.name}}</h3>
+        <app-bus-seat-configuration
+          style="width: 400px"
+          *ngFor="let config of busSeatConfigurations$ | async"
+          [busSeatConfiguration]="config.node"></app-bus-seat-configuration>
+      </mat-card>
+
+    </div>
     <div fxLayout="row">
       <span class="spacer"></span>
       <button mat-flat-button color="primary" type="submit">Submit</button>

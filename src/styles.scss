@@ -1,3 +1,4 @@
+@use "~@material/typography/mdc-typography";
 @import '~@angular/material/theming';
 
 @include mat-core();
@@ -39,7 +40,7 @@ h1,.mat-h1,.mat-headline{
   font-family: 'Redressed', cursive !important;
 }
 
-.mat-flat-button.mat-primary {background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC  51%, #02AAB0  100%)}
+  .mat-flat-button.mat-primary {background-image: linear-gradient(to right, #02AAB0 0%, #00cdac 51%, #02AAB0  100%)}
 .mat-flat-button.mat-primary {
   font-weight: 600;
   margin: 10px;
@@ -70,4 +71,22 @@ h1,.mat-h1,.mat-headline{
   background-position: center center; /* change the direction of the change here */
   color: gray;
   text-decoration: none;
+}
+@mixin clip{
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-purple{
+  background-image: linear-gradient(to right, #9733EE 0%, #DA22FF  100%);
+  @include clip
+}
+
+.gradient-blue{
+  background-image: linear-gradient(to top right, #4776E6 0%, #8E54E9  100%);
+  @include clip
+}
+
+.gradient-red{
+  background-image: linear-gradient(to top right, #1D976C  0%, #93F9B9  100%);
+  @include clip
 }

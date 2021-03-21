@@ -1,8 +1,17 @@
 <div fxLayout="column">
-  <mat-card><app-trip-search-form layout="row" [input]="tripSearchData"></app-trip-search-form></mat-card>
   <mat-card>
-    <app-trip-list-item>
-
-    </app-trip-list-item>
+    <app-trip-search-form
+      layout="row"
+      [input]="tripSearchQuery"
+      (formSubmit)="searchChanged($event)"
+      (formChanged)="searchChanged($event)"
+    >
+    </app-trip-search-form>
+  </mat-card>
+  <mat-card>
+    <app-trip-list
+      [leavingFrom]="tripSearchQuery.leavingFrom"
+      [destination]="tripSearchQuery.destination">
+    </app-trip-list>
   </mat-card>
 </div>
