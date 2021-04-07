@@ -90,3 +90,15 @@ h1,.mat-h1,.mat-headline{
   background-image: linear-gradient(to top right, #1D976C  0%, #93F9B9  100%);
   @include clip
 }
+
+// layout
+
+.width60{
+  width: 60%;
+  margin: auto;
+}
+@media( max-width: 1200px){
+  .width60{
+    width: 100%;
+  }
+}

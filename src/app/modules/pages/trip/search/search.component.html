@@ -6,10 +6,10 @@
       (formChanged)="searchChanged($event)"
     >
     </app-trip-search-form>
-
-    <app-trip-list
-      [leavingFrom]="tripSearchQuery.leavingFrom"
-      [destination]="tripSearchQuery.destination">
-    </app-trip-list>
-
+    <div class="width60">
+      <app-trip-list
+        [leavingFrom]="tripSearchQuery.leavingFrom"
+        [destination]="tripSearchQuery.destination">
+      </app-trip-list>
+    </div>
 </div>

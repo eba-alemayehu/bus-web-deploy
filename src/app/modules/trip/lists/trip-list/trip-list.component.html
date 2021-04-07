@@ -2,6 +2,9 @@
   <div fxLayout="column">
     <mat-card fxLayout="row" *ngFor="let trip of trips$ | async" (click)="onSelect(trip)" style="margin-bottom: 1em">
       <app-trip-list-item [trip]="trip.node" style="width: 100%; margin: auto">
+        <div buttons>
+          <button mat-flat-button color="primary" routerLink="/booking/seat/{{trip.node.id}}">Book ticket</button>
+        </div>
       </app-trip-list-item>
     </mat-card>
   </div>

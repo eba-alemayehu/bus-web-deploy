@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ApplicationRef, Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {BusSeatConfigurationGQL, BusSeatConfigurationNode} from '../../../../generated/graphql';
 import {map} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
@@ -24,12 +24,14 @@ export class BusSeatConfigurationComponent implements OnInit {
           this.setRowCol();
         }
       );
-  };
+  }
+  @Input() selectedBusSeatConfigurationSeats: any[] = [];
+  @Output() selectedBusSeatConfigurationSeatsChange: EventEmitter<any> = new EventEmitter<any>();
   busSeatConfigurationSeats = [];
   row = [];
   col = [];
 
-  constructor(private busSeatConfigurationGQL: BusSeatConfigurationGQL) {
+  constructor(private busSeatConfigurationGQL: BusSeatConfigurationGQL, private appRef: ApplicationRef) {
   }
 
   ngOnInit(): void {
@@ -62,5 +64,18 @@ export class BusSeatConfigurationComponent implements OnInit {
       }
     );
     return seat;
+  }
+  selectSeat(seat): void{
+    if (!this.isSeatSelected(seat)){
+      this.selectedBusSeatConfigurationSeats.push(seat);
+    }else{
+      const index = this.selectedBusSeatConfigurationSeats.indexOf(seat);
+      this.selectedBusSeatConfigurationSeats.splice(index, 1);
+    }
+    this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
+    this.appRef.tick();
+  }
+  isSeatSelected(seat): boolean{
+    return this.selectedBusSeatConfigurationSeats?.indexOf(seat) >= 0;
   }
 }

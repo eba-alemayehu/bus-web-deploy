@@ -12,7 +12,9 @@
 
   <span class="spacer"></span>
   <div fxLayout="column">
-    <app-price [price]="2300"></app-price>
+    <div fxLayout="row-reverse">
+      <app-price [price]="2300"></app-price>
+    </div>
     <ng-content select="[buttons]"></ng-content>
   </div>
 </div>

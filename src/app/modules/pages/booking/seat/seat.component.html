@@ -1,0 +1,11 @@
+<div class="width60">
+  <mat-card style="margin-top: 3em">
+    <app-bus-seat-configuration
+      [(selectedBusSeatConfigurationSeats)]="selectedBusSeatConfigurationSeats"
+      [busSeatConfiguration]="trip?.busSeatConfiguration"></app-bus-seat-configuration>
+    <div fxLayout="row-reverse">
+      <button mat-flat-button color="primary" (click)="next()">Next</button>
+    </div>
+
+  </mat-card>
+</div>

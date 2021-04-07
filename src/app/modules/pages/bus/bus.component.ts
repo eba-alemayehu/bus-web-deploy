@@ -60,7 +60,6 @@ export class BusComponent implements OnInit {
   }
 
   private mutateDriver(input): void{
-    echo(input);
     this.busDriverMutation.mutate({input: input}).subscribe(
       (response) => {
         this.bus = response.data.busDriver.bus;
