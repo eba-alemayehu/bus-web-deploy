@@ -1,1 +1,10 @@
-<p>{{selectedSeats | json}}</p>
+<div class="width60">
+  <mat-card>
+    <app-passengers-info-form [selectedSeats]="selectedSeats" [(passengerInfo)]="passengerInfo"></app-passengers-info-form>
+  </mat-card>
+  <div fxLayout="row-reverse">
+    <button mat-flat-button color="primary">Book Ticket</button>
+  </div>
+</div>
+
+

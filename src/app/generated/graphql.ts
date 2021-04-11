@@ -2348,6 +2348,29 @@ export type RefreshTokenMutation = (
   )> }
 );
 
+export type TicketMuationMutationVariables = Exact<{
+  input: TicketMutationInput;
+}>;
+
+
+export type TicketMuationMutation = (
+  { __typename?: 'Mutation' }
+  & { ticket?: Maybe<(
+    { __typename?: 'TicketMutationPayload' }
+    & { ticket?: Maybe<(
+      { __typename?: 'TicketNode' }
+      & Pick<TicketNode, 'id' | 'firstName' | 'lastName' | 'ticketNumber'>
+      & { trip: (
+        { __typename?: 'TripNode' }
+        & Pick<TripNode, 'id'>
+      ), busSeatConfigurationSeat: (
+        { __typename?: 'BusSeatConfigurationSeatNode' }
+        & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
+      ) }
+    )> }
+  )> }
+);
+
 export type LoginMutationMutationVariables = Exact<{
   input: ObtainJsonWebTokenInput;
 }>;
@@ -2980,6 +3003,36 @@ export const RefreshTokenDocument = gql`
   })
   export class RefreshTokenGQL extends Apollo.Mutation<RefreshTokenMutation, RefreshTokenMutationVariables> {
     document = RefreshTokenDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const TicketMuationDocument = gql`
+    mutation ticketMuation($input: TicketMutationInput!) {
+  ticket(input: $input) {
+    ticket {
+      id
+      firstName
+      lastName
+      trip {
+        id
+      }
+      busSeatConfigurationSeat {
+        id
+        name
+      }
+      ticketNumber
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class TicketMuationGQL extends Apollo.Mutation<TicketMuationMutation, TicketMuationMutationVariables> {
+    document = TicketMuationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
