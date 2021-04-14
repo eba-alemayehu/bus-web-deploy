@@ -80,34 +80,6 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <mat-form-field class="example-full-width" fxFill>
-        <mat-label>Who told you about serdo? Enter phone number. (optional)</mat-label>
-        <input
-          type="text"
-          matInput
-          [matAutocomplete]="auto"
-          formControlName="referredBy"
-          (focusout)="referredByFocusOut($event)">
-        <mat-error *ngIf="!!selectedUserError">{{selectedUserError}}</mat-error>
-        <mat-hint>Please mention who told you about us. Your friend will get credits.</mat-hint>
-        <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption (optionSelected)="referredBy($event)">
-          <mat-option *ngFor="let user of filteredUsers" [value]="user.node">
-            <div class="flex" style="justify-content: space-between">
-              <span>{{user.node.name}}</span>
-              <span class="secondery">{{user.node.phone}}</span>
-            </div>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <div class="flex flat-card" style="margin-top: 1em" *ngIf="selectedUser">
-        <div class="flex">
-          <app-profile-pic [upload]="false" [pic]="selectedUser?.profilePic" size="30px"></app-profile-pic>
-          <div class="flex-col" style="margin-left: 1em">
-            <b>{{selectedUser?.name}}</b>
-            <i>{{selectedUser?.phone}}</i>
-          </div>
-        </div>
-      </div>
       <div fxLayout="row" style="margin-top: .5em">
         <span class="spacer"></span>
         <button mat-flat-button (click)="close.emit()">Cancel</button>

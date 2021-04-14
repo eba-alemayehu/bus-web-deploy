@@ -30,10 +30,10 @@ export class BookingComponent implements OnInit {
   }
 
   bookTicket(): void{
-    this.ticketMutation.mutate({
-      input: {
-        
-      }
-    })
+    // this.ticketMutation.mutate({
+    //   input: {
+    //
+    //   }
+    // })
   }
 }
