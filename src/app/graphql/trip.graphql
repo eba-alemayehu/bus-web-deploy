@@ -14,6 +14,7 @@ query Trip($id: ID!){
       busSeatConfiguration{
         id
         name
+
       }
     }
     route{
@@ -21,6 +22,14 @@ query Trip($id: ID!){
       leavingFrom{
         id
         name
+        busstopSet{
+          edges{
+            node{
+              id
+              name
+            }
+          }
+        }
       }
       destination{
         id

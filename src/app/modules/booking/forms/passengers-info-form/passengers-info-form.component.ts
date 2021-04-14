@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BookTicketGQL} from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
 
 @Component({
@@ -10,13 +11,24 @@ import {echo} from '../../../../util/print';
 export class PassengersInfoFormComponent implements OnInit {
   public passengerInfoFormGroup: FormGroup;
   @Input() passengerInfo;
+  @Input() trip;
   @Output() passengerInfoChange: EventEmitter<any> = new EventEmitter<any>();
-  @Input('selectedSeats')  set selectedSeats(seats){
+
+  @Input('selectedSeats') set selectedSeats(seats) {
     seats.forEach((e) => {
       this.addPassenger(e);
     });
   }
-  constructor(private formBuilder: FormBuilder) {
+
+  // private passengers: {
+  //   firstname: string,
+  //   lastName: string,
+  //   phone: string,
+  //   busStop: string,
+  //   busSeatConfigurationSeat: string,
+  // }[];
+
+  constructor(private formBuilder: FormBuilder, private bookTicketGQL: BookTicketGQL) {
     this.passengerInfoFormGroup = this.formBuilder.group({
       passengers: this.formBuilder.array([])
     });
@@ -37,13 +49,40 @@ export class PassengersInfoFormComponent implements OnInit {
     this.passengers.push(this.createPassengerFormGroup(id));
   }
 
-  createPassengerFormGroup(id): any {
+  createPassengerFormGroup(busSeatConfigurationSeatId): any {
     return this.formBuilder.group({
+      busSeatConfigurationSeat: busSeatConfigurationSeatId,
       name: ['', [Validators.required]],
-      phone: ['', [Validators.required]]
+      phone: ['', [Validators.required]],
+      busStop: ['', [Validators.required]]
     });
   }
-  submit(): void{
-    console.log(this.passengerInfoFormGroup.value);
+
+  submit(): void {
+    if (this.passengerInfoFormGroup.valid) {
+      const passengers = this.passengerInfoFormGroup.value.passengers.map(
+        (e) => {
+          const name = e.name.split(' ');
+          e.firstName = name[0];
+          e.lastName = name[1];
+          return e;
+        }
+      );
+
+      this.bookTicketGQL.mutate({
+        input: {
+          trip: this.trip.id,
+          passengers: JSON.stringify({'passengers': passengers}),
+        }
+      }).subscribe(
+        (response) => {
+          echo(response);
+        },
+        (error) => {
+          echo(error);
+        }
+      );
+      console.log('error');
+    }
   }
 }

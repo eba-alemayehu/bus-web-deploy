@@ -10,7 +10,7 @@ import {TicketMuationGQL, TripGQL} from '../../../generated/graphql';
 export class BookingComponent implements OnInit {
   selectedSeats;
   passengerInfo: any[];
-  private trip: any;
+  trip: any;
   constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private ticketMutation: TicketMuationGQL) {
     this.activatedRoute.params.subscribe(
       (params) => {
@@ -30,10 +30,10 @@ export class BookingComponent implements OnInit {
   }
 
   bookTicket(): void{
-    this.ticketMutation.mutate({
-      input: {
-        
-      }
-    })
+    // this.ticketMutation.mutate({
+    //   input: {
+    //
+    //   }
+    // })
   }
 }

@@ -34,8 +34,12 @@
     "apollo-link-error": "^1.1.13",
     "bootstrap": "4.1.1",
     "graphql": "^15.0.0",
+    "intl-tel-input": "^17.0.13",
     "libphonenumber-js": "^1.9.13",
+    "lottie-web": "^5.7.11",
+    "moment": "^2.29.1",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-lottie": "^7.0.1",
     "ngx-mat-intl-tel-input": "^4.0.0",
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.6.0",
@@ -47,7 +51,10 @@
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
     "@graphql-codegen/cli": "1.21.3",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typescript": "1.21.1",
     "@graphql-codegen/typescript-apollo-angular": "2.3.2",
+    "@graphql-codegen/typescript-operations": "1.17.15",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -62,9 +69,6 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2",
-    "@graphql-codegen/typescript": "1.21.1",
-    "@graphql-codegen/typescript-operations": "1.17.15",
-    "@graphql-codegen/introspection": "1.18.1"
+    "typescript": "~4.0.2"
   }
 }

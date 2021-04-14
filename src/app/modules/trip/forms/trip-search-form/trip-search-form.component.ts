@@ -72,6 +72,10 @@ export class TripSearchFormComponent implements OnInit {
     this.tripFomGroup.valueChanges.subscribe((value) => this.formChanged.emit(value));
   }
 
+  changeWeakDate(date: Date): void {
+    this.tripFomGroup.controls.departureDate.setValue(new Date(date).toISOString());
+  }
+
   _submit(): void {
     const input = this.tripFomGroup.value;
     input.passengers = this.passengers;

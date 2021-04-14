@@ -6,6 +6,7 @@ import {TripListItemModule} from '../../components/trip-list-item/trip-list-item
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {RouterModule} from '@angular/router';
+import {TripModule} from '../../trip.module';
 
 
 
@@ -14,13 +15,14 @@ import {RouterModule} from '@angular/router';
   exports: [
     TripListComponent
   ],
-    imports: [
-        CommonModule,
-        FlexModule,
-        TripListItemModule,
-        MatButtonModule,
-        MatCardModule,
-        RouterModule
-    ]
+  imports: [
+    CommonModule,
+    FlexModule,
+    TripListItemModule,
+    MatButtonModule,
+    MatCardModule,
+    RouterModule,
+    TripModule
+  ]
 })
 export class TripListModule { }

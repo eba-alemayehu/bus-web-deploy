@@ -1,7 +1,9 @@
+<!--[fxLayout]="!(isHandset$ | async)? layout: 'column'"-->
+<!--[class.align-items]="layout === 'row' && !(isHandset$ | async)"-->
+
 <div fxLayout="column">
   <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto">
-    <div [fxLayout]="!(isHandset$ | async)? layout: 'column'"
-         [class.align-items]="layout === 'row' && !(isHandset$ | async)" style="flex-flow: wrap">
+    <div  style="flex-flow: wrap">
       <div fxLayout="row" >
         <mat-form-field appearance="outline">
           <mat-label>Leaving from</mat-label>
@@ -64,7 +66,6 @@
           <mat-icon matPrefix color="accent">place</mat-icon>
         </mat-form-field>
       </div>
-
       <div fxLayout="row" style="justify-content: space-between">
         <mat-form-field appearance="outline">
           <mat-label>Departure date</mat-label>
@@ -78,6 +79,9 @@
           <mat-datepicker-toggle matSuffix [for]="returnDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #returnDatePicker></mat-datepicker>
         </mat-form-field>
+      </div>
+      <div>
+        <app-weak-date></app-weak-date>
       </div>
       <div fxLayout="row" style="justify-content: center" *ngIf="layout !== 'row'">
         <button mat-icon-button (click)="subtractPassenger()" type="button" >

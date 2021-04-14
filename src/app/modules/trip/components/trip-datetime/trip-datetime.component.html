@@ -3,12 +3,12 @@
     <div fxLayout="column" class="time-city-container">
       <span class="time">{{trip?.departureTime | date:'shortTime'}}</span>
       <span>{{trip?.departureTime| date: 'fullDate'}}</span>
-      <span class="mat-card-subtitle">{{trip?.route.leavingFrom.name}}</span>
+      <span class="mat-card-subtitle" style="margin-top: 8px;">{{trip?.route.leavingFrom.name}}</span>
     </div>
     <span class="duration" style="color: lightblue">4h3m</span>
     <div fxLayout="column" class="time-city-container">
       <span class="time">{{trip?.arrivalTime | date:'shortTime'}}</span>
       <span>{{trip?.departureTime| date: 'fullDate'}}</span>
-      <span class="mat-card-subtitle">{{trip?.route.destination.name}}</span>
+      <span class="mat-card-subtitle" style="margin-top: 8px;">{{trip?.route.destination.name}}</span>
     </div>
   </div>

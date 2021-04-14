@@ -1,0 +1,88 @@
+.mat-divider.mat-divider-vertical {
+  border-top: 0;
+  border-right-width: 4px;
+  border-right-style: dotted;
+}
+
+.mat-card-actions, .mat-card-subtitle, .mat-card-content {
+  display: block;
+  margin-bottom: 0;
+}
+
+.time{
+  font-weight: 600;
+  font-size: 1.6em;
+  padding: 2px 0.5rem 2px 0.5rem ;
+  align-self: center;
+}
+
+.ticket-card {
+  border-radius: 20px;
+  padding:4px;
+  height: 170px;
+}
+
+.time-city-container{
+  margin: 1em 0em;
+}
+
+.duration:after,
+.duration:before{
+  content:"\00a0\00a0\00a0\00a0\00a\00a0\00a0";
+  text-decoration:line-through;
+}
+.personal-info{
+    position: relative;
+    height: 1.5em;
+    margin: 0 auto;
+    border-radius: 1em/0.6em;
+    z-index: 1;
+    &:before, &:after {
+      content:"";
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+    }
+  &:before {
+    width: 2em;
+    height: 2em;
+    background: white;
+    z-index: 2;
+    left: 92%;
+    top: 156px;
+  }
+    &:after {
+      width: 2em;
+      height: 2em;
+      background: #fff;
+      z-index: 3;
+      left: 110%;
+      top: -1.4rem;
+    } &:after {
+      width: 2em;
+      height: 2em;
+      background: #fff;
+      z-index: 3;
+      left: 92%;
+      top: -1.4rem;
+    }
+}
+
+.mat-flat-button.mat-primary {
+  font-weight: 600;
+  margin-top: 4rem;
+  padding: 3px 25px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 20px;
+  display: block;
+}
+
+.svg-border-mask {
+  //-webkit-mask-box-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/stampTiles.svg) 30 repeat;
+
+}
