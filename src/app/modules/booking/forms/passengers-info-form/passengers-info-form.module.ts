@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FlexModule} from '@angular/flex-layout';
 import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from "@angular/material/radio";
 
 
 
@@ -14,13 +15,14 @@ import {MatInputModule} from '@angular/material/input';
   exports: [
     PassengersInfoFormComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    FlexModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        FlexModule,
+        MatInputModule,
+        MatRadioModule
+    ]
 })
 export class PassengersInfoFormModule { }

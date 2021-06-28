@@ -3,6 +3,19 @@ query Trip($id: ID!){
     id
     departureTime
     arrivalTime
+    price
+    seats{
+      busSeatConfigurationSeat{
+        id
+        name
+        row
+        col
+        windowSeat
+        createdAt
+      }
+      isLocked
+      isSold
+    }
     busSeatConfiguration{
       id
       name
@@ -21,6 +34,14 @@ query Trip($id: ID!){
       leavingFrom{
         id
         name
+        busstopSet{
+          edges{
+            node{
+              id
+              name
+            }
+          }
+        }
       }
       destination{
         id

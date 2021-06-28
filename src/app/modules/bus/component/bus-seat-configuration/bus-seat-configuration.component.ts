@@ -1,5 +1,5 @@
 import {ApplicationRef, Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
-import {BusSeatConfigurationGQL, BusSeatConfigurationNode} from '../../../../generated/graphql';
+import {BusSeatConfigurationGQL, BusSeatConfigurationNode, TripGQL, TripSeatType} from '../../../../generated/graphql';
 import {map} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
 
@@ -20,18 +20,37 @@ export class BusSeatConfigurationComponent implements OnInit {
       .pipe(map((response) => response.data.busSeatConfiguration.busseatconfigurationseatSet.edges))
       .subscribe(
         (busSeatConfigurationSeats) => {
-          this.busSeatConfigurationSeats = busSeatConfigurationSeats;
+          this.seats = busSeatConfigurationSeats.map(
+            (e) => {
+              const busSeatConfigurationSeat: any= {};
+              busSeatConfigurationSeat.busSeatConfigurationSeat = e.node;
+              return busSeatConfigurationSeat;
+            }
+          );
+          this.setRowCol();
+        }
+      );
+  }
+  @Input('trip') set trip(value){
+    echo('****');
+    echo(value);
+    if (!value.id) return;
+    this.tripGQL.watch({id: value.id}).valueChanges
+      .pipe(map((response) => response.data.trip.seats))
+      .subscribe(
+        (seats) => {
+          this.seats = seats;
           this.setRowCol();
         }
       );
   }
   @Input() selectedBusSeatConfigurationSeats: any[] = [];
   @Output() selectedBusSeatConfigurationSeatsChange: EventEmitter<any> = new EventEmitter<any>();
-  busSeatConfigurationSeats = [];
+  seats = [];
   row = [];
   col = [];
 
-  constructor(private busSeatConfigurationGQL: BusSeatConfigurationGQL, private appRef: ApplicationRef) {
+  constructor(private busSeatConfigurationGQL: BusSeatConfigurationGQL, private appRef: ApplicationRef, private tripGQL: TripGQL) {
   }
 
   ngOnInit(): void {
@@ -39,10 +58,10 @@ export class BusSeatConfigurationComponent implements OnInit {
   setRowCol(): void {
     let maxCol = -1;
     let maxRow = -1;
-    this.busSeatConfigurationSeats.forEach(
+    this.seats.forEach(
       (e) => {
-        maxCol = (e.node.col > maxCol) ? e.node.col : maxCol;
-        maxRow = (e.node.row > maxRow) ? e.node.row : maxRow;
+        maxCol = (e.busSeatConfigurationSeat.col > maxCol) ? e.busSeatConfigurationSeat.col : maxCol;
+        maxRow = (e.busSeatConfigurationSeat.row > maxRow) ? e.busSeatConfigurationSeat.row : maxRow;
       }
     );
     for (let col = 0; col <= maxCol; col++){
@@ -52,12 +71,12 @@ export class BusSeatConfigurationComponent implements OnInit {
       this.row.push(row);
     }
   }
-  seat(row, col): BusSeatConfigurationNode|null{
-    let seat: BusSeatConfigurationNode = null;
-    const seats = this.busSeatConfigurationSeats.every(
+  seat(row, col): TripSeatType|null {
+    let seat: TripSeatType = null;
+    const seats = this.seats.every(
       (e) => {
-        if (e.node.col === col && e.node.row === row){
-          seat = e.node;
+        if (e.busSeatConfigurationSeat.col === col && e.busSeatConfigurationSeat.row === row){
+          seat = e;
           return false;
         }
         return true;
@@ -77,5 +96,16 @@ export class BusSeatConfigurationComponent implements OnInit {
   }
   isSeatSelected(seat): boolean{
     return this.selectedBusSeatConfigurationSeats?.indexOf(seat) >= 0;
+  }
+  seatStatus(seat): string{
+    if (seat.isLocked){
+      return 'locked';
+    } else if (seat.isSold){
+      return 'sold';
+    } else if (this.isSeatSelected(seat)){
+      return 'selected';
+    } else{
+      return 'unselected';
+    }
   }
 }

@@ -2,23 +2,36 @@
   <ng-container *ngFor="let userFormGroup of passengers.controls; let i = index">
     <h4>Passenger {{i+1}}</h4>
     <div [formGroup]="userFormGroup" fxLayout="row">
-      <div class="passenger-input-container">
-        <mat-form-field appearance="outline">
-          <mat-label>Full name</mat-label>
-          <input matInput type="text" formControlName="name">
-        </mat-form-field>
-      </div>
-      <div class="passenger-input-container">
-        <mat-form-field appearance="outline">
-          <mat-label>Phone</mat-label>
-          <input matInput type="tel" formControlName="phone">
-        </mat-form-field>
+      <input type="hidden" formControlName="busSeatConfigurationSeat"/>
+      <div fxLayout="column" style="width: 100%">
+        <div fxLayout="row">
+          <div class="passenger-input-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Full name</mat-label>
+              <input matInput type="text" formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="passenger-input-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone</mat-label>
+              <input matInput type="tel" formControlName="phone">
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-radio-group
+          [hidden]="trip?.route?.leavingFrom.busstopSet.edges.length <= 1"
+          formControlName="busStop"
+          aria-label="Select bus stop option"
+          style="width: 100%; display: flex; justify-content: space-around">
+          <mat-radio-button
+            *ngFor="let busStop of trip?.route?.leavingFrom.busstopSet.edges"
+            [value]="busStop.node.id">{{busStop.node.name}}</mat-radio-button>
+        </mat-radio-group>
       </div>
     </div>
   </ng-container>
-  <div fxLayout="row-reverse">
-    <button mat-flat-button color="primary">Submit</button>
-  </div>
+  <!--  <div fxLayout="row-reverse">-->
+  <!--    <button mat-flat-button color="primary">Submit</button>-->
+  <!--  </div>-->
 
 </form>
-

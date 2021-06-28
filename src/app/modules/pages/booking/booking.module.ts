@@ -7,6 +7,7 @@ import {PassengersInfoFormModule} from '../../booking/forms/passengers-info-form
 import {MatCardModule} from '@angular/material/card';
 import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
+import {PriceModule} from '../../common/price/price.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {MatButtonModule} from '@angular/material/button';
     PassengersInfoFormModule,
     MatCardModule,
     FlexModule,
-    MatButtonModule
+    MatButtonModule,
+    PriceModule
   ]
 })
 export class BookingModule { }

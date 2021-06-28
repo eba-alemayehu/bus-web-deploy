@@ -1,6 +1,6 @@
-mutation ticketMuation($input: TicketMutationInput!) {
-  ticket(input: $input){
-    ticket{
+mutation TicketMuation($input: BookTicketMutationInput!) {
+  bookTicket(input: $input){
+    tickets{
       id
       firstName
       lastName

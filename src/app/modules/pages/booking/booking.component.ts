@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TicketMuationGQL, TripGQL} from '../../../generated/graphql';
+import {echo} from '../../../util/print';
 
 @Component({
   selector: 'app-booking',
@@ -10,11 +11,11 @@ import {TicketMuationGQL, TripGQL} from '../../../generated/graphql';
 export class BookingComponent implements OnInit {
   selectedSeats;
   passengerInfo: any[];
-  private trip: any;
+  public trip = null;
   constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private ticketMutation: TicketMuationGQL) {
     this.activatedRoute.params.subscribe(
       (params) => {
-        this.trip = tripGQL.watch({id: params.trip}).valueChanges.subscribe(
+        tripGQL.watch({id: params.trip}).valueChanges.subscribe(
           (response) => this.trip = response.data.trip
         );
       }
@@ -22,6 +23,7 @@ export class BookingComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(
       (queryParams) => {
         this.selectedSeats = JSON.parse(decodeURIComponent(queryParams.selectedSeats));
+        console.log(this.selectedSeats);
       }
     );
   }
@@ -30,10 +32,16 @@ export class BookingComponent implements OnInit {
   }
 
   bookTicket(): void{
-    // this.ticketMutation.mutate({
-    //   input: {
-    //
-    //   }
-    // })
+    echo(this.passengerInfo);
+    this.ticketMutation.mutate({
+      input: {
+        trip: this.trip.id,
+        passengers: JSON.stringify(this.passengerInfo),
+      }
+    }).subscribe(
+      (data) => {
+        console.log(data);
+      }
+    );
   }
 }

@@ -16,6 +16,7 @@ export class PassengersInfoFormComponent implements OnInit {
       this.addPassenger(e);
     });
   }
+  @Input() trip;
   constructor(private formBuilder: FormBuilder) {
     this.passengerInfoFormGroup = this.formBuilder.group({
       passengers: this.formBuilder.array([])
