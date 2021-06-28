@@ -41,7 +41,9 @@ export class PassengersInfoFormComponent implements OnInit {
   createPassengerFormGroup(id): any {
     return this.formBuilder.group({
       name: ['', [Validators.required]],
-      phone: ['', [Validators.required]]
+      phone: ['', [Validators.required]],
+      busSeatConfigurationSeat: ['', [Validators.required]],
+      busStop: ['', [Validators.required]],
     });
   }
   submit(): void{
