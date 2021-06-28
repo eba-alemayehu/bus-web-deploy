@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TripGQL} from '../../../../generated/graphql';
 import {ActivatedRoute, Router} from '@angular/router';
+import {echo} from "../../../../util/print";
 
 @Component({
   selector: 'app-seat',
@@ -24,7 +25,8 @@ export class SeatComponent implements OnInit {
   }
 
   next(): void{
-    const selectedSeatsId = JSON.stringify(this.selectedBusSeatConfigurationSeats.map(e => e.id));
+    echo(this.selectedBusSeatConfigurationSeats);
+    const selectedSeatsId = JSON.stringify(this.selectedBusSeatConfigurationSeats.map(e => e.busSeatConfigurationSeat.id));
     this.router.navigate(['/booking/' + this.trip.id], { queryParams: {selectedSeats: encodeURIComponent(selectedSeatsId)}});
   }
 }

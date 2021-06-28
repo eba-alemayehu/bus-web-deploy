@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TicketMuationGQL, TripGQL} from '../../../generated/graphql';
 import {echo} from '../../../util/print';
+import {BookTicketGQL} from "../../../generated/mutation/graphql";
 
 @Component({
   selector: 'app-booking',
@@ -10,9 +11,9 @@ import {echo} from '../../../util/print';
 })
 export class BookingComponent implements OnInit {
   selectedSeats;
-  passengerInfo: any[];
+  passengerInfo: any;
   public trip = null;
-  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private ticketMutation: TicketMuationGQL) {
+  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private bookTicketGQL: BookTicketGQL) {
     this.activatedRoute.params.subscribe(
       (params) => {
         tripGQL.watch({id: params.trip}).valueChanges.subscribe(
@@ -32,8 +33,15 @@ export class BookingComponent implements OnInit {
   }
 
   bookTicket(): void{
+    this.passengerInfo.passengers.map(e => {
+      const name = e.name.split(' ');
+      e.firstName = name[0];
+      e.lastName = name[1];
+      echo(e);
+      return e;
+    });
     echo(this.passengerInfo);
-    this.ticketMutation.mutate({
+    this.bookTicketGQL.mutate({
       input: {
         trip: this.trip.id,
         passengers: JSON.stringify(this.passengerInfo),

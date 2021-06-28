@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {echo} from '../../../../util/print';
+import {BookTicketGQL, BookTicketMutation} from "../../../../generated/mutation/graphql";
 
 @Component({
   selector: 'app-passengers-info-form',
@@ -11,13 +12,18 @@ export class PassengersInfoFormComponent implements OnInit {
   public passengerInfoFormGroup: FormGroup;
   @Input() passengerInfo;
   @Output() passengerInfoChange: EventEmitter<any> = new EventEmitter<any>();
-  @Input('selectedSeats')  set selectedSeats(seats){
+
+  @Input('selectedSeats') set selectedSeats(seats) {
     seats.forEach((e) => {
+      echo('6');
+      echo(e);
       this.addPassenger(e);
     });
   }
+
   @Input() trip;
-  constructor(private formBuilder: FormBuilder) {
+
+  constructor(private formBuilder: FormBuilder, private bookTicketMutation: BookTicketGQL) {
     this.passengerInfoFormGroup = this.formBuilder.group({
       passengers: this.formBuilder.array([])
     });
@@ -38,15 +44,15 @@ export class PassengersInfoFormComponent implements OnInit {
     this.passengers.push(this.createPassengerFormGroup(id));
   }
 
-  createPassengerFormGroup(id): any {
+  createPassengerFormGroup(seat): any {
     return this.formBuilder.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      busSeatConfigurationSeat: ['', [Validators.required]],
+      busSeatConfigurationSeat: [seat, [Validators.required]],
       busStop: ['', [Validators.required]],
     });
   }
-  submit(): void{
-    console.log(this.passengerInfoFormGroup.value);
+
+  submit(): void {
   }
 }

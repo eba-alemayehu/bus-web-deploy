@@ -1,0 +1,9 @@
+mutation UserFCMToken($input:UserFCMTokenMutationInput!){
+    userFcmToken(input:$input){
+        userFcmToken{
+            id
+            token
+            createdAt
+        }
+    }
+}
