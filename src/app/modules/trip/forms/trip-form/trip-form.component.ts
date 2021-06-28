@@ -77,12 +77,12 @@ export class TripFormComponent implements OnInit {
     const value = this.tripFomGroup.value;
     value.carrier = this.carrier.id;
     value.busSeatConfiguration = this.busSeatConfiguration.node.id;
-
     this.tripMutationGQL.mutate({
       input: this.tripFomGroup.value
     }).subscribe(
       (response) => {
         this.submitted.emit(response.data.trip);
+        echo(response.data.trip);
       }
     );
   }

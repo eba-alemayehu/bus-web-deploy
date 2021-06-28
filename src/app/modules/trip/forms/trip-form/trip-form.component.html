@@ -50,7 +50,7 @@
     </div>
 
     <div fxLayout="row">
-      <mat-form-field appearance="fill" fxFill>
+      <mat-form-field appearance="outline" fxFill>
         <mat-label>Departure time</mat-label>
         <input matInput type="datetime-local"  formControlName="departureDatetime">
         <mat-error *ngIf="tripFomGroup.controls['departureDatetime'].hasError('required')">
@@ -60,7 +60,7 @@
     </div>
 
     <div fxLayout="row">
-      <mat-form-field appearance="fill" fxFill>
+      <mat-form-field appearance="outline" fxFill>
         <mat-label>Arrival time</mat-label>
         <input matInput type="datetime-local"  formControlName="arrivalDatetime">
         <mat-error *ngIf="tripFomGroup.controls['arrivalDatetime'].hasError('required')">
