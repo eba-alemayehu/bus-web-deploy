@@ -3,10 +3,11 @@ import {BusSeatConfigurationGQL, BusSeatConfigurationNode, TripGQL, TripSeatType
 import {map} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
 
-enum Orientation{
-  ROW= 'row',
+enum Orientation {
+  ROW = 'row',
   COLUMN = 'column',
 }
+
 @Component({
   selector: 'app-bus-seat-configuration',
   templateUrl: './bus-seat-configuration.component.html',
@@ -14,7 +15,8 @@ enum Orientation{
 })
 export class BusSeatConfigurationComponent implements OnInit {
   @Input() orientation = Orientation.ROW;
-  @Input('busSeatConfiguration') set busSeatConfiguration(value){
+
+  @Input('busSeatConfiguration') set busSeatConfiguration(value) {
     this.busSeatConfigurationGQL
       .watch({id: value.id}).valueChanges
       .pipe(map((response) => response.data.busSeatConfiguration.busseatconfigurationseatSet.edges))
@@ -32,7 +34,8 @@ export class BusSeatConfigurationComponent implements OnInit {
         }
       );
   }
-  @Input('trip') set trip(value){
+
+  @Input('trip') set trip(value) {
     echo('****');
     echo(value);
     if (!value.id) return;
@@ -45,17 +48,20 @@ export class BusSeatConfigurationComponent implements OnInit {
         }
       );
   }
+
   @Input() selectedBusSeatConfigurationSeats: any[] = [];
   @Output() selectedBusSeatConfigurationSeatsChange: EventEmitter<any> = new EventEmitter<any>();
   seats = [];
   row = [];
   col = [];
 
+
   constructor(private busSeatConfigurationGQL: BusSeatConfigurationGQL, private appRef: ApplicationRef, private tripGQL: TripGQL) {
   }
 
   ngOnInit(): void {
   }
+
   setRowCol(): void {
     let maxCol = -1;
     let maxRow = -1;
@@ -65,47 +71,72 @@ export class BusSeatConfigurationComponent implements OnInit {
         maxRow = (e.busSeatConfigurationSeat.row > maxRow) ? e.busSeatConfigurationSeat.row : maxRow;
       }
     );
-    for (let col = 0; col <= maxCol; col++){
+    for (let col = 0; col <= maxCol; col++) {
       this.col.push(col);
     }
-    for (let row = 0; row <= maxRow; row++){
+    for (let row = 0; row <= maxRow; row++) {
       this.row.push(row);
     }
   }
-  seat(row, col): TripSeatType|null {
+
+  seat(row, col): any {
     let seat: TripSeatType = null;
     const seats = this.seats.every(
       (e) => {
-        if (e.busSeatConfigurationSeat.col === col && e.busSeatConfigurationSeat.row === row){
+        if (e.busSeatConfigurationSeat.col === col && e.busSeatConfigurationSeat.row === row) {
           seat = e;
           return false;
         }
         return true;
       }
     );
-    return seat;
+    if (seat == null) {
+      return null;
+    }
+    const seatStyle: any = {
+      'width.px': 36,
+      fill: 'url(#available)',
+    };
+
+    if (this.orientation === Orientation.ROW) {
+      seatStyle.transform = 'rotate(-90deg)';
+    }
+    if (seat.isLockedByMe && !seat.isBookedByMe) {
+      seatStyle.fill = 'url(#selected)';
+    } else if (seat.isLocked || seat.isBookedByMe) {
+      seatStyle.fill = 'url(#reserved)';
+    } else if (seat.isSold === true) {
+      seatStyle.fill = 'url(#booked)';
+    } else {
+      seatStyle.fill = 'url(#available)';
+    }
+    console.log(seatStyle);
+    return {seat: seat, style: seatStyle};
   }
-  selectSeat(seat): void{
-    if (!this.isSeatSelected(seat)){
+
+  selectSeat(seat): void {
+    if (!this.isSeatSelected(seat)) {
       this.selectedBusSeatConfigurationSeats.push(seat);
-    }else{
+    } else {
       const index = this.selectedBusSeatConfigurationSeats.indexOf(seat);
       this.selectedBusSeatConfigurationSeats.splice(index, 1);
     }
     this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
     this.appRef.tick();
   }
-  isSeatSelected(seat): boolean{
+
+  isSeatSelected(seat): boolean {
     return this.selectedBusSeatConfigurationSeats?.indexOf(seat) >= 0;
   }
-  seatStatus(seat): string{
-    if (seat.isLocked){
+
+  seatStatus(seat): string {
+    if (seat.isLocked) {
       return 'locked';
-    } else if (seat.isSold){
+    } else if (seat.isSold) {
       return 'sold';
-    } else if (this.isSeatSelected(seat)){
+    } else if (this.isSeatSelected(seat)) {
       return 'selected';
-    } else{
+    } else {
       return 'unselected';
     }
   }

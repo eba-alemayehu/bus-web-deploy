@@ -2816,10 +2816,16 @@ export type TripQuery = (
     & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'price' | 'createdAt'>
     & { seats?: Maybe<Array<Maybe<(
       { __typename?: 'TripSeatType' }
-      & Pick<TripSeatType, 'isLocked' | 'isSold'>
+      & Pick<TripSeatType, 'isLocked' | 'isSold' | 'isLockedByMe' | 'isBookedByMe'>
       & { busSeatConfigurationSeat?: Maybe<(
         { __typename?: 'BusSeatConfigurationSeatNode' }
         & Pick<BusSeatConfigurationSeatNode, 'id' | 'name' | 'row' | 'col' | 'windowSeat' | 'createdAt'>
+      )>, lockedBy?: Maybe<(
+        { __typename?: 'BusUserNode' }
+        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName'>
+      )>, ticket?: Maybe<(
+        { __typename?: 'TicketNode' }
+        & Pick<TicketNode, 'id' | 'firstName' | 'lastName'>
       )> }
     )>>>, busSeatConfiguration: (
       { __typename?: 'BusSeatConfigurationNode' }
@@ -3514,8 +3520,20 @@ export const TripDocument = gql`
         windowSeat
         createdAt
       }
+      lockedBy {
+        id
+        firstName
+        lastName
+      }
+      ticket {
+        id
+        firstName
+        lastName
+      }
       isLocked
       isSold
+      isLockedByMe
+      isBookedByMe
     }
     busSeatConfiguration {
       id

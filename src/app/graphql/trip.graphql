@@ -13,8 +13,20 @@ query Trip($id: ID!){
         windowSeat
         createdAt
       }
+      lockedBy{
+        id
+        firstName
+        lastName
+      }
+      ticket{
+        id
+        firstName
+        lastName
+      }
       isLocked
       isSold
+      isLockedByMe
+      isBookedByMe
     }
     busSeatConfiguration{
       id
