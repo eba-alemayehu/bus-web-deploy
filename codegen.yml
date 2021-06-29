@@ -1,8 +1,15 @@
 overwrite: true
 schema: "./schema.graphql"
-documents: "src/app/graphql/*.graphql"
+
 generates:
   src/app/generated/graphql.ts:
+    documents: "src/app/graphql/*.graphql"
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
+  src/app/generated/mutation/graphql.ts:
+    documents: "src/app/graphql/mutations/*.graphql"
     plugins:
       - "typescript"
       - "typescript-operations"

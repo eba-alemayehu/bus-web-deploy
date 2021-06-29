@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {TripDatetimeModule} from '../trip-datetime/trip-datetime.module';
 import {PriceModule} from '../../../common/price/price.module';
 import {MatCardModule} from '@angular/material/card';
+import {ShimmerModule} from "../../../common/shimmer/shimmer.module";
 
 
 
@@ -21,6 +22,7 @@ import {MatCardModule} from '@angular/material/card';
     TripDatetimeModule,
     PriceModule,
     MatCardModule,
+    ShimmerModule
   ]
 })
 export class TripListItemModule { }

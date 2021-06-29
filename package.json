@@ -42,6 +42,7 @@
     "ngx-lottie": "^7.0.1",
     "ngx-mat-intl-tel-input": "^4.0.0",
     "ngx-material-timepicker": "^5.5.3",
+    "ngx-shimmer-loading": "^0.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

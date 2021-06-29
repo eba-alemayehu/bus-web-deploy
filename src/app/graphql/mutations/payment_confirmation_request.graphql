@@ -1,0 +1,20 @@
+mutation PaymentConfirmationRequest($input: PaymentConfirmationRequestMutationInput!){
+    paymentConfirmationRequest(input: $input){
+        paymentOrder{
+            id
+            createdAt
+            price
+            transactionId
+            bankAccount{
+                id
+                accountNumber
+            }
+            verifiedAt
+            verifiedBy{
+                id
+                firstName
+                lastName
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+mutation SendPhoneVerificationCode($input: SendVerificationCodeMutationInput!){
+    sendPhoneVerificationCode(input: $input){
+        user{
+            id
+            firstName
+            lastName
+        }
+    }
+}

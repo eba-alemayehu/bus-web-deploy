@@ -1,0 +1,3 @@
+#mutation Ticket($input: TripMutationInput!){
+#
+#}

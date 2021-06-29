@@ -9,20 +9,19 @@ import {RouterModule} from '@angular/router';
 import {TripModule} from '../../trip.module';
 
 
-
 @NgModule({
   declarations: [TripListComponent],
   exports: [
     TripListComponent
   ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    TripListItemModule,
-    MatButtonModule,
-    MatCardModule,
-    RouterModule,
-    TripModule
-  ]
+    imports: [
+        CommonModule,
+        FlexModule,
+        TripListItemModule,
+        MatButtonModule,
+        MatCardModule,
+        RouterModule,
+        TripModule,
+    ]
 })
 export class TripListModule { }

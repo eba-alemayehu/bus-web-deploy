@@ -1,0 +1,24 @@
+mutation ReserveTicket($input: ReserveTicketMutationInput!){
+    reserveTicket(input: $input){
+        ticket{
+            id
+            firstName
+            lastName
+            trip{
+                id
+            }
+            busSeatConfigurationSeat{
+                id
+                name
+            }
+            user{
+                id
+                firstName
+                lastName
+                email
+                phone
+            }
+            ticketNumber
+        }
+    }
+}

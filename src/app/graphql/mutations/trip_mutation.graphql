@@ -1,0 +1,9 @@
+mutation Trip($input: TripMutationInput!){
+  trip(input: $input){
+    bulkRef
+    trips{
+      id
+      departureTime
+    }
+  }
+}

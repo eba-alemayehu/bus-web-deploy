@@ -362,6 +362,7 @@ export type BusUserNode = Node & {
   isActive: Scalars['Boolean'];
   profilePic?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
+  userfcmtokenSet: UserFcmTokenNodeConnection;
   carrierSet: CarrierNodeConnection;
   CarrierRating: CarrierNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
@@ -372,10 +373,21 @@ export type BusUserNode = Node & {
   orderedBy: PaymentOrderNodeConnection;
   paymentorderSet: PaymentOrderNodeConnection;
   ticketSet: TicketNodeConnection;
+  notificationSet: NotificationNodeConnection;
+  usernotificationSet: UserNotificationNodeConnection;
   password: Scalars['String'];
   isRegistered: Scalars['Boolean'];
   isSuperuser: Scalars['Boolean'];
   tickets?: Maybe<Array<Maybe<TicketNode>>>;
+};
+
+
+export type BusUserNodeUserfcmtokenSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -483,6 +495,27 @@ export type BusUserNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+
+export type BusUserNodeNotificationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']>;
+};
+
+
+export type BusUserNodeUsernotificationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  user?: Maybe<Scalars['ID']>;
+};
+
 export type BusUserNodeConnection = {
   __typename?: 'BusUserNodeConnection';
   pageInfo: PageInfo;
@@ -556,6 +589,9 @@ export type CarrierNode = Node & {
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
   name: Scalars['String'];
+  nameAm?: Maybe<Scalars['String']>;
+  nameOr?: Maybe<Scalars['String']>;
+  nameTg?: Maybe<Scalars['String']>;
   logo?: Maybe<Scalars['String']>;
   admins: BusUserNodeConnection;
   ratings: BusUserNodeConnection;
@@ -777,6 +813,9 @@ export type CityNode = Node & {
   latitude?: Maybe<Scalars['Decimal']>;
   longitude?: Maybe<Scalars['Decimal']>;
   name: Scalars['String'];
+  nameAm?: Maybe<Scalars['String']>;
+  nameOr?: Maybe<Scalars['String']>;
+  nameTg?: Maybe<Scalars['String']>;
   region: RegionNode;
   busstopSet: BusStopNodeConnection;
   leavingFrom: RouteNodeConnection;
@@ -904,7 +943,6 @@ export type Mutation = {
   changeTripBus?: Maybe<ChangeTripBusMutationPayload>;
   cancelTrip?: Maybe<CancelTripMutationPayload>;
   bookTicket?: Maybe<BookTicketMutationPayload>;
-  ticket?: Maybe<TicketMutationPayload>;
   reserveTicket?: Maybe<ReserveTicketMutationPayload>;
   cancelTicket?: Maybe<CancelTicketMutationPayload>;
   rescheduleTicket?: Maybe<RescheduleTicketMutationPayload>;
@@ -928,7 +966,6 @@ export type Mutation = {
   sendSecondaryEmailActivation?: Maybe<SendSecondaryEmailActivationPayload>;
   verifySecondaryEmail?: Maybe<VerifySecondaryEmailPayload>;
   swapEmails?: Maybe<SwapEmailsPayload>;
-  changeUserProfilePic?: Maybe<ChangeUserProfilePicMutationPayload>;
   tokenAuth?: Maybe<ObtainJsonWebTokenPayload>;
   verifyToken?: Maybe<VerifyTokenPayload>;
   refreshToken?: Maybe<RefreshTokenPayload>;
@@ -937,6 +974,8 @@ export type Mutation = {
   user?: Maybe<UserMutationPayload>;
   sendPhoneVerificationCode?: Maybe<SendVerificationCodeMutationPayload>;
   verifyPhoneVerificationCode?: Maybe<ValidatePhoneMutationPayload>;
+  userFcmToken?: Maybe<UserFcmTokenMutationPayload>;
+  changeUserProfilePic?: Maybe<ChangeUserProfilePicMutationPayload>;
 };
 
 
@@ -957,11 +996,6 @@ export type MutationCancelTripArgs = {
 
 export type MutationBookTicketArgs = {
   input: BookTicketMutationInput;
-};
-
-
-export type MutationTicketArgs = {
-  input: TicketMutationInput;
 };
 
 
@@ -1080,11 +1114,6 @@ export type MutationSwapEmailsArgs = {
 };
 
 
-export type MutationChangeUserProfilePicArgs = {
-  input: ChangeUserProfilePicMutationInput;
-};
-
-
 export type MutationTokenAuthArgs = {
   input: ObtainJsonWebTokenInput;
 };
@@ -1124,9 +1153,74 @@ export type MutationVerifyPhoneVerificationCodeArgs = {
   input: ValidatePhoneMutationInput;
 };
 
+
+export type MutationUserFcmTokenArgs = {
+  input: UserFcmTokenMutationInput;
+};
+
+
+export type MutationChangeUserProfilePicArgs = {
+  input: ChangeUserProfilePicMutationInput;
+};
+
 export type Node = {
   id: Scalars['ID'];
 };
+
+export type NotificationNode = Node & {
+  __typename?: 'NotificationNode';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  body: Scalars['String'];
+  type: NotificationType;
+  users: BusUserNodeConnection;
+  createdAt: Scalars['DateTime'];
+  usernotificationSet: UserNotificationNodeConnection;
+};
+
+
+export type NotificationNodeUsersArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['ID']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+};
+
+
+export type NotificationNodeUsernotificationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  user?: Maybe<Scalars['ID']>;
+};
+
+export type NotificationNodeConnection = {
+  __typename?: 'NotificationNodeConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<NotificationNodeEdge>>;
+};
+
+export type NotificationNodeEdge = {
+  __typename?: 'NotificationNodeEdge';
+  node?: Maybe<NotificationNode>;
+  cursor: Scalars['String'];
+};
+
+export enum NotificationType {
+  A_1 = 'A_1'
+}
 
 export type ObtainJsonWebTokenInput = {
   clientMutationId?: Maybe<Scalars['String']>;
@@ -1235,6 +1329,10 @@ export type PaymentOrderNodeEdge = {
 
 export type Query = {
   __typename?: 'Query';
+  notifications?: Maybe<NotificationNodeConnection>;
+  userNotifications?: Maybe<UserNotificationNodeConnection>;
+  notification?: Maybe<NotificationNode>;
+  userNotification?: Maybe<UserNotificationNode>;
   routes?: Maybe<RouteNodeConnection>;
   route?: Maybe<RouteNode>;
   trips?: Maybe<TripNodeConnection>;
@@ -1269,6 +1367,37 @@ export type Query = {
   me?: Maybe<UserNode>;
   user?: Maybe<UserNode>;
   users?: Maybe<UserNodeConnection>;
+};
+
+
+export type QueryNotificationsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryUserNotificationsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  user?: Maybe<Scalars['ID']>;
+};
+
+
+export type QueryNotificationArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryUserNotificationArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1638,6 +1767,7 @@ export type ReserveTicketMutationInput = {
   busSeatConfigurationSeat: Scalars['ID'];
   trip: Scalars['String'];
   lock?: Maybe<Scalars['Boolean']>;
+  replace?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -1805,22 +1935,6 @@ export type SwapEmailsPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type TicketMutationInput = {
-  id?: Maybe<Scalars['ID']>;
-  trip: Scalars['ID'];
-  busStop: Scalars['ID'];
-  busSeatConfigurationSeat: Scalars['ID'];
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type TicketMutationPayload = {
-  __typename?: 'TicketMutationPayload';
-  ticket?: Maybe<TicketNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
 export type TicketNode = Node & {
   __typename?: 'TicketNode';
   id: Scalars['ID'];
@@ -1924,6 +2038,7 @@ export type TripSeatType = {
   isLocked?: Maybe<Scalars['Boolean']>;
   isSold?: Maybe<Scalars['Boolean']>;
   isLockedByMe?: Maybe<Scalars['Boolean']>;
+  isBookedByMe?: Maybe<Scalars['Boolean']>;
   lockedBy?: Maybe<BusUserNode>;
   ticket?: Maybe<TicketNode>;
 };
@@ -1944,6 +2059,37 @@ export type UpdateAccountPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+
+export type UserFcmTokenMutationInput = {
+  token: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UserFcmTokenMutationPayload = {
+  __typename?: 'UserFCMTokenMutationPayload';
+  userFcmToken?: Maybe<UserFcmTokenNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UserFcmTokenNode = Node & {
+  __typename?: 'UserFCMTokenNode';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  user: BusUserNode;
+  token: Scalars['String'];
+};
+
+export type UserFcmTokenNodeConnection = {
+  __typename?: 'UserFCMTokenNodeConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<UserFcmTokenNodeEdge>>;
+};
+
+export type UserFcmTokenNodeEdge = {
+  __typename?: 'UserFCMTokenNodeEdge';
+  node?: Maybe<UserFcmTokenNode>;
+  cursor: Scalars['String'];
+};
 
 export type UserMutationInput = {
   id?: Maybe<Scalars['ID']>;
@@ -1980,6 +2126,7 @@ export type UserNode = Node & {
   isActive: Scalars['Boolean'];
   profilePic?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
+  userfcmtokenSet: UserFcmTokenNodeConnection;
   carrierSet: CarrierNodeConnection;
   CarrierRating: CarrierNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
@@ -1990,10 +2137,21 @@ export type UserNode = Node & {
   orderedBy: PaymentOrderNodeConnection;
   paymentorderSet: PaymentOrderNodeConnection;
   ticketSet: TicketNodeConnection;
+  notificationSet: NotificationNodeConnection;
+  usernotificationSet: UserNotificationNodeConnection;
   pk?: Maybe<Scalars['Int']>;
   archived?: Maybe<Scalars['Boolean']>;
   verified?: Maybe<Scalars['Boolean']>;
   secondaryEmail?: Maybe<Scalars['String']>;
+};
+
+
+export type UserNodeUserfcmtokenSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2101,6 +2259,27 @@ export type UserNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+
+export type UserNodeNotificationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']>;
+};
+
+
+export type UserNodeUsernotificationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  user?: Maybe<Scalars['ID']>;
+};
+
 export type UserNodeConnection = {
   __typename?: 'UserNodeConnection';
   pageInfo: PageInfo;
@@ -2110,6 +2289,30 @@ export type UserNodeConnection = {
 export type UserNodeEdge = {
   __typename?: 'UserNodeEdge';
   node?: Maybe<UserNode>;
+  cursor: Scalars['String'];
+};
+
+export type UserNotificationNode = Node & {
+  __typename?: 'UserNotificationNode';
+  id: Scalars['ID'];
+  notification: NotificationNode;
+  user: BusUserNode;
+  sentViaTelegram?: Maybe<Scalars['Boolean']>;
+  sentViaSms?: Maybe<Scalars['Boolean']>;
+  sentViaFcm?: Maybe<Scalars['Boolean']>;
+  seen: Scalars['Boolean'];
+  createdAt: Scalars['DateTime'];
+};
+
+export type UserNotificationNodeConnection = {
+  __typename?: 'UserNotificationNodeConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<UserNotificationNodeEdge>>;
+};
+
+export type UserNotificationNodeEdge = {
+  __typename?: 'UserNotificationNodeEdge';
+  node?: Maybe<UserNotificationNode>;
   cursor: Scalars['String'];
 };
 
@@ -2177,76 +2380,6 @@ export type VerifyTokenPayload = {
   errors?: Maybe<Scalars['ExpectedErrorType']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
-
-export type BookTicketMutationVariables = Exact<{
-  input: BookTicketMutationInput;
-}>;
-
-
-export type BookTicketMutation = (
-  { __typename?: 'Mutation' }
-  & { bookTicket?: Maybe<(
-    { __typename?: 'BookTicketMutationPayload' }
-    & { order?: Maybe<(
-      { __typename?: 'PaymentOrderNode' }
-      & Pick<PaymentOrderNode, 'id' | 'price' | 'verification' | 'isChecked' | 'transactionId' | 'verifiedAt'>
-      & { orderedBy: (
-        { __typename?: 'BusUserNode' }
-        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
-      ), verifiedBy?: Maybe<(
-        { __typename?: 'BusUserNode' }
-        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
-      )> }
-    )>, tickets?: Maybe<Array<Maybe<(
-      { __typename?: 'TicketNode' }
-      & Pick<TicketNode, 'id' | 'firstName' | 'lastName' | 'phone' | 'ticketNumber'>
-      & { order?: Maybe<(
-        { __typename?: 'PaymentOrderNode' }
-        & Pick<PaymentOrderNode, 'id' | 'price' | 'verification' | 'isChecked' | 'transactionId' | 'verifiedAt'>
-        & { orderedBy: (
-          { __typename?: 'BusUserNode' }
-          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
-        ), verifiedBy?: Maybe<(
-          { __typename?: 'BusUserNode' }
-          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
-        )> }
-      )>, busStop?: Maybe<(
-        { __typename?: 'BusStopNode' }
-        & Pick<BusStopNode, 'name'>
-      )>, busSeatConfigurationSeat: (
-        { __typename?: 'BusSeatConfigurationSeatNode' }
-        & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
-      ), trip: (
-        { __typename?: 'TripNode' }
-        & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'price' | 'createdAt'>
-        & { busSeatConfiguration: (
-          { __typename?: 'BusSeatConfigurationNode' }
-          & Pick<BusSeatConfigurationNode, 'id' | 'name'>
-        ), bus?: Maybe<(
-          { __typename?: 'BusNode' }
-          & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
-          & { busSeatConfiguration: (
-            { __typename?: 'BusSeatConfigurationNode' }
-            & Pick<BusSeatConfigurationNode, 'id' | 'name'>
-          ) }
-        )>, route: (
-          { __typename?: 'RouteNode' }
-          & Pick<RouteNode, 'id' | 'distance'>
-          & { leavingFrom: (
-            { __typename?: 'CityNode' }
-            & Pick<CityNode, 'id' | 'name'>
-          ), destination: (
-            { __typename?: 'CityNode' }
-            & Pick<CityNode, 'id' | 'name'>
-          ) }
-        ), carrier: (
-          { __typename?: 'CarrierNode' }
-          & Pick<CarrierNode, 'id' | 'name' | 'logo'>
-        ) }
-      ) }
-    )>>> }
-  )> }
-);
 
 export type BusQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -2632,15 +2765,15 @@ export type RefreshTokenMutation = (
 );
 
 export type TicketMuationMutationVariables = Exact<{
-  input: TicketMutationInput;
+  input: BookTicketMutationInput;
 }>;
 
 
 export type TicketMuationMutation = (
   { __typename?: 'Mutation' }
-  & { ticket?: Maybe<(
-    { __typename?: 'TicketMutationPayload' }
-    & { ticket?: Maybe<(
+  & { bookTicket?: Maybe<(
+    { __typename?: 'BookTicketMutationPayload' }
+    & { tickets?: Maybe<Array<Maybe<(
       { __typename?: 'TicketNode' }
       & Pick<TicketNode, 'id' | 'firstName' | 'lastName' | 'ticketNumber'>
       & { trip: (
@@ -2650,7 +2783,7 @@ export type TicketMuationMutation = (
         { __typename?: 'BusSeatConfigurationSeatNode' }
         & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
       ) }
-    )> }
+    )>>> }
   )> }
 );
 
@@ -2680,8 +2813,15 @@ export type TripQuery = (
   { __typename?: 'Query' }
   & { trip?: Maybe<(
     { __typename?: 'TripNode' }
-    & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'createdAt'>
-    & { busSeatConfiguration: (
+    & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'price' | 'createdAt'>
+    & { seats?: Maybe<Array<Maybe<(
+      { __typename?: 'TripSeatType' }
+      & Pick<TripSeatType, 'isLocked' | 'isSold'>
+      & { busSeatConfigurationSeat?: Maybe<(
+        { __typename?: 'BusSeatConfigurationSeatNode' }
+        & Pick<BusSeatConfigurationSeatNode, 'id' | 'name' | 'row' | 'col' | 'windowSeat' | 'createdAt'>
+      )> }
+    )>>>, busSeatConfiguration: (
       { __typename?: 'BusSeatConfigurationNode' }
       & Pick<BusSeatConfigurationNode, 'id' | 'name'>
     ), bus?: Maybe<(
@@ -2806,114 +2946,6 @@ export type UsersQuery = (
   )> }
 );
 
-export const BookTicketDocument = gql`
-    mutation BookTicket($input: BookTicketMutationInput!) {
-  bookTicket(input: $input) {
-    order {
-      id
-      price
-      orderedBy {
-        id
-        firstName
-        lastName
-        phone
-      }
-      verification
-      isChecked
-      transactionId
-      verifiedAt
-      verifiedBy {
-        id
-        firstName
-        lastName
-        phone
-      }
-    }
-    tickets {
-      id
-      firstName
-      lastName
-      phone
-      order {
-        id
-        price
-        orderedBy {
-          id
-          firstName
-          lastName
-          phone
-        }
-        verification
-        isChecked
-        transactionId
-        verifiedAt
-        verifiedBy {
-          id
-          firstName
-          lastName
-          phone
-        }
-      }
-      busStop {
-        name
-      }
-      busSeatConfigurationSeat {
-        id
-        name
-      }
-      trip {
-        id
-        departureTime
-        arrivalTime
-        price
-        busSeatConfiguration {
-          id
-          name
-        }
-        bus {
-          id
-          plateNumber
-          busNumber
-          busSeatConfiguration {
-            id
-            name
-          }
-        }
-        route {
-          id
-          leavingFrom {
-            id
-            name
-          }
-          destination {
-            id
-            name
-          }
-          distance
-        }
-        carrier {
-          id
-          name
-          logo
-        }
-        createdAt
-      }
-      ticketNumber
-    }
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class BookTicketGQL extends Apollo.Mutation<BookTicketMutation, BookTicketMutationVariables> {
-    document = BookTicketDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
 export const BusDocument = gql`
     query Bus($id: ID!) {
   bus(id: $id) {
@@ -3410,9 +3442,9 @@ export const RefreshTokenDocument = gql`
     }
   }
 export const TicketMuationDocument = gql`
-    mutation ticketMuation($input: TicketMutationInput!) {
-  ticket(input: $input) {
-    ticket {
+    mutation TicketMuation($input: BookTicketMutationInput!) {
+  bookTicket(input: $input) {
+    tickets {
       id
       firstName
       lastName
@@ -3472,6 +3504,19 @@ export const TripDocument = gql`
     id
     departureTime
     arrivalTime
+    price
+    seats {
+      busSeatConfigurationSeat {
+        id
+        name
+        row
+        col
+        windowSeat
+        createdAt
+      }
+      isLocked
+      isSold
+    }
     busSeatConfiguration {
       id
       name

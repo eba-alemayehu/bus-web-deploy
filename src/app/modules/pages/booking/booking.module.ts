@@ -7,17 +7,20 @@ import {PassengersInfoFormModule} from '../../booking/forms/passengers-info-form
 import {MatCardModule} from '@angular/material/card';
 import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
+import { PaymentComponent } from './payment/payment.component';
+import { BankCardComponent } from './bank-card/bank-card.component';
 
 
 @NgModule({
-  declarations: [BookingComponent],
+  declarations: [BookingComponent, PaymentComponent, BankCardComponent],
+
   imports: [
     CommonModule,
     BookingRoutingModule,
     PassengersInfoFormModule,
     MatCardModule,
     FlexModule,
-    MatButtonModule
+    MatButtonModule,
   ]
 })
 export class BookingModule { }

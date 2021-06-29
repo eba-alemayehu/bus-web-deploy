@@ -1,0 +1,45 @@
+<!--<div style="text-align: center">-->
+<!--  <h1 style="font-size:24px">Entered Passengers Information.</h1>-->
+<!--</div>-->
+<!--<div fxLayout="row" style="margin: 16px">-->
+<!--  <ng-container *ngFor="let d of data.passengers">-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <p style="font-size: medium">Passengers 1</p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <div fxLayout="row">-->
+<!--      <p class="name">Full Name: </p>-->
+<!--      <p class="value">Muluken Bogale</p>-->
+<!--    </div>-->
+<!--    <div fxLayout="row">-->
+<!--      <p class="name">Phone Number: </p>-->
+<!--      <p class="value">+251986088963</p>-->
+<!--    </div>-->
+<!--    <div fxLayout="row">-->
+<!--      <p class="name">Boarding: </p>-->
+<!--      <p class="value">Megenagn</p>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+<!--</div>-->
+
+<h2 mat-dialog-title style="text-align:center;">Entered passengers information</h2>
+<mat-dialog-content class="mat-typography" >
+  <ng-container *ngFor="let d of [].constructor(2)" >
+  <h3 style="text-align: center">passenger 1</h3>
+  <div fxLayout="row">
+    <h2 class="name">Full Name: </h2>
+    <h2 class="value">Muluken Bogale</h2>
+  </div>
+  <div fxLayout="row">
+    <h2 class="name">Phone Number: </h2>
+    <h2 class="value">+251986088963</h2>
+  </div>
+  <div fxLayout="row">
+    <h2 class="name">Boarding: </h2>
+    <h2 class="value">Megenagn</h2>
+  </div>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary" routerLink="booking/payment">Proceed to Payment</a>
+</mat-dialog-actions>
+

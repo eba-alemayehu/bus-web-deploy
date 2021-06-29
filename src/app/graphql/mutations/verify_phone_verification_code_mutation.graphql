@@ -1,0 +1,11 @@
+mutation VerifyPhoneVerificationCode($input:ValidatePhoneMutationInput!) {
+    verifyPhoneVerificationCode(input: $input){
+        user{
+            id
+            firstName
+            lastName
+        }
+        token
+        refreshToken
+    }
+}

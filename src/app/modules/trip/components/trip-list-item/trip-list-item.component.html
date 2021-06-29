@@ -1,15 +1,16 @@
 <div fxLayout="row" style="max-width: 900px; margin:auto">
   <div fxLayout="column">
-    <img src="/assets/yenabus.png" style="width: 60px;align-self: center; padding-top: 2rem" />
+    <img src="/assets/yenabus.png" style="width: 60px;align-self: center; padding-top: 2rem"/>
     <mat-card-title style="font-size: 1.1em; text-align: center; margin:auto">{{trip?.carrier.name}}</mat-card-title>
   </div>
   <div fxLayout="column" style="margin-left: 2em">
     <app-trip-datetime [trip]="trip"></app-trip-datetime>
     <div>
-      <i style="background: #fff1ff; color: #12005e; padding: .3em 1em; margin: 2em; border-radius: 6px">{{trip?.busSeatConfiguration.busseatconfigurationseatSet.edges.length | json}} seats</i>
+      <i
+        style="background: #fff1ff; color: #12005e; padding: .3em 1em; margin: 2em; border-radius: 6px">{{trip?.busSeatConfiguration.busseatconfigurationseatSet.edges.length | json}}
+        seats</i>
     </div>
   </div>
-
   <span class="spacer"></span>
   <div fxLayout="column">
     <div fxLayout="row-reverse">
@@ -18,3 +19,37 @@
     <ng-content select="[buttons]"></ng-content>
   </div>
 </div>
+
+<!--   shimmer-->
+<!--  <div fxLayout="row" style="max-width: 900px; margin:auto">-->
+<!--    <div fxLayout="column">-->
+<!--      <app-custom-shimmer [width]="60" [height]="60" [circle]="true" [style]="'align-self: center; padding-top: 2rem'"></app-custom-shimmer>-->
+<!--      <app-custom-shimmer [width]="80" [height]="16" [style]="'text-align: center; margin:auto'"></app-custom-shimmer>-->
+<!--    </div>-->
+<!--    <div fxLayout="column" style="margin-left: 2em">-->
+<!--      <div fxLayout="row" style="align-items: center">-->
+<!--        <div fxLayout="column" class="time-city-container">-->
+<!--          <app-custom-shimmer [width]="60" height="16"></app-custom-shimmer>-->
+<!--          <app-custom-shimmer [width]="90" height="14"></app-custom-shimmer>-->
+<!--          <app-custom-shimmer [width]="75" height="18" [style]="'margin-top: 8px;'" ></app-custom-shimmer>-->
+<!--        </div>-->
+<!--        <app-custom-shimmer [width]="60" height="16"></app-custom-shimmer>-->
+<!--        <div fxLayout="column" class="time-city-container">-->
+<!--          <app-custom-shimmer [width]="60" height="16"></app-custom-shimmer>-->
+<!--          <app-custom-shimmer [width]="90" height="14"></app-custom-shimmer>-->
+<!--          <app-custom-shimmer [width]="75" height="18" [style]="'margin-top: 8px;'" ></app-custom-shimmer>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <app-custom-shimmer [width]="40" height="18"></app-custom-shimmer>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <span class="spacer"></span>-->
+<!--    <div fxLayout="column">-->
+<!--      <div fxLayout="row-reverse">-->
+<!--        <app-custom-shimmer [width]="40" height="18"></app-custom-shimmer>-->
+<!--      </div>-->
+<!--      <app-custom-shimmer [width]="60" height="22"></app-custom-shimmer>-->
+<!--    </div>-->
+<!--  </div>-->

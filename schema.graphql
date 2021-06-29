@@ -445,7 +445,6 @@ type Mutation {
   changeTripBus(input: ChangeTripBusMutationInput!): ChangeTripBusMutationPayload
   cancelTrip(input: CancelTripMutationInput!): CancelTripMutationPayload
   bookTicket(input: BookTicketMutationInput!): BookTicketMutationPayload
-  ticket(input: TicketMutationInput!): TicketMutationPayload
   reserveTicket(input: ReserveTicketMutationInput!): ReserveTicketMutationPayload
   cancelTicket(input: CancelTicketMutationInput!): CancelTicketMutationPayload
   rescheduleTicket(input: RescheduleTicketMutationInput!): RescheduleTicketMutationPayload
@@ -790,21 +789,6 @@ input SwapEmailsInput {
 type SwapEmailsPayload {
   success: Boolean
   errors: ExpectedErrorType
-  clientMutationId: String
-}
-
-input TicketMutationInput {
-  id: ID
-  trip: ID!
-  busStop: ID!
-  busSeatConfigurationSeat: ID!
-  firstName: String
-  lastName: String
-  clientMutationId: String
-}
-
-type TicketMutationPayload {
-  ticket: TicketNode
   clientMutationId: String
 }
 

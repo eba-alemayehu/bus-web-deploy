@@ -1,0 +1,15 @@
+mutation Login($input:  ObtainJSONWebTokenInput!){
+  tokenAuth(input: $input){
+    token
+    refreshToken
+    user{
+      id
+      firstName
+      lastName
+      phone
+    }
+
+    success
+    errors
+  }
+}

@@ -1,0 +1,10 @@
+mutation CancelTicket($input: CancelTicketMutationInput!){
+    cancelTicket(input: $input){
+        ticket{
+            id
+            trip{
+                id
+            }
+        }
+    }
+}

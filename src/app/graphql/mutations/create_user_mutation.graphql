@@ -1,0 +1,12 @@
+mutation UserCreate($input: UserMutationInput!){
+  user(input: $input){
+    user {
+      id
+      firstName
+      lastName
+      phone
+    }
+    token
+    refreshToken
+  }
+}

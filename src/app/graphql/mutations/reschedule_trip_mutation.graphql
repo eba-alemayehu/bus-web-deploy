@@ -1,0 +1,19 @@
+mutation RescheduleTrip($input:  RescheduleTicketMutationInput!,) {
+    rescheduleTicket(input: $input){
+        ticket{
+            id
+            firstName,
+            lastName,
+            trip{
+                id
+                price
+                departureTime
+                carrier{
+                    id
+                    name
+                    logo
+                }
+            }
+        }
+    }
+}

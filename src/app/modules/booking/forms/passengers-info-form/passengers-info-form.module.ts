@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PassengersInfoFormComponent } from './passengers-info-form.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PassengersInfoFormComponent} from './passengers-info-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -9,7 +9,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from "@angular/material/radio";
 import {MatIconModule} from "@angular/material/icon";
 import {NgxMatIntlTelInputModule} from "ngx-mat-intl-tel-input";
-
+import {BookingModule} from "../../booking.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -26,7 +27,10 @@ import {NgxMatIntlTelInputModule} from "ngx-mat-intl-tel-input";
     MatInputModule,
     MatRadioModule,
     MatIconModule,
-    NgxMatIntlTelInputModule
+    NgxMatIntlTelInputModule,
+    BookingModule,
+    MatDialogModule
   ]
 })
-export class PassengersInfoFormModule { }
+export class PassengersInfoFormModule {
+}
