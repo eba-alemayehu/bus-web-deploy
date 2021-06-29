@@ -20,9 +20,10 @@ export class BusSeatConfigurationComponent implements OnInit {
       .pipe(map((response) => response.data.busSeatConfiguration.busseatconfigurationseatSet.edges))
       .subscribe(
         (busSeatConfigurationSeats) => {
+          echo(busSeatConfigurationSeats);
           this.seats = busSeatConfigurationSeats.map(
             (e) => {
-              const busSeatConfigurationSeat: any= {};
+              const busSeatConfigurationSeat: any = {};
               busSeatConfigurationSeat.busSeatConfigurationSeat = e.node;
               return busSeatConfigurationSeat;
             }

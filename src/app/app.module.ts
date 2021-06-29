@@ -19,6 +19,8 @@ import {TopNavModule} from './nav/top-nav/top-nav.module';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
+import {NgxsModule} from "@ngxs/store";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatDialogModule,
     FlexLayoutModule,
     SideNavModule,
-    TopNavModule
+    TopNavModule,
+    NgxsModule.forRoot([]),
+    NgxsLoggerPluginModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [
