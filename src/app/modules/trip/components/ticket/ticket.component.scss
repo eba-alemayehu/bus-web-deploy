@@ -11,7 +11,7 @@
 
 .time{
   font-weight: 600;
-  font-size: 1.6em;
+  font-size: 1.8em;
   padding: 2px 0.5rem 2px 0.5rem ;
   align-self: center;
 }
@@ -28,7 +28,7 @@
 
 .duration:after,
 .duration:before{
-  content:"\00a0\00a0\00a0\00a0\00a\00a0\00a0";
+  content:"\00a\00a0\00a0";
   text-decoration:line-through;
 }
 .personal-info{

@@ -198,6 +198,7 @@ type BusUserNode implements Node {
   isActive: Boolean!
   profilePic: String
   createdAt: DateTime!
+  userfcmtokenSet(offset: Int, before: String, after: String, first: Int, last: Int): UserFCMTokenNodeConnection!
   carrierSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   CarrierRating(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
@@ -208,6 +209,8 @@ type BusUserNode implements Node {
   orderedBy(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
   paymentorderSet(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
   ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  notificationSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection!
+  usernotificationSet(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection!
   password: String!
   isRegistered: Boolean!
   isSuperuser: Boolean!
@@ -278,6 +281,9 @@ type CarrierNode implements Node {
   id: ID!
   createdAt: DateTime!
   name: String!
+  nameAm: String
+  nameOr: String
+  nameTg: String
   logo: String
   admins(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
   ratings(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
@@ -373,6 +379,9 @@ type CityNode implements Node {
   latitude: Decimal
   longitude: Decimal
   name: String!
+  nameAm: String
+  nameOr: String
+  nameTg: String
   region: RegionNode!
   busstopSet(offset: Int, before: String, after: String, first: Int, last: Int): BusStopNodeConnection!
   leavingFrom(offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection!
@@ -468,7 +477,6 @@ type Mutation {
   sendSecondaryEmailActivation(input: SendSecondaryEmailActivationInput!): SendSecondaryEmailActivationPayload
   verifySecondaryEmail(input: VerifySecondaryEmailInput!): VerifySecondaryEmailPayload
   swapEmails(input: SwapEmailsInput!): SwapEmailsPayload
-  changeUserProfilePic(input: ChangeUserProfilePicMutationInput!): ChangeUserProfilePicMutationPayload
   tokenAuth(input: ObtainJSONWebTokenInput!): ObtainJSONWebTokenPayload
   verifyToken(input: VerifyTokenInput!): VerifyTokenPayload
   refreshToken(input: RefreshTokenInput!): RefreshTokenPayload
@@ -477,10 +485,36 @@ type Mutation {
   user(input: UserMutationInput!): UserMutationPayload
   sendPhoneVerificationCode(input: SendVerificationCodeMutationInput!): SendVerificationCodeMutationPayload
   verifyPhoneVerificationCode(input: ValidatePhoneMutationInput!): ValidatePhoneMutationPayload
+  userFcmToken(input: UserFCMTokenMutationInput!): UserFCMTokenMutationPayload
+  changeUserProfilePic(input: ChangeUserProfilePicMutationInput!): ChangeUserProfilePicMutationPayload
 }
 
 interface Node {
   id: ID!
+}
+
+type NotificationNode implements Node {
+  id: ID!
+  title: String!
+  body: String!
+  type: NotificationType!
+  users(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
+  createdAt: DateTime!
+  usernotificationSet(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection!
+}
+
+type NotificationNodeConnection {
+  pageInfo: PageInfo!
+  edges: [NotificationNodeEdge]!
+}
+
+type NotificationNodeEdge {
+  node: NotificationNode
+  cursor: String!
+}
+
+enum NotificationType {
+  A_1
 }
 
 input ObtainJSONWebTokenInput {
@@ -572,6 +606,10 @@ type PaymentOrderNodeEdge {
 }
 
 type Query {
+  notifications(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection
+  userNotifications(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection
+  notification(id: ID!): NotificationNode
+  userNotification(id: ID!): UserNotificationNode
   routes(order: String, offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection
   route(id: ID!): RouteNode
   trips(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, carrier_In: [ID], bulkRef: String, departureTime: DateTime, departureTime_Gte: DateTime, departureTime_Lte: DateTime, route_LeavingFrom: ID, route_Destination: ID, route_Routeprice_Price: Float, route_Routeprice_Price_Lte: Float, route_Routeprice_Price_Gte: Float): TripNodeConnection
@@ -686,6 +724,7 @@ input ReserveTicketMutationInput {
   busSeatConfigurationSeat: ID!
   trip: String!
   lock: Boolean
+  replace: Boolean
   clientMutationId: String
 }
 
@@ -878,6 +917,7 @@ type TripSeatType {
   isLocked: Boolean
   isSold: Boolean
   isLockedByMe: Boolean
+  isBookedByMe: Boolean
   lockedBy: BusUserNode
   ticket: TicketNode
 }
@@ -899,6 +939,33 @@ type UpdateAccountPayload {
 }
 
 scalar Upload
+
+input UserFCMTokenMutationInput {
+  token: String!
+  clientMutationId: String
+}
+
+type UserFCMTokenMutationPayload {
+  userFcmToken: UserFCMTokenNode
+  clientMutationId: String
+}
+
+type UserFCMTokenNode implements Node {
+  id: ID!
+  createdAt: DateTime!
+  user: BusUserNode!
+  token: String!
+}
+
+type UserFCMTokenNodeConnection {
+  pageInfo: PageInfo!
+  edges: [UserFCMTokenNodeEdge]!
+}
+
+type UserFCMTokenNodeEdge {
+  node: UserFCMTokenNode
+  cursor: String!
+}
 
 input UserMutationInput {
   id: ID
@@ -933,6 +1000,7 @@ type UserNode implements Node {
   isActive: Boolean!
   profilePic: String
   createdAt: DateTime!
+  userfcmtokenSet(offset: Int, before: String, after: String, first: Int, last: Int): UserFCMTokenNodeConnection!
   carrierSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   CarrierRating(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
@@ -943,6 +1011,8 @@ type UserNode implements Node {
   orderedBy(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
   paymentorderSet(offset: Int, before: String, after: String, first: Int, last: Int): PaymentOrderNodeConnection!
   ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  notificationSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection!
+  usernotificationSet(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection!
   pk: Int
   archived: Boolean
   verified: Boolean
@@ -956,6 +1026,27 @@ type UserNodeConnection {
 
 type UserNodeEdge {
   node: UserNode
+  cursor: String!
+}
+
+type UserNotificationNode implements Node {
+  id: ID!
+  notification: NotificationNode!
+  user: BusUserNode!
+  sentViaTelegram: Boolean
+  sentViaSms: Boolean
+  sentViaFcm: Boolean
+  seen: Boolean!
+  createdAt: DateTime!
+}
+
+type UserNotificationNodeConnection {
+  pageInfo: PageInfo!
+  edges: [UserNotificationNodeEdge]!
+}
+
+type UserNotificationNodeEdge {
+  node: UserNotificationNode
   cursor: String!
 }
 

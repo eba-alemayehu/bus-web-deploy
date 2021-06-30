@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {TicketMuationGQL, TripGQL} from '../../../generated/graphql';
 import {echo} from '../../../util/print';
 import {BookTicketGQL} from '../../../generated/mutation/graphql';
-import {MatDialog} from "@angular/material/dialog";
-import {PassengerInfoPreviewComponent} from "../../booking/passenger-info-preview/passenger-info-preview.component";
+import {MatDialog} from '@angular/material/dialog';
+import {PassengerInfoPreviewComponent} from '../../booking/passenger-info-preview/passenger-info-preview.component';
 
 @Component({
   selector: 'app-booking',

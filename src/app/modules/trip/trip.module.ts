@@ -11,6 +11,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { SuccessComponent } from './components/success/success.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import {ShimmerModule} from "../common/shimmer/shimmer.module";
 
 
 // tslint:disable-next-line:typedef
@@ -24,16 +25,17 @@ export function playerFactory() {
         TicketComponent,
         SuccessComponent
     ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    MatCardModule,
-    TripDatetimeModule,
-    PriceModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    [LottieModule.forRoot({ player: playerFactory })]
-  ]
+    imports: [
+        CommonModule,
+        FlexModule,
+        MatCardModule,
+        TripDatetimeModule,
+        PriceModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        [LottieModule.forRoot({player: playerFactory})],
+        ShimmerModule
+    ]
 })
 export class TripModule { }

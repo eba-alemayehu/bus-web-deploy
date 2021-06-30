@@ -3,6 +3,31 @@ query Trip($id: ID!){
     id
     departureTime
     arrivalTime
+    price
+    seats{
+      busSeatConfigurationSeat{
+        id
+        name
+        row
+        col
+        windowSeat
+        createdAt
+      }
+      lockedBy{
+        id
+        firstName
+        lastName
+      }
+      ticket{
+        id
+        firstName
+        lastName
+      }
+      isLocked
+      isSold
+      isLockedByMe
+      isBookedByMe
+    }
     busSeatConfiguration{
       id
       name
@@ -14,7 +39,6 @@ query Trip($id: ID!){
       busSeatConfiguration{
         id
         name
-
       }
     }
     route{

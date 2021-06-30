@@ -1,0 +1,17 @@
+mutation TicketMuation($input: BookTicketMutationInput!) {
+  bookTicket(input: $input){
+    tickets{
+      id
+      firstName
+      lastName
+      trip{
+        id
+      }
+      busSeatConfigurationSeat{
+        id
+        name
+      }
+      ticketNumber
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {echo} from '../../../../util/print';
-import {BookTicketGQL, BookTicketMutation} from "../../../../generated/mutation/graphql";
+import {BookTicketGQL, BookTicketMutation} from '../../../../generated/mutation/graphql';
 import {MatDialog} from "@angular/material/dialog";
 import {PassengerInfoPreviewComponent} from "../../passenger-info-preview/passenger-info-preview.component";
 
