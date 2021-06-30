@@ -1,7 +1,8 @@
 import {ApplicationRef, Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {BusSeatConfigurationGQL, BusSeatConfigurationNode, TripGQL, TripSeatType} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
+import {ReserveTicketGQL} from '../../../../generated/mutation/graphql';
 
 enum Orientation {
   ROW = 'row',
@@ -15,7 +16,6 @@ enum Orientation {
 })
 export class BusSeatConfigurationComponent implements OnInit {
   @Input() orientation = Orientation.ROW;
-
   @Input('busSeatConfiguration') set busSeatConfiguration(value) {
     this.busSeatConfigurationGQL
       .watch({id: value.id}).valueChanges
@@ -34,13 +34,27 @@ export class BusSeatConfigurationComponent implements OnInit {
         }
       );
   }
-
   @Input('trip') set trip(value) {
     echo('****');
     echo(value);
-    if (!value.id) return;
-    this.tripGQL.watch({id: value.id}).valueChanges
-      .pipe(map((response) => response.data.trip.seats))
+    if (!value.id) {
+      return;
+    }
+    this.tripGQL.watch({id: value.id}, {
+      pollInterval: 4000
+    }).valueChanges
+      .pipe(
+        tap((response) => this._trip = response.data.trip),
+        map((response) => response.data.trip.seats),
+        tap(seats => {
+          seats.forEach(
+            (seat) => {
+              if (seat.isLockedByMe && !seat.isBookedByMe) {
+                this.selectedBusSeatConfigurationSeats.push(seat);
+              }
+            });
+        })
+      )
       .subscribe(
         (seats) => {
           this.seats = seats;
@@ -54,15 +68,22 @@ export class BusSeatConfigurationComponent implements OnInit {
   seats = [];
   row = [];
   col = [];
+  _trip;
+  loading = [];
 
-
-  constructor(private busSeatConfigurationGQL: BusSeatConfigurationGQL, private appRef: ApplicationRef, private tripGQL: TripGQL) {
+  constructor(
+    private busSeatConfigurationGQL: BusSeatConfigurationGQL,
+    private reserveTicketGQL: ReserveTicketGQL,
+    private appRef: ApplicationRef,
+    private tripGQL: TripGQL) {
   }
 
   ngOnInit(): void {
   }
 
   setRowCol(): void {
+    this.row = [];
+    this.col = [];
     let maxCol = -1;
     let maxRow = -1;
     this.seats.forEach(
@@ -110,19 +131,44 @@ export class BusSeatConfigurationComponent implements OnInit {
     } else {
       seatStyle.fill = 'url(#available)';
     }
-    console.log(seatStyle);
     return {seat: seat, style: seatStyle};
   }
 
   selectSeat(seat): void {
-    if (!this.isSeatSelected(seat)) {
-      this.selectedBusSeatConfigurationSeats.push(seat);
-    } else {
-      const index = this.selectedBusSeatConfigurationSeats.indexOf(seat);
-      this.selectedBusSeatConfigurationSeats.splice(index, 1);
-    }
-    this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
-    this.appRef.tick();
+    this.loading.push(seat.busSeatConfigurationSeat.id);
+    this.reserveTicketGQL.mutate({
+      input: {
+        busSeatConfigurationSeat: seat.busSeatConfigurationSeat.id,
+        id: seat.ticket?.id,
+        trip: this._trip.id,
+        lock: true,
+      }
+    })
+      .subscribe((response) => {
+        this.loading = this.loading.filter(e => e !== seat.busSeatConfigurationSeat.id);
+        if (response.errors == null) {
+          const $seat = response.data.reserveTicket.ticket.busSeatConfigurationSeat;
+          for (let i = 0; i < this.seats.length; i++) {
+            if (this.seats[i].busSeatConfigurationSeat.id === $seat.id) {
+              const s: any = Object.assign({}, this.seats[i]);
+              s.isLockedByMe = true;
+              this.seats = this.seats.filter(
+                e => e !== this.seats[i]
+              );
+              this.seats = [...this.seats, s];
+              this.appRef.tick();
+            }
+          }
+          echo(this.seats);
+        }
+      });
+    // if (!this.isSeatSelected(seat)) {
+    //   this.selectedBusSeatConfigurationSeats.push(seat);
+    // } else {
+    //   const index = this.selectedBusSeatConfigurationSeats.indexOf(seat);
+    //   this.selectedBusSeatConfigurationSeats.splice(index, 1);
+    // }
+    // this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
   }
 
   isSeatSelected(seat): boolean {

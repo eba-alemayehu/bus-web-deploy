@@ -17,7 +17,7 @@
       <td [style.padding-left]="'.8em'" *ngIf="orientation === 'row' && r === row.length-1" style="margin-right: 2em">
       </td>
       <td *ngFor="let c of (orientation === 'row')? col: row" [style.width]="100/col.length + '%'"
-          (click)="selectSeat(seat(r, c))">
+          (click)="selectSeat(seat(r, c).seat)">
         <div class="flex-col" *ngIf="seat(r, c)">
           <div style="display: grid;grid-template-columns: 1fr;grid-template-rows: 1fr;">
             <div class="flex"
@@ -25,14 +25,17 @@
                z-index: 10000;
                color: white;
                display: flex;
-               margin-left: 7px;
+               margin-left: 5px;
                margin-bottom: 8px;
                grid-area: 1 / 1 / 2 / 2;
                align-items: center">
-              <span>{{seat(r, c).seat.busSeatConfigurationSeat.name}}</span>
+              <span *ngIf="loading.indexOf(seat(r,c).seat.busSeatConfigurationSeat.id) <= -1">{{seat(r, c).seat.busSeatConfigurationSeat.name}}</span>
+              <mat-spinner diameter="20" style="stroke: white;" *ngIf="loading.indexOf(seat(r,c).seat.busSeatConfigurationSeat.id) > -1"></mat-spinner>
+
             </div>
             <div style="grid-area: 1 / 1 / 1 / 1;">
               <svg-icon
+                [style.opacity]="loading.indexOf(seat(r,c).seat.busSeatConfigurationSeat.id) > -1 ? 0.5: 1"
                 src="assets/bus_seat.svg"
                 [svgStyle]="seat(r, c).style"></svg-icon>
             </div>
