@@ -92,7 +92,7 @@ export class BusSeatConfigurationComponent implements OnInit {
         maxRow = (e.busSeatConfigurationSeat.row > maxRow) ? e.busSeatConfigurationSeat.row : maxRow;
       }
     );
-    for (let col = 0; col <= maxCol; col++) {
+    for (let col = 0; col <= maxCol; col++){
       this.col.push(col);
     }
     for (let row = 0; row <= maxRow; row++) {

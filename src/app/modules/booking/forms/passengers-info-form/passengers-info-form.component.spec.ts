@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PassangersInfoFormComponent } from './passengers-info-form.component';
+import { PassangersInfoFormComponent} from './passengers-info-form.component';
 
 describe('PassangersInfoFormComponent', () => {
   let component: PassangersInfoFormComponent;

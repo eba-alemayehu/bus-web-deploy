@@ -2381,6 +2381,93 @@ export type VerifyTokenPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type BankAccountsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BankAccountsQuery = (
+  { __typename?: 'Query' }
+  & { bankAccounts?: Maybe<(
+    { __typename?: 'BankAccountNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'BankAccountNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'BankAccountNode' }
+        & Pick<BankAccountNode, 'id' | 'bankName' | 'bankLogo' | 'accountName' | 'accountNumber'>
+      )> }
+    )>> }
+  )> }
+);
+
+export type BookTicketMutationVariables = Exact<{
+  input: BookTicketMutationInput;
+}>;
+
+
+export type BookTicketMutation = (
+  { __typename?: 'Mutation' }
+  & { bookTicket?: Maybe<(
+    { __typename?: 'BookTicketMutationPayload' }
+    & { order?: Maybe<(
+      { __typename?: 'PaymentOrderNode' }
+      & Pick<PaymentOrderNode, 'id' | 'price' | 'verification' | 'isChecked' | 'transactionId' | 'verifiedAt'>
+      & { orderedBy: (
+        { __typename?: 'BusUserNode' }
+        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+      ), verifiedBy?: Maybe<(
+        { __typename?: 'BusUserNode' }
+        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+      )> }
+    )>, tickets?: Maybe<Array<Maybe<(
+      { __typename?: 'TicketNode' }
+      & Pick<TicketNode, 'id' | 'firstName' | 'lastName' | 'phone' | 'ticketNumber'>
+      & { order?: Maybe<(
+        { __typename?: 'PaymentOrderNode' }
+        & Pick<PaymentOrderNode, 'id' | 'price' | 'verification' | 'isChecked' | 'transactionId' | 'verifiedAt'>
+        & { orderedBy: (
+          { __typename?: 'BusUserNode' }
+          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+        ), verifiedBy?: Maybe<(
+          { __typename?: 'BusUserNode' }
+          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+        )> }
+      )>, busStop?: Maybe<(
+        { __typename?: 'BusStopNode' }
+        & Pick<BusStopNode, 'name'>
+      )>, busSeatConfigurationSeat: (
+        { __typename?: 'BusSeatConfigurationSeatNode' }
+        & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
+      ), trip: (
+        { __typename?: 'TripNode' }
+        & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'price' | 'createdAt'>
+        & { busSeatConfiguration: (
+          { __typename?: 'BusSeatConfigurationNode' }
+          & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+        ), bus?: Maybe<(
+          { __typename?: 'BusNode' }
+          & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
+          & { busSeatConfiguration: (
+            { __typename?: 'BusSeatConfigurationNode' }
+            & Pick<BusSeatConfigurationNode, 'id' | 'name'>
+          ) }
+        )>, route: (
+          { __typename?: 'RouteNode' }
+          & Pick<RouteNode, 'id' | 'distance'>
+          & { leavingFrom: (
+            { __typename?: 'CityNode' }
+            & Pick<CityNode, 'id' | 'name'>
+          ), destination: (
+            { __typename?: 'CityNode' }
+            & Pick<CityNode, 'id' | 'name'>
+          ) }
+        ), carrier: (
+          { __typename?: 'CarrierNode' }
+          & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+        ) }
+      ) }
+    )>>> }
+  )> }
+);
+
 export type BusQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -2952,6 +3039,140 @@ export type UsersQuery = (
   )> }
 );
 
+export const BankAccountsDocument = gql`
+    query BankAccounts {
+  bankAccounts {
+    edges {
+      node {
+        id
+        bankName
+        bankLogo
+        accountName
+        accountNumber
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BankAccountsGQL extends Apollo.Query<BankAccountsQuery, BankAccountsQueryVariables> {
+    document = BankAccountsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const BookTicketDocument = gql`
+    mutation BookTicket($input: BookTicketMutationInput!) {
+  bookTicket(input: $input) {
+    order {
+      id
+      price
+      orderedBy {
+        id
+        firstName
+        lastName
+        phone
+      }
+      verification
+      isChecked
+      transactionId
+      verifiedAt
+      verifiedBy {
+        id
+        firstName
+        lastName
+        phone
+      }
+    }
+    tickets {
+      id
+      firstName
+      lastName
+      phone
+      order {
+        id
+        price
+        orderedBy {
+          id
+          firstName
+          lastName
+          phone
+        }
+        verification
+        isChecked
+        transactionId
+        verifiedAt
+        verifiedBy {
+          id
+          firstName
+          lastName
+          phone
+        }
+      }
+      busStop {
+        name
+      }
+      busSeatConfigurationSeat {
+        id
+        name
+      }
+      trip {
+        id
+        departureTime
+        arrivalTime
+        price
+        busSeatConfiguration {
+          id
+          name
+        }
+        bus {
+          id
+          plateNumber
+          busNumber
+          busSeatConfiguration {
+            id
+            name
+          }
+        }
+        route {
+          id
+          leavingFrom {
+            id
+            name
+          }
+          destination {
+            id
+            name
+          }
+          distance
+        }
+        carrier {
+          id
+          name
+          logo
+        }
+        createdAt
+      }
+      ticketNumber
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BookTicketGQL extends Apollo.Mutation<BookTicketMutation, BookTicketMutationVariables> {
+    document = BookTicketDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const BusDocument = gql`
     query Bus($id: ID!) {
   bus(id: $id) {

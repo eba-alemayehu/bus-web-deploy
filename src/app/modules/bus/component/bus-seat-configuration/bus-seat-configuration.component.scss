@@ -1,27 +1,6 @@
-
 .path {
   transform: rotate(90deg);
   transform-origin: 50% 50%;
   color: red;
   background-color: red;
-}
-.selected{
-  fill: rgba(2, 170, 176, 1);
-  stroke: #1a1a1a;
-  stroke-opacity: 1;
-}
-.unselected{
-  fill: rgba(0, 0, 0, 1);
-  stroke: #1a1a1a;
-  stroke-opacity: .5;
-}
-.locked{
-  fill: rgba(222, 56, 34, .1);
-  stroke: #1a1a1a;
-  stroke-opacity: 1;
-}
-.sold{
-  fill: rgba(222, 222, 222, 1);
-  stroke: #1a1a1a;
-  stroke-opacity: 1;
 }

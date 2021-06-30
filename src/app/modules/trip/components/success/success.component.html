@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="space-between">
+  <div style="width:400px; height:400px;margin:auto; ">
+    <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+  </div>
+  <div style="margin:auto">
+    <h1 style="font-size:3em">Your ticket has been booked!</h1>
+  </div>
+  <div style="margin:auto; padding-top: 30px;">
+    <app-ticket></app-ticket>
+  </div>
+</div>
+
+

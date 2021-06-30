@@ -5106,21 +5106,6 @@
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
-"fsevents@^1.2.7":
-  "integrity" "sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-1.2.13.tgz"
-  "version" "1.2.13"
-
-"fsevents@~2.1.2":
-  "integrity" "sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.1.3.tgz"
-  "version" "2.1.3"
-
-"fsevents@~2.3.1":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
-
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -5836,6 +5821,11 @@
     "default-gateway" "^4.2.0"
     "ipaddr.js" "^1.9.0"
 
+"intl-tel-input@^17.0.13":
+  "integrity" "sha512-+jPgPKUcgbhSSRN0BZLJOdntTaMv8tqowLrVQ3CGCNGpMKb4B9PRyzOZQpwo1FeA+LTOzvErOlBhbCuQog7R3g=="
+  "resolved" "https://registry.npmjs.org/intl-tel-input/-/intl-tel-input-17.0.13.tgz"
+  "version" "17.0.13"
+
 "invariant@^2.2.2":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
@@ -6501,7 +6491,7 @@
   "integrity" "sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss="
   "resolved" "https://registry.npmjs.org/jsonfile/-/jsonfile-4.0.0.tgz"
   "version" "4.0.0"
-  dependencies:
+  optionalDependencies:
     "graceful-fs" "^4.1.6"
 
 "jsonify@~0.0.0":
@@ -6720,13 +6710,13 @@
   "version" "3.13.1"
   dependencies:
     "copy-anything" "^2.0.1"
-    "errno" "^0.1.1"
-    "graceful-fs" "^4.1.2"
-    "make-dir" "^2.1.0"
-    "mime" "^1.4.1"
     "tslib" "^1.10.0"
   optionalDependencies:
+    "errno" "^0.1.1"
+    "graceful-fs" "^4.1.2"
     "image-size" "~0.5.0"
+    "make-dir" "^2.1.0"
+    "mime" "^1.4.1"
     "native-request" "^1.0.5"
     "source-map" "~0.6.0"
 
@@ -6995,6 +6985,11 @@
   "version" "1.4.0"
   dependencies:
     "js-tokens" "^3.0.0 || ^4.0.0"
+
+"lottie-web@^5.7.11":
+  "integrity" "sha512-Jvz3PQqwrDj1rXGqfeQtipH/WNtM/Y4l8t8NIQXe1xUI0nVooH2bTYJGef0UkdBcWUx1s3miKsRhyP196g9tvQ=="
+  "resolved" "https://registry.npmjs.org/lottie-web/-/lottie-web-5.7.11.tgz"
+  "version" "5.7.11"
 
 "lower-case-first@^2.0.1":
   "integrity" "sha512-EVm/rR94FJTZi3zefZ82fLWab+GX14LJN4HrWBcuo6Evmsl9hEfnqxgcHCKb9q+mNf6EVdsjx/qucYFIIB84pg=="
@@ -7375,6 +7370,11 @@
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
+"moment@^2.29.1":
+  "integrity" "sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
+  "version" "2.29.1"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="
   "resolved" "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz"
@@ -7462,6 +7462,13 @@
   "resolved" "https://registry.npmjs.org/ngx-bootstrap/-/ngx-bootstrap-6.2.0.tgz"
   "version" "6.2.0"
 
+"ngx-lottie@^7.0.1":
+  "integrity" "sha512-zvRYZJ6RVpGOZK8Msg9DnXxmMwl7Bu8/Xvy03R5pyP8nfOv8a8vhjofM5xt/EFh3Fcecnt9uXA9byR41nMcQOQ=="
+  "resolved" "https://registry.npmjs.org/ngx-lottie/-/ngx-lottie-7.0.1.tgz"
+  "version" "7.0.1"
+  dependencies:
+    "tslib" "^2.1.0"
+
 "ngx-mat-intl-tel-input@^4.0.0":
   "integrity" "sha512-FRqzJn2oV8WahptQUl3UUpxmk0Y2ool3Hn4fjEmRLLez4hzJJMBI/ZE7w19nZZh0pRCNO7HZ2ggI6wUuNf3/Rg=="
   "resolved" "https://registry.npmjs.org/ngx-mat-intl-tel-input/-/ngx-mat-intl-tel-input-4.0.0.tgz"
@@ -7476,6 +7483,13 @@
   dependencies:
     "@types/luxon" "1.11.1"
     "luxon" "1.24.0"
+    "tslib" "^1.9.0"
+
+"ngx-shimmer-loading@^0.0.5":
+  "integrity" "sha512-6y3Ai9ZvCWA+o1J2LaVQI8MHer+roaXded5rUusOHuMg6k4RrKBGIV2xQ9Lby4Nj2eMFHNd78lrlMBJSzQafHw=="
+  "resolved" "https://registry.npmjs.org/ngx-shimmer-loading/-/ngx-shimmer-loading-0.0.5.tgz"
+  "version" "0.0.5"
+  dependencies:
     "tslib" "^1.9.0"
 
 "nice-try@^1.0.4":
@@ -10614,7 +10628,7 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
 
-"tslib@^2", "tslib@^2.0.0", "tslib@^2.0.3", "tslib@~2.1.0":
+"tslib@^2", "tslib@^2.0.0", "tslib@^2.0.3", "tslib@^2.1.0", "tslib@~2.1.0":
   "integrity" "sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.1.0.tgz"
   "version" "2.1.0"
@@ -10997,10 +11011,10 @@
   "resolved" "https://registry.npmjs.org/watchpack/-/watchpack-1.7.5.tgz"
   "version" "1.7.5"
   dependencies:
-    "chokidar" "^3.4.1"
     "graceful-fs" "^4.1.2"
     "neo-async" "^2.5.0"
   optionalDependencies:
+    "chokidar" "^3.4.1"
     "watchpack-chokidar2" "^2.0.1"
 
 "wbuf@^1.1.0", "wbuf@^1.7.3":

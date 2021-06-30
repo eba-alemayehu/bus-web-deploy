@@ -2,36 +2,37 @@
   <ng-container *ngFor="let userFormGroup of passengers.controls; let i = index">
     <h4>Passenger {{i+1}}</h4>
     <div [formGroup]="userFormGroup" fxLayout="row">
-      <input type="hidden" formControlName="busSeatConfigurationSeat"/>
-      <div fxLayout="column" style="width: 100%">
-        <div fxLayout="row">
-          <div class="passenger-input-container">
-            <mat-form-field appearance="outline">
-              <mat-label>Full name</mat-label>
-              <input matInput type="text" formControlName="name">
-            </mat-form-field>
-          </div>
-          <div class="passenger-input-container">
-            <mat-form-field appearance="outline">
-              <mat-label>Phone</mat-label>
-              <input matInput type="tel" formControlName="phone">
-            </mat-form-field>
-          </div>
-        </div>
-        <mat-radio-group
-          [hidden]="trip?.route?.leavingFrom.busstopSet.edges.length <= 1"
-          formControlName="busStop"
-          aria-label="Select bus stop option"
-          style="width: 100%; display: flex; justify-content: space-around">
-          <mat-radio-button
-            *ngFor="let busStop of trip?.route?.leavingFrom.busstopSet.edges"
-            [value]="busStop.node.id">{{busStop.node.name}}</mat-radio-button>
-        </mat-radio-group>
+      <div class="passenger-input-container">
+        <mat-form-field appearance="outline">
+          <mat-icon matPrefix color="accent">person</mat-icon>
+          <mat-label>Full name</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div class="passenger-input-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Phone</mat-label>
+          <ngx-mat-intl-tel-input
+            inputPlaceholder="911111111"
+            [preferredCountries]="['et', 'us']"
+            [enablePlaceholder]="true"
+            [enableSearch]="true"
+            name="phone"
+            formControlName="phone">
+          </ngx-mat-intl-tel-input>
+        </mat-form-field>
       </div>
     </div>
+    <div [formGroup]="userFormGroup" class="passenger-input-container">
+      <mat-radio-group formControlName="busStop">
+        <ng-container *ngFor="let t of trip?.route.leavingFrom.busstopSet.edges">
+           <mat-radio-button class="boarding-check-box" value={{t.node.id}}>{{t.node.name}}</mat-radio-button>
+        </ng-container>
+      </mat-radio-group>
+    </div>
   </ng-container>
-  <!--  <div fxLayout="row-reverse">-->
-  <!--    <button mat-flat-button color="primary">Submit</button>-->
-  <!--  </div>-->
-
+<!--  <div fxLayout="row-reverse">-->
+<!--    <button mat-flat-button color="primary" (click)="openDialog()">Preview and Submit</button>-->
+<!--  </div>-->
 </form>
+

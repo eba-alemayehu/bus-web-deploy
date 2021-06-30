@@ -6,7 +6,7 @@ import {TripListItemModule} from '../../components/trip-list-item/trip-list-item
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {RouterModule} from '@angular/router';
-
+import {TripModule} from '../../trip.module';
 
 
 @NgModule({
@@ -20,7 +20,8 @@ import {RouterModule} from '@angular/router';
         TripListItemModule,
         MatButtonModule,
         MatCardModule,
-        RouterModule
+        RouterModule,
+        TripModule,
     ]
 })
 export class TripListModule { }

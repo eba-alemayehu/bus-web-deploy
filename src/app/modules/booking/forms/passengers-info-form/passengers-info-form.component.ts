@@ -1,7 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {echo} from '../../../../util/print';
-import {BookTicketGQL, BookTicketMutation} from "../../../../generated/mutation/graphql";
+import {BookTicketGQL, BookTicketMutation} from '../../../../generated/mutation/graphql';
+import {MatDialog} from "@angular/material/dialog";
+import {PassengerInfoPreviewComponent} from "../../passenger-info-preview/passenger-info-preview.component";
 
 @Component({
   selector: 'app-passengers-info-form',
@@ -15,8 +17,6 @@ export class PassengersInfoFormComponent implements OnInit {
 
   @Input('selectedSeats') set selectedSeats(seats) {
     seats.forEach((e) => {
-      echo('6');
-      echo(e);
       this.addPassenger(e);
     });
   }

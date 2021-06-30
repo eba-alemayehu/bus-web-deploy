@@ -1,0 +1,14 @@
+query BankAccounts{
+    bankAccounts{
+        edges{
+            node{
+                id
+                bankName
+                bankLogo
+                accountName
+                accountNumber
+              accountName
+            }
+        }
+    }
+}
