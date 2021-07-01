@@ -7,37 +7,22 @@ import {PassengersInfoFormModule} from '../../booking/forms/passengers-info-form
 import {MatCardModule} from '@angular/material/card';
 import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { PaymentComponent } from './payment/payment.component';
-import { BankCardComponent } from './bank-card/bank-card.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
-import {ClipboardModule} from '@angular/cdk/clipboard';
-import { PaymentPopupComponent } from './payment-popup/payment-popup.component';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {ShimmerModule} from "../../common/shimmer/shimmer.module";
+import {PayDialogModule} from '../../payment/dialogs/pay-dialog/pay-dialog.module';
 
 
 @NgModule({
-  declarations: [BookingComponent, PaymentComponent, BankCardComponent, PaymentPopupComponent],
+  declarations: [BookingComponent],
+  exports: [
+  ],
 
-    imports: [
-        CommonModule,
-        BookingRoutingModule,
-        PassengersInfoFormModule,
-        MatCardModule,
-        FlexModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatIconModule,
-        MatGridListModule,
-        ClipboardModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ShimmerModule,
-    ]
+  imports: [
+    CommonModule,
+    BookingRoutingModule,
+    MatCardModule,
+    PassengersInfoFormModule,
+    MatButtonModule,
+    PayDialogModule,
+    FlexModule
+  ]
 })
 export class BookingModule { }
