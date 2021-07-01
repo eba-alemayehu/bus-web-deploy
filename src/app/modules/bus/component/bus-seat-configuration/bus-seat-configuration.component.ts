@@ -1,8 +1,11 @@
 import {ApplicationRef, Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {BusSeatConfigurationGQL, BusSeatConfigurationNode, TripGQL, TripSeatType} from '../../../../generated/graphql';
-import {map, tap} from 'rxjs/operators';
+import {map, shareReplay, tap} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
-import {ReserveTicketGQL} from '../../../../generated/mutation/graphql';
+import {ReserveTicketGQL, ReserveTicketMutation} from '../../../../generated/mutation/graphql';
+import {FetchResult} from 'apollo-link';
+import {Observable} from "rxjs";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 enum Orientation {
   ROW = 'row',
@@ -16,13 +19,16 @@ enum Orientation {
 })
 export class BusSeatConfigurationComponent implements OnInit {
   @Input() orientation = Orientation.ROW;
+
   @Input('busSeatConfiguration') set busSeatConfiguration(value) {
+    if (!value?.id) {
+      return;
+    }
     this.busSeatConfigurationGQL
       .watch({id: value.id}).valueChanges
       .pipe(map((response) => response.data.busSeatConfiguration.busseatconfigurationseatSet.edges))
       .subscribe(
         (busSeatConfigurationSeats) => {
-          echo(busSeatConfigurationSeats);
           this.seats = busSeatConfigurationSeats.map(
             (e) => {
               const busSeatConfigurationSeat: any = {};
@@ -34,9 +40,8 @@ export class BusSeatConfigurationComponent implements OnInit {
         }
       );
   }
+
   @Input('trip') set trip(value) {
-    echo('****');
-    echo(value);
     if (!value.id) {
       return;
     }
@@ -75,10 +80,20 @@ export class BusSeatConfigurationComponent implements OnInit {
     private busSeatConfigurationGQL: BusSeatConfigurationGQL,
     private reserveTicketGQL: ReserveTicketGQL,
     private appRef: ApplicationRef,
+    private breakpointObserver: BreakpointObserver,
     private tripGQL: TripGQL) {
   }
 
   ngOnInit(): void {
+    this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches),
+        shareReplay()
+      ).subscribe((isHandSet) => {
+      if (isHandSet) {
+        this.orientation = Orientation.COLUMN;
+      }
+    });
   }
 
   setRowCol(): void {
@@ -92,7 +107,7 @@ export class BusSeatConfigurationComponent implements OnInit {
         maxRow = (e.busSeatConfigurationSeat.row > maxRow) ? e.busSeatConfigurationSeat.row : maxRow;
       }
     );
-    for (let col = 0; col <= maxCol; col++){
+    for (let col = 0; col <= maxCol; col++) {
       this.col.push(col);
     }
     for (let row = 0; row <= maxRow; row++) {
@@ -102,6 +117,11 @@ export class BusSeatConfigurationComponent implements OnInit {
 
   seat(row, col): any {
     let seat: TripSeatType = null;
+    if (this.orientation === Orientation.COLUMN) {
+      const temp = row;
+      row = col;
+      col = temp;
+    }
     const seats = this.seats.every(
       (e) => {
         if (e.busSeatConfigurationSeat.col === col && e.busSeatConfigurationSeat.row === row) {
@@ -114,6 +134,11 @@ export class BusSeatConfigurationComponent implements OnInit {
     if (seat == null) {
       return null;
     }
+    const seatStyle = this.setSeatStyle(seat);
+    return {seat: seat, style: seatStyle};
+  }
+
+  private setSeatStyle(seat: TripSeatType): any {
     const seatStyle: any = {
       'width.px': 36,
       fill: 'url(#available)',
@@ -131,7 +156,7 @@ export class BusSeatConfigurationComponent implements OnInit {
     } else {
       seatStyle.fill = 'url(#available)';
     }
-    return {seat: seat, style: seatStyle};
+    return seatStyle;
   }
 
   selectSeat(seat): void {
@@ -147,28 +172,24 @@ export class BusSeatConfigurationComponent implements OnInit {
       .subscribe((response) => {
         this.loading = this.loading.filter(e => e !== seat.busSeatConfigurationSeat.id);
         if (response.errors == null) {
-          const $seat = response.data.reserveTicket.ticket.busSeatConfigurationSeat;
-          for (let i = 0; i < this.seats.length; i++) {
-            if (this.seats[i].busSeatConfigurationSeat.id === $seat.id) {
-              const s: any = Object.assign({}, this.seats[i]);
-              s.isLockedByMe = true;
-              this.seats = this.seats.filter(
-                e => e !== this.seats[i]
-              );
-              this.seats = [...this.seats, s];
-              this.appRef.tick();
-            }
-          }
-          echo(this.seats);
+          this.updateSeatStatus(response);
         }
       });
-    // if (!this.isSeatSelected(seat)) {
-    //   this.selectedBusSeatConfigurationSeats.push(seat);
-    // } else {
-    //   const index = this.selectedBusSeatConfigurationSeats.indexOf(seat);
-    //   this.selectedBusSeatConfigurationSeats.splice(index, 1);
-    // }
-    // this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
+  }
+
+  private updateSeatStatus(response: FetchResult<ReserveTicketMutation>): void {
+    const $seat = response.data.reserveTicket.ticket.busSeatConfigurationSeat;
+    for (let i = 0; i < this.seats.length; i++) {
+      if (this.seats[i].busSeatConfigurationSeat.id === $seat.id) {
+        const s: any = Object.assign({}, this.seats[i]);
+        s.isLockedByMe = true;
+        this.seats = this.seats.filter(
+          e => e !== this.seats[i]
+        );
+        this.seats = [...this.seats, s];
+        this.appRef.tick();
+      }
+    }
   }
 
   isSeatSelected(seat): boolean {

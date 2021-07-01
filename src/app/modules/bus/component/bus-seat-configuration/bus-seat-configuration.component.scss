@@ -4,3 +4,27 @@
   color: red;
   background-color: red;
 }
+.mat-spinner-color::ng-deep circle{
+  stroke: #FFFFFF !important;
+}
+
+.seat-container{
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  justify-items: center;
+  .seat-name{
+    z-index: 10000;
+    color: white;
+    justify-content: space-around;
+    grid-column: 1;
+    grid-row: 1;
+    align-items: center;
+    display: flex;
+  }
+  .seat-icon{
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: .55rem;
+  }
+}
