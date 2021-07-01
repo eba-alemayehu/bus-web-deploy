@@ -18,26 +18,29 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {ShimmerModule} from "../../common/shimmer/shimmer.module";
+import { SuccessScreenComponent } from './success-screen/success-screen.component';
+import {TripModule} from "../../trip/trip.module";
 
 
 @NgModule({
-  declarations: [BookingComponent, PaymentComponent, BankCardComponent, PaymentPopupComponent],
+  declarations: [BookingComponent, PaymentComponent, BankCardComponent, PaymentPopupComponent, SuccessScreenComponent],
 
-    imports: [
-        CommonModule,
-        BookingRoutingModule,
-        PassengersInfoFormModule,
-        MatCardModule,
-        FlexModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatIconModule,
-        MatGridListModule,
-        ClipboardModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ShimmerModule,
-    ]
+  imports: [
+    CommonModule,
+    BookingRoutingModule,
+    PassengersInfoFormModule,
+    MatCardModule,
+    FlexModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatGridListModule,
+    ClipboardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ShimmerModule,
+    TripModule,
+  ]
 })
 export class BookingModule { }

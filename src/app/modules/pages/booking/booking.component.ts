@@ -32,7 +32,7 @@ export class BookingComponent implements OnInit {
   }
 
   openDialog = () =>  {
-    const dialogRef = this.dialog.open(PassengerInfoPreviewComponent);
+    const dialogRef = this.dialog.open(PassengerInfoPreviewComponent, {data: {passenger : this.passengerInfo, trip: this.trip}});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -43,7 +43,6 @@ export class BookingComponent implements OnInit {
   }
 
   bookTicket(): void{
-    console.log(this.passengerInfo);
     this.passengerInfo.passengers.map(e => {
       const name = e.name.split(' ');
       e.firstName = name[0];

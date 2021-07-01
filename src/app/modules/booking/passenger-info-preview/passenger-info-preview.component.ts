@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Inject} from '@angular/core';
 import {echo} from '../../../util/print';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-passenger-info-preview',
@@ -7,8 +8,7 @@ import {echo} from '../../../util/print';
   styleUrls: ['./passenger-info-preview.component.scss']
 })
 export class PassengerInfoPreviewComponent implements OnInit {
-  @Input() data;
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     echo(this.data);

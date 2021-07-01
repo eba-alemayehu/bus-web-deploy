@@ -6,11 +6,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FlexModule} from '@angular/flex-layout';
 import {MatInputModule} from '@angular/material/input';
-import {MatRadioModule} from "@angular/material/radio";
-import {MatIconModule} from "@angular/material/icon";
-import {NgxMatIntlTelInputModule} from "ngx-mat-intl-tel-input";
-import {BookingModule} from "../../booking.module";
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatRadioModule} from '@angular/material/radio';
+import {MatIconModule} from '@angular/material/icon';
+import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
+import {BookingModule} from '../../booking.module';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
