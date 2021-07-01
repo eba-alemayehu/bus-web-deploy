@@ -1,0 +1,27 @@
+<h1 mat-dialog-title style="text-align:center; font-size: 32px">Please enter transaction id.</h1>
+<mat-dialog-content class="mat-typography" style="padding:2rem 4rem; border-radius: 4rem;" >
+  <div fxLayout="row" style="margin-bottom: 2rem">
+    <!--    <img alt="" src="{{bank.bankLogo.split('?')[0]}}"-->
+    <!--         style="width: 80px; height:80px; border-radius:50%; align-self: center;"/>-->
+    <!--    <mat-card-title style="font-size: 1.2em; font-weight:700; text-align: center; margin-top:0.3rem ">{{bank.bankName}}</mat-card-title>-->
+    <img alt="" src="{{bank.bankLogo.split('?')[0]}}"
+         style="width: 50px; height:50px; border-radius:50%; align-self: center;"/>
+    <div fxLayout="column" style="margin-top:0.4rem; margin-left:0.4rem;">
+      <mat-card-title style="font-size: 1.4em; font-weight:700; text-align: center; ">{{bank.bankName}}</mat-card-title>
+      <span style=" font-size:14px; text-align: start;  margin-top:0.1rem">{{bank.accountNumber}}</span>
+    </div>
+  </div>
+  <div>
+    <mat-form-field fxFill appearance="outline">
+      <mat-label>Transaction Id</mat-label>
+      <input matInput placeholder="Enter transaction id">
+      <mat-icon matSuffix>user</mat-icon>
+      <!--    <mat-error *ngIf="loginForm.controls['phone'].hasError('required')">-->
+      <!--      Phone number is required.-->
+      <!--    </mat-error>-->
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Submit</a>
+</mat-dialog-actions>

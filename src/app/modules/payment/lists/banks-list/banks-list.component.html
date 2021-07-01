@@ -1,0 +1,7 @@
+<mat-grid-list [cols]="breakpoint" rowHeight="5:2"  (window:resize)="onResize($event)" >
+  <ng-container *ngFor="let bank of bankAccounts">
+    <mat-grid-tile>
+      <app-bank-card [bank]="bank.node"></app-bank-card>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
