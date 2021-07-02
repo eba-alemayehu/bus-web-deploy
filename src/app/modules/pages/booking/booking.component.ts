@@ -15,6 +15,7 @@ export class BookingComponent implements OnInit {
   selectedSeats;
   passengerInfo: any;
   public trip = null;
+  // tslint:disable-next-line:max-line-length
   constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private bookTicketGQL: BookTicketGQL, public dialog: MatDialog) {
     this.activatedRoute.params.subscribe(
       (params) => {
@@ -26,7 +27,7 @@ export class BookingComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(
       (queryParams) => {
         this.selectedSeats = JSON.parse(decodeURIComponent(queryParams.selectedSeats));
-        console.log(this.selectedSeats);
+        echo(this.selectedSeats);
       }
     );
   }
@@ -47,10 +48,10 @@ export class BookingComponent implements OnInit {
       const name = e.name.split(' ');
       e.firstName = name[0];
       e.lastName = name[1];
-      echo(e);
       return e;
     });
     echo(this.passengerInfo);
+    echo(this.selectedSeats);
     this.bookTicketGQL.mutate({
       input: {
         trip: this.trip.id,
@@ -58,6 +59,7 @@ export class BookingComponent implements OnInit {
       }
     }).subscribe(
       (data) => {
+        echo('done!');
         this.openDialog();
       }
     );

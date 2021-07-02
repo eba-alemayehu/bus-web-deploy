@@ -16,17 +16,15 @@ export class TripListComponent implements OnInit, OnChanges {
 
   @Output() selected: EventEmitter<any> = new EventEmitter<any>();
   trips$;
+
   constructor(private tripsGQL: TripsGQL) {
   }
 
   ngOnInit(): void {
+    this.loadTrips();
   }
 
-  onSelect(trip: any): any{
-    this.selected.emit(trip);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
+  private loadTrips(): void {
     this.trips$ = this.tripsGQL.watch(
       {
         carrier: this.carrier?.id,
@@ -35,5 +33,13 @@ export class TripListComponent implements OnInit, OnChanges {
         destination: this.destination
       }).valueChanges
       .pipe(map(response => response.data.trips.edges));
+  }
+
+  onSelect(trip: any): any {
+    this.selected.emit(trip);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadTrips();
   }
 }

@@ -1,4 +1,4 @@
-<div fxLayout="column">
+  <div fxLayout="column">
     <mat-card fxLayout="row" *ngFor="let trip of trips$ | async" (click)="onSelect(trip)" style="margin-bottom: 1em">
       <app-trip-list-item [trip]="trip.node" style="width: 100%; margin: auto">
         <div buttons>
@@ -8,11 +8,4 @@
     </mat-card>
 </div>
 
-<!--shimmmer-->
 
-<!--<div fxLayout="column">-->
-<!--    <mat-card fxLayout="row" *ngFor="let trip of [].constructor(10)" style="margin-bottom: 1em">-->
-<!--      <app-trip-list-item style="width: 100%; margin: auto">-->
-<!--      </app-trip-list-item>-->
-<!--    </mat-card>-->
-<!--</div>-->
