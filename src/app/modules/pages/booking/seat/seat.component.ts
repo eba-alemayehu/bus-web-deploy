@@ -25,7 +25,7 @@ export class SeatComponent implements OnInit {
   }
 
   next(): void{
-    const selectedSeatsId = JSON.stringify(this.selectedBusSeatConfigurationSeats.map(e => e.id));
+    const selectedSeatsId = JSON.stringify(this.selectedBusSeatConfigurationSeats.map(e => e.busSeatConfigurationSeat.id));
     this.router.navigate(['/booking/' + this.trip.id], { queryParams: {selectedSeats: encodeURIComponent(selectedSeatsId)}});
   }
 }
