@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TicketComponent } from './components/ticket/ticket.component';
+import { TicketComponent } from '../ticket/components/ticket/ticket.component';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {TripDatetimeModule} from './components/trip-datetime/trip-datetime.module';

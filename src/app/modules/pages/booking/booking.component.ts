@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {TicketMuationGQL, TripGQL} from '../../../generated/graphql';
+import {TripGQL} from '../../../generated/graphql';
 import {echo} from '../../../util/print';
 import {BookTicketGQL} from '../../../generated/mutation/graphql';
 import {MatDialog} from '@angular/material/dialog';
@@ -15,6 +15,8 @@ export class BookingComponent implements OnInit {
   selectedSeats;
   passengerInfo: any;
   public trip = null;
+  bookingOrder: any;
+
   // tslint:disable-next-line:max-line-length
   constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private bookTicketGQL: BookTicketGQL, public dialog: MatDialog) {
     this.activatedRoute.params.subscribe(
@@ -32,8 +34,12 @@ export class BookingComponent implements OnInit {
     );
   }
 
-  openDialog = () =>  {
-    const dialogRef = this.dialog.open(PassengerInfoPreviewComponent, {data: {passenger : this.passengerInfo, trip: this.trip}});
+  openDialog = () => {
+    const dialogRef = this.dialog.open(PassengerInfoPreviewComponent, {
+      data: {
+        passenger: this.passengerInfo, trip: this.trip, bookingOrder: this.bookingOrder
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -43,7 +49,7 @@ export class BookingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  bookTicket(): void{
+  bookTicket(): void {
     this.passengerInfo.passengers.map(e => {
       const name = e.name.split(' ');
       e.firstName = name[0];
@@ -59,7 +65,7 @@ export class BookingComponent implements OnInit {
       }
     }).subscribe(
       (data) => {
-        echo('done!');
+        this.bookingOrder = data.data.bookTicket.order.id;
         this.openDialog();
       }
     );

@@ -11,14 +11,16 @@ import {PayDialogComponent} from '../../dialogs/pay-dialog/pay-dialog.component'
 })
 export class BankCardComponent implements OnInit {
   @Input() bank;
-  constructor(public dialog: MatDialog) {}
+  @Input() orderId;
+  constructor(public dialog: MatDialog, ) {
+  }
 
 
   ngOnInit(): void {
   }
 
   openDialog = () =>  {
-    const dialogRef = this.dialog.open(PayDialogComponent, {data: this.bank});
+    const dialogRef = this.dialog.open(PayDialogComponent, {data: {bank: this.bank, orderId: this.orderId}});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

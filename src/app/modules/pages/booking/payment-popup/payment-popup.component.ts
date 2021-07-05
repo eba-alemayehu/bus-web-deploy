@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {echo} from "../../../../util/print";
+import {echo} from '../../../../util/print';
 
 @Component({
   selector: 'app-payment-popup',

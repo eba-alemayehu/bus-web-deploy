@@ -1,4 +1,5 @@
 <h1 mat-dialog-title style="text-align:center; font-size: 32px">Please enter transaction id.</h1>
+<form [formGroup]="transactionForm" (ngSubmit)="submit()">
 <mat-dialog-content class="mat-typography" style="padding:2rem 4rem; border-radius: 4rem;" >
   <div fxLayout="row" style="margin-bottom: 2rem">
     <!--    <img alt="" src="{{bank.bankLogo.split('?')[0]}}"-->
@@ -14,14 +15,18 @@
   <div>
     <mat-form-field fxFill appearance="outline">
       <mat-label>Transaction Id</mat-label>
-      <input matInput placeholder="Enter transaction id">
-      <mat-icon matSuffix>user</mat-icon>
-      <!--    <mat-error *ngIf="loginForm.controls['phone'].hasError('required')">-->
-      <!--      Phone number is required.-->
-      <!--    </mat-error>-->
+      <input matInput formControlName="transactionId" placeholder="Enter transaction id">
+      <mat-icon matPrefix>receipt_long</mat-icon>
+      <mat-error *ngIf="transactionForm.controls['transactionId'].hasError('required')">
+        transaction id is required.
+      </mat-error>
     </mat-form-field>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Submit</a>
+<mat-dialog-actions>
+  <div fxLayout="row">
+<!--  [mat-dialog-close]="true"-->
+  <button  type="submit" cdkFocusInitial mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="transactionForm.invalid">Submit</button>
+  </div>
 </mat-dialog-actions>
+</form>

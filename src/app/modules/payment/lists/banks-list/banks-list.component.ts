@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {BankAccountsGQL, CitiesGQL} from "../../../../generated/graphql";
-import {echo} from "../../../../util/print";
+import { Component, OnInit, Input } from '@angular/core';
+import {BankAccountsGQL, CitiesGQL} from '../../../../generated/graphql';
+import {echo} from '../../../../util/print';
 
 @Component({
   selector: 'app-banks-list',
@@ -8,7 +8,7 @@ import {echo} from "../../../../util/print";
   styleUrls: ['./banks-list.component.scss']
 })
 export class BanksListComponent implements OnInit {
-
+  @Input() orderId;
   bankAccounts: any;
   breakpoint: any;
 

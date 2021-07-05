@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {BankAccountsGQL, CitiesGQL} from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -8,11 +9,14 @@ import {echo} from '../../../../util/print';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
-
+  orderId: any;
   bankAccounts: any;
   breakpoint: any;
 
-  constructor( private bankAccountsGQL: BankAccountsGQL, private city: CitiesGQL) {
+  constructor( private bankAccountsGQL: BankAccountsGQL, private city: CitiesGQL, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      this.orderId = params;
+    });
     this.bankAccountsGQL.watch({}).valueChanges.subscribe(
       (response) => {
         this.bankAccounts = response.data.bankAccounts.edges;
