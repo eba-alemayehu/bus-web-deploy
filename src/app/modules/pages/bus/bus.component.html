@@ -2,7 +2,7 @@
   <div fxLayout="column">
     <div fxLayout="row" style="justify-content: space-around; margin-bottom: 1em">
       <b>Bus number: {{bus?.busNumber}} </b>
-      <b>Plate number: {{bus?.plateNumber}}</b>
+      <b><app-car-plate [plateNumber]="bus?.plateNumber"></app-car-plate></b>
     </div>
     <div fxLayout="row" style="justify-content: space-around">
       <mat-card style="background: #efefef;">

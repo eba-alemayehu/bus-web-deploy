@@ -1,8 +1,8 @@
 <div *ngIf="!add" [fxLayout]="row? 'row': 'column'" style="align-items: center">
   <img src="/assets/bus.svg" alt="" style="width: 70px">
-  <div fxLayout="column" [style.margin-left]="row? '2em': '0'">
-    <span>{{bus.busNumber}}</span>
-    <span>{{bus.plateNumber}}</span>
+  <div fxLayout="column" [style.margin-left]="row? '2em': '0'" style="text-align: center">
+    <span style="font-weight: 600;font-size: 1.3em; margin-bottom: .5em">{{bus.busNumber}}</span>
+    <app-car-plate [plateNumber]="bus.plateNumber"></app-car-plate>
   </div>
 </div>
 <div *ngIf="add" fxLayout="column">
