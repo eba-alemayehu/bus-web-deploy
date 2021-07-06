@@ -2,7 +2,7 @@
   <app-custom-shimmer [width]="80" [height]="80" [circle]="true"></app-custom-shimmer>
   <app-custom-shimmer [width]="80" [height]="16" style="margin-top: 1.2em"></app-custom-shimmer>
 </div>
-<div fxLayout="column" *ngIf="!loading">
+<div fxLayout="column" *ngIf="!loading" style="justify-content: center; align-items: center; padding: 1.5em">
   <img src="assets/carrier.svg" style="width: 70px; margin-bottom: 1em; " alt="">
-  <p>{{carrier.node.name}}</p>
+  <h3><b>{{carrier.node.name}}</b></h3>
 </div>

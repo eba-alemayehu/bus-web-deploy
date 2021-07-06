@@ -7,7 +7,7 @@
     (click)="drawer.toggle()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span routerLink="/">busWeb</span>
+  <h1 routerLink="/" class="logo">Guzo</h1>
   <span class="spacer"></span>
   <ul class="nav-list" style="list-style: none; display: flex; align-items: center;font-size: 1em">
     <li *ngIf="!this.registeredGuard.canActivate(null, null)">
