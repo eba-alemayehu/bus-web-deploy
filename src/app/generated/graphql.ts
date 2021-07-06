@@ -2876,6 +2876,56 @@ export type MeQuery = (
   )> }
 );
 
+export type MyTicketQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type MyTicketQuery = (
+  { __typename?: 'Query' }
+  & { ticket?: Maybe<(
+    { __typename?: 'TicketNode' }
+    & Pick<TicketNode, 'id' | 'firstName' | 'lastName' | 'phone' | 'ticketNumber'>
+    & { user: (
+      { __typename?: 'BusUserNode' }
+      & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+    ), busSeatConfigurationSeat: (
+      { __typename?: 'BusSeatConfigurationSeatNode' }
+      & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
+    ), order?: Maybe<(
+      { __typename?: 'PaymentOrderNode' }
+      & Pick<PaymentOrderNode, 'id' | 'price' | 'verification' | 'isChecked' | 'transactionId' | 'verifiedAt'>
+      & { orderedBy: (
+        { __typename?: 'BusUserNode' }
+        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+      ), verifiedBy?: Maybe<(
+        { __typename?: 'BusUserNode' }
+        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+      )> }
+    )>, trip: (
+      { __typename?: 'TripNode' }
+      & Pick<TripNode, 'price' | 'departureTime' | 'arrivalTime'>
+      & { bus?: Maybe<(
+        { __typename?: 'BusNode' }
+        & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
+      )>, route: (
+        { __typename?: 'RouteNode' }
+        & Pick<RouteNode, 'id' | 'distance'>
+        & { leavingFrom: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+        ), destination: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+        ) }
+      ), carrier: (
+        { __typename?: 'CarrierNode' }
+        & Pick<CarrierNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg' | 'logo'>
+      ) }
+    ) }
+  )> }
+);
+
 export type MyTicketsQueryVariables = Exact<{
   first?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
@@ -3794,6 +3844,94 @@ export const MeDocument = gql`
   })
   export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
     document = MeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const MyTicketDocument = gql`
+    query MyTicket($id: ID!) {
+  ticket(id: $id) {
+    id
+    user {
+      id
+      firstName
+      lastName
+      phone
+    }
+    firstName
+    lastName
+    phone
+    ticketNumber
+    busSeatConfigurationSeat {
+      id
+      name
+    }
+    order {
+      id
+      price
+      orderedBy {
+        id
+        firstName
+        lastName
+        phone
+      }
+      verification
+      isChecked
+      transactionId
+      verifiedAt
+      verifiedBy {
+        id
+        firstName
+        lastName
+        phone
+      }
+    }
+    trip {
+      bus {
+        id
+        plateNumber
+        busNumber
+      }
+      route {
+        id
+        distance
+        leavingFrom {
+          id
+          name
+          nameAm
+          nameOr
+          nameTg
+        }
+        destination {
+          id
+          name
+          nameAm
+          nameOr
+          nameTg
+        }
+      }
+      price
+      departureTime
+      arrivalTime
+      carrier {
+        id
+        name
+        nameAm
+        nameOr
+        nameTg
+        logo
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MyTicketGQL extends Apollo.Query<MyTicketQuery, MyTicketQueryVariables> {
+    document = MyTicketDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
