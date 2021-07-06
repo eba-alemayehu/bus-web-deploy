@@ -1,0 +1,26 @@
+.plate-container {
+  border: 2px solid #84c184;
+  padding: 4px .8em;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  color: darkgreen;
+  .code{
+    border: 2px solid green;
+    border-radius: 50%;
+    height: 1.3em;
+    width: 1.3em;
+    line-height: 1;
+    font-size: 0.8em;
+    margin-right: 1em;
+    margin-bottom: .3em;
+    padding: 2px;
+    padding-top: 1px;
+  }
+  .plate {
+    font-weight: 600;
+    font-size: 1em;
+
+    text-align: center;
+  }
+}
