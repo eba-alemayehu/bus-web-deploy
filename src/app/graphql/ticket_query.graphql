@@ -1,0 +1,59 @@
+query Tickets {
+    tickets(first: 5) {
+        edges {
+            node {
+                id
+                user {
+                    id
+                    firstName
+                    lastName
+                    phone
+                }
+                ticketNumber
+                firstName
+                lastName
+                phone
+                busSeatConfigurationSeat {
+                    id
+                    name
+                }
+                trip {
+                    route {
+                        leavingFrom {
+                            id
+                            name
+                            nameAm
+                            nameOr
+                            nameTg
+                        }
+                        destination {
+                            id
+                            name
+                            nameAm
+                            nameOr
+                            nameTg
+                        }
+                    }
+                    price
+                    departureTime
+                    carrier {
+                        id
+                        name
+                        nameAm
+                        nameOr
+                        nameTg
+                        logo
+                        busSet{
+                            edges{
+                                node{
+                                    id
+                                    plateNumber
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

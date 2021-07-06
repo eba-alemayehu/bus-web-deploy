@@ -31,5 +31,19 @@ import {CarPlateModule} from "../../bus/component/bus-tumb/car-plate/car-plate.m
         TripDriverOrAssistantAddDialogModule,
         CarPlateModule
     ]
+    imports: [
+        CommonModule,
+        BusRoutingModule,
+        FlexModule,
+        MatCardModule,
+        BusSeatConfigurationModule,
+        MatButtonModule,
+        UserTumbModule,
+        MatListModule,
+        MatIconModule,
+        TripDriverOrAssistantAddFormModule,
+        TripDriverOrAssistantAddDialogModule,
+        ShimmerModule
+    ]
 })
 export class BusModule { }

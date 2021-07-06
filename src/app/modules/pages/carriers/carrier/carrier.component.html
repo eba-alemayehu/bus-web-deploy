@@ -1,5 +1,6 @@
 <div fxLayout="row" style="justify-content: center">
   <h1>{{carrier?.name}}</h1>
+  <app-custom-shimmer width="100" height="32" *ngIf="!carrier?.name"></app-custom-shimmer>
 </div>
 <div fxLayout="row wrap" style="justify-content: space-around;">
   <mat-card routerLink="trips" style="margin: 1em">

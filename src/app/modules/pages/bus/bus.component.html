@@ -12,9 +12,11 @@
           <app-bus-seat-configuration
             [orientation]="'row'"
             [busSeatConfiguration]="bus?.busSeatConfiguration"></app-bus-seat-configuration>
+          <app-custom-shimmer width="206" height="157" *ngIf="!bus"></app-custom-shimmer>
         </div>
       </mat-card>
     </div>
+
     <div fxLayout="row" style="justify-content: space-around; margin-top: 1em">
       <mat-card>
         <h3 matSubheader>Drivers</h3>

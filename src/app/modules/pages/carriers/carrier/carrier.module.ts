@@ -5,6 +5,7 @@ import { CarrierRoutingModule } from './carrier-routing.module';
 import { CarrierComponent } from './carrier.component';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
+import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {MatCardModule} from '@angular/material/card';
     CommonModule,
     CarrierRoutingModule,
     FlexModule,
-    MatCardModule
+    MatCardModule,
+    ShimmerModule
   ]
 })
 export class CarrierModule { }
