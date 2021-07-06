@@ -9,6 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {PayDialogModule} from '../../dialogs/pay-dialog/pay-dialog.module';
 import {BankCardComponent} from "./bank-card.component";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatIconModule} from "@angular/material/icon";
+import {ClipboardModule} from "@angular/cdk/clipboard";
 
 
 
@@ -25,6 +27,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatButtonModule,
     MatDividerModule,
     ShimmerModule,
+    MatIconModule,
+    ClipboardModule,
   ]
 })
 export class BankCardModule { }

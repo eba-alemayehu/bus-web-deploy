@@ -12,12 +12,14 @@ import {TripDialogComponent} from '../../../../trip/dialog/trip-dialog/trip-dial
 })
 export class TripsComponent implements OnInit {
   carrier;
+  carrierId;
 
   constructor(private activatedRoute: ActivatedRoute, private carrierGQL: CarrierGQL, private matDialog: MatDialog, private route: Router) {
     this.activatedRoute.params.subscribe(
       (params) => {
+        this.carrierId = params.id;
         this.carrierGQL
-          .watch({id: params.id, getTrips: true}).valueChanges
+          .watch({id: this.carrierId, getTrips: false}).valueChanges
           .pipe(map((response) => response.data.carrier))
           .subscribe(
             (carrier) => this.carrier = carrier

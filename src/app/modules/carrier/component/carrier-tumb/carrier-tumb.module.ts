@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarrierTumbComponent } from './carrier-tumb.component';
 import {FlexModule} from '@angular/flex-layout';
-import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
+import {ShimmerModule} from "../../../common/shimmer/shimmer.module";
 
 
 
@@ -11,10 +11,10 @@ import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
   exports: [
     CarrierTumbComponent
   ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    ShimmerModule
-  ]
+    imports: [
+        CommonModule,
+        FlexModule,
+        ShimmerModule
+    ]
 })
 export class CarrierTumbModule { }

@@ -21,25 +21,21 @@
 <!--  </ng-container>-->
 <!--</div>-->
 
-<h2 mat-dialog-title style="text-align:center;">Entered passengers information</h2>
-<mat-dialog-content class="mat-typography" >
-  <ng-container *ngFor="let d of [].constructor(2)" >
-  <h3 style="text-align: center">passenger 1</h3>
+<h1 mat-dialog-title style="text-align:center; font-size:32px">Entered passengers information</h1>
+<mat-dialog-content class="mat-typography" style="padding:2rem 4rem; border-radius: 4rem;">
+  <ng-container *ngFor="let passanger of data.passenger.passengers let i = index" >
+  <h3 style="text-align: center">passenger {{i+1}}</h3>
   <div fxLayout="row">
     <h2 class="name">Full Name: </h2>
-    <h2 class="value">Muluken Bogale</h2>
+    <h2 class="value">{{passanger.name}}</h2>
   </div>
   <div fxLayout="row">
     <h2 class="name">Phone Number: </h2>
-    <h2 class="value">+251986088963</h2>
-  </div>
-  <div fxLayout="row">
-    <h2 class="name">Boarding: </h2>
-    <h2 class="value">Megenagn</h2>
+    <h2 class="value">{{passanger.phone}}</h2>
   </div>
   </ng-container>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary" routerLink="booking/payment">Proceed to Payment</a>
+  <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary" routerLink="booking/payment/{{data.bookingOrder}}">Proceed to Payment</a>
 </mat-dialog-actions>
 

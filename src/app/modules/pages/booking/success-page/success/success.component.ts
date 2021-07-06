@@ -8,16 +8,16 @@ import {AnimationItem} from 'lottie-web';
   styleUrls: ['./success.component.scss']
 })
 export class SuccessComponent implements OnInit {
-
-  constructor() { }
   options: AnimationOptions = {
     path: '/assets/lotties/success.json',
   };
-
-  ngOnInit(): void {
-  }
   animationCreated(animationItem: AnimationItem): void {
     console.log(animationItem);
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
   }
 
 }

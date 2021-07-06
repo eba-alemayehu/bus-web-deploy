@@ -1,5 +1,9 @@
-<div fxLayout="column">
-  <img src="assets/carrier.svg" style="width: 70px; margin-bottom: 1em;">
+<div fxLayout="column" *ngIf="loading">
+  <app-custom-shimmer [width]="80" [height]="80" [circle]="true"></app-custom-shimmer>
+  <app-custom-shimmer [width]="80" [height]="16" style="margin-top: 1.2em"></app-custom-shimmer>
+</div>
+<div fxLayout="column" *ngIf="!loading">
+  <img src="assets/carrier.svg" style="width: 70px; margin-bottom: 1em; " alt="">
   <p>{{carrier.node.name}}</p>
 </div>
 

@@ -24,6 +24,7 @@ export class LoginFormComponent implements OnInit {
   });
   invalidCredentialsErrors = false;
 
+  // tslint:disable-next-line:max-line-length
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog, public loginMutation: LoginMutationGQL, private storage: StorageService) {
   }
 

@@ -5,5 +5,7 @@
   </div>
 </div>
 <div fxLayout="column">
-  <app-trip-list (selected)="tripClick($event)"></app-trip-list>
+  <app-trip-list
+    [carrier]="carrierId"
+    (selected)="tripClick($event)"></app-trip-list>
 </div>
