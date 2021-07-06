@@ -2838,6 +2838,66 @@ export type MeQuery = (
   )> }
 );
 
+export type MyTicketsQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type MyTicketsQuery = (
+  { __typename?: 'Query' }
+  & { myTickets?: Maybe<(
+    { __typename?: 'TicketNodeConnection' }
+    & { pageInfo: (
+      { __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'hasNextPage' | 'hasPreviousPage' | 'startCursor' | 'endCursor'>
+    ), edges: Array<Maybe<(
+      { __typename?: 'TicketNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TicketNode' }
+        & Pick<TicketNode, 'id' | 'firstName' | 'lastName' | 'phone' | 'ticketNumber'>
+        & { user: (
+          { __typename?: 'BusUserNode' }
+          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+        ), busSeatConfigurationSeat: (
+          { __typename?: 'BusSeatConfigurationSeatNode' }
+          & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
+        ), order?: Maybe<(
+          { __typename?: 'PaymentOrderNode' }
+          & Pick<PaymentOrderNode, 'id' | 'price' | 'verification' | 'isChecked' | 'transactionId' | 'verifiedAt'>
+          & { orderedBy: (
+            { __typename?: 'BusUserNode' }
+            & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+          ), verifiedBy?: Maybe<(
+            { __typename?: 'BusUserNode' }
+            & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+          )> }
+        )>, trip: (
+          { __typename?: 'TripNode' }
+          & Pick<TripNode, 'price' | 'departureTime' | 'arrivalTime'>
+          & { bus?: Maybe<(
+            { __typename?: 'BusNode' }
+            & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
+          )>, route: (
+            { __typename?: 'RouteNode' }
+            & Pick<RouteNode, 'id' | 'distance'>
+            & { leavingFrom: (
+              { __typename?: 'CityNode' }
+              & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+            ), destination: (
+              { __typename?: 'CityNode' }
+              & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+            ) }
+          ), carrier: (
+            { __typename?: 'CarrierNode' }
+            & Pick<CarrierNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg' | 'logo'>
+          ) }
+        ) }
+      )> }
+    )>> }
+  )> }
+);
+
 export type RefreshTokenMutationVariables = Exact<{
   input: RefreshTokenInput;
 }>;
@@ -2871,6 +2931,56 @@ export type TicketMuationMutation = (
         & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
       ) }
     )>>> }
+  )> }
+);
+
+export type TicketsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TicketsQuery = (
+  { __typename?: 'Query' }
+  & { tickets?: Maybe<(
+    { __typename?: 'TicketNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TicketNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TicketNode' }
+        & Pick<TicketNode, 'id' | 'ticketNumber' | 'firstName' | 'lastName' | 'phone'>
+        & { user: (
+          { __typename?: 'BusUserNode' }
+          & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+        ), busSeatConfigurationSeat: (
+          { __typename?: 'BusSeatConfigurationSeatNode' }
+          & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
+        ), trip: (
+          { __typename?: 'TripNode' }
+          & Pick<TripNode, 'price' | 'departureTime'>
+          & { route: (
+            { __typename?: 'RouteNode' }
+            & { leavingFrom: (
+              { __typename?: 'CityNode' }
+              & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+            ), destination: (
+              { __typename?: 'CityNode' }
+              & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+            ) }
+          ), carrier: (
+            { __typename?: 'CarrierNode' }
+            & Pick<CarrierNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg' | 'logo'>
+            & { busSet: (
+              { __typename?: 'BusNodeConnection' }
+              & { edges: Array<Maybe<(
+                { __typename?: 'BusNodeEdge' }
+                & { node?: Maybe<(
+                  { __typename?: 'BusNode' }
+                  & Pick<BusNode, 'id' | 'plateNumber'>
+                )> }
+              )>> }
+            ) }
+          ) }
+        ) }
+      )> }
+    )>> }
   )> }
 );
 
@@ -3049,6 +3159,7 @@ export const BankAccountsDocument = gql`
         bankLogo
         accountName
         accountNumber
+        accountName
       }
     }
   }
@@ -3647,6 +3758,104 @@ export const MeDocument = gql`
       super(apollo);
     }
   }
+export const MyTicketsDocument = gql`
+    query MyTickets($first: Int, $after: String) {
+  myTickets(first: $first, after: $after) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      node {
+        id
+        user {
+          id
+          firstName
+          lastName
+          phone
+        }
+        firstName
+        lastName
+        phone
+        ticketNumber
+        busSeatConfigurationSeat {
+          id
+          name
+        }
+        order {
+          id
+          price
+          orderedBy {
+            id
+            firstName
+            lastName
+            phone
+          }
+          verification
+          isChecked
+          transactionId
+          verifiedAt
+          verifiedBy {
+            id
+            firstName
+            lastName
+            phone
+          }
+        }
+        trip {
+          bus {
+            id
+            plateNumber
+            busNumber
+          }
+          route {
+            id
+            distance
+            leavingFrom {
+              id
+              name
+              nameAm
+              nameOr
+              nameTg
+            }
+            destination {
+              id
+              name
+              nameAm
+              nameOr
+              nameTg
+            }
+          }
+          price
+          departureTime
+          arrivalTime
+          carrier {
+            id
+            name
+            nameAm
+            nameOr
+            nameTg
+            logo
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MyTicketsGQL extends Apollo.Query<MyTicketsQuery, MyTicketsQueryVariables> {
+    document = MyTicketsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const RefreshTokenDocument = gql`
     mutation RefreshToken($input: RefreshTokenInput!) {
   refreshToken(input: $input) {
@@ -3693,6 +3902,78 @@ export const TicketMuationDocument = gql`
   })
   export class TicketMuationGQL extends Apollo.Mutation<TicketMuationMutation, TicketMuationMutationVariables> {
     document = TicketMuationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const TicketsDocument = gql`
+    query Tickets {
+  tickets(first: 5) {
+    edges {
+      node {
+        id
+        user {
+          id
+          firstName
+          lastName
+          phone
+        }
+        ticketNumber
+        firstName
+        lastName
+        phone
+        busSeatConfigurationSeat {
+          id
+          name
+        }
+        trip {
+          route {
+            leavingFrom {
+              id
+              name
+              nameAm
+              nameOr
+              nameTg
+            }
+            destination {
+              id
+              name
+              nameAm
+              nameOr
+              nameTg
+            }
+          }
+          price
+          departureTime
+          carrier {
+            id
+            name
+            nameAm
+            nameOr
+            nameTg
+            logo
+            busSet {
+              edges {
+                node {
+                  id
+                  plateNumber
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class TicketsGQL extends Apollo.Query<TicketsQuery, TicketsQueryVariables> {
+    document = TicketsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
