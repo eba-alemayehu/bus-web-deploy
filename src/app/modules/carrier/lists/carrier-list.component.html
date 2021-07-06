@@ -1,5 +1,12 @@
-<div fxLayout="row" style="justify-content: center; margin-top: 2em;">
+<div *ngIf="!loading" fxLayout="row" style="justify-content: center; margin-top: 2em;">
   <mat-card fxLayout="column" style="padding: 1em 2em; margin: 0 1em" *ngFor="let carrier of carriers$ | async">
     <app-carrier-tumb [carrier]="carrier" [routerLink]="'/carrier/'+carrier.node.id"></app-carrier-tumb>
   </mat-card>
 </div>
+<div *ngIf="loading" fxLayout="row" style="justify-content: center; margin-top: 2em;">
+  <mat-card fxLayout="column" style="padding: 1em 2em; margin: 0 1em" *ngFor="let carrier of carriers$ | async">
+    <app-carrier-tumb [carrier]="carrier" [routerLink]="'/carrier/'+carrier.node.id"
+                      [loading]="loading"></app-carrier-tumb>
+  </mat-card>
+</div>
+
