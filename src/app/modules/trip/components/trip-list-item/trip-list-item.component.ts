@@ -8,6 +8,8 @@ import {TripNodeEdge} from '../../../../generated/graphql';
 })
 export class TripListItemComponent implements OnInit {
   @Input() trip: any;
+  @Input() loading = false;
+
   constructor() { }
 
   ngOnInit(): void {

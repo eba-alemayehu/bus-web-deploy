@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TripGQL} from '../../../../generated/graphql';
 import {ActivatedRoute, Router} from '@angular/router';
-import {echo} from "../../../../util/print";
+import {echo} from '../../../../util/print';
 
 @Component({
   selector: 'app-seat',
@@ -11,6 +11,7 @@ import {echo} from "../../../../util/print";
 export class SeatComponent implements OnInit {
   trip = null;
   selectedBusSeatConfigurationSeats = [];
+
   constructor(private tripGQL: TripGQL, private activatedRoute: ActivatedRoute, private router: Router) {
     this.activatedRoute.params.subscribe(
       (params) => {
@@ -24,8 +25,12 @@ export class SeatComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  next(): void{
+  next(): void {
     const selectedSeatsId = JSON.stringify(this.selectedBusSeatConfigurationSeats.map(e => e.busSeatConfigurationSeat.id));
-    this.router.navigate(['/booking/' + this.trip.id], { queryParams: {selectedSeats: encodeURIComponent(selectedSeatsId)}});
+    this.router.navigate(['/booking/' + this.trip.id], {
+      queryParams: {
+        selectedSeats: encodeURIComponent(selectedSeatsId)
+      }
+    });
   }
 }

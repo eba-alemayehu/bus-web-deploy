@@ -3,7 +3,7 @@ import {isDevMode} from '@angular/core';
 let _SERVER_URI = 'http://api.gozo.com/';
 
 if (isDevMode()){
-    _SERVER_URI   = 'https://hrkylbniai.execute-api.us-west-2.amazonaws.com/dev/';
+    _SERVER_URI   = 'http://0.0.0.0:8000/';
 }
 
 export const SERVER_URI   = _SERVER_URI;

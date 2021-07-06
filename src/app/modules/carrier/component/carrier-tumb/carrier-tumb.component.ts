@@ -8,6 +8,8 @@ import {CarrierNode, CarrierNodeEdge} from '../../../../generated/graphql';
 })
 export class CarrierTumbComponent implements OnInit {
   @Input() carrier: CarrierNodeEdge;
+  @Input() loading = false;
+
   constructor() { }
 
   ngOnInit(): void {

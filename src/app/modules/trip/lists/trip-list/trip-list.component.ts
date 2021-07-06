@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TripsGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
 
 @Component({
@@ -13,6 +13,8 @@ export class TripListComponent implements OnInit, OnChanges {
   @Input() uuid = null;
   @Input() leavingFrom = null;
   @Input() destination = null;
+  @Input() departureDate = null;
+  @Input() loading = true;
 
   @Output() selected: EventEmitter<any> = new EventEmitter<any>();
   trips$;
@@ -25,14 +27,24 @@ export class TripListComponent implements OnInit, OnChanges {
   }
 
   private loadTrips(): void {
+    const departureDate = new Date(this.departureDate);
+    const departureDateTo = new Date(departureDate.setDate(departureDate.getDate() + 1));
+
     this.trips$ = this.tripsGQL.watch(
       {
-        carrier: this.carrier?.id,
+        carrier: (typeof (this.carrier) === 'string') ? this.carrier : this.carrier?.id,
         bulkRef: this.uuid,
         leavingFrom: this.leavingFrom,
-        destination: this.destination
+        destination: this.destination,
+        departureTime_Gte: (this.departureDate === null) ? null : new Date(this.departureDate).toISOString(),
+        departureTime_Lte: (this.departureDate === null) ? null : departureDateTo.toISOString(),
       }).valueChanges
-      .pipe(map(response => response.data.trips.edges));
+      .pipe(
+        tap(response => {
+          this.loading = response.loading;
+        }),
+        map(response => response.data.trips.edges),
+      );
   }
 
   onSelect(trip: any): any {

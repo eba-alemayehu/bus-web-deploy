@@ -16,7 +16,6 @@ export type Scalars = {
   Decimal: any;
   ExpectedErrorType: any;
   GenericScalar: any;
-  UUID: any;
   Upload: any;
 };
 
@@ -64,6 +63,17 @@ export type BankAccountNodeEdge = {
   __typename?: 'BankAccountNodeEdge';
   node?: Maybe<BankAccountNode>;
   cursor: Scalars['String'];
+};
+
+export type BoardPassengerMutationInput = {
+  id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type BoardPassengerMutationPayload = {
+  __typename?: 'BoardPassengerMutationPayload';
+  ticket?: Maybe<TicketNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type BookTicketMutationInput = {
@@ -289,6 +299,7 @@ export type BusSeatConfigurationSeatNode = Node & {
   row: Scalars['Int'];
   col: Scalars['Int'];
   ticketSet: TicketNodeConnection;
+  isLocked?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -946,6 +957,7 @@ export type Mutation = {
   reserveTicket?: Maybe<ReserveTicketMutationPayload>;
   cancelTicket?: Maybe<CancelTicketMutationPayload>;
   rescheduleTicket?: Maybe<RescheduleTicketMutationPayload>;
+  boardPassenger?: Maybe<BoardPassengerMutationPayload>;
   paymentConfirmationRequest?: Maybe<PaymentConfirmationRequestMutationPayload>;
   validatePayment?: Maybe<ValidatePaymentMutationPayload>;
   carrier?: Maybe<CarrierMutationPayload>;
@@ -1011,6 +1023,11 @@ export type MutationCancelTicketArgs = {
 
 export type MutationRescheduleTicketArgs = {
   input: RescheduleTicketMutationInput;
+};
+
+
+export type MutationBoardPassengerArgs = {
+  input: BoardPassengerMutationInput;
 };
 
 
@@ -1337,6 +1354,7 @@ export type Query = {
   route?: Maybe<RouteNode>;
   trips?: Maybe<TripNodeConnection>;
   trip?: Maybe<TripNode>;
+  myCrewTrips?: Maybe<TripNodeConnection>;
   tickets?: Maybe<TicketNodeConnection>;
   myTickets?: Maybe<TicketNodeConnection>;
   ticket?: Maybe<TicketNode>;
@@ -1440,6 +1458,26 @@ export type QueryTripsArgs = {
 
 export type QueryTripArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryMyCrewTripsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
+  carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  bulkRef?: Maybe<Scalars['String']>;
+  departureTime?: Maybe<Scalars['DateTime']>;
+  departureTime_Gte?: Maybe<Scalars['DateTime']>;
+  departureTime_Lte?: Maybe<Scalars['DateTime']>;
+  route_LeavingFrom?: Maybe<Scalars['ID']>;
+  route_Destination?: Maybe<Scalars['ID']>;
+  route_Routeprice_Price?: Maybe<Scalars['Float']>;
+  route_Routeprice_Price_Lte?: Maybe<Scalars['Float']>;
+  route_Routeprice_Price_Gte?: Maybe<Scalars['Float']>;
 };
 
 
@@ -1947,9 +1985,10 @@ export type TicketNode = Node & {
   busStop?: Maybe<BusStopNode>;
   busSeatConfigurationSeat: BusSeatConfigurationSeatNode;
   order?: Maybe<PaymentOrderNode>;
-  ticketNumber?: Maybe<Scalars['UUID']>;
+  ticketNumber?: Maybe<Scalars['String']>;
   lockedAt?: Maybe<Scalars['DateTime']>;
   lockedUntil?: Maybe<Scalars['DateTime']>;
+  boardedAt?: Maybe<Scalars['DateTime']>;
   isLocked?: Maybe<Scalars['Boolean']>;
   state?: Maybe<TicketState>;
 };
@@ -2042,7 +2081,6 @@ export type TripSeatType = {
   lockedBy?: Maybe<BusUserNode>;
   ticket?: Maybe<TicketNode>;
 };
-
 
 export type UpdateAccountInput = {
   clientMutationId?: Maybe<Scalars['String']>;
@@ -3083,6 +3121,9 @@ export type TripsQueryVariables = Exact<{
   bulkRef?: Maybe<Scalars['String']>;
   leavingFrom?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
+  departureTime?: Maybe<Scalars['DateTime']>;
+  departureTime_Gte?: Maybe<Scalars['DateTime']>;
+  departureTime_Lte?: Maybe<Scalars['DateTime']>;
 }>;
 
 
@@ -4113,10 +4154,13 @@ export const TripMutationDocument = gql`
     }
   }
 export const TripsDocument = gql`
-    query Trips($carrier: ID, $bulkRef: String, $leavingFrom: ID, $destination: ID) {
+    query Trips($carrier: ID, $bulkRef: String, $leavingFrom: ID, $destination: ID, $departureTime: DateTime, $departureTime_Gte: DateTime, $departureTime_Lte: DateTime) {
   trips(
     carrier: $carrier
     bulkRef: $bulkRef
+    departureTime: $departureTime
+    departureTime_Gte: $departureTime_Gte
+    departureTime_Lte: $departureTime_Lte
     route_LeavingFrom: $leavingFrom
     route_Destination: $destination
   ) {

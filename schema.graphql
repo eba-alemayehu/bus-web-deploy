@@ -34,6 +34,16 @@ type BankAccountNodeEdge {
   cursor: String!
 }
 
+input BoardPassengerMutationInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type BoardPassengerMutationPayload {
+  ticket: TicketNode
+  clientMutationId: String
+}
+
 input BookTicketMutationInput {
   trip: ID!
   passengers: String!
@@ -149,6 +159,7 @@ type BusSeatConfigurationSeatNode implements Node {
   row: Int!
   col: Int!
   ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  isLocked: Boolean
 }
 
 type BusSeatConfigurationSeatNodeConnection {
@@ -457,6 +468,7 @@ type Mutation {
   reserveTicket(input: ReserveTicketMutationInput!): ReserveTicketMutationPayload
   cancelTicket(input: CancelTicketMutationInput!): CancelTicketMutationPayload
   rescheduleTicket(input: RescheduleTicketMutationInput!): RescheduleTicketMutationPayload
+  boardPassenger(input: BoardPassengerMutationInput!): BoardPassengerMutationPayload
   paymentConfirmationRequest(input: PaymentConfirmationRequestMutationInput!): PaymentConfirmationRequestMutationPayload
   validatePayment(input: ValidatePaymentMutationInput!): ValidatePaymentMutationPayload
   carrier(input: CarrierMutationInput!): CarrierMutationPayload
@@ -614,6 +626,7 @@ type Query {
   route(id: ID!): RouteNode
   trips(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, carrier_In: [ID], bulkRef: String, departureTime: DateTime, departureTime_Gte: DateTime, departureTime_Lte: DateTime, route_LeavingFrom: ID, route_Destination: ID, route_Routeprice_Price: Float, route_Routeprice_Price_Lte: Float, route_Routeprice_Price_Gte: Float): TripNodeConnection
   trip(id: ID!): TripNode
+  myCrewTrips(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, carrier_In: [ID], bulkRef: String, departureTime: DateTime, departureTime_Gte: DateTime, departureTime_Lte: DateTime, route_LeavingFrom: ID, route_Destination: ID, route_Routeprice_Price: Float, route_Routeprice_Price_Lte: Float, route_Routeprice_Price_Gte: Float): TripNodeConnection
   tickets(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection
   myTickets(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection
   ticket(id: ID!): TicketNode
@@ -842,9 +855,10 @@ type TicketNode implements Node {
   busStop: BusStopNode
   busSeatConfigurationSeat: BusSeatConfigurationSeatNode!
   order: PaymentOrderNode
-  ticketNumber: UUID
+  ticketNumber: String
   lockedAt: DateTime
   lockedUntil: DateTime
+  boardedAt: DateTime
   isLocked: Boolean
   state: TicketState
 }
@@ -921,8 +935,6 @@ type TripSeatType {
   lockedBy: BusUserNode
   ticket: TicketNode
 }
-
-scalar UUID
 
 input UpdateAccountInput {
   clientMutationId: String

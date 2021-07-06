@@ -1,7 +1,18 @@
-query Trips($carrier: ID, $bulkRef: String, $leavingFrom: ID, $destination:ID){
+query Trips(
+  $carrier: ID,
+  $bulkRef: String,
+  $leavingFrom: ID,
+  $destination:ID,
+  $departureTime: DateTime,
+  $departureTime_Gte: DateTime,
+  $departureTime_Lte: DateTime
+){
   trips(
     carrier: $carrier,
     bulkRef: $bulkRef,
+    departureTime: $departureTime,
+    departureTime_Gte: $departureTime_Gte,
+    departureTime_Lte: $departureTime_Lte,
     route_LeavingFrom: $leavingFrom,
     route_Destination: $destination){
     edges{
