@@ -10,14 +10,14 @@ import {map, tap} from 'rxjs/operators';
 })
 export class CarrierListComponent implements OnInit {
   @Input() carriers$: Observable<any>;
-  @Input() loading = false;
+  @Input() loading = true;
 
   constructor(private carriersGQL: CarriersGQL) {
     this.carriers$ = carriersGQL
       .watch({getTrips: false}).valueChanges
       .pipe(
-        map(response => response.data.carriers.edges),
         tap(response => this.loading = response.loading),
+        map(response => response.data.carriers.edges),
       );
   }
 
