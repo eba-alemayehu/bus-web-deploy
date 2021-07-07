@@ -1,0 +1,75 @@
+query MyTicket($id: ID!) {
+  ticket(id: $id) {
+    id
+    user {
+      id
+      firstName
+      lastName
+      phone
+    }
+    firstName
+    lastName
+    phone
+    ticketNumber
+    busSeatConfigurationSeat {
+      id
+      name
+    }
+    order {
+      id
+      price
+      orderedBy {
+        id
+        firstName
+        lastName
+        phone
+      }
+      verification
+      isChecked
+      transactionId
+      verifiedAt
+      verifiedBy {
+        id
+        firstName
+        lastName
+        phone
+      }
+    }
+    trip {
+      bus {
+        id
+        plateNumber
+        busNumber
+      }
+      route {
+        id
+        distance
+        leavingFrom {
+          id
+          name
+          nameAm
+          nameOr
+          nameTg
+        }
+        destination {
+          id
+          name
+          nameAm
+          nameOr
+          nameTg
+        }
+      }
+      price
+      departureTime
+      arrivalTime
+      carrier {
+        id
+        name
+        nameAm
+        nameOr
+        nameTg
+        logo
+      }
+    }
+  }
+}

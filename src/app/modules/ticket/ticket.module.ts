@@ -8,10 +8,14 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
 import {FlexModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import {QRCodeModule} from "angularx-qrcode";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
-  declarations: [TicketListComponent, TicketDetailComponent],
+  declarations: [TicketListComponent, TicketDetailComponent, QrCodeComponent],
   exports: [
     TicketListComponent,
     TicketDetailComponent
@@ -22,7 +26,10 @@ import {MatDividerModule} from "@angular/material/divider";
     TripModule,
     FlexModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    QRCodeModule,
+    MatButtonModule,
+    MatDialogModule
   ]
 })
 export class TicketsModule { }

@@ -1,4 +1,4 @@
-<div fxLayout="row"  class="ticket-card" style="max-width: 800px; justify-content: space-evenly; margin:auto; background-color:white;">
+<div fxLayout="row" (click)="openDialog()" class="ticket-card" style="max-width: 800px; justify-content: space-evenly; margin:auto; background-color:white;">
   <div fxLayout="column" class="personal-info" style="width: 17%">
     <img src="/assets/yenabus.png" style="width: 40px; height:60px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;" alt=""/>
     <mat-card-title style="font-size: 1em; font-weight:700; text-align: center; ">{{ticket.firstName | titlecase}} {{ticket.lastName | titlecase}}</mat-card-title>

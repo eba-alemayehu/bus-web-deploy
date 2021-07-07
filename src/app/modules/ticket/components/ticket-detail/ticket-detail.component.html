@@ -1,10 +1,62 @@
-<div fxLayout="column" class="container">
-  <div fxLayout="row" style="justify-content:space-around">
-    <img src="/assets/yenabus.png" style="width: 60px; height:80px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;" alt=""/>
-     <div fxLayout="column" style="margin-bottom: 1rem;">
-       <mat-card-title style="font-size: 1.5em; font-weight:700; text-align: center; ">Muluken Bogale</mat-card-title>
-       <mat-card-title style="font-size: 1.5em; font-weight:400; text-align: center; padding-top:0.4em">+251986088963</mat-card-title>
+<div fxLayout="column" class="container" style="background-color:white; border-radius: 120px; min-width: 600px">
+  <div fxLayout="row" style="justify-content:space-around;margin-top: 16px;">
+    <img src="/assets/yenabus.png" style="width: 70px; height:90px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;" alt=""/>
+     <div fxLayout="column" style="margin-bottom: 1rem; align-self: flex-end ">
+       <mat-card-title style="font-size: 1.3em; font-weight:700; text-align: center;">{{ticket.firstName | titlecase}} {{ticket.lastName | titlecase}}</mat-card-title>
+       <mat-card-title style="font-size: 1.3em; font-weight:400; text-align: center; padding-top:0.5em; color:gray">{{ticket.phone}}</mat-card-title>
      </div>
   </div>
   <mat-divider  class="mat-divider" ></mat-divider>
+  <div style="text-align:center">
+    <app-qr-code ticketId={{ticket.id}}></app-qr-code>
+  </div>
+
+  <mat-divider  class="mat-divider" ></mat-divider>
+  <div fxLayout="row" style="justify-content:space-between; margin: 0 4em">
+    <div fxLayout="column">
+      <img src="/assets/yenabus.png" style="width: 50px; height:70px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;" alt=""/>
+      <mat-card-title style="font-size: 1.2em; font-weight:700; text-align: center;color:gray; ">{{ticket.trip.carrier.name | titlecase}}</mat-card-title>
+    </div>
+    <div fxLayout="column" style="margin-bottom: 1rem; align-self: flex-end ">
+      <mat-card-title style="font-size: 1.7em; color:orange; font-weight:700; text-align: center; ">{{ticket.order.price}} Birr</mat-card-title>
+    </div>
+  </div>
+  <div fxLayout="row" style="justify-content:space-between; margin: 1rem 4em">
+    <div fxLayout="column">
+      <span style="color: darkgray; text-align:center">Leaving From:</span>
+      <mat-card-title class="city">{{ticket.trip.route.leavingFrom.name | titlecase }}</mat-card-title>
+    </div>
+    <div fxLayout="column">
+      <span style="color: darkgray; text-align:center">Destination:</span>
+      <mat-card-title class="city">{{ticket.trip.route.destination.name | titlecase}}</mat-card-title>
+    </div>
+  </div>
+  <!--  time -->
+  <div fxLayout="row" style="justify-content:space-between; margin: 1rem 4em">
+    <div fxLayout="column">
+      <span style="color: darkgray; text-align:center">Departure time:</span>
+      <span class="time">{{ticket.trip.departureTime | date:'shortTime' }}</span>
+    </div>
+    <div fxLayout="column">
+      <span style="color: darkgray; text-align:center">plate no:</span>
+      <mat-card-title class="plate">{{ticket.trip.bus.busNumber}}</mat-card-title>
+    </div>
+  </div>
+  <!--  date -->
+  <div fxLayout="row" style="justify-content:space-between; margin: 1rem 5em">
+    <div fxLayout="column">
+      <span class="date">{{ticket.trip.departureTime | date:'fullDate' }}</span>
+    </div>
+    <div fxLayout="column">
+      <mat-card-title class="seat">Seat no: {{ ticket.busSeatConfigurationSeat.name}}</mat-card-title>
+    </div>
+  </div>
+<!--  <div fxLayout="row" style="place-content: space-between">-->
+<!--    <button mat-flat-button color="primary" style="margin-top: 8px; margin-right: 2em; max-height:3em">pay</button>-->
+<!--    <div fxLayout="row" style="align-self: flex-end;">-->
+<!--      <button mat-flat-button color="primary" style="margin-top: 8px; margin-right: 2em; max-height:3em">Cancel</button>-->
+<!--      <button mat-flat-button color="primary" style="margin-top: 8px; max-height:3em">Reschedule</button>-->
+<!--    </div>-->
+<!--  </div>-->
+
 </div>
