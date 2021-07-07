@@ -1,12 +1,13 @@
 <div fxLayout="row" style="justify-content: space-around">
-  <div *ngFor="let date of getWeakDays(5)">
-    <button type="button" (click)="console.log(date.date)" class="weak-day-btn" mat-raised-button>
-   <p class="weak-day-num">
-  {{date.day}}
+  <div *ngFor="let date of days">
+    <button (click)="changeDepartureDate(date.date, $event)" class="weak-day-btn" mat-raised-button>
+      <p class="weak-day-num">
+        {{date.day}}
       </p>
       <p class="weak-day-name">
         {{date.dateNum}}
       </p>
     </button>
-  </div>
+<!--  </div>-->
+</div>
 </div>

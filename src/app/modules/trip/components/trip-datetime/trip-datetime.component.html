@@ -1,14 +1,14 @@
-
-  <div fxLayout="row" style="align-items: center">
-    <div fxLayout="column" class="time-city-container">
-      <span class="time">{{trip?.departureTime | date:'shortTime'}}</span>
-      <span>{{trip?.departureTime| date: 'fullDate'}}</span>
-      <span class="mat-card-subtitle" style="margin-top: 8px;">{{trip?.route.leavingFrom.name}}</span>
-    </div>
-    <span class="duration" style="color: lightblue">4h3m</span>
-    <div fxLayout="column" class="time-city-container">
-      <span class="time">{{trip?.arrivalTime | date:'shortTime'}}</span>
-      <span>{{trip?.departureTime| date: 'fullDate'}}</span>
-      <span class="mat-card-subtitle" style="margin-top: 8px;">{{trip?.route.destination.name}}</span>
-    </div>
+<div fxLayout="row" style="align-items: center">
+  <div class="time-city-container" fxLayout="column">
+    <span class="time">{{trip?.departureTime | date:'shortTime'}}</span>
+    <span>{{trip?.departureTime| date: 'fullDate'}}</span>
+    <span class="mat-card-subtitle" style="margin-top: 8px;">{{trip?.route.leavingFrom.name}}</span>
   </div>
+  <span class="duration" style="color: lightblue; min-width: 25%;text-align: center;
+    font-size: 1.3em;">4h3m</span>
+  <div class="time-city-container" fxLayout="column">
+    <span class="time">{{trip?.arrivalTime | date:'shortTime'}}</span>
+    <span>{{trip?.departureTime| date: 'fullDate'}}</span>
+    <span class="mat-card-subtitle" style="margin-top: 8px;">{{trip?.route.destination.name}}</span>
+  </div>
+</div>
