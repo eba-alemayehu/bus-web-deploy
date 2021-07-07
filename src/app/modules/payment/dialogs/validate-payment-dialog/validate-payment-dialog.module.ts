@@ -7,20 +7,22 @@ import {FormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from "@angular/flex-layout";
+import {LangModule} from '../../../../lang.module';
 
 
 
 @NgModule({
   declarations: [ValidatePaymentDialogComponent],
   exports: [ValidatePaymentDialogComponent],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatIconModule,
-    MatButtonModule,
-    FlexModule
-  ]
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatIconModule,
+        MatButtonModule,
+        FlexModule,
+        LangModule
+    ]
 })
 export class ValidatePaymentDialogModule { }

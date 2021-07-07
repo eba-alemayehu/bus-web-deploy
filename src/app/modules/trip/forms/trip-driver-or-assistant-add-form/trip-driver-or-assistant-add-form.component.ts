@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {echo} from '../../../../util/print';
 import {MatDialogRef} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-trip-driver-or-assistant-add-form',
@@ -10,7 +12,10 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class TripDriverOrAssistantAddFormComponent implements OnInit {
   selectedUser = null;
   @Output() addUser: EventEmitter<any> = new EventEmitter<any>();
-  constructor() { }
+  constructor(translate: TranslateService , private storage: StorageService
+  ) {
+    translate.use(this.storage.getLanguage('lang'));
+  }
 
   ngOnInit(): void {
   }

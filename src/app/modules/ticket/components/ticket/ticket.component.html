@@ -37,15 +37,15 @@
     </div>
     <div fxLayout="row" >
       <ng-container *ngIf="ticket.order.isChecked === true;else second">
-        <button mat-flat-button color="green">paid</button>
+        <button mat-flat-button color="green">{{'paid'| translate}}</button>
       </ng-container>
       <ng-template #second>
         <ng-container *ngIf="ticket.order.isChecked === false;else third">
-          <button mat-flat-button color="grey">pending...</button>
+          <button mat-flat-button color="grey">{{'pending...'| translate}}</button>
         </ng-container>
       </ng-template>
       <ng-template #third>
-        <button mat-flat-button color="primary">pay</button>
+        <button mat-flat-button color="primary">{{'pay'| translate}}</button>
       </ng-template>
 <!--      <div ngIf(!(ticket.order.isChecked))>-->
 <!--        <button mat-flat-button color="primary">pending</button>-->

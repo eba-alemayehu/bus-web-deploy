@@ -14,6 +14,7 @@ import {TripDriverOrAssistantAddFormModule} from '../../trip/forms/trip-driver-o
 import {TripDriverOrAssistantAddDialogModule} from '../../trip/dialog/trip-driver-or-assistant-add-dialog/trip-driver-or-assistant-add-dialog.module';
 import {CarPlateModule} from '../../bus/component/bus-tumb/car-plate/car-plate.module';
 import {ShimmerModule} from '../../common/shimmer/shimmer.module';
+import {LangModule} from '../../../lang.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {ShimmerModule} from '../../common/shimmer/shimmer.module';
         TripDriverOrAssistantAddFormModule,
         TripDriverOrAssistantAddDialogModule,
         CarPlateModule,
-        ShimmerModule
+        ShimmerModule,
+        LangModule
     ]
 })
 export class BusModule { }

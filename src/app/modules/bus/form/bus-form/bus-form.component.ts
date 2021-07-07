@@ -4,6 +4,8 @@ import {BusMutationGQL, BusSeatConfigurationsGQL} from '../../../../generated/gr
 import {map} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
 import { Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-bus-form',
@@ -23,7 +25,9 @@ export class BusFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: Router,
     private busSeatConfigurationsGQL: BusSeatConfigurationsGQL,
-    private busMutation: BusMutationGQL) {
+    private busMutation: BusMutationGQL,
+    translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
     this.busSeatConfigurations$ = busSeatConfigurationsGQL
       .watch({}).valueChanges
       .pipe(map((response) => response.data.busSeatConfigurations.edges));

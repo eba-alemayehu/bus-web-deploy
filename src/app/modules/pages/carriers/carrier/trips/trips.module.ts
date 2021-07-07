@@ -12,20 +12,22 @@ import {TripDialogModule} from '../../../../trip/dialog/trip-dialog/trip-dialog.
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
+import {LangModule} from '../../../../../lang.module';
 
 
 @NgModule({
   declarations: [TripsComponent],
-  imports: [
-    CommonModule,
-    TripsRoutingModule,
-    TripListModule,
-    FlexModule,
-    MatButtonModule,
-    TripFormModule,
-    TripDialogModule,
-    MatIconModule
-  ],
+    imports: [
+        CommonModule,
+        TripsRoutingModule,
+        TripListModule,
+        FlexModule,
+        MatButtonModule,
+        TripFormModule,
+        TripDialogModule,
+        MatIconModule,
+        LangModule
+    ],
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,

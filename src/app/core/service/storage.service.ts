@@ -22,4 +22,10 @@ export class StorageService {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
   }
+  setLanguage(lang: string): void{
+    localStorage.setItem('lang', lang);
+  }
+  getLanguage(lang: string): string{
+    return localStorage.getItem('lang');
+  }
 }

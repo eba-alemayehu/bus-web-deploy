@@ -1,7 +1,7 @@
 <mat-form-field class="example-full-width" fxFill>
   <mat-label>Number</mat-label>
   <input type="text"
-         placeholder="Pick one"
+         [placeholder]="'Pick one'| translate"
          aria-label="Number"
          matInput
          [formControl]="searchInputControl"

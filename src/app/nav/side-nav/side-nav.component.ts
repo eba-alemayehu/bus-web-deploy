@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {StorageService} from '../../core/service/storage.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-side-nav',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  constructor(    translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
+  }
 
   ngOnInit(): void {
   }

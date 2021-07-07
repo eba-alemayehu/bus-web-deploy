@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BusNode, BusNodeEdge} from '../../../../generated/graphql';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-bus-tumb',
@@ -12,7 +14,9 @@ export class BusTumbComponent implements OnInit {
   @Input() add = false;
   @Input() loading = false;
 
-  constructor() { }
+  constructor(translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
+  }
 
   ngOnInit(): void {
   }

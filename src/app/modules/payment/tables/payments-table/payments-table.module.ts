@@ -6,19 +6,21 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {LangModule} from '../../../../lang.module';
 
 
 
 @NgModule({
   declarations: [PaymentsTableComponent],
   exports: [PaymentsTableComponent],
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatSortModule,
-    MatIconModule,
-    MatButtonModule,
-    MatPaginatorModule
-  ]
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatSortModule,
+        MatIconModule,
+        MatButtonModule,
+        MatPaginatorModule,
+        LangModule
+    ]
 })
 export class PaymentsTableModule { }

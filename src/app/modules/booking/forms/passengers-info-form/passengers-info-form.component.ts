@@ -4,6 +4,8 @@ import {echo} from '../../../../util/print';
 import {BookTicketGQL, BookTicketMutation} from '../../../../generated/mutation/graphql';
 import {MatDialog} from "@angular/material/dialog";
 import {PassengerInfoPreviewComponent} from "../../passenger-info-preview/passenger-info-preview.component";
+import {StorageService} from '../../../../core/service/storage.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-passengers-info-form',
@@ -23,7 +25,9 @@ export class PassengersInfoFormComponent implements OnInit {
 
   @Input() trip;
 
-  constructor(private formBuilder: FormBuilder, private bookTicketMutation: BookTicketGQL) {
+  constructor(private formBuilder: FormBuilder, private bookTicketMutation: BookTicketGQL,
+              translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
     this.passengerInfoFormGroup = this.formBuilder.group({
       passengers: this.formBuilder.array([])
     });

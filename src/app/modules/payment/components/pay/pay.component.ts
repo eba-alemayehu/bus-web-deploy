@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {echo} from '../../../../util/print';
 import {PaymentConfirmationRequestGQL} from '../../../../generated/mutation/graphql';
 import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-pay',
@@ -17,7 +19,10 @@ export class PayComponent implements OnInit {
     transactionId: ['', Validators.required],
   });
   // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, private router: Router, private paymentConfirmationRequestMutation: PaymentConfirmationRequestGQL ) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private paymentConfirmationRequestMutation: PaymentConfirmationRequestGQL,
+              translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
+  }
 
   ngOnInit(): void {
     this.close.emit(false);

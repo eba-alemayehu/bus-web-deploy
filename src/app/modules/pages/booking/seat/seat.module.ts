@@ -7,17 +7,19 @@ import {BusSeatConfigurationModule} from '../../../bus/component/bus-seat-config
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@angular/flex-layout';
+import {LangModule} from '../../../../lang.module';
 
 
 @NgModule({
   declarations: [SeatComponent],
-  imports: [
-    CommonModule,
-    SeatRoutingModule,
-    BusSeatConfigurationModule,
-    MatCardModule,
-    MatButtonModule,
-    FlexModule
-  ]
+    imports: [
+        CommonModule,
+        SeatRoutingModule,
+        BusSeatConfigurationModule,
+        MatCardModule,
+        MatButtonModule,
+        FlexModule,
+        LangModule
+    ]
 })
 export class SeatModule { }

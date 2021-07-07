@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {FlexModule} from '@angular/flex-layout';
 import {UserTumbModule} from '../../component/user-tumb/user-tumb.module';
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -15,14 +16,15 @@ import {UserTumbModule} from '../../component/user-tumb/user-tumb.module';
     exports: [
         UserSearchFormComponent
     ],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    FlexModule,
-    UserTumbModule
-  ]
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        FlexModule,
+        UserTumbModule,
+        LangModule
+    ]
 })
 export class UserSearchFormModule { }
