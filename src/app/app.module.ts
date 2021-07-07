@@ -22,6 +22,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsModule} from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { LangModule } from './lang.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
     TopNavModule,
     NgxsModule.forRoot([]),
     NgxsLoggerPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot()
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    LangModule
   ],
   bootstrap: [AppComponent],
   providers: [
