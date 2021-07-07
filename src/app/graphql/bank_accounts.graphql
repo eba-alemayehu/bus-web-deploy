@@ -3,8 +3,10 @@ query BankAccounts{
         edges{
             node{
                 id
-                bankName
-                bankLogo
+                bank{
+                  name
+                  logo
+                }
                 accountName
                 accountNumber
               accountName

@@ -1,8 +1,11 @@
+<h1 style="text-align: center">Bus</h1>
 <mat-card style="margin-top: 2em">
   <div fxLayout="column">
     <div fxLayout="row" style="justify-content: space-around; margin-bottom: 1em">
-      <b>Bus number: {{bus?.busNumber}}<app-custom-shimmer width="80" height="20" *ngIf="!bus?.busNumber"></app-custom-shimmer></b>
-      <b>Plate number: {{bus?.plateNumber}}<app-custom-shimmer width="80" height="20" *ngIf="!bus?.busNumber"></app-custom-shimmer></b>
+      <span>Bus number: <b>{{bus?.busNumber}}</b></span>
+      <b>
+        <app-car-plate [plateNumber]="bus?.plateNumber"></app-car-plate>
+      </b>
     </div>
     <div fxLayout="row" style="justify-content: space-around">
       <mat-card style="background: #efefef;">
@@ -20,7 +23,10 @@
         <h3 matSubheader>Drivers</h3>
         <div fxLayout="row" *ngFor="let user of bus?.drivers.edges">
           <app-user-tumb [user]="user.node"></app-user-tumb>
-          <button mat-button color="warn" (click)="removeDriver(user.node)"><mat-icon>remove</mat-icon>Remove</button>
+          <button mat-button color="warn" (click)="removeDriver(user.node)">
+            <mat-icon>remove</mat-icon>
+            Remove
+          </button>
         </div>
 
         <div fxLayout="row">
@@ -34,7 +40,10 @@
           <app-user-tumb [user]="user.node"></app-user-tumb>
           <div fxLayout="row">
             <span class="spacer"></span>
-            <button mat-button color="warn" (click)="removeAssistant(user.node)"><mat-icon>remove</mat-icon>Remove</button>
+            <button mat-button color="warn" (click)="removeAssistant(user.node)">
+              <mat-icon>remove</mat-icon>
+              Remove
+            </button>
           </div>
         </div>
         <div fxLayout="row">

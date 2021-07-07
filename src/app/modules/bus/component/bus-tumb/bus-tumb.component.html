@@ -1,24 +1,20 @@
-<div *ngIf="!add" [fxLayout]="row? 'row': 'column'" style="align-items: center">
+<div *ngIf="!add && !loading" [fxLayout]="row? 'row': 'column'" style="align-items: center; padding: .5em 1em">
   <img src="/assets/bus.svg" alt="" style="width: 70px">
-  <div fxLayout="column" [style.margin-left]="row? '2em': '0'">
-    <span>{{bus.busNumber}}</span>
-    <span>{{bus.plateNumber}}</span>
+  <div fxLayout="column" [style.margin-left]="row? '2em': '0'" style="text-align: center">
+    <span style="font-weight: 600;font-size: 1.3em; margin-bottom: .5em">{{bus.busNumber}}</span>
+    <app-car-plate [plateNumber]="bus.plateNumber"></app-car-plate>
   </div>
 </div>
-<div *ngIf="add" fxLayout="column">
+<div *ngIf="add && !loading" fxLayout="column">
   <img src="/assets/add.svg" width="70px"/>
   <span>Add bus</span>
 </div>
 
 
-<!--<div *ngIf="!add" [fxLayout]="row? 'row': 'column'" style="align-items: center">-->
-<!--  <app-custom-shimmer width="70" height="70"></app-custom-shimmer>-->
-<!--  <div fxLayout="column" [style.margin-left]="row? '2em': '0'">-->
-<!--    <app-custom-shimmer width="70" height="16"></app-custom-shimmer>-->
-<!--    <app-custom-shimmer width="70" height="16"></app-custom-shimmer>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<div *ngIf="add" fxLayout="column">-->
-<!--  <app-custom-shimmer width="70" height="70" circle="true"></app-custom-shimmer>-->
-<!--  <app-custom-shimmer width="70" height="16"></app-custom-shimmer>-->
-<!--</div>-->
+<div *ngIf="!add && loading" [fxLayout]="row? 'row': 'column'" style="align-items: center">
+  <app-custom-shimmer width="70" height="70"></app-custom-shimmer>
+  <div fxLayout="column" [style.margin-left]="row? '2em': '0'">
+    <app-custom-shimmer width="70" height="16"></app-custom-shimmer>
+    <app-custom-shimmer width="70" height="16"></app-custom-shimmer>
+  </div>
+</div>

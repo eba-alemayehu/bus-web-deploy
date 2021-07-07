@@ -12,6 +12,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {TripDriverOrAssistantAddFormModule} from '../../trip/forms/trip-driver-or-assistant-add-form/trip-driver-or-assistant-add-form.module';
 import {TripDriverOrAssistantAddDialogModule} from '../../trip/dialog/trip-driver-or-assistant-add-dialog/trip-driver-or-assistant-add-dialog.module';
+import {CarPlateModule} from '../../bus/component/bus-tumb/car-plate/car-plate.module';
 import {ShimmerModule} from '../../common/shimmer/shimmer.module';
 
 
@@ -29,6 +30,7 @@ import {ShimmerModule} from '../../common/shimmer/shimmer.module';
         MatIconModule,
         TripDriverOrAssistantAddFormModule,
         TripDriverOrAssistantAddDialogModule,
+        CarPlateModule,
         ShimmerModule
     ]
 })

@@ -1,0 +1,26 @@
+mutation ValidatePayment($input: ValidatePaymentMutationInput!){
+  validatePayment(input: $input){
+    paymentOrder{
+      id
+      transactionId
+      price
+      isChecked
+      verifiedAt
+      verification
+      bankAccount{
+        id
+        bank{
+          name
+          logo
+        }
+      }
+      verifiedAt
+      verifiedBy{
+        id
+        firstName
+        lastName
+      }
+      createdAt
+    }
+  }
+}
