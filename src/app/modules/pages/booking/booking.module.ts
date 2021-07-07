@@ -9,6 +9,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {PayDialogModule} from '../../payment/dialogs/pay-dialog/pay-dialog.module';
 import {LangModule} from '../../../lang.module';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {LangModule} from '../../../lang.module';
         MatButtonModule,
         PayDialogModule,
         FlexModule,
-        LangModule
+        LangModule,
+        MatProgressSpinnerModule
     ]
 })
 export class BookingModule { }

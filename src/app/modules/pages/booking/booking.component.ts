@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TripGQL} from '../../../generated/graphql';
 import {echo} from '../../../util/print';
 import {BookTicketGQL} from '../../../generated/mutation/graphql';
@@ -18,9 +18,17 @@ export class BookingComponent implements OnInit {
   passengerInfo: any;
   public trip = null;
   bookingOrder: any;
+  booking = false;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private bookTicketGQL: BookTicketGQL, public dialog: MatDialog,           translate: TranslateService , private storage: StorageService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private tripGQL: TripGQL,
+    private bookTicketGQL: BookTicketGQL,
+    public dialog: MatDialog,
+    private router: Router,
+    translate: TranslateService ,
+    private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
     this.activatedRoute.params.subscribe(
       (params) => {
@@ -44,9 +52,7 @@ export class BookingComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    return dialogRef;
   }
 
   ngOnInit(): void {
@@ -59,17 +65,21 @@ export class BookingComponent implements OnInit {
       e.lastName = name[1];
       return e;
     });
-    echo(this.passengerInfo);
-    echo(this.selectedSeats);
-    this.bookTicketGQL.mutate({
-      input: {
-        trip: this.trip.id,
-        passengers: JSON.stringify(this.passengerInfo),
-      }
-    }).subscribe(
-      (data) => {
-        this.bookingOrder = data.data.bookTicket.order.id;
-        this.openDialog();
+    this.openDialog().afterClosed().subscribe(
+      () => {
+        this.booking = true;
+        this.bookTicketGQL.mutate({
+          input: {
+            trip: this.trip.id,
+            passengers: JSON.stringify(this.passengerInfo),
+          }
+        }).subscribe(
+          (data) => {
+            this.booking = false;
+            this.bookingOrder = data.data.bookTicket.order.id;
+            this.router.navigate(['booking/payment/' + this.bookingOrder]);
+          }
+        );
       }
     );
   }

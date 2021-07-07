@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import moment from 'moment';
+import {echo} from '../../../../../util/print';
 
 @Component({
   selector: 'app-weak-date',
@@ -7,25 +8,27 @@ import moment from 'moment';
   styleUrls: ['./weak-date.component.scss']
 })
 export class WeakDateComponent implements OnInit {
+  days = [];
+
   constructor() { }
 
-  getWeakDays = (length: number) => {
-    const days = [];
-    for (let i = 0; i < length; i++){
-      days.push({
+  getWeakDays = (length: number = 5 ) => {
+    for (let i = 0; i < length; i++) {
+      this.days.push({
         day: moment().add(i, 'days').format('dddd').slice(0, 3).toUpperCase(),
         dateNum: moment().add(i, 'days').format('Do'),
         date: moment().add(i, 'days').toDate(),
       });
     }
-    return days;
   }
 
-   changeDepartureDate = () => {
-    console.log('it works');
+   changeDepartureDate = (selectedDate, $event) => {
+     $event.preventDefault();
+     echo(selectedDate);
   }
 
   ngOnInit(): void {
+    this.getWeakDays();
   }
 
 }

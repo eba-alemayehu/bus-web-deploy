@@ -55,7 +55,8 @@ export class BusSeatConfigurationComponent implements OnInit {
           seats.forEach(
             (seat) => {
               if (seat.isLockedByMe && !seat.isBookedByMe) {
-                this.selectedBusSeatConfigurationSeats.push(seat);
+                this.selectedBusSeatConfigurationSeats.push(seat.busSeatConfigurationSeat);
+                this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
               }
             });
         })
@@ -172,6 +173,8 @@ export class BusSeatConfigurationComponent implements OnInit {
       .subscribe((response) => {
         this.loading = this.loading.filter(e => e !== seat.busSeatConfigurationSeat.id);
         if (response.errors == null) {
+          this.selectedBusSeatConfigurationSeats.push(response.data.reserveTicket.ticket.busSeatConfigurationSeat);
+          this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
           this.updateSeatStatus(response);
         }
       });
