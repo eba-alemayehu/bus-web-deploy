@@ -10,6 +10,9 @@ import {TripFormModule} from '../../trip/forms/trip-form/trip-form.module';
 import {TripModule} from "../../trip/trip.module";
 import {NgxShimmerLoadingModule} from "ngx-shimmer-loading";
 import {ShimmerModule} from "../../common/shimmer/shimmer.module";
+import {RouteModule} from "../../trip/components/route/route.module";
+import {RouteListModule} from "../../trip/lists/route-list/route-list.module";
+import {CarrierListModule} from "../../carrier/lists/carrier-list.module";
 
 @NgModule({
   declarations: [HomeComponent],
@@ -23,6 +26,9 @@ import {ShimmerModule} from "../../common/shimmer/shimmer.module";
         TripModule,
         NgxShimmerLoadingModule,
         ShimmerModule,
+        RouteModule,
+        RouteListModule,
+        CarrierListModule,
     ]
 })
 export class HomeModule { }

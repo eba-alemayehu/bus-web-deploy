@@ -11,6 +11,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import {ShimmerModule} from '../common/shimmer/shimmer.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 // tslint:disable-next-line:typedef
@@ -33,7 +36,10 @@ export function playerFactory() {
         MatIconModule,
         MatDividerModule,
         [LottieModule.forRoot({player: playerFactory})],
-        ShimmerModule
+        ShimmerModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
     ]
 })
 export class TripModule { }

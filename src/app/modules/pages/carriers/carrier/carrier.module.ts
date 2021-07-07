@@ -6,6 +6,8 @@ import { CarrierComponent } from './carrier.component';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
+import {MainStatModule} from '../../../carrier/component/dashboard/main-stat/main-stat.module';
+import {TripsTableModule} from '../../../trip/tables/trips-table/trips-table.module';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
     CarrierRoutingModule,
     FlexModule,
     MatCardModule,
-    ShimmerModule
+    ShimmerModule,
+    MainStatModule,
+    TripsTableModule
   ]
 })
 export class CarrierModule { }

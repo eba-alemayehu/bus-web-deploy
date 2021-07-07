@@ -3221,6 +3221,32 @@ export type RefreshTokenMutation = (
   )> }
 );
 
+export type RoutesQueryVariables = Exact<{
+  order?: Maybe<Scalars['String']>;
+}>;
+
+
+export type RoutesQuery = (
+  { __typename?: 'Query' }
+  & { routes?: Maybe<(
+    { __typename?: 'RouteNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'RouteNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'RouteNode' }
+        & Pick<RouteNode, 'id' | 'distance'>
+        & { leavingFrom: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+        ), destination: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name' | 'nameAm' | 'nameOr' | 'nameTg'>
+        ) }
+      )> }
+    )>> }
+  )> }
+);
+
 export type TicketMuationMutationVariables = Exact<{
   input: BookTicketMutationInput;
 }>;
@@ -4319,6 +4345,43 @@ export const RefreshTokenDocument = gql`
   })
   export class RefreshTokenGQL extends Apollo.Mutation<RefreshTokenMutation, RefreshTokenMutationVariables> {
     document = RefreshTokenDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RoutesDocument = gql`
+    query Routes($order: String) {
+  routes(order: $order) {
+    edges {
+      node {
+        id
+        distance
+        leavingFrom {
+          id
+          name
+          nameAm
+          nameOr
+          nameTg
+        }
+        destination {
+          id
+          name
+          nameAm
+          nameOr
+          nameTg
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RoutesGQL extends Apollo.Query<RoutesQuery, RoutesQueryVariables> {
+    document = RoutesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
