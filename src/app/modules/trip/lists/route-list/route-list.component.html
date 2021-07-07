@@ -1,0 +1,5 @@
+<div fxLayout="row" class="route-list" style="justify-content: center">
+  <mat-card *ngFor="let route of routes$ | async" class="route-card">
+    <app-route [route]="route"></app-route>
+  </mat-card>
+</div>
