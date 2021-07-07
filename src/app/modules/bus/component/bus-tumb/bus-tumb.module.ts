@@ -15,12 +15,8 @@ import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
   imports: [
     CommonModule,
     FlexModule,
-    CarPlateModule
+    CarPlateModule,
+    ShimmerModule
   ]
-    imports: [
-        CommonModule,
-        FlexModule,
-        ShimmerModule
-    ]
 })
 export class BusTumbModule { }

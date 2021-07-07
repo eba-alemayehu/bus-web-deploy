@@ -10,12 +10,13 @@ import {CarrierGQL} from '../../../../../generated/graphql';
 })
 export class BusesComponent implements OnInit {
   carrier;
-
+  carrierId;
   constructor(private activatedRoute: ActivatedRoute, private carrierGQL: CarrierGQL, private router: Router) {
     this.activatedRoute.params.subscribe(
       (params) => {
+        this.carrierId = params.id;
         this.carrierGQL
-          .watch({id: params.id, getTrips: true}).valueChanges
+          .watch({id: this.carrierId, getTrips: false}).valueChanges
           .pipe(map((response) => response.data.carrier))
           .subscribe(
             (carrier) => this.carrier = carrier

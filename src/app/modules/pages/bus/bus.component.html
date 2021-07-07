@@ -1,7 +1,8 @@
+<h1 style="text-align: center">Bus</h1>
 <mat-card style="margin-top: 2em">
   <div fxLayout="column">
     <div fxLayout="row" style="justify-content: space-around; margin-bottom: 1em">
-      <b>Bus number: {{bus?.busNumber}} </b>
+      <span>Bus number: <b>{{bus?.busNumber}}</b></span>
       <b>
         <app-car-plate [plateNumber]="bus?.plateNumber"></app-car-plate>
       </b>

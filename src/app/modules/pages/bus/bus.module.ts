@@ -12,7 +12,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {TripDriverOrAssistantAddFormModule} from '../../trip/forms/trip-driver-or-assistant-add-form/trip-driver-or-assistant-add-form.module';
 import {TripDriverOrAssistantAddDialogModule} from '../../trip/dialog/trip-driver-or-assistant-add-dialog/trip-driver-or-assistant-add-dialog.module';
-import {CarPlateModule} from "../../bus/component/bus-tumb/car-plate/car-plate.module";
+import {CarPlateModule} from '../../bus/component/bus-tumb/car-plate/car-plate.module';
+import {ShimmerModule} from '../../common/shimmer/shimmer.module';
 
 
 @NgModule({
@@ -29,20 +30,7 @@ import {CarPlateModule} from "../../bus/component/bus-tumb/car-plate/car-plate.m
         MatIconModule,
         TripDriverOrAssistantAddFormModule,
         TripDriverOrAssistantAddDialogModule,
-        CarPlateModule
-    ]
-    imports: [
-        CommonModule,
-        BusRoutingModule,
-        FlexModule,
-        MatCardModule,
-        BusSeatConfigurationModule,
-        MatButtonModule,
-        UserTumbModule,
-        MatListModule,
-        MatIconModule,
-        TripDriverOrAssistantAddFormModule,
-        TripDriverOrAssistantAddDialogModule,
+        CarPlateModule,
         ShimmerModule
     ]
 })

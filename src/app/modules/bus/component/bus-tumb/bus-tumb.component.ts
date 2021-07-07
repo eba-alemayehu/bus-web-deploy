@@ -10,6 +10,7 @@ export class BusTumbComponent implements OnInit {
   @Input() bus: BusNode| any;
   @Input() row = false;
   @Input() add = false;
+  @Input() loading = false;
 
   constructor() { }
 

@@ -1,0 +1,14 @@
+#container{
+  width: 75%;
+  margin:auto;
+}
+#container ul>li{
+  width: 25%
+}
+
+
+@media (max-width: 768px){
+  #container{
+    width: 95%;
+  }
+}

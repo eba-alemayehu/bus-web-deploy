@@ -37,10 +37,10 @@ export type BankAccountNode = Node & {
   __typename?: 'BankAccountNode';
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
-  bankName: Scalars['String'];
+  bank: BankNode;
   accountName: Scalars['String'];
   accountNumber: Scalars['String'];
-  bankLogo?: Maybe<Scalars['String']>;
+  carrier: CarrierNode;
   paymentorderSet: PaymentOrderNodeConnection;
 };
 
@@ -51,6 +51,13 @@ export type BankAccountNodePaymentorderSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  orderedBy?: Maybe<Scalars['ID']>;
+  transactionId?: Maybe<Scalars['String']>;
+  bankAccount?: Maybe<Scalars['ID']>;
+  verifiedBy?: Maybe<Scalars['ID']>;
+  verification?: Maybe<Scalars['Boolean']>;
+  isChecked?: Maybe<Scalars['Boolean']>;
+  bankAccount_Carrier?: Maybe<Scalars['ID']>;
 };
 
 export type BankAccountNodeConnection = {
@@ -63,6 +70,25 @@ export type BankAccountNodeEdge = {
   __typename?: 'BankAccountNodeEdge';
   node?: Maybe<BankAccountNode>;
   cursor: Scalars['String'];
+};
+
+export type BankNode = Node & {
+  __typename?: 'BankNode';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  name: Scalars['String'];
+  logo?: Maybe<Scalars['String']>;
+  bankaccountSet: BankAccountNodeConnection;
+};
+
+
+export type BankNodeBankaccountSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 export type BoardPassengerMutationInput = {
@@ -123,6 +149,7 @@ export type BusNode = Node & {
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
   plateNumber: Scalars['String'];
+  plateCode: Scalars['String'];
   busNumber: Scalars['String'];
   carrier: CarrierNode;
   busSeatConfiguration: BusSeatConfigurationNode;
@@ -381,6 +408,7 @@ export type BusUserNode = Node & {
   drivers: BusNodeConnection;
   assistants: BusNodeConnection;
   tripSet: TripNodeConnection;
+  triplocationSet: TripLocationNodeConnection;
   orderedBy: PaymentOrderNodeConnection;
   paymentorderSet: PaymentOrderNodeConnection;
   ticketSet: TicketNodeConnection;
@@ -480,12 +508,29 @@ export type BusUserNodeTripSetArgs = {
 };
 
 
+export type BusUserNodeTriplocationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+};
+
+
 export type BusUserNodeOrderedByArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  orderedBy?: Maybe<Scalars['ID']>;
+  transactionId?: Maybe<Scalars['String']>;
+  bankAccount?: Maybe<Scalars['ID']>;
+  verifiedBy?: Maybe<Scalars['ID']>;
+  verification?: Maybe<Scalars['Boolean']>;
+  isChecked?: Maybe<Scalars['Boolean']>;
+  bankAccount_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -495,6 +540,13 @@ export type BusUserNodePaymentorderSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  orderedBy?: Maybe<Scalars['ID']>;
+  transactionId?: Maybe<Scalars['String']>;
+  bankAccount?: Maybe<Scalars['ID']>;
+  verifiedBy?: Maybe<Scalars['ID']>;
+  verification?: Maybe<Scalars['Boolean']>;
+  isChecked?: Maybe<Scalars['Boolean']>;
+  bankAccount_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -613,6 +665,7 @@ export type CarrierNode = Node & {
   routeSet: RouteNodeConnection;
   routepriceSet: RoutePriceNodeConnection;
   tripSet: TripNodeConnection;
+  bankaccountSet: BankAccountNodeConnection;
 };
 
 
@@ -727,6 +780,16 @@ export type CarrierNodeTripSetArgs = {
   route_Routeprice_Price?: Maybe<Scalars['Float']>;
   route_Routeprice_Price_Lte?: Maybe<Scalars['Float']>;
   route_Routeprice_Price_Gte?: Maybe<Scalars['Float']>;
+};
+
+
+export type CarrierNodeBankaccountSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 export type CarrierNodeConnection = {
@@ -946,6 +1009,17 @@ export type DeleteAccountPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type EbaTripMutationInput = {
+  trip: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type EbaTripMutationPayload = {
+  __typename?: 'EbaTripMutationPayload';
+  trip?: Maybe<TripNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 
 
 export type Mutation = {
@@ -953,6 +1027,9 @@ export type Mutation = {
   trip?: Maybe<TripMutationPayload>;
   changeTripBus?: Maybe<ChangeTripBusMutationPayload>;
   cancelTrip?: Maybe<CancelTripMutationPayload>;
+  startTrip?: Maybe<StartTripMutationPayload>;
+  endTrip?: Maybe<EbaTripMutationPayload>;
+  tripLocation?: Maybe<TripLocationMutationPayload>;
   bookTicket?: Maybe<BookTicketMutationPayload>;
   reserveTicket?: Maybe<ReserveTicketMutationPayload>;
   cancelTicket?: Maybe<CancelTicketMutationPayload>;
@@ -1003,6 +1080,21 @@ export type MutationChangeTripBusArgs = {
 
 export type MutationCancelTripArgs = {
   input: CancelTripMutationInput;
+};
+
+
+export type MutationStartTripArgs = {
+  input: StartTripMutationInput;
+};
+
+
+export type MutationEndTripArgs = {
+  input: EbaTripMutationInput;
+};
+
+
+export type MutationTripLocationArgs = {
+  input: TripLocationMutationInput;
 };
 
 
@@ -1510,6 +1602,7 @@ export type QueryBankAccountsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1524,6 +1617,13 @@ export type QueryPaymentOrdersArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  orderedBy?: Maybe<Scalars['ID']>;
+  transactionId?: Maybe<Scalars['String']>;
+  bankAccount?: Maybe<Scalars['ID']>;
+  verifiedBy?: Maybe<Scalars['ID']>;
+  verification?: Maybe<Scalars['Boolean']>;
+  isChecked?: Maybe<Scalars['Boolean']>;
+  bankAccount_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1961,6 +2061,17 @@ export type SendVerificationCodeMutationPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type StartTripMutationInput = {
+  trip: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type StartTripMutationPayload = {
+  __typename?: 'StartTripMutationPayload';
+  trip?: Maybe<TripNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type SwapEmailsInput = {
   clientMutationId?: Maybe<Scalars['String']>;
   password: Scalars['String'];
@@ -2012,6 +2123,43 @@ export enum TicketState {
   Declined = 'DECLINED'
 }
 
+export type TripLocationMutationInput = {
+  trip: Scalars['ID'];
+  time: Scalars['DateTime'];
+  lat: Scalars['Decimal'];
+  long: Scalars['Decimal'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type TripLocationMutationPayload = {
+  __typename?: 'TripLocationMutationPayload';
+  tripLocation?: Maybe<TripLocationNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type TripLocationNode = Node & {
+  __typename?: 'TripLocationNode';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  time: Scalars['DateTime'];
+  lat: Scalars['Decimal'];
+  long: Scalars['Decimal'];
+  trip: TripNode;
+  user: BusUserNode;
+};
+
+export type TripLocationNodeConnection = {
+  __typename?: 'TripLocationNodeConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<TripLocationNodeEdge>>;
+};
+
+export type TripLocationNodeEdge = {
+  __typename?: 'TripLocationNodeEdge';
+  node?: Maybe<TripLocationNode>;
+  cursor: Scalars['String'];
+};
+
 export type TripMutationInput = {
   id?: Maybe<Scalars['ID']>;
   route?: Maybe<Scalars['ID']>;
@@ -2045,9 +2193,22 @@ export type TripNode = Node & {
   arrivalTime: Scalars['DateTime'];
   bulkRef?: Maybe<Scalars['String']>;
   canceledBy?: Maybe<BusUserNode>;
+  startedAt?: Maybe<Scalars['DateTime']>;
+  endedAt?: Maybe<Scalars['DateTime']>;
+  triplocationSet: TripLocationNodeConnection;
   ticketSet: TicketNodeConnection;
   price?: Maybe<Scalars['Decimal']>;
   seats?: Maybe<Array<Maybe<TripSeatType>>>;
+};
+
+
+export type TripNodeTriplocationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
 };
 
 
@@ -2172,6 +2333,7 @@ export type UserNode = Node & {
   drivers: BusNodeConnection;
   assistants: BusNodeConnection;
   tripSet: TripNodeConnection;
+  triplocationSet: TripLocationNodeConnection;
   orderedBy: PaymentOrderNodeConnection;
   paymentorderSet: PaymentOrderNodeConnection;
   ticketSet: TicketNodeConnection;
@@ -2271,12 +2433,29 @@ export type UserNodeTripSetArgs = {
 };
 
 
+export type UserNodeTriplocationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+};
+
+
 export type UserNodeOrderedByArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  orderedBy?: Maybe<Scalars['ID']>;
+  transactionId?: Maybe<Scalars['String']>;
+  bankAccount?: Maybe<Scalars['ID']>;
+  verifiedBy?: Maybe<Scalars['ID']>;
+  verification?: Maybe<Scalars['Boolean']>;
+  isChecked?: Maybe<Scalars['Boolean']>;
+  bankAccount_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -2286,6 +2465,13 @@ export type UserNodePaymentorderSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  orderedBy?: Maybe<Scalars['ID']>;
+  transactionId?: Maybe<Scalars['String']>;
+  bankAccount?: Maybe<Scalars['ID']>;
+  verifiedBy?: Maybe<Scalars['ID']>;
+  verification?: Maybe<Scalars['Boolean']>;
+  isChecked?: Maybe<Scalars['Boolean']>;
+  bankAccount_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -2806,6 +2992,33 @@ export type TripMutation = (
       { __typename?: 'TripNode' }
       & Pick<TripNode, 'id' | 'departureTime'>
     )>>> }
+  )> }
+);
+
+export type ValidatePaymentMutationVariables = Exact<{
+  input: ValidatePaymentMutationInput;
+}>;
+
+
+export type ValidatePaymentMutation = (
+  { __typename?: 'Mutation' }
+  & { validatePayment?: Maybe<(
+    { __typename?: 'ValidatePaymentMutationPayload' }
+    & { paymentOrder?: Maybe<(
+      { __typename?: 'PaymentOrderNode' }
+      & Pick<PaymentOrderNode, 'id' | 'transactionId' | 'price' | 'isChecked' | 'verifiedAt' | 'verification' | 'createdAt'>
+      & { bankAccount?: Maybe<(
+        { __typename?: 'BankAccountNode' }
+        & Pick<BankAccountNode, 'id'>
+        & { bank: (
+          { __typename?: 'BankNode' }
+          & Pick<BankNode, 'name' | 'logo'>
+        ) }
+      )>, verifiedBy?: Maybe<(
+        { __typename?: 'BusUserNode' }
+        & Pick<BusUserNode, 'id' | 'firstName' | 'lastName'>
+      )> }
+    )> }
   )> }
 );
 
@@ -3376,6 +3589,45 @@ export const TripDocument = gql`
   })
   export class TripGQL extends Apollo.Mutation<TripMutation, TripMutationVariables> {
     document = TripDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ValidatePaymentDocument = gql`
+    mutation ValidatePayment($input: ValidatePaymentMutationInput!) {
+  validatePayment(input: $input) {
+    paymentOrder {
+      id
+      transactionId
+      price
+      isChecked
+      verifiedAt
+      verification
+      bankAccount {
+        id
+        bank {
+          name
+          logo
+        }
+      }
+      verifiedAt
+      verifiedBy {
+        id
+        firstName
+        lastName
+      }
+      createdAt
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ValidatePaymentGQL extends Apollo.Mutation<ValidatePaymentMutation, ValidatePaymentMutationVariables> {
+    document = ValidatePaymentDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

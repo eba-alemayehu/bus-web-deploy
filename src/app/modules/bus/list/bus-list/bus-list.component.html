@@ -5,6 +5,18 @@
   >
     <app-bus-tumb [bus]="bus.node"></app-bus-tumb>
   </mat-card>
+  <mat-card style="margin: .5em 1.5em" routerLink="form" *ngIf="!loading">
+    <app-bus-tumb [add]="true"></app-bus-tumb>
+  </mat-card>
+</div>
+
+<div fxLayout="row-wrap" *ngIf="loading" style="justify-content: center;flex-flow: wrap">
+  <mat-card
+    style="margin: .5em 1.5em" *ngFor="let bus of [1, 2, 3, 4, 5]"
+    (click)="_selected(bus.node)"
+  >
+    <app-bus-tumb [loading]="loading"></app-bus-tumb>
+  </mat-card>
   <mat-card style="margin: .5em 1.5em" routerLink="form">
     <app-bus-tumb [add]="true"></app-bus-tumb>
   </mat-card>

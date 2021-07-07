@@ -1,0 +1,28 @@
+query PaymentOrders($bankAccount_Carrier: ID, $isChecked: Boolean, $verified: Boolean){
+  paymentOrders (isChecked: $isChecked, verification:  $verified, bankAccount_Carrier: $bankAccount_Carrier){
+    edges{
+      node{
+        id
+        transactionId
+        verifiedAt
+        price
+        verification
+        createdAt
+        isChecked
+        bankAccount{
+          id
+          bank{
+            name
+            logo
+          }
+        }
+        orderedBy{
+          id
+          firstName
+          lastName
+
+        }
+      }
+    }
+  }
+}
