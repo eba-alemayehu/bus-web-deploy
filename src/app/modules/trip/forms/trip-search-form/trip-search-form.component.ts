@@ -5,6 +5,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map, shareReplay} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
 import {CitiesGQL} from '../../../../generated/graphql';
+import moment from 'moment';
 
 @Component({
   selector: 'app-trip-search-form',
@@ -15,6 +16,7 @@ export class TripSearchFormComponent implements OnInit {
   @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
   @Output() formChanged: EventEmitter<any> = new EventEmitter<any>();
   @Input() layout = 'column';
+  todayDate = new Date();
 
   @Input('input') set input(value) {
     this.tripFomGroup.patchValue(value);
@@ -28,6 +30,7 @@ export class TripSearchFormComponent implements OnInit {
     destination: ['', Validators.required],
     roundTrip: [false],
     departureDate: ['', Validators.required],
+    returnDate: ['', ],
     roundTripDepartureDate: ['',  Validators.required],
   });
   passengers = 1;
@@ -41,6 +44,8 @@ export class TripSearchFormComponent implements OnInit {
 
   leavingFromCity = null;
   destinationCity = null;
+
+  days = [];
 
   allLeavingFromCity = [];
   allDestinationCity = [];
@@ -70,15 +75,31 @@ export class TripSearchFormComponent implements OnInit {
       }
     );
     this.tripFomGroup.valueChanges.subscribe((value) => this.formChanged.emit(value));
+
+    this.getWeakDays();
   }
 
-  changeWeakDate(date: Date): void {
-    this.tripFomGroup.controls.departureDate.setValue(new Date(date).toISOString());
+  getWeakDays = (length: number = 5 ) => {
+    for (let i = 0; i < length; i++) {
+      this.days.push({
+        day: moment().add(i, 'days').format('dddd').slice(0, 3).toUpperCase(),
+        dateNum: moment().add(i, 'days').format('Do'),
+        date: moment().add(i, 'days').toDate(),
+      });
+    }
+  }
+
+  changeDepartureDate = (selectedDate, $event) => {
+    $event.preventDefault();
+    this.tripFomGroup.controls.departureDate.setValue(selectedDate);
   }
 
   _submit(): void {
     const input = this.tripFomGroup.value;
     input.passengers = this.passengers;
+    if (this.formSubmit.hasError){
+      return;
+    }
     this.formSubmit.emit(input);
   }
 

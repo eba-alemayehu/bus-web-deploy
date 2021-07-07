@@ -64,24 +64,39 @@
             </mat-option>
           </mat-select>
           <mat-icon matPrefix color="accent">place</mat-icon>
+          <mat-error *ngIf="tripFomGroup.controls['destination'].hasError('required')">
+            Destination city is required.
+          </mat-error>
         </mat-form-field>
       </div>
       <div fxLayout="row" style="justify-content: space-between">
         <mat-form-field appearance="outline">
           <mat-label>Departure date</mat-label>
-          <input matInput required [matDatepicker]="departureDatePicker" formControlName="departureDate">
+          <input matInput [min]="todayDate" required [matDatepicker]="departureDatePicker" formControlName="departureDate">
           <mat-datepicker-toggle matSuffix [for]="departureDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #departureDatePicker></mat-datepicker>
+          <mat-error *ngIf="tripFomGroup.controls['departureDate'].hasError('required')">
+            Departure date is required.
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Return date (optional)</mat-label>
-          <input matInput [matDatepicker]="returnDatePicker" formControlName="departureDate">
+          <input matInput [min]="todayDate" [matDatepicker]="returnDatePicker" formControlName="returnDate">
           <mat-datepicker-toggle matSuffix [for]="returnDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #returnDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div>
-        <app-weak-date></app-weak-date>
+      <div fxLayout="row" style="justify-content: space-around">
+        <div *ngFor="let date of days">
+          <button (click)="changeDepartureDate(date.date, $event)" class="weak-day-btn" mat-raised-button>
+            <p class="weak-day-num">
+              {{date.day}}
+            </p>
+            <p class="weak-day-name">
+              {{date.dateNum}}
+            </p>
+          </button>
+        </div>
       </div>
       <div fxLayout="row" style="justify-content: center" *ngIf="layout !== 'row'">
         <button mat-icon-button (click)="subtractPassenger()" type="button" >
