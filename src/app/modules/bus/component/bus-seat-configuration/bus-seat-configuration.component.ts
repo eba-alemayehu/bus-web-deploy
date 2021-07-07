@@ -55,7 +55,7 @@ export class BusSeatConfigurationComponent implements OnInit {
           seats.forEach(
             (seat) => {
               if (seat.isLockedByMe && !seat.isBookedByMe) {
-                this.selectedBusSeatConfigurationSeats.push(seat);
+                this.selectedBusSeatConfigurationSeats.push(seat.busSeatConfigurationSeat);
                 this.selectedBusSeatConfigurationSeatsChange.emit(this.selectedBusSeatConfigurationSeats);
               }
             });

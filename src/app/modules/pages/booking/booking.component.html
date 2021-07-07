@@ -1,11 +1,14 @@
 <div class="width60">
-  <mat-card>
+  <mat-card [class.loading]="booking">
     <app-passengers-info-form
       [selectedSeats]="selectedSeats"
       [trip]="trip"
       [(passengerInfo)]="passengerInfo"></app-passengers-info-form>
   </mat-card>
-  <div fxLayout="row-reverse">
-    <button mat-flat-button color="primary" (click)="bookTicket()">Book Ticket</button>
+  <div fxLayout="row-reverse" [class.loading]="booking">
+    <button mat-flat-button color="primary" (click)="bookTicket()" [class.spinner]="booking" [disabled]="booking">
+      Book Ticket
+    </button>
+
   </div>
 </div>

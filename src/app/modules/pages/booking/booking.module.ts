@@ -8,6 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {PayDialogModule} from '../../payment/dialogs/pay-dialog/pay-dialog.module';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -15,14 +16,15 @@ import {PayDialogModule} from '../../payment/dialogs/pay-dialog/pay-dialog.modul
   exports: [
   ],
 
-  imports: [
-    CommonModule,
-    BookingRoutingModule,
-    MatCardModule,
-    PassengersInfoFormModule,
-    MatButtonModule,
-    PayDialogModule,
-    FlexModule
-  ]
+    imports: [
+        CommonModule,
+        BookingRoutingModule,
+        MatCardModule,
+        PassengersInfoFormModule,
+        MatButtonModule,
+        PayDialogModule,
+        FlexModule,
+        MatProgressSpinnerModule
+    ]
 })
 export class BookingModule { }
