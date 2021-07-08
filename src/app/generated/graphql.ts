@@ -922,6 +922,7 @@ export type CarrierTicketerMutationInput = {
   carrier: Scalars['ID'];
   user?: Maybe<Scalars['ID']>;
   userPhone?: Maybe<Scalars['String']>;
+  remove?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 

@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'trip/search', loadChildren: () => import('./modules/pages/trip/search/search.module').then(m => m.SearchModule) },
   { path: 'trip', loadChildren: () => import('./modules/pages/trip/trip.module').then(m => m.TripModule) },
   { path: 'home', loadChildren: () => import('./modules/pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'about', loadChildren: () => import('./modules/pages/about-us/about-us.module').then(m => m.AboutUsModule) },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
 ];
 

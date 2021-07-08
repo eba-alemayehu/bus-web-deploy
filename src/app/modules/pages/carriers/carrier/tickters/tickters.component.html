@@ -4,7 +4,11 @@
     <button mat-flat-button color="primary" (click)="addTicketer()">Add ticketer</button>
   </div>
   <mat-card>
-    <app-users-table [ticketerCarrierId]="ticketerCarrierId" #usersTable></app-users-table>
+    <app-users-table [ticketerCarrierId]="ticketerCarrierId" #usersTable>
+      <ng-template let-row>
+        <button mat-icon-button (click)="removeTicketer(row)" color="warn"><mat-icon>delete</mat-icon></button>
+      </ng-template>
+    </app-users-table>
   </mat-card>
 </div>
 

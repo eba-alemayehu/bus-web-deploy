@@ -383,6 +383,7 @@ input CarrierTicketerMutationInput {
   carrier: ID!
   user: ID
   userPhone: String
+  remove: Boolean
   clientMutationId: String
 }
 

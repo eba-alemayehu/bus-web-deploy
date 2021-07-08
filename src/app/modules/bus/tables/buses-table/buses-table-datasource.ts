@@ -1,10 +1,10 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {map} from 'rxjs/operators';
+import {Observable, of as observableOf, merge} from 'rxjs';
 
-export class TripsTableDataSource extends DataSource<any> {
+export class BusesTableDataSource extends DataSource<any> {
 
   paginator: MatPaginator;
   sort: MatSort;
@@ -12,6 +12,8 @@ export class TripsTableDataSource extends DataSource<any> {
   constructor(public data: any[] = []) {
     super();
   }
+
+
   connect(): Observable<any[]> {
     const dataMutations = [
       observableOf(this.data),
@@ -23,8 +25,10 @@ export class TripsTableDataSource extends DataSource<any> {
       return this.getPagedData(this.getSortedData([...this.data]));
     }));
   }
-  disconnect(): void {}
 
+
+  disconnect(): void {
+  }
 
   private getPagedData(data: any[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
@@ -39,9 +43,12 @@ export class TripsTableDataSource extends DataSource<any> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'id':
+          return compare(+a.id, +b.id, isAsc);
+        default:
+          return 0;
       }
     });
   }
