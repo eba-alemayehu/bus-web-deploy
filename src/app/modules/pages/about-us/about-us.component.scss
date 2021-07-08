@@ -1,0 +1,73 @@
+mat-tab{
+    margin-left: 20px;
+
+}
+mat-form-field{
+  width:400px !important;
+}
+agm-map {
+  text-align: center;
+  height: 300px;
+width:100%;
+}
+mat-tab:active{
+color:yellowgreen;
+}
+.flax{
+  margin:2em 2em;
+}
+mat-card{
+  margin:1em 1.5em;
+}
+a i{
+  //color:rgb(249,197,79);
+  font-size: 2em;
+  margin-left: 8px;
+}
+
+h2{
+  text-align: center;
+}
+.box{
+height:100%;
+  width: 100%;
+}
+.box2{
+  width: 40%;
+  height:40%;
+  float: left;
+}
+.box3{
+  width:40%;
+  height:40%;
+  float:right;
+}
+.box4{
+  margin-top: auto;
+  width:40%;
+  height:40%;
+  float:left;
+}
+.box5{
+  margin-top: auto;
+  width:40%;
+  height:40%;
+  float:right;
+}
+mat-card i {
+  color:rgb(249,197,79);
+}
+mat-expansion-panel{margin-bottom: 1em;}
+#about-us-container{
+  width: 70%;
+  margin: auto;
+  .mat-tab-group{
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  #about-us-container{
+    width: 98%;
+  }
+}
