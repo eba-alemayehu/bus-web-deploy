@@ -338,6 +338,8 @@ export type BusSeatConfigurationSeatNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type BusSeatConfigurationSeatNodeConnection = {
@@ -370,6 +372,8 @@ export type BusStopNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type BusStopNodeConnection = {
@@ -578,6 +582,8 @@ export type BusUserNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -1519,6 +1525,8 @@ export type PaymentOrderNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type PaymentOrderNodeConnection = {
@@ -1676,6 +1684,8 @@ export type QueryTicketsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -1685,6 +1695,8 @@ export type QueryMyTicketsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -2316,6 +2328,8 @@ export type TripNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type TripNodeConnection = {
@@ -2599,6 +2613,8 @@ export type UserNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -3388,7 +3404,9 @@ export type TicketMuationMutation = (
   )> }
 );
 
-export type TicketsQueryVariables = Exact<{ [key: string]: never; }>;
+export type TicketsQueryVariables = Exact<{
+  trip?: Maybe<Scalars['ID']>;
+}>;
 
 
 export type TicketsQuery = (
@@ -4553,8 +4571,8 @@ export const TicketMuationDocument = gql`
     }
   }
 export const TicketsDocument = gql`
-    query Tickets {
-  tickets(first: 5) {
+    query Tickets($trip: ID) {
+  tickets(first: 60, trip: $trip) {
     edges {
       node {
         id

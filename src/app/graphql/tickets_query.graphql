@@ -1,5 +1,5 @@
-query Tickets {
-    tickets(first: 5) {
+query Tickets($trip: ID) {
+    tickets(first: 60, trip: $trip) {
         edges {
             node {
                 id
