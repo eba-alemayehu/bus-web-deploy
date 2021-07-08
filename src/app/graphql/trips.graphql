@@ -5,7 +5,9 @@ query Trips(
   $destination:ID,
   $departureTime: DateTime,
   $departureTime_Gte: DateTime,
-  $departureTime_Lte: DateTime
+  $departureTime_Lte: DateTime,
+  $first: Int,
+  $after:String,
 ){
   trips(
     carrier: $carrier,
@@ -14,7 +16,10 @@ query Trips(
     departureTime_Gte: $departureTime_Gte,
     departureTime_Lte: $departureTime_Lte,
     route_LeavingFrom: $leavingFrom,
-    route_Destination: $destination){
+    route_Destination: $destination,
+  	first: $first,
+    after: $after
+  ){
     edges{
       node{
         id
@@ -54,6 +59,12 @@ query Trips(
         }
         createdAt
       }
+    }
+    pageInfo{
+      hasNextPage
+      startCursor
+      endCursor
+      hasPreviousPage
     }
   }
 }

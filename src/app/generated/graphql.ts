@@ -3574,6 +3574,8 @@ export type TripsQueryVariables = Exact<{
   departureTime?: Maybe<Scalars['DateTime']>;
   departureTime_Gte?: Maybe<Scalars['DateTime']>;
   departureTime_Lte?: Maybe<Scalars['DateTime']>;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -3616,7 +3618,10 @@ export type TripsQuery = (
           & Pick<CarrierNode, 'id' | 'name' | 'logo'>
         ) }
       )> }
-    )>> }
+    )>>, pageInfo: (
+      { __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'hasNextPage' | 'startCursor' | 'endCursor' | 'hasPreviousPage'>
+    ) }
   )> }
 );
 
@@ -4792,7 +4797,7 @@ export const TripMutationDocument = gql`
     }
   }
 export const TripsDocument = gql`
-    query Trips($carrier: ID, $bulkRef: String, $leavingFrom: ID, $destination: ID, $departureTime: DateTime, $departureTime_Gte: DateTime, $departureTime_Lte: DateTime) {
+    query Trips($carrier: ID, $bulkRef: String, $leavingFrom: ID, $destination: ID, $departureTime: DateTime, $departureTime_Gte: DateTime, $departureTime_Lte: DateTime, $first: Int, $after: String) {
   trips(
     carrier: $carrier
     bulkRef: $bulkRef
@@ -4801,6 +4806,8 @@ export const TripsDocument = gql`
     departureTime_Lte: $departureTime_Lte
     route_LeavingFrom: $leavingFrom
     route_Destination: $destination
+    first: $first
+    after: $after
   ) {
     edges {
       node {
@@ -4841,6 +4848,12 @@ export const TripsDocument = gql`
         }
         createdAt
       }
+    }
+    pageInfo {
+      hasNextPage
+      startCursor
+      endCursor
+      hasPreviousPage
     }
   }
 }

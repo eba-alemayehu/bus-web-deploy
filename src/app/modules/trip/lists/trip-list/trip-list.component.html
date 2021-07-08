@@ -1,5 +1,16 @@
+<div
+  class="flex-col"
+  id="tender-list-col"
+  infiniteScroll
+  [infiniteScrollContainer]="'.sidenav-content'"
+  [infiniteScrollDistance]="4"
+  [infiniteScrollThrottle]="150"
+  [fromRoot]="true"
+  (scrolled)="onScroll()"
+>
+
 <div fxLayout="column" style="margin-top: 1.5em">
-  <mat-card fxLayout="row" *ngFor="let trip of trips$ | async" (click)="onSelect(trip)" style="margin-bottom: 1em">
+  <mat-card fxLayout="row" *ngFor="let trip of trips" (click)="onSelect(trip)" style="margin-bottom: 1em">
     <app-trip-list-item [trip]="trip.node" style="width: 100%; margin: auto">
       <div buttons>
         <button mat-flat-button color="primary" routerLink="/booking/seat/{{trip.node.id}}">{{'Book ticket'| translate}}</button>
@@ -13,5 +24,6 @@
     <app-trip-list-item [loading]="loading" style="width: 100%; margin: auto">
     </app-trip-list-item>
   </mat-card>
+</div>
 </div>
 
