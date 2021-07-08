@@ -4,6 +4,22 @@ query Trip($id: ID!){
     departureTime
     arrivalTime
     price
+    ticketSet{
+      edges{
+        node{
+          id
+          firstName
+          lastName
+          phone
+          busStop{
+            name
+          }
+          busSeatConfigurationSeat{
+            name
+          }
+        }
+      }
+    }
     seats{
       busSeatConfigurationSeat{
         id

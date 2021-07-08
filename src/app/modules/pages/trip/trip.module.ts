@@ -11,6 +11,9 @@ import {BusSeatConfigurationModule} from '../../bus/component/bus-seat-configura
 import {SelectBusDialogModule} from '../../bus/dialog/select-bus-dialog/select-bus-dialog.module';
 import {TripDatetimeModule} from '../../trip/components/trip-datetime/trip-datetime.module';
 import {LangModule} from '../../../lang.module';
+import {TripsTableModule} from "../../trip/tables/trips-table/trips-table.module";
+import {TicketsModule} from "../../ticket/ticket.module";
+import {TicketsTableModule} from "../../ticket/tables/tickets-table/tickets-table.module";
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import {LangModule} from '../../../lang.module';
         BusSeatConfigurationModule,
         SelectBusDialogModule,
         TripDatetimeModule,
-        LangModule
+        LangModule,
+        TripsTableModule,
+        TicketsModule,
+        TicketsTableModule
     ]
 })
 export class TripModule { }

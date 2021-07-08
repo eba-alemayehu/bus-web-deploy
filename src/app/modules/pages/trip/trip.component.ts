@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ChangeTripBusMutationGQL, TripGQL, TripNode} from '../../../generated/graphql';
+import {ChangeTripBusMutationGQL, TripGQL} from '../../../generated/graphql';
 import {map, tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {SelectBusDialogComponent} from '../../bus/dialog/select-bus-dialog/select-bus-dialog.component';
@@ -15,17 +15,24 @@ import {StorageService} from '../../../core/service/storage.service';
 export class TripComponent implements OnInit {
   @Input() loading = true;
 
+  fileName: string;
+
   public trip: any;
-  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private matDialog: MatDialog, private changeTripBusMutation: ChangeTripBusMutationGQL,
-              translate: TranslateService , private storage: StorageService) {
+
+  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL,
+              private matDialog: MatDialog, private changeTripBusMutation: ChangeTripBusMutationGQL,
+              translate: TranslateService, private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
     this.activatedRoute.params.subscribe(
       (params) => {
-          this.tripGQL.watch({id: params.id}).valueChanges.pipe(
-            tap(response => this.loading = response.loading),
-            map(response => response.data.trip)).subscribe(
-            (trip) => this.trip = trip
-          );
+        this.tripGQL.watch({id: params.id}).valueChanges.pipe(
+          tap(response => this.loading = response.loading),
+          map(response => response.data.trip)).subscribe(
+          (trip) => {
+            this.trip = trip;
+            this.fileName = `${trip.route.leavingFrom.name}-to-${trip.route.destination.name}-${trip.departureTime}.xlsx`;
+          }
+        );
       }
     );
   }
@@ -48,10 +55,10 @@ export class TripComponent implements OnInit {
           .mutate({input: {trip: this.trip.id, bus: bus.id}})
           .pipe(map(response => response.data.changeTripBus.trip))
           .subscribe(
-          (trip) => {
-            this.trip = trip;
-          }
-        );
+            (trip) => {
+              this.trip = trip;
+            }
+          );
       }
     );
   }
