@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { PaymentsTableDataSource, PaymentsTableItem } from './payments-table-datasource';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-payments-table',
@@ -26,7 +28,9 @@ export class PaymentsTableComponent implements AfterViewInit, OnInit {
   }
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['bank', 'orderedBy', 'price', 'transactionId', 'verify'];
-
+  constructor(translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
+  }
   ngOnInit(): void {
     this.setDataSource(this.$data);
   }

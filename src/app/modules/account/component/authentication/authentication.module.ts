@@ -5,6 +5,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {SignupFormModule} from '../../forms/signup-form/signup-form.module';
 import {LoginFormModule} from '../../forms/login-form/login-form.module';
 import {MatButtonModule} from '@angular/material/button';
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -13,12 +14,13 @@ import {MatButtonModule} from '@angular/material/button';
   exports: [
     AuthenticationComponent
   ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    SignupFormModule,
-    LoginFormModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        FlexModule,
+        SignupFormModule,
+        LoginFormModule,
+        MatButtonModule,
+        LangModule
+    ]
 })
 export class AuthenticationModule { }

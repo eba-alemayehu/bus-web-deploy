@@ -4,6 +4,8 @@ import {UsersGQL} from '../../../../generated/graphql';
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {echo} from '../../../../util/print';
+import {StorageService} from '../../../../core/service/storage.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-search-form',
@@ -16,7 +18,8 @@ export class UserSearchFormComponent implements OnInit {
   allUsers = [];
   filteredUsers: Observable<any>;
 
-  constructor(private usersGQL: UsersGQL) {
+  constructor(private usersGQL: UsersGQL, translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
   }
 
   ngOnInit(): void {

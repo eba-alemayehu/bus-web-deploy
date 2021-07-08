@@ -1,8 +1,8 @@
-<h1 style="text-align: center">Bus</h1>
+<h1 style="text-align: center">{{'Bus'| translate}}</h1>
 <mat-card style="margin-top: 2em">
   <div fxLayout="column">
     <div fxLayout="row" style="justify-content: space-around; margin-bottom: 1em">
-      <span>Bus number: <b>{{bus?.busNumber}}</b></span>
+      <span>{{'Bus number'| translate}}: <b>{{bus?.busNumber}}</b></span>
       <b>
         <app-car-plate [plateNumber]="bus?.plateNumber"></app-car-plate>
       </b>
@@ -25,13 +25,13 @@
           <app-user-tumb [user]="user.node"></app-user-tumb>
           <button mat-button color="warn" (click)="removeDriver(user.node)">
             <mat-icon>remove</mat-icon>
-            Remove
+            {{'Remove'| translate}}
           </button>
         </div>
 
         <div fxLayout="row">
           <span class="spacer"></span>
-          <button mat-flat-button color="primary" (click)="addDriver()">Add</button>
+          <button mat-flat-button color="primary" (click)="addDriver()">{{'Add'| translate}}</button>
         </div>
       </mat-card>
       <mat-card>
@@ -42,13 +42,13 @@
             <span class="spacer"></span>
             <button mat-button color="warn" (click)="removeAssistant(user.node)">
               <mat-icon>remove</mat-icon>
-              Remove
+              {{'Remove'| translate}}
             </button>
           </div>
         </div>
         <div fxLayout="row">
           <span class="spacer"></span>
-          <button mat-flat-button color="primary" (click)="addAssistant()">Add</button>
+          <button mat-flat-button color="primary" (click)="addAssistant()">{{'Add'| translate}}</button>
         </div>
 
       </mat-card>

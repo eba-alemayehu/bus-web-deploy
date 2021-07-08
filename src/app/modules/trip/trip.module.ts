@@ -14,6 +14,7 @@ import {ShimmerModule} from '../common/shimmer/shimmer.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {LangModule} from '../../lang.module';
 
 
 // tslint:disable-next-line:typedef
@@ -36,6 +37,8 @@ export function playerFactory() {
         MatIconModule,
         MatDividerModule,
         [LottieModule.forRoot({player: playerFactory})],
+        ShimmerModule,
+        LangModule,
         ShimmerModule,
         MatTableModule,
         MatPaginatorModule,

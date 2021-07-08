@@ -18,7 +18,7 @@
       <mat-card-title style="font-size: 1.2em; font-weight:700; text-align: center;color:gray; ">{{ticket.trip.carrier.name | titlecase}}</mat-card-title>
     </div>
     <div fxLayout="column" style="margin-bottom: 1rem; align-self: flex-end ">
-      <mat-card-title style="font-size: 1.7em; color:orange; font-weight:700; text-align: center; ">{{ticket.order.price}} Birr</mat-card-title>
+      <mat-card-title style="font-size: 1.7em; color:orange; font-weight:700; text-align: center; ">{{ticket.order.price}} {{'Birr'| translate}}</mat-card-title>
     </div>
   </div>
   <div fxLayout="row" style="justify-content:space-between; margin: 1rem 4em">
@@ -27,18 +27,18 @@
       <mat-card-title class="city">{{ticket.trip.route.leavingFrom.name | titlecase }}</mat-card-title>
     </div>
     <div fxLayout="column">
-      <span style="color: darkgray; text-align:center">Destination:</span>
+      <span style="color: darkgray; text-align:center">{{'Destination'| translate}}:</span>
       <mat-card-title class="city">{{ticket.trip.route.destination.name | titlecase}}</mat-card-title>
     </div>
   </div>
   <!--  time -->
   <div fxLayout="row" style="justify-content:space-between; margin: 1rem 4em">
     <div fxLayout="column">
-      <span style="color: darkgray; text-align:center">Departure time:</span>
+      <span style="color: darkgray; text-align:center">{{'Departure time'| translate}}:</span>
       <span class="time">{{ticket.trip.departureTime | date:'shortTime' }}</span>
     </div>
     <div fxLayout="column">
-      <span style="color: darkgray; text-align:center">plate no:</span>
+      <span style="color: darkgray; text-align:center">{{'plate no'| translate}}:</span>
       <mat-card-title class="plate">{{ticket.trip.bus.busNumber}}</mat-card-title>
     </div>
   </div>
@@ -48,7 +48,7 @@
       <span class="date">{{ticket.trip.departureTime | date:'fullDate' }}</span>
     </div>
     <div fxLayout="column">
-      <mat-card-title class="seat">Seat no: {{ ticket.busSeatConfigurationSeat.name}}</mat-card-title>
+      <mat-card-title class="seat">{{'Seat no'| translate}}: {{ ticket.busSeatConfigurationSeat.name}}</mat-card-title>
     </div>
   </div>
 <!--  <div fxLayout="row" style="place-content: space-between">-->

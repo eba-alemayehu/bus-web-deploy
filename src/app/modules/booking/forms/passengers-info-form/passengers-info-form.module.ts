@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
 import {BookingModule} from '../../booking.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import {LangModule} from '../../../../lang.module';
 
 
 @NgModule({
@@ -18,19 +19,20 @@ import {MatDialogModule} from '@angular/material/dialog';
   exports: [
     PassengersInfoFormComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    FlexModule,
-    MatInputModule,
-    MatRadioModule,
-    MatIconModule,
-    NgxMatIntlTelInputModule,
-    BookingModule,
-    MatDialogModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        FlexModule,
+        MatInputModule,
+        MatRadioModule,
+        MatIconModule,
+        NgxMatIntlTelInputModule,
+        BookingModule,
+        MatDialogModule,
+        LangModule
+    ]
 })
 export class PassengersInfoFormModule {
 }

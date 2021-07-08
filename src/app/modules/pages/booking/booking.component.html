@@ -7,7 +7,7 @@
   </mat-card>
   <div fxLayout="row-reverse" [class.loading]="booking">
     <button mat-flat-button color="primary" (click)="bookTicket()" [class.spinner]="booking" [disabled]="booking">
-      Book Ticket
+      {{'Book Ticket'| translate}}
     </button>
 
   </div>

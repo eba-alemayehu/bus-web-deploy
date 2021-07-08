@@ -7,12 +7,13 @@ import {FlexModule} from '@angular/flex-layout';
 import { MatCardModule} from '@angular/material/card';
 import {TripSearchFormModule} from '../../trip/forms/trip-search-form/trip-search-form.module';
 import {TripFormModule} from '../../trip/forms/trip-form/trip-form.module';
-import {TripModule} from "../../trip/trip.module";
-import {NgxShimmerLoadingModule} from "ngx-shimmer-loading";
-import {ShimmerModule} from "../../common/shimmer/shimmer.module";
-import {RouteModule} from "../../trip/components/route/route.module";
-import {RouteListModule} from "../../trip/lists/route-list/route-list.module";
-import {CarrierListModule} from "../../carrier/lists/carrier-list.module";
+import {TripModule} from '../../trip/trip.module';
+import {NgxShimmerLoadingModule} from 'ngx-shimmer-loading';
+import {ShimmerModule} from '../../common/shimmer/shimmer.module';
+import {RouteModule} from '../../trip/components/route/route.module';
+import {RouteListModule} from '../../trip/lists/route-list/route-list.module';
+import {CarrierListModule} from '../../carrier/lists/carrier-list.module';
+import {LangModule} from '../../../lang.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -29,6 +30,7 @@ import {CarrierListModule} from "../../carrier/lists/carrier-list.module";
         RouteModule,
         RouteListModule,
         CarrierListModule,
+        LangModule,
     ]
 })
 export class HomeModule { }

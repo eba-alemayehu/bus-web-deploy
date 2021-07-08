@@ -6,6 +6,7 @@ import {UserCreateAnonimusUserGQL} from './generated/graphql';
 import {StorageService} from './core/service/storage.service';
 import {AuthGuard} from './guards/auth/auth.guard';
 import {echo} from './util/print';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,11 @@ export class AppComponent implements OnInit, AfterViewInit{
     private breakpointObserver: BreakpointObserver,
     private createAnonymousUserGQL: UserCreateAnonimusUserGQL,
     private authGuard: AuthGuard,
-    private storage: StorageService) {
+    private storage: StorageService,
+    translate: TranslateService) {
+    this.storage.setLanguage(this.storage.getLanguage('lang') || 'en');
+    translate.setDefaultLang(this.storage.getLanguage('lang'));
+    translate.use(this.storage.getLanguage('lang'));
   }
   async ngOnInit(): Promise<void> {
     if (!this.authGuard.canActivate(null, null)){

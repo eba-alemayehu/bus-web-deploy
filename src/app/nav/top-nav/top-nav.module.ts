@@ -10,6 +10,9 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {AuthenticationDialogModule} from '../../modules/account/dialogs/authentication-dialog/authentication-dialog.module';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import {RouterModule} from '@angular/router';
+import {LangModule} from '../../lang.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -18,17 +21,20 @@ import {RouterModule} from '@angular/router';
     exports: [
         TopNavComponent
     ],
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        ProfilePicModule,
-        FlexModule,
-        AuthenticationDialogModule,
-        MatSnackBarModule,
-        RouterModule,
-    ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    ProfilePicModule,
+    FlexModule,
+    AuthenticationDialogModule,
+    MatSnackBarModule,
+    RouterModule,
+    LangModule,
+    MatFormFieldModule,
+    MatSelectModule,
+  ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ]

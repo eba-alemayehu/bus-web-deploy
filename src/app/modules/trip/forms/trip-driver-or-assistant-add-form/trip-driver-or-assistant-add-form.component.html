@@ -1,5 +1,5 @@
 <app-user-search-form (userSelected)="userSelected($event)"></app-user-search-form>
 <app-user-tumb *ngIf="selectedUser !== null" [user]="selectedUser"></app-user-tumb>
 <div fxLayout="row-reverse">
-  <button mat-flat-button color="primary" (click)="add()"><mat-icon>add</mat-icon> Add</button>
+  <button mat-flat-button color="primary" (click)="add()"><mat-icon>add</mat-icon>{{'Add'| translate}}</button>
 </div>

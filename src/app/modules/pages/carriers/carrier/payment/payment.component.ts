@@ -6,6 +6,8 @@ import {ValidatePaymentDialogComponent} from '../../../../payment/dialogs/valida
 import {PaymentOrdersGQL} from '../../../../../generated/graphql';
 import {map} from 'rxjs/operators';
 import {ActivatedRoute} from "@angular/router";
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-payment',
@@ -22,7 +24,9 @@ export class PaymentComponent implements OnInit {
     private matDialog: MatDialog,
     private matSnackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
+    translate: TranslateService , private storage: StorageService
   ) {
+    translate.use(this.storage.getLanguage('lang'));
   }
 
   ngOnInit(): void {

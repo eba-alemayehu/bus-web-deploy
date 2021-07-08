@@ -10,6 +10,7 @@ import {RouterModule} from '@angular/router';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
 import {FlexModule} from '@angular/flex-layout';
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -18,17 +19,18 @@ import {FlexModule} from '@angular/flex-layout';
   exports: [
     LoginFormComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterModule,
-    NgxMatIntlTelInputModule,
-    FlexModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterModule,
+        NgxMatIntlTelInputModule,
+        FlexModule,
+        LangModule
+    ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ]

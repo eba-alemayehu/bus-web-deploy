@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {TripsGQL} from '../../../../generated/graphql';
 import {map, tap} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -19,7 +21,8 @@ export class TripListComponent implements OnInit, OnChanges {
   @Output() selected: EventEmitter<any> = new EventEmitter<any>();
   trips$;
 
-  constructor(private tripsGQL: TripsGQL) {
+  constructor(private tripsGQL: TripsGQL, translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
   }
 
   ngOnInit(): void {

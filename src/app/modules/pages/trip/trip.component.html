@@ -6,12 +6,12 @@
       <div *ngIf="!trip?.bus" fxLayout="column" style="align-items: center">
         <img src="/assets/bus.svg" alt="" style="width: 80px">
         <div fxLayout="column" style="margin-left: 2.5em;">
-          <b>No bus is assigned.</b>
+          <b>{{'No bus is assigned.'| translate}}</b>
         </div>
       </div>
       <button mat-flat-button color="primary" (click)="addBus()" style="margin: auto; margin-top: 1em">
-        <span *ngIf="!trip?.bus">Add bus</span>
-        <span *ngIf="trip?.bus">Change bus</span>
+        <span *ngIf="!trip?.bus">{{'Add bus'| translate}}</span>
+        <span *ngIf="trip?.bus">{{'Change bus'| translate}}</span>
       </button>
     </mat-card>
     <mat-card>

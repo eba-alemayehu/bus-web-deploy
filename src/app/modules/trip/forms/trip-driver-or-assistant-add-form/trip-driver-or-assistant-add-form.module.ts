@@ -6,6 +6,7 @@ import {UserTumbModule} from '../../../account/component/user-tumb/user-tumb.mod
 import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -14,13 +15,14 @@ import {MatIconModule} from '@angular/material/icon';
     exports: [
         TripDriverOrAssistantAddFormComponent
     ],
-  imports: [
-    CommonModule,
-    UserSearchFormModule,
-    UserTumbModule,
-    FlexModule,
-    MatButtonModule,
-    MatIconModule
-  ]
+    imports: [
+        CommonModule,
+        UserSearchFormModule,
+        UserTumbModule,
+        FlexModule,
+        MatButtonModule,
+        MatIconModule,
+        LangModule
+    ]
 })
 export class TripDriverOrAssistantAddFormModule { }

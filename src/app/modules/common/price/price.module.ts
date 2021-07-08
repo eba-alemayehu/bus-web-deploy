@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PriceComponent } from './price.component';
+import {LangModule} from '../../../lang.module';
 
 
 
@@ -10,7 +11,8 @@ import { PriceComponent } from './price.component';
         PriceComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        LangModule
     ]
 })
 export class PriceModule { }

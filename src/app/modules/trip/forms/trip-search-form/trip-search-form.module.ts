@@ -12,6 +12,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { WeakDateComponent } from './weak-date/weak-date.component';
+import {LangModule} from '../../../../lang.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { WeakDateComponent } from './weak-date/weak-date.component';
         MatNativeDateModule,
         GridModule,
         MatRadioModule,
-        MatSelectModule
+        MatSelectModule,
+        LangModule
     ],
   providers: [
     MatDatepickerModule,

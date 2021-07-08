@@ -12,6 +12,7 @@ import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import {QRCodeModule} from "angularx-qrcode";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
+import {LangModule} from '../../lang.module';
 
 
 @NgModule({
@@ -20,16 +21,17 @@ import {MatDialogModule} from "@angular/material/dialog";
     TicketListComponent,
     TicketDetailComponent
   ],
-  imports: [
-    CommonModule,
-    TicketRoutingModule,
-    TripModule,
-    FlexModule,
-    MatCardModule,
-    MatDividerModule,
-    QRCodeModule,
-    MatButtonModule,
-    MatDialogModule
-  ]
+    imports: [
+        CommonModule,
+        TicketRoutingModule,
+        TripModule,
+        FlexModule,
+        MatCardModule,
+        MatDividerModule,
+        QRCodeModule,
+        MatButtonModule,
+        MatDialogModule,
+        LangModule
+    ]
 })
 export class TicketsModule { }

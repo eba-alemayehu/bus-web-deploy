@@ -1,18 +1,18 @@
 <form [formGroup]="busForm" (ngSubmit)="submit()">
   <div fxLayout="row" style="justify-content: space-evenly">
     <mat-form-field appearance="outline">
-      <mat-label>Bus number</mat-label>
+      <mat-label>{{'Bus number'| translate}}</mat-label>
       <input matInput type="text" formControlName="busNumber">
       <mat-error *ngIf="busForm.controls['busNumber'].hasError('required')">
-        Bus number is required.
+        {{'Bus number is required.'| translate}}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Plate number</mat-label>
+      <mat-label>{{'Plate number'| translate}}</mat-label>
       <input matInput type="text" formControlName="plateNumber">
       <mat-error *ngIf="busForm.controls['plateNumber'].hasError('required')">
-        Bus plate number is required.
+        {{'Bus plate number is required.'| translate}}
       </mat-error>
     </mat-form-field>
   </div>
@@ -33,6 +33,6 @@
   <div fxLayout="row">
     <span class="spacer">
     </span>
-    <button mat-flat-button color="primary" type="submit">Submit</button>
+    <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
   </div>
 </form>

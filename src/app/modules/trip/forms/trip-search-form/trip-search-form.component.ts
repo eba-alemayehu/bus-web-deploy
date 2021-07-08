@@ -6,6 +6,8 @@ import {map, shareReplay} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
 import {CitiesGQL} from '../../../../generated/graphql';
 import moment from 'moment';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-trip-search-form',
@@ -50,7 +52,10 @@ export class TripSearchFormComponent implements OnInit {
   allLeavingFromCity = [];
   allDestinationCity = [];
 
-  constructor(private formBuilder: FormBuilder, private breakpointObserver: BreakpointObserver, private citiesGQL: CitiesGQL) {
+  constructor(private formBuilder: FormBuilder, private breakpointObserver: BreakpointObserver, private citiesGQL: CitiesGQL,
+              translate: TranslateService , private storage: StorageService
+  ) {
+    translate.use(this.storage.getLanguage('lang'));
     this.citiesGQL.watch({}).valueChanges.subscribe(
       (response) => {
         const cities = response.data.cities.edges;

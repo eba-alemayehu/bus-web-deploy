@@ -9,6 +9,7 @@ import {of, throwError} from 'rxjs';
 import {UserCreateMutationGQL, UsersGQL} from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
 import {StorageService} from '../../../../core/service/storage.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup-form',
@@ -67,7 +68,9 @@ export class SignupFormComponent implements OnInit {
     public dialog: MatDialog,
     private activeRoute: ActivatedRoute,
     private storage: StorageService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    translate: TranslateService) {
+    translate.use(this.storage.getLanguage('lang'));
   }
 
   passwordConfirming(c: AbstractControl): { match: boolean } {

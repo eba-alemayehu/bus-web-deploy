@@ -2,12 +2,12 @@
   <div *ngIf="state == 0">
     <app-login-form (close)="_close()" (login)="login()"></app-login-form>
     <div style="text-align: left" class="flex-col">
-      <a mat-button (click)="state = 1" color="link">Create new account</a>
+      <a mat-button (click)="state = 1" color="link">{{'Create new account'| translate}}</a>
     </div>
   </div>
 
   <div *ngIf="state == 1">
     <app-signup-form (close)="_close()" (signup)="signup()"></app-signup-form>
-    <a mat-button (click)="state = 0" color="link">Login</a>
+    <a mat-button (click)="state = 0" color="link">{{'Login'| translate}}</a>
   </div>
 </div>

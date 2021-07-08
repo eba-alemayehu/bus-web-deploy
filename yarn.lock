@@ -163,7 +163,7 @@
     "universal-analytics" "0.4.23"
     "uuid" "8.3.0"
 
-"@angular/common@^10.0.0", "@angular/common@^10.0.0 || ^11.0.0-0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/common@^8.2.14", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0", "@angular/common@>=7.0.0", "@angular/common@>=7.2.0", "@angular/common@>=9.0.0", "@angular/common@~10.2.0", "@angular/common@~9.0.0", "@angular/common@10.2.4":
+"@angular/common@^10.0.0", "@angular/common@^10.0.0 || ^11.0.0-0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/common@^8.2.14", "@angular/common@>=10.0.0", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0", "@angular/common@>=7.0.0", "@angular/common@>=7.2.0", "@angular/common@>=9.0.0", "@angular/common@~10.2.0", "@angular/common@~9.0.0", "@angular/common@10.2.4":
   "integrity" "sha512-bBfsLJNDQaC2OI1mReDJuSZ/uBb7Pf3HVpRmlQKNIPllIxqX1hLH8I3Plodrns9m32JMJ6FMsQthcP0KMdRCJA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-10.2.4.tgz"
   "version" "10.2.4"
@@ -201,7 +201,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@^10.0.0", "@angular/core@^10.0.0 || ^11.0.0-0", "@angular/core@^10.0.2", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@^8.2.14", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0", "@angular/core@>=6.1.0 <13.0.0", "@angular/core@>=7.0.0", "@angular/core@>=7.2.0", "@angular/core@>=8.0.0", "@angular/core@~10.2.0", "@angular/core@~9.0.0", "@angular/core@10.2.4":
+"@angular/core@^10.0.0", "@angular/core@^10.0.0 || ^11.0.0-0", "@angular/core@^10.0.2", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@^8.2.14", "@angular/core@>=10.0.0", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0", "@angular/core@>=6.1.0 <13.0.0", "@angular/core@>=7.0.0", "@angular/core@>=7.2.0", "@angular/core@>=8.0.0", "@angular/core@~10.2.0", "@angular/core@~9.0.0", "@angular/core@10.2.4":
   "integrity" "sha512-5xpAvmZwD9nZ8eWx10urjibqEeePGEiFXVMEn3IaJWgfdOcMmeSoioW9JUllT3w85+DlNVWbRbhz0YfE9a4jyw=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-10.2.4.tgz"
   "version" "10.2.4"
@@ -1628,6 +1628,20 @@
   "integrity" "sha512-jSBq00T+9G1C0ctgAMoKQl48WSGC4MOBz+cXJ8cQbmIPfz7BEQxw1F+QV5xym+7cDWfLgEtHCoXsX4S7m92l+g=="
   "resolved" "https://registry.npmjs.org/@ngx-tiny/date-picker/-/date-picker-10.0.2.tgz"
   "version" "10.0.2"
+  dependencies:
+    "tslib" "^2.0.0"
+
+"@ngx-translate/core@^13.0.0", "@ngx-translate/core@>=13.0.0":
+  "integrity" "sha512-+tzEp8wlqEnw0Gc7jtVRAJ6RteUjXw6JJR4O65KlnxOmJrCGPI0xjV/lKRnQeU0w4i96PQs/jtpL921Wrb7PWg=="
+  "resolved" "https://registry.npmjs.org/@ngx-translate/core/-/core-13.0.0.tgz"
+  "version" "13.0.0"
+  dependencies:
+    "tslib" "^2.0.0"
+
+"@ngx-translate/http-loader@^6.0.0":
+  "integrity" "sha512-LCekn6qCbeXWlhESCxU1rAbZz33WzDG0lI7Ig0pYC1o5YxJWrkU9y3Y4tNi+jakQ7R6YhTR2D3ox6APxDtA0wA=="
+  "resolved" "https://registry.npmjs.org/@ngx-translate/http-loader/-/http-loader-6.0.0.tgz"
+  "version" "6.0.0"
   dependencies:
     "tslib" "^2.0.0"
 
@@ -9485,7 +9499,7 @@
   dependencies:
     "aproba" "^1.1.1"
 
-"rxjs@^6.0.0", "rxjs@^6.3.3", "rxjs@^6.5.3", "rxjs@^6.6.0", "rxjs@>=6.5.5", "rxjs@>=6.6.0", "rxjs@~6.6.0":
+"rxjs@^6.0.0", "rxjs@^6.3.3", "rxjs@^6.5.3", "rxjs@^6.6.0", "rxjs@>=6.5.3", "rxjs@>=6.5.5", "rxjs@>=6.6.0", "rxjs@~6.6.0":
   "integrity" "sha512-/oTwee4N4iWzAMAL9xdGKjkEHmIwupR3oXbQjCKywF1BeFohswF3vZdogbmEF6pZkOsXTzWkrZszrWpQTByYVg=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-6.6.6.tgz"
   "version" "6.6.6"

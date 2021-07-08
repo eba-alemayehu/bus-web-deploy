@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {CarrierGQL, CarrierNode} from '../../../../generated/graphql';
 import {Observable} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-carrier',
@@ -12,7 +14,9 @@ import {Observable} from 'rxjs';
 export class CarrierComponent implements OnInit {
   carrier: any;
 
-  constructor(private activatedRouter: ActivatedRoute, private carrierGQL: CarrierGQL) {
+  constructor(private activatedRouter: ActivatedRoute, private carrierGQL: CarrierGQL,
+              translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
     this.activatedRouter.params.subscribe(
       (params) => {
         this.carrierGQL
