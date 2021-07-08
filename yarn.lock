@@ -1721,6 +1721,11 @@
   dependencies:
     "any-observable" "^0.3.0"
 
+"@scarf/scarf@^1.1.0":
+  "integrity" "sha512-VGbKDbk1RFIaSmdVb0cNjjWJoRWRI/Weo23AjRCC2nryO0iAS8pzsToJfPVPtVs74WHw4L1UTADNdIYRLkirZQ=="
+  "resolved" "https://registry.npmjs.org/@scarf/scarf/-/scarf-1.1.1.tgz"
+  "version" "1.1.1"
+
 "@schematics/angular@^7.3.5":
   "integrity" "sha512-R/oBE5Nbs/meMVqLLFjeVf3G+ROJAPtRbiJ+22EZ6V63RQfLbW37zX+z3Wv7yD9URtYE7X9Ojtz9WEfmSzBPUg=="
   "resolved" "https://registry.npmjs.org/@schematics/angular/-/angular-7.3.10.tgz"
@@ -7733,6 +7738,14 @@
   "resolved" "https://registry.npmjs.org/ngx-bootstrap/-/ngx-bootstrap-6.2.0.tgz"
   "version" "6.2.0"
 
+"ngx-infinite-scroll@^10.0.1":
+  "integrity" "sha512-7is0eJZ9kJPsaHohRmMhJ/QFHAW9jp9twO5HcHRvFM/Yl/R8QCiokgjwmH0/CR3MuxUanxfHZMfO3PbYTwlBEg=="
+  "resolved" "https://registry.npmjs.org/ngx-infinite-scroll/-/ngx-infinite-scroll-10.0.1.tgz"
+  "version" "10.0.1"
+  dependencies:
+    "@scarf/scarf" "^1.1.0"
+    "opencollective-postinstall" "^2.0.2"
+
 "ngx-lottie@^7.0.1":
   "integrity" "sha512-zvRYZJ6RVpGOZK8Msg9DnXxmMwl7Bu8/Xvy03R5pyP8nfOv8a8vhjofM5xt/EFh3Fcecnt9uXA9byR41nMcQOQ=="
   "resolved" "https://registry.npmjs.org/ngx-lottie/-/ngx-lottie-7.0.1.tgz"
@@ -8118,6 +8131,11 @@
   dependencies:
     "is-docker" "^2.0.0"
     "is-wsl" "^2.1.1"
+
+"opencollective-postinstall@^2.0.2":
+  "integrity" "sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q=="
+  "resolved" "https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz"
+  "version" "2.0.3"
 
 "opn@^5.5.0":
   "integrity" "sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA=="
