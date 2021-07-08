@@ -5,6 +5,8 @@ import {echo} from '../../../util/print';
 import {BookTicketGQL} from '../../../generated/mutation/graphql';
 import {MatDialog} from '@angular/material/dialog';
 import {PassengerInfoPreviewComponent} from '../../booking/passenger-info-preview/passenger-info-preview.component';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../core/service/storage.service';
 
 @Component({
   selector: 'app-booking',
@@ -23,8 +25,11 @@ export class BookingComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private tripGQL: TripGQL,
     private bookTicketGQL: BookTicketGQL,
+    public dialog: MatDialog,
     private router: Router,
-    public dialog: MatDialog) {
+    translate: TranslateService ,
+    private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
     this.activatedRoute.params.subscribe(
       (params) => {
         tripGQL.watch({id: params.trip}).valueChanges.subscribe(

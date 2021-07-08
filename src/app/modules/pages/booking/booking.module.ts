@@ -8,6 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {PayDialogModule} from '../../payment/dialogs/pay-dialog/pay-dialog.module';
+import {LangModule} from '../../../lang.module';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
@@ -24,6 +25,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         MatButtonModule,
         PayDialogModule,
         FlexModule,
+        LangModule,
         MatProgressSpinnerModule
     ]
 })

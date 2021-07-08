@@ -6,6 +6,7 @@ import {echo} from '../../../../util/print';
 import {tap} from 'rxjs/operators';
 import {StorageService} from '../../../../core/service/storage.service';
 import {throwError} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-form',
@@ -25,7 +26,10 @@ export class LoginFormComponent implements OnInit {
   invalidCredentialsErrors = false;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, public loginMutation: LoginMutationGQL, private storage: StorageService) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, public loginMutation: LoginMutationGQL, private storage: StorageService,
+              translate: TranslateService) {
+    translate.use(this.storage.getLanguage('lang'));
+
   }
 
   ngOnInit(): void {

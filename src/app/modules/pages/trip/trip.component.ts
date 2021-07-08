@@ -4,6 +4,8 @@ import {ChangeTripBusMutationGQL, TripGQL, TripNode} from '../../../generated/gr
 import {map, tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {SelectBusDialogComponent} from '../../bus/dialog/select-bus-dialog/select-bus-dialog.component';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../core/service/storage.service';
 
 @Component({
   selector: 'app-trip',
@@ -14,7 +16,9 @@ export class TripComponent implements OnInit {
   @Input() loading = true;
 
   public trip: any;
-  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private matDialog: MatDialog, private changeTripBusMutation: ChangeTripBusMutationGQL) {
+  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private matDialog: MatDialog, private changeTripBusMutation: ChangeTripBusMutationGQL,
+              translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
     this.activatedRoute.params.subscribe(
       (params) => {
           this.tripGQL.watch({id: params.id}).valueChanges.pipe(

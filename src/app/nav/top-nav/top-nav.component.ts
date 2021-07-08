@@ -7,6 +7,7 @@ import {StorageService} from '../../core/service/storage.service';
 import {echo} from '../../util/print';
 import {RegisteredUserGuard} from '../../guards/auth/registered-user.guard';
 import {Apollo} from 'apollo-angular';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-top-nav',
@@ -16,6 +17,7 @@ import {Apollo} from 'apollo-angular';
 export class TopNavComponent implements OnInit {
   @Input() drawer;
   authUser;
+  lang: string;
 
   constructor(
     private matDialog: MatDialog,
@@ -24,10 +26,14 @@ export class TopNavComponent implements OnInit {
     private apollo: Apollo,
     private createAnonymousUserGQL: UserCreateAnonimusUserGQL,
     private logoutMutation: LogoutMutationGQL,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    translate: TranslateService , private storage: StorageService
+  ) {
+    translate.use(this.storage.getLanguage('lang'));
   }
 
   ngOnInit(): void {
+    this.lang = this.storageService.getLanguage('lang') || 'en';
     this.meGQL.watch().valueChanges.subscribe(
       (response) => {
         this.authUser = response.data.me;
@@ -59,5 +65,11 @@ export class TopNavComponent implements OnInit {
     this.matDialog.open(AuthenticationDialogComponent, {
       width: '480px'
     });
+  }
+
+  // tslint:disable-next-line:typedef
+  changeLang(value: any) {
+    this.storageService.setLanguage(value);
+    window.location.reload();
   }
 }

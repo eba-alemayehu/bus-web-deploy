@@ -1,4 +1,4 @@
-<h1 mat-dialog-title style="text-align:center; font-size: 32px">Please enter transaction id.</h1>
+<h1 mat-dialog-title style="text-align:center; font-size: 32px">{{'Please enter transaction id.'| translate}}</h1>
 <form [formGroup]="transactionForm" (ngSubmit)="submit()">
 <mat-dialog-content class="mat-typography" style="padding:2rem 4rem; border-radius: 4rem;" >
   <div fxLayout="row" style="margin-bottom: 2rem">
@@ -14,11 +14,11 @@
   </div>
   <div>
     <mat-form-field fxFill appearance="outline">
-      <mat-label>Transaction Id</mat-label>
-      <input matInput formControlName="transactionId" placeholder="Enter transaction id">
+      <mat-label>{{'Transaction Id'| translate}}</mat-label>
+      <input matInput formControlName="transactionId" [placeholder]="'Enter transaction id'| translate">
       <mat-icon matPrefix>receipt_long</mat-icon>
       <mat-error *ngIf="transactionForm.controls['transactionId'].hasError('required')">
-        transaction id is required.
+        {{'transaction id is required.'| translate}}
       </mat-error>
     </mat-form-field>
   </div>
@@ -26,7 +26,8 @@
 <mat-dialog-actions>
   <div fxLayout="row">
 <!--  [mat-dialog-close]="true"-->
-  <button  type="submit" cdkFocusInitial mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="transactionForm.invalid">Submit</button>
+  <button  type="submit" cdkFocusInitial mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="transactionForm.invalid">
+    {{'Submit'| translate}}</button>
   </div>
 </mat-dialog-actions>
 </form>

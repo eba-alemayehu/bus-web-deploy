@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {BusSeatConfigurationModule} from '../../bus/component/bus-seat-configuration/bus-seat-configuration.module';
 import {SelectBusDialogModule} from '../../bus/dialog/select-bus-dialog/select-bus-dialog.module';
 import {TripDatetimeModule} from '../../trip/components/trip-datetime/trip-datetime.module';
+import {LangModule} from '../../../lang.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {TripDatetimeModule} from '../../trip/components/trip-datetime/trip-datet
         MatButtonModule,
         BusSeatConfigurationModule,
         SelectBusDialogModule,
-        TripDatetimeModule
+        TripDatetimeModule,
+        LangModule
     ]
 })
 export class TripModule { }

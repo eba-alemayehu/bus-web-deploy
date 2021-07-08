@@ -1,4 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 enum AuthenticationState {
   LOGIN,
@@ -13,7 +15,9 @@ enum AuthenticationState {
 export class AuthenticationComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
   state = AuthenticationState.LOGIN;
-  constructor() { }
+  constructor(translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
+  }
 
   ngOnInit(): void {
   }

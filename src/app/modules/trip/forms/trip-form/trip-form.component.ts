@@ -12,6 +12,8 @@ import {
 } from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
 import {map} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-trip-form',
@@ -45,7 +47,9 @@ export class TripFormComponent implements OnInit {
     private tripMutationGQL: TripMutationGQL,
     private busesGQL: BusesGQL,
     private busSeatConfigurationGQL: BusSeatConfigurationsGQL,
-    private citiesGQL: CitiesGQL) {
+    private citiesGQL: CitiesGQL,
+    translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
     this.busSeatConfigurations$ = busSeatConfigurationGQL
       .watch({}).valueChanges
       .pipe(map((response) => response.data.busSeatConfigurations.edges));

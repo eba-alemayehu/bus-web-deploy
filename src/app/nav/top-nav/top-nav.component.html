@@ -11,12 +11,24 @@
   <span class="spacer"></span>
   <ul class="nav-list" style="list-style: none; display: flex; align-items: center;font-size: 1em">
     <li *ngIf="!this.registeredGuard.canActivate(null, null)">
-      <button mat-button (click)="login()">Login</button>
+      <button mat-button (click)="login()">{{'Login'| translate}}</button>
     </li>
     <li *ngIf="this.registeredGuard.canActivate(null, null)">
       <app-profile-pic [matMenuTriggerFor]="menu"></app-profile-pic>
     </li>
   </ul>
+  <div class="selectl">
+    <select (change)="changeLang($event.target.value)">
+      <option value="en" [selected]="lang == 'en'">eng</option>
+      <option value="amh" [selected]="lang == 'amh'">amh</option>
+    </select>
+  </div>
+<!--  <mat-form-field>-->
+<!--    <mat-select name="countryString" (valueChange)="changeLang($event.target.value)" placeholder="Lang">-->
+<!--      <mat-option [value]="'en'">eng</mat-option>-->
+<!--      <mat-option [value]="'amh'">amh</mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->
 </div>
 <mat-menu #menu="matMenu">
   <div class="flex-col" style="padding: 1em 1.7em">
@@ -42,7 +54,8 @@
       mat-menu-item
       class="flex" style="align-items: center; display: flex">
       <img src="/assets/logout.svg" alt="" style="width: 20px; height: 20px;">
-      <span style="margin-left: 0.5em"> Logout</span>
+      <span style="margin-left: 0.5em"> {{'Logout'| translate}}</span>
     </button>
   </div>
+
 </mat-menu>

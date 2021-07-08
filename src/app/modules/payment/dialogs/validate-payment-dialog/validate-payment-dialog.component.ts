@@ -3,6 +3,8 @@ import {FormBuilder, FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {PaymentOrdersGQL} from '../../../../generated/graphql';
 import {ValidatePaymentGQL} from "../../../../generated/mutation/graphql";
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-validate-payment-dialog',
@@ -19,7 +21,10 @@ export class ValidatePaymentDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private matDialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private validatePaymentGQL: ValidatePaymentGQL) { }
+    private validatePaymentGQL: ValidatePaymentGQL,
+    translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
+  }
 
   ngOnInit(): void {
     this.paymentOrder = this.data;

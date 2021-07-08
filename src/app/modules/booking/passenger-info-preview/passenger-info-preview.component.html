@@ -22,14 +22,17 @@
 <!--</div>-->
 <h1 mat-dialog-title style="text-align:center; font-size:32px">Entered passengers information</h1>
 <mat-dialog-content class="mat-typography" style="padding:1rem 2rem; border-radius: 4rem;">
+
+<h1 mat-dialog-title style="text-align:center; font-size:32px">{{'Entered passengers information'| translate}}</h1>
+<mat-dialog-content class="mat-typography" style="padding:2rem 4rem; border-radius: 4rem;">
   <ng-container *ngFor="let passanger of data.passenger.passengers let i = index" >
-  <h3 style="text-align: center">passenger {{i+1}}</h3>
+  <h3 style="text-align: center">{{'passenger'| translate}} {{i+1}}</h3>
   <div fxLayout="row">
-    <h2 class="name">Full Name: </h2>
+    <h2 class="name">{{'Full Name'| translate}}: </h2>
     <h2 class="value">{{passanger.name}}</h2>
   </div>
   <div fxLayout="row">
-    <h2 class="name">Phone Number: </h2>
+    <h2 class="name">{{'Phone Number'| translate}}: </h2>
     <h2 class="value">{{passanger.phone}}</h2>
   </div>
   </ng-container>

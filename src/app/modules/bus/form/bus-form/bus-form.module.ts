@@ -8,6 +8,7 @@ import {MatInputModule} from '@angular/material/input';
 import {BusSeatConfigurationModule} from '../../component/bus-seat-configuration/bus-seat-configuration.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -16,15 +17,16 @@ import {MatCardModule} from '@angular/material/card';
     exports: [
         BusFormComponent
     ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FlexModule,
-    MatFormFieldModule,
-    MatInputModule,
-    BusSeatConfigurationModule,
-    MatButtonModule,
-    MatCardModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FlexModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BusSeatConfigurationModule,
+        MatButtonModule,
+        MatCardModule,
+        LangModule
+    ]
 })
 export class BusFormModule { }

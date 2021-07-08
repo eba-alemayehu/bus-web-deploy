@@ -5,6 +5,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterModule} from '@angular/router';
+import {LangModule} from '../../lang.module';
 
 
 
@@ -18,7 +19,8 @@ import {RouterModule} from '@angular/router';
     MatToolbarModule,
     MatListModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    LangModule
   ]
 })
 export class SideNavModule { }

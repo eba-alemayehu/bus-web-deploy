@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-ticket',
@@ -9,7 +11,9 @@ import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 })
 export class TicketComponent implements OnInit {
   @Input() ticket;
-  constructor( public dialog: MatDialog) { }
+  constructor( public dialog: MatDialog, translate: TranslateService , private storage: StorageService) {
+    translate.use(this.storage.getLanguage('lang'));
+  }
 
   openDialog = () => {
     const dialogRef = this.dialog.open(TicketDetailComponent, {

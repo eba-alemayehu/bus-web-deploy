@@ -1,22 +1,22 @@
 <div id="container">
   <mat-tab-group>
-    <mat-tab label="New requests">
+    <mat-tab [label]="'New requests'| translate">
       <app-payments-table
-        title="New payment verification requests"
+        [title]="'New payment verification requests'| translate"
         [data]="newPaymentOrders"
         (verify)="validate($event)"
       ></app-payments-table>
     </mat-tab>
-    <mat-tab label="Verified">
+    <mat-tab [label]="'Verified'| translate">
       <app-payments-table
-        title="Verified payments"
+        [title]="'Verified payments'| translate"
         [data]="verfiedPaymentOrders"
         (verify)="validate($event)"
       ></app-payments-table>
     </mat-tab>
-    <mat-tab label="Denied">
+    <mat-tab [label]="'Denied'| translate">
       <app-payments-table
-        title="Denied payments"
+        [title]="'Denied payments'| translate"
         [data]="deniedPaymentOrders"
         (verify)="validate($event)"
       ></app-payments-table>

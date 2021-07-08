@@ -6,6 +6,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
+import {LangModule} from '../../lang.module';
 
 
 @NgModule({
@@ -13,13 +14,14 @@ import {RouterModule} from '@angular/router';
   exports: [
     PassengerInfoPreviewComponent
   ],
-  imports: [
-    NgxMatIntlTelInputModule,
-    CommonModule,
-    FlexModule,
-    MatDialogModule,
-    MatButtonModule,
-    RouterModule
-  ]
+    imports: [
+        NgxMatIntlTelInputModule,
+        CommonModule,
+        FlexModule,
+        MatDialogModule,
+        MatButtonModule,
+        RouterModule,
+        LangModule
+    ]
 })
 export class BookingModule { }

@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCardModule} from '@angular/material/card';
 import {BusSeatConfigurationModule} from '../../../bus/component/bus-seat-configuration/bus-seat-configuration.module';
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -21,22 +22,23 @@ import {BusSeatConfigurationModule} from '../../../bus/component/bus-seat-config
   exports: [
     TripFormComponent
   ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatAutocompleteModule,
-    MatCardModule,
-    BusSeatConfigurationModule
-  ],
+    imports: [
+        CommonModule,
+        FlexModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        MatCardModule,
+        BusSeatConfigurationModule,
+        LangModule
+    ],
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,

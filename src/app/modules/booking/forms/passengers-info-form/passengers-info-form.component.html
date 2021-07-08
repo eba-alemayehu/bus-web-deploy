@@ -1,17 +1,17 @@
 <form [formGroup]="passengerInfoFormGroup" (ngSubmit)="submit()">
   <ng-container *ngFor="let userFormGroup of passengers.controls; let i = index">
-    <h4>Passenger {{i+1}}</h4>
+    <h4>{{'Passenger'| translate}} {{i+1}}</h4>
     <div [formGroup]="userFormGroup" fxLayout="row">
       <div class="passenger-input-container">
         <mat-form-field appearance="outline">
           <mat-icon matPrefix color="accent">person</mat-icon>
-          <mat-label>Full name</mat-label>
+          <mat-label>{{'Full name'| translate}}</mat-label>
           <input matInput type="text" formControlName="name">
         </mat-form-field>
       </div>
       <div class="passenger-input-container">
         <mat-form-field appearance="outline">
-          <mat-label>Phone</mat-label>
+          <mat-label>{{'Phone'| translate}}</mat-label>
           <ngx-mat-intl-tel-input
             inputPlaceholder="911111111"
             [preferredCountries]="['et', 'us']"

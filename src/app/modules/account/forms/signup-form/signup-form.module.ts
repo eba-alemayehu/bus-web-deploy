@@ -10,6 +10,7 @@ import {ProfilePicModule} from '../../profile-pic/profile-pic.module';
 import {MatOptionModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@angular/flex-layout';
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -18,17 +19,18 @@ import {FlexModule} from '@angular/flex-layout';
   exports: [
     SignupFormComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    ProfilePicModule,
-    MatOptionModule,
-    MatButtonModule,
-    FlexModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        ProfilePicModule,
+        MatOptionModule,
+        MatButtonModule,
+        FlexModule,
+        LangModule
+    ]
 })
 export class SignupFormModule { }
