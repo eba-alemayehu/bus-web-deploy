@@ -9,7 +9,7 @@
   </button>
   <h1 routerLink="/" class="logo">Guzo</h1>
   <span class="spacer"></span>
-  <ul class="nav-list" style="list-style: none; display: flex; align-items: center;font-size: 1em">
+  <ul class="nav-list" style="list-style: none; display: flex; align-items: center;font-size: 1em; margin-bottom: 0">
     <li *ngIf="!this.registeredGuard.canActivate(null, null)">
       <button mat-button (click)="login()">{{'Login'| translate}}</button>
     </li>
@@ -17,12 +17,26 @@
       <app-profile-pic [matMenuTriggerFor]="menu"></app-profile-pic>
     </li>
   </ul>
-  <div class="selectl">
-    <select (change)="changeLang($event.target.value)">
-      <option value="en" [selected]="lang == 'en'">eng</option>
-      <option value="amh" [selected]="lang == 'amh'">amh</option>
-    </select>
-  </div>
+  <button mat-icon-button [matMenuTriggerFor]="languagemenu">
+    <mat-icon>language</mat-icon>
+  </button>
+  <mat-menu #languagemenu="matMenu">
+    <button mat-menu-item (click)="changeLang('en')">
+      <mat-icon>dialpad</mat-icon>
+      <span>English</span>
+    </button>
+    <button mat-menu-item (click)="changeLang('amh')" >
+      <mat-icon>voicemail</mat-icon>
+      <span>Amharic</span>
+    </button>
+  </mat-menu>
+<!--  <div class="select">-->
+<!--    -->
+<!--    <select (change)="changeLang($event.target.value)">-->
+<!--      <option value="en" [selected]="lang == 'en'">eng</option>-->
+<!--      <option value="amh" [selected]="lang == 'amh'">amh</option>-->
+<!--    </select>-->
+<!--  </div>-->
 <!--  <mat-form-field>-->
 <!--    <mat-select name="countryString" (valueChange)="changeLang($event.target.value)" placeholder="Lang">-->
 <!--      <mat-option [value]="'en'">eng</mat-option>-->
