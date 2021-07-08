@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { UsersTableDataSource, UsersTableItem } from './users-table-datasource';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTable} from '@angular/material/table';
+import {UsersTableDataSource} from './users-table-datasource';
+import {UsersGQL} from '../../../../generated/graphql';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-users-table',
@@ -10,21 +12,44 @@ import { UsersTableDataSource, UsersTableItem } from './users-table-datasource';
   styleUrls: ['./users-table.component.scss']
 })
 export class UsersTableComponent implements AfterViewInit, OnInit {
+  @Input() ticketerCarrierId = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<UsersTableItem>;
+  @ViewChild(MatTable) table: MatTable<any>;
+
   dataSource: UsersTableDataSource;
+  users = [];
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['name', 'phone'];
 
-  ngOnInit() {
-    this.dataSource = new UsersTableDataSource();
+  constructor(private usersGQL: UsersGQL) {
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
+    this.usersGQL.watch({
+      ticketerCarrier: this.ticketerCarrierId
+    }).valueChanges.pipe(map((response) => response.data.busUsers)).subscribe(
+      (users) => {
+        this.users = users.edges.map(e => e.node);
+        this.setUsersData();
+      }
+    );
+    this.setUsersData();
+  }
+
+  setUsersData(): void {
+    this.dataSource = new UsersTableDataSource(this.users);
+    this.ngAfterViewInit();
+  }
+
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  addNewUser(user): void{
+    this.users.push(user);
+    this.setUsersData();
   }
 }

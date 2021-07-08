@@ -174,6 +174,7 @@ export type BusNodeDriversArgs = {
   email_Icontains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   phone_Icontains?: Maybe<Scalars['String']>;
+  carrierticketer_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -192,6 +193,7 @@ export type BusNodeAssistantsArgs = {
   email_Icontains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   phone_Icontains?: Maybe<Scalars['String']>;
+  carrierticketer_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -678,7 +680,7 @@ export type CarrierNode = Node & {
   nameTg?: Maybe<Scalars['String']>;
   logo?: Maybe<Scalars['String']>;
   admins: BusUserNodeConnection;
-  ticketer: BusUserNodeConnection;
+  ticketers: BusUserNodeConnection;
   ratings: BusUserNodeConnection;
   carrierphoneSet: CarrierPhoneNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
@@ -707,10 +709,11 @@ export type CarrierNodeAdminsArgs = {
   email_Icontains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   phone_Icontains?: Maybe<Scalars['String']>;
+  carrierticketer_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
-export type CarrierNodeTicketerArgs = {
+export type CarrierNodeTicketersArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -725,6 +728,7 @@ export type CarrierNodeTicketerArgs = {
   email_Icontains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   phone_Icontains?: Maybe<Scalars['String']>;
+  carrierticketer_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -743,6 +747,7 @@ export type CarrierNodeRatingsArgs = {
   email_Icontains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   phone_Icontains?: Maybe<Scalars['String']>;
+  carrierticketer_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1394,6 +1399,7 @@ export type NotificationNodeUsersArgs = {
   email_Icontains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   phone_Icontains?: Maybe<Scalars['String']>;
+  carrierticketer_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1870,6 +1876,7 @@ export type QueryBusUsersArgs = {
   email_Icontains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   phone_Icontains?: Maybe<Scalars['String']>;
+  carrierticketer_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3582,6 +3589,7 @@ export type TripsQuery = (
 export type UsersQueryVariables = Exact<{
   phoneContains?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
+  ticketerCarrier?: Maybe<Scalars['ID']>;
 }>;
 
 
@@ -4799,8 +4807,12 @@ export const TripsDocument = gql`
     }
   }
 export const UsersDocument = gql`
-    query Users($phoneContains: String, $phone: String) {
-  busUsers(phone_Icontains: $phoneContains, phone: $phone) {
+    query Users($phoneContains: String, $phone: String, $ticketerCarrier: ID) {
+  busUsers(
+    phone_Icontains: $phoneContains
+    phone: $phone
+    carrierticketer_Carrier: $ticketerCarrier
+  ) {
     edges {
       node {
         id
