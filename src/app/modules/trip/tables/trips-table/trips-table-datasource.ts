@@ -26,12 +26,12 @@ export class TripsTableDataSource extends DataSource<any> {
   disconnect(): void {}
 
 
-  private getPagedData(data: any[]) {
+  private getPagedData(data: any[]): any {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
 
-  private getSortedData(data: any[]) {
+  private getSortedData(data: any[]): any {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -47,6 +47,6 @@ export class TripsTableDataSource extends DataSource<any> {
   }
 }
 
-function compare(a: string | number, b: string | number, isAsc: boolean) {
+function compare(a: string | number, b: string | number, isAsc: boolean): any {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

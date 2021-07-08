@@ -1,0 +1,14 @@
+query Count($startDate: DateTime, $endDate: DateTime){
+  countStat(startDate: $startDate, endDate: $endDate){
+    users{
+      date
+      count
+    }
+    tickets{
+      date
+      count
+    }
+    ticketsTotal
+    usersTotal
+  }
+}

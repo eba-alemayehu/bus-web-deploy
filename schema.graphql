@@ -489,6 +489,11 @@ type CreateAnonymousUserMutationPayload {
   clientMutationId: String
 }
 
+type DateCountType {
+  date: String
+  count: Int
+}
+
 scalar DateTime
 
 scalar Decimal
@@ -680,6 +685,7 @@ type PaymentOrderNodeEdge {
 }
 
 type Query {
+  countStat(startDate: DateTime, endDate: DateTime, start: Int, end: Int): TotalCount
   notifications(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection
   userNotifications(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection
   notification(id: ID!): NotificationNode
@@ -950,6 +956,13 @@ enum TicketState {
   BOOKED
   VERIFIED
   DECLINED
+}
+
+type TotalCount {
+  users: [DateCountType]
+  tickets: [DateCountType]
+  usersTotal: Int
+  ticketsTotal: Int
 }
 
 input TripLocationMutationInput {

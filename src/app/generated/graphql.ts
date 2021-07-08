@@ -1092,6 +1092,12 @@ export type CreateAnonymousUserMutationPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type DateCountType = {
+  __typename?: 'DateCountType';
+  date?: Maybe<Scalars['String']>;
+  count?: Maybe<Scalars['Int']>;
+};
+
 
 
 export type DeleteAccountInput = {
@@ -1544,6 +1550,7 @@ export type PaymentOrderNodeEdge = {
 
 export type Query = {
   __typename?: 'Query';
+  countStat?: Maybe<TotalCount>;
   notifications?: Maybe<NotificationNodeConnection>;
   userNotifications?: Maybe<UserNotificationNodeConnection>;
   notification?: Maybe<NotificationNode>;
@@ -1583,6 +1590,14 @@ export type Query = {
   me?: Maybe<UserNode>;
   user?: Maybe<UserNode>;
   users?: Maybe<UserNodeConnection>;
+};
+
+
+export type QueryCountStatArgs = {
+  startDate?: Maybe<Scalars['DateTime']>;
+  endDate?: Maybe<Scalars['DateTime']>;
+  start?: Maybe<Scalars['Int']>;
+  end?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2233,6 +2248,14 @@ export enum TicketState {
   Verified = 'VERIFIED',
   Declined = 'DECLINED'
 }
+
+export type TotalCount = {
+  __typename?: 'TotalCount';
+  users?: Maybe<Array<Maybe<DateCountType>>>;
+  tickets?: Maybe<Array<Maybe<DateCountType>>>;
+  usersTotal?: Maybe<Scalars['Int']>;
+  ticketsTotal?: Maybe<Scalars['Int']>;
+};
 
 export type TripLocationMutationInput = {
   trip: Scalars['ID'];
@@ -3140,6 +3163,27 @@ export type CitiesQuery = (
         ) }
       )> }
     )>> }
+  )> }
+);
+
+export type CountQueryVariables = Exact<{
+  startDate?: Maybe<Scalars['DateTime']>;
+  endDate?: Maybe<Scalars['DateTime']>;
+}>;
+
+
+export type CountQuery = (
+  { __typename?: 'Query' }
+  & { countStat?: Maybe<(
+    { __typename?: 'TotalCount' }
+    & Pick<TotalCount, 'ticketsTotal' | 'usersTotal'>
+    & { users?: Maybe<Array<Maybe<(
+      { __typename?: 'DateCountType' }
+      & Pick<DateCountType, 'date' | 'count'>
+    )>>>, tickets?: Maybe<Array<Maybe<(
+      { __typename?: 'DateCountType' }
+      & Pick<DateCountType, 'date' | 'count'>
+    )>>> }
   )> }
 );
 
@@ -4164,6 +4208,33 @@ export const CitiesDocument = gql`
   })
   export class CitiesGQL extends Apollo.Query<CitiesQuery, CitiesQueryVariables> {
     document = CitiesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CountDocument = gql`
+    query Count($startDate: DateTime, $endDate: DateTime) {
+  countStat(startDate: $startDate, endDate: $endDate) {
+    users {
+      date
+      count
+    }
+    tickets {
+      date
+      count
+    }
+    ticketsTotal
+    usersTotal
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountGQL extends Apollo.Query<CountQuery, CountQueryVariables> {
+    document = CountDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

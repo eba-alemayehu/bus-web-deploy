@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@agm/core@^3.0.0-beta.0":
+  "integrity" "sha512-KNmKbe89Nen7s7+mX63RgX88jBfajUZCFqkHIQ8Fd+Lf/ko/IY6yw4kPh0iYGxgPVPjpsHJ06GZ5m3ZxpEVX9A=="
+  "resolved" "https://registry.npmjs.org/@agm/core/-/core-3.0.0-beta.0.tgz"
+  "version" "3.0.0-beta.0"
+  dependencies:
+    "tslib" "^2.0.0"
+
 "@angular-devkit/architect@0.1002.3":
   "integrity" "sha512-7ainXRNO1njZ6bBbJXGpMzCh0OYrzuIRe/+zRj0ncV1YfEsJb2yWBuiza0+y2Ljco7hdd4wr+7eJm7cfn+NvAw=="
   "resolved" "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1002.3.tgz"
@@ -182,7 +189,7 @@
     "universal-analytics" "0.4.23"
     "uuid" "8.3.0"
 
-"@angular/common@^10.0.0", "@angular/common@^10.0.0 || ^11.0.0-0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/common@^8.2.14", "@angular/common@>=10.0.0", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0", "@angular/common@>=7.0.0", "@angular/common@>=7.2.0", "@angular/common@>=9.0.0", "@angular/common@~10.2.0", "@angular/common@~9.0.0", "@angular/common@10.2.4":
+"@angular/common@^10.0.0", "@angular/common@^10.0.0 || ^11.0.0-0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/common@^8.2.14", "@angular/common@^9.1.0 || ^10.0.0", "@angular/common@>=10.0.0", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0", "@angular/common@>=7.0.0", "@angular/common@>=7.2.0", "@angular/common@>=9.0.0", "@angular/common@~10.2.0", "@angular/common@~9.0.0", "@angular/common@10.2.4":
   "integrity" "sha512-bBfsLJNDQaC2OI1mReDJuSZ/uBb7Pf3HVpRmlQKNIPllIxqX1hLH8I3Plodrns9m32JMJ6FMsQthcP0KMdRCJA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-10.2.4.tgz"
   "version" "10.2.4"
@@ -220,7 +227,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@^10.0.0", "@angular/core@^10.0.0 || ^11.0.0-0", "@angular/core@^10.0.2", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@^8.2.14", "@angular/core@>=10.0.0", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0", "@angular/core@>=6.1.0 <13.0.0", "@angular/core@>=7.0.0", "@angular/core@>=7.2.0", "@angular/core@>=8.0.0", "@angular/core@~10.2.0", "@angular/core@~9.0.0", "@angular/core@10.2.4":
+"@angular/core@^10.0.0", "@angular/core@^10.0.0 || ^11.0.0-0", "@angular/core@^10.0.2", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@^8.2.14", "@angular/core@^9.1.0 || ^10.0.0", "@angular/core@>=10.0.0", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0", "@angular/core@>=6.1.0 <13.0.0", "@angular/core@>=7.0.0", "@angular/core@>=7.2.0", "@angular/core@>=8.0.0", "@angular/core@~10.2.0", "@angular/core@~9.0.0", "@angular/core@10.2.4":
   "integrity" "sha512-5xpAvmZwD9nZ8eWx10urjibqEeePGEiFXVMEn3IaJWgfdOcMmeSoioW9JUllT3w85+DlNVWbRbhz0YfE9a4jyw=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-10.2.4.tgz"
   "version" "10.2.4"
@@ -1789,6 +1796,11 @@
   dependencies:
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/googlemaps@^3.39.8":
+  "integrity" "sha512-ZWNoz/O8MPEpiajvj7QiqCY8tTLFNqNZ/a+s+zTV58wFVNAvvqV4bdGfnsjTb5Cs4V6wEsLrX8XRhmnyYJ2Tdg=="
+  "resolved" "https://registry.npmjs.org/@types/googlemaps/-/googlemaps-3.43.3.tgz"
+  "version" "3.43.3"
 
 "@types/http-proxy-agent@^2.0.2":
   "integrity" "sha512-2S6IuBRhqUnH1/AUx9k8KWtY3Esg4eqri946MnxTG5HwehF1S5mqLln8fcyMiuQkY72p2gH3W+rIPqp5li0LyQ=="

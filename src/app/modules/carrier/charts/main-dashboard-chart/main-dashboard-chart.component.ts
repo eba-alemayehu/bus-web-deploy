@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
+import {CountGQL} from "../../../../generated/graphql";
+import {map} from "rxjs/operators";
+import {echo} from "../../../../util/print";
 
 @Component({
   selector: 'app-main-dashboard-chart',
@@ -25,7 +28,14 @@ export class MainDashboardChartComponent implements OnInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
-  constructor() {
+  constructor(private countGQL: CountGQL) {
+    this.countGQL.watch({}).valueChanges.pipe(
+      map(response => response.data.countStat),
+    ).subscribe(
+      (response) => {
+        echo(response);
+      }
+    );
   }
 
   ngOnInit(): void {
