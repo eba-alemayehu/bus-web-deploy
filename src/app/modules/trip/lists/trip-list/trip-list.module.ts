@@ -8,6 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {RouterModule} from '@angular/router';
 import {TripModule} from '../../trip.module';
 import {LangModule} from '../../../../lang.module';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {LangModule} from '../../../../lang.module';
         RouterModule,
         TripModule,
         LangModule,
+        InfiniteScrollModule,
     ]
 })
 export class TripListModule { }

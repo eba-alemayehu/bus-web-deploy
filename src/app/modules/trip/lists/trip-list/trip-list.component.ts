@@ -20,7 +20,7 @@ export class TripListComponent implements OnInit, OnChanges {
 
   @Output() selected: EventEmitter<any> = new EventEmitter<any>();
   trips$;
-
+  $pageInfo:null;
   constructor(private tripsGQL: TripsGQL, translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }
@@ -56,5 +56,9 @@ export class TripListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.loadTrips();
+  }
+
+  onScroll(): void {
+    this.loadTrips()
   }
 }

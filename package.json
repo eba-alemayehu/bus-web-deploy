@@ -45,6 +45,7 @@
     "lottie-web": "^5.7.11",
     "moment": "^2.29.1",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-infinite-scroll": "^10.0.1",
     "ngx-lottie": "^7.0.1",
     "ngx-mat-intl-tel-input": "^4.0.0",
     "ngx-material-timepicker": "^5.5.3",
