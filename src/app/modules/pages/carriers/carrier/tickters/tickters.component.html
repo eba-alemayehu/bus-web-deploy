@@ -1,0 +1,10 @@
+<div fxLayout="column">
+  <div fxLayout="row" style="margin: 1em; justify-content: space-between">
+    <h1 style="text-align: center">Ticketers</h1>
+    <button mat-flat-button color="primary" (click)="addTicketer()">Add ticketer</button>
+  </div>
+  <mat-card>
+    <app-users-table [ticketerCarrierId]="ticketerCarrierId" #usersTable></app-users-table>
+  </mat-card>
+</div>
+
