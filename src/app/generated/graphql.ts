@@ -402,8 +402,10 @@ export type BusUserNode = Node & {
   createdAt: Scalars['DateTime'];
   userfcmtokenSet: UserFcmTokenNodeConnection;
   carrierSet: CarrierNodeConnection;
+  CarrierTicketer: CarrierNodeConnection;
   CarrierRating: CarrierNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
+  carrierticketerSet: CarrierTicketerNodeConnection;
   carrierratingSet: CarrierRatingNodeConnection;
   drivers: BusNodeConnection;
   assistants: BusNodeConnection;
@@ -439,6 +441,15 @@ export type BusUserNodeCarrierSetArgs = {
 };
 
 
+export type BusUserNodeCarrierTicketerArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
 export type BusUserNodeCarrierRatingArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -449,6 +460,15 @@ export type BusUserNodeCarrierRatingArgs = {
 
 
 export type BusUserNodeCarrieradminSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type BusUserNodeCarrierticketerSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -620,6 +640,7 @@ export type CarrierAdminNode = Node & {
   carrier: CarrierNode;
   user: BusUserNode;
   readPermission: Scalars['Boolean'];
+  writePermission: Scalars['Boolean'];
 };
 
 export type CarrierAdminNodeConnection = {
@@ -657,9 +678,11 @@ export type CarrierNode = Node & {
   nameTg?: Maybe<Scalars['String']>;
   logo?: Maybe<Scalars['String']>;
   admins: BusUserNodeConnection;
+  ticketer: BusUserNodeConnection;
   ratings: BusUserNodeConnection;
   carrierphoneSet: CarrierPhoneNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
+  carrierticketerSet: CarrierTicketerNodeConnection;
   carrierratingSet: CarrierRatingNodeConnection;
   busSet: BusNodeConnection;
   routeSet: RouteNodeConnection;
@@ -670,6 +693,24 @@ export type CarrierNode = Node & {
 
 
 export type CarrierNodeAdminsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['ID']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+};
+
+
+export type CarrierNodeTicketerArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -715,6 +756,15 @@ export type CarrierNodeCarrierphoneSetArgs = {
 
 
 export type CarrierNodeCarrieradminSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type CarrierNodeCarrierticketerSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -854,6 +904,41 @@ export type CarrierRatingNodeConnection = {
 export type CarrierRatingNodeEdge = {
   __typename?: 'CarrierRatingNodeEdge';
   node?: Maybe<CarrierRatingNode>;
+  cursor: Scalars['String'];
+};
+
+export type CarrierTicketerMutationInput = {
+  carrier: Scalars['ID'];
+  user?: Maybe<Scalars['ID']>;
+  userPhone?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type CarrierTicketerMutationPayload = {
+  __typename?: 'CarrierTicketerMutationPayload';
+  carrierTicketer?: Maybe<CarrierTicketerNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type CarrierTicketerNode = Node & {
+  __typename?: 'CarrierTicketerNode';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  carrier: CarrierNode;
+  user: BusUserNode;
+  readPermission: Scalars['Boolean'];
+  writePermission: Scalars['Boolean'];
+};
+
+export type CarrierTicketerNodeConnection = {
+  __typename?: 'CarrierTicketerNodeConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<CarrierTicketerNodeEdge>>;
+};
+
+export type CarrierTicketerNodeEdge = {
+  __typename?: 'CarrierTicketerNodeEdge';
+  node?: Maybe<CarrierTicketerNode>;
   cursor: Scalars['String'];
 };
 
@@ -1039,6 +1124,7 @@ export type Mutation = {
   validatePayment?: Maybe<ValidatePaymentMutationPayload>;
   carrier?: Maybe<CarrierMutationPayload>;
   carrierRating?: Maybe<CarrierRatingMutationPayload>;
+  carrierTicketer?: Maybe<CarrierTicketerMutationPayload>;
   busSeatConfiguration?: Maybe<BusSeatConfigurationMutationPayload>;
   busSeatConfigurationSeat?: Maybe<BusSeatConfigurationSeatMutationPayload>;
   bus?: Maybe<BusMutationPayload>;
@@ -1140,6 +1226,11 @@ export type MutationCarrierArgs = {
 
 export type MutationCarrierRatingArgs = {
   input: CarrierRatingMutationInput;
+};
+
+
+export type MutationCarrierTicketerArgs = {
+  input: CarrierTicketerMutationInput;
 };
 
 
@@ -2327,8 +2418,10 @@ export type UserNode = Node & {
   createdAt: Scalars['DateTime'];
   userfcmtokenSet: UserFcmTokenNodeConnection;
   carrierSet: CarrierNodeConnection;
+  CarrierTicketer: CarrierNodeConnection;
   CarrierRating: CarrierNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
+  carrierticketerSet: CarrierTicketerNodeConnection;
   carrierratingSet: CarrierRatingNodeConnection;
   drivers: BusNodeConnection;
   assistants: BusNodeConnection;
@@ -2364,6 +2457,15 @@ export type UserNodeCarrierSetArgs = {
 };
 
 
+export type UserNodeCarrierTicketerArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
 export type UserNodeCarrierRatingArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -2374,6 +2476,15 @@ export type UserNodeCarrierRatingArgs = {
 
 
 export type UserNodeCarrieradminSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserNodeCarrierticketerSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;

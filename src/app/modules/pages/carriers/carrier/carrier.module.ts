@@ -9,6 +9,7 @@ import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
 import {LangModule} from '../../../../lang.module';
 import {MainStatModule} from '../../../carrier/component/dashboard/main-stat/main-stat.module';
 import {TripsTableModule} from '../../../trip/tables/trips-table/trips-table.module';
+import {MainDashboardChartModule} from "../../../carrier/charts/main-dashboard-chart/main-dashboard-chart.module";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {TripsTableModule} from '../../../trip/tables/trips-table/trips-table.mod
     ShimmerModule,
     MainStatModule,
     TripsTableModule,
-    LangModule
+    LangModule,
+    MainDashboardChartModule
   ]
 })
 export class CarrierModule { }

@@ -1,0 +1,19 @@
+mutation CarrierTicketer($input: CarrierTicketerMutationInput!){
+  carrierTicketer(input: $input){
+    carrierTicketer{
+      carrier{
+        id
+        name
+        logo
+      }
+      user{
+        id
+        firstName
+        lastName
+        email
+        phone
+        profilePic
+      }
+    }
+  }
+}

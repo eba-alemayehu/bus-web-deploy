@@ -220,8 +220,10 @@ type BusUserNode implements Node {
   createdAt: DateTime!
   userfcmtokenSet(offset: Int, before: String, after: String, first: Int, last: Int): UserFCMTokenNodeConnection!
   carrierSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
+  CarrierTicketer(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   CarrierRating(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
+  carrierticketerSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierTicketerNodeConnection!
   carrierratingSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierRatingNodeConnection!
   drivers(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, busSeatConfiguration: ID): BusNodeConnection!
   assistants(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, busSeatConfiguration: ID): BusNodeConnection!
@@ -274,6 +276,7 @@ type CarrierAdminNode implements Node {
   carrier: CarrierNode!
   user: BusUserNode!
   readPermission: Boolean!
+  writePermission: Boolean!
 }
 
 type CarrierAdminNodeConnection {
@@ -307,9 +310,11 @@ type CarrierNode implements Node {
   nameTg: String
   logo: String
   admins(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
+  ticketer(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
   ratings(offset: Int, before: String, after: String, first: Int, last: Int, id: ID, firstName: String, firstName_Icontains: String, lastName: String, lastName_Icontains: String, email: String, email_Icontains: String, phone: String, phone_Icontains: String): BusUserNodeConnection!
   carrierphoneSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierPhoneNodeConnection!
   carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
+  carrierticketerSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierTicketerNodeConnection!
   carrierratingSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierRatingNodeConnection!
   busSet(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, busSeatConfiguration: ID): BusNodeConnection!
   routeSet(offset: Int, before: String, after: String, first: Int, last: Int, leavingFrom: ID, destination: ID): RouteNodeConnection!
@@ -371,6 +376,37 @@ type CarrierRatingNodeConnection {
 
 type CarrierRatingNodeEdge {
   node: CarrierRatingNode
+  cursor: String!
+}
+
+input CarrierTicketerMutationInput {
+  carrier: ID!
+  user: ID
+  userPhone: String
+  clientMutationId: String
+}
+
+type CarrierTicketerMutationPayload {
+  carrierTicketer: CarrierTicketerNode
+  clientMutationId: String
+}
+
+type CarrierTicketerNode implements Node {
+  id: ID!
+  createdAt: DateTime!
+  carrier: CarrierNode!
+  user: BusUserNode!
+  readPermission: Boolean!
+  writePermission: Boolean!
+}
+
+type CarrierTicketerNodeConnection {
+  pageInfo: PageInfo!
+  edges: [CarrierTicketerNodeEdge]!
+}
+
+type CarrierTicketerNodeEdge {
+  node: CarrierTicketerNode
   cursor: String!
 }
 
@@ -497,6 +533,7 @@ type Mutation {
   validatePayment(input: ValidatePaymentMutationInput!): ValidatePaymentMutationPayload
   carrier(input: CarrierMutationInput!): CarrierMutationPayload
   carrierRating(input: CarrierRatingMutationInput!): CarrierRatingMutationPayload
+  carrierTicketer(input: CarrierTicketerMutationInput!): CarrierTicketerMutationPayload
   busSeatConfiguration(input: BusSeatConfigurationMutationInput!): BusSeatConfigurationMutationPayload
   busSeatConfigurationSeat(input: BusSeatConfigurationSeatMutationInput!): BusSeatConfigurationSeatMutationPayload
   bus(input: BusMutationInput!): BusMutationPayload
@@ -1084,8 +1121,10 @@ type UserNode implements Node {
   createdAt: DateTime!
   userfcmtokenSet(offset: Int, before: String, after: String, first: Int, last: Int): UserFCMTokenNodeConnection!
   carrierSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
+  CarrierTicketer(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   CarrierRating(offset: Int, before: String, after: String, first: Int, last: Int): CarrierNodeConnection!
   carrieradminSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierAdminNodeConnection!
+  carrierticketerSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierTicketerNodeConnection!
   carrierratingSet(offset: Int, before: String, after: String, first: Int, last: Int): CarrierRatingNodeConnection!
   drivers(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, busSeatConfiguration: ID): BusNodeConnection!
   assistants(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, busSeatConfiguration: ID): BusNodeConnection!
