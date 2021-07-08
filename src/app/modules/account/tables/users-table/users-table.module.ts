@@ -8,12 +8,15 @@ import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
-  declarations: [UsersTableComponent],
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
-  ]
+    declarations: [UsersTableComponent],
+    exports: [
+        UsersTableComponent
+    ],
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
+    ]
 })
 export class UsersTableModule { }

@@ -1,5 +1,5 @@
-query Users($phoneContains: String, $phone: String){
-  busUsers(phone_Icontains: $phoneContains, phone: $phone){
+query Users($phoneContains: String, $phone: String, $ticketerCarrier: ID){
+  busUsers(phone_Icontains: $phoneContains, phone: $phone, carrierticketer_Carrier: $ticketerCarrier){
     edges{
       node{
         id

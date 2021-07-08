@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: '', component: CarrierComponent },
   { path: 'trips', loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule) },
   { path: 'buses', loadChildren: () => import('./buses/buses.module').then(m => m.BusesModule) },
-  { path: 'payment', loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule) }];
+  { path: 'payment', loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule) },
+  { path: 'ticketers', loadChildren: () => import('./tickters/tickters.module').then(m => m.TicktersModule) }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
