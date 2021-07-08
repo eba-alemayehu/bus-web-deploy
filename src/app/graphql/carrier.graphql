@@ -3,6 +3,18 @@ query Carrier($id: ID!, $getTrips: Boolean!){
     id
     name
     logo
+#    ticketers @include(if: $getTicketers) {
+#      edges{
+#        node{
+#          id
+#          firstName
+#          lastName
+#          phone
+#          email
+#          profilePic
+#        }
+#      }
+#    }
     tripSet @include(if: $getTrips) {
       edges{
         node{

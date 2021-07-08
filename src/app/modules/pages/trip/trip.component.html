@@ -24,4 +24,9 @@
       <app-bus-seat-configuration [busSeatConfiguration]="trip?.busSeatConfiguration"></app-bus-seat-configuration>
     </mat-card>
   </div>
+
+  <div class="ticket">
+    <h1 style="text-align: center;font-size:2em;">Trip Ticket</h1>
+    <app-tickets-table [fileName]="fileName"></app-tickets-table>
+  </div>
 </div>

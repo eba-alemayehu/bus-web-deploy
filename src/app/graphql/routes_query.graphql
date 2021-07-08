@@ -1,0 +1,24 @@
+query Routes($order: String) {
+    routes(order: $order){
+        edges{
+            node{
+                id
+                distance
+                leavingFrom{
+                    id
+                    name
+                    nameAm
+                    nameOr
+                    nameTg
+                }
+                destination{
+                    id
+                    name
+                    nameAm
+                    nameOr
+                    nameTg
+                }
+            }
+        }
+    }
+}

@@ -32,8 +32,8 @@ export class TripSearchFormComponent implements OnInit {
     destination: ['', Validators.required],
     roundTrip: [false],
     departureDate: ['', Validators.required],
-    returnDate: ['', ],
-    roundTripDepartureDate: ['',  Validators.required],
+    returnDate: [''],
+    roundTripDepartureDate: ['', ],
   });
   passengers = 1;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -99,10 +99,14 @@ export class TripSearchFormComponent implements OnInit {
     this.tripFomGroup.controls.departureDate.setValue(selectedDate);
   }
 
+  returnDatePicker = (selectedDate) => {
+    this.tripFomGroup.controls.returnDate.setValue(selectedDate);
+  }
+
   _submit(): void {
     const input = this.tripFomGroup.value;
     input.passengers = this.passengers;
-    if (this.formSubmit.hasError){
+    if (this.tripFomGroup.invalid){
       return;
     }
     this.formSubmit.emit(input);

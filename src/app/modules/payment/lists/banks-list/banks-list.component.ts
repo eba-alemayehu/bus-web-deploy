@@ -21,11 +21,11 @@ export class BanksListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.breakpoint = (window.innerWidth <= 1200) ? 1 : 4;
+    this.breakpoint = (window.innerWidth <= 1200) ? 1 : 3;
   }
 
   onResize = (event) => {
-    this.breakpoint = (event.target.innerWidth <= 1200) ? 1 : 4;
+    this.breakpoint = (event.target.innerWidth <= 1200) ? 1 : 3;
   }
 
 

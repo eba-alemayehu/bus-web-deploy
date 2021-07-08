@@ -1,0 +1,15 @@
+<mat-grid-list cols="3" rowHeight="50" style="width: 160px">
+  <mat-grid-tile [rowspan]="2">
+    <mat-grid-list cols="2" rowHeight="20" style="width: 24px">
+      <mat-grid-tile [colspan]="2"><mat-icon>location_on</mat-icon></mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+      <mat-grid-tile style="border-left: 2px dotted gray"></mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+      <mat-grid-tile style="border-left: 2px dotted gray"></mat-grid-tile>
+      <mat-grid-tile [colspan]="2"><mat-icon>gps_fixed</mat-icon></mat-grid-tile>
+    </mat-grid-list>
+  </mat-grid-tile>
+  <!-- <mat-grid-tile>2</mat-grid-tile> -->
+  <mat-grid-tile [colspan]="2" class="route-name"><span>{{route.leavingFrom.name}}</span></mat-grid-tile>
+  <mat-grid-tile [colspan]="2" class="route-name"><span>{{route.destination.name}}</span></mat-grid-tile>
+</mat-grid-list>
