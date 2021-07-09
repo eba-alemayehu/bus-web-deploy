@@ -34,10 +34,7 @@
     ></app-main-stat>
   </div>
   <div fxLayout="row" style="justify-content: space-between" class="row2">
-    <mat-card style="flex: 1; ">
-      <h2>Tickets chart</h2>
-      <app-main-dashboard-chart *ngIf="carrier" [carrier]="carrier?.id"></app-main-dashboard-chart>
-    </mat-card>
+
     <mat-card style="flex: 2">
       <h2>Recent trips</h2>
       <app-trips-table
@@ -45,6 +42,17 @@
         [displayedColumns]="['departureTime', 'leavingFrom', 'destination']"
         [carrier]="carrier.id"></app-trips-table>
     </mat-card>
-
+    <mat-card style="flex: 1; ">
+      <h2>Tickets chart</h2>
+      <app-main-dashboard-chart *ngIf="carrier" [carrier]="carrier?.id"></app-main-dashboard-chart>
+    </mat-card>
+  </div>
+  <div fxLayout="row" class="row3">
+    <mat-card style="width: 100%">
+      <app-links-list></app-links-list>
+    </mat-card>
+    <mat-card style="width: 100%">
+      <app-links-list></app-links-list>
+    </mat-card>
   </div>
 </div>

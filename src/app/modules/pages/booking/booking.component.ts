@@ -19,7 +19,7 @@ export class BookingComponent implements OnInit {
   public trip = null;
   bookingOrder: any;
   booking = false;
-
+  isValid: boolean;
   // tslint:disable-next-line:max-line-length
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -55,6 +55,7 @@ export class BookingComponent implements OnInit {
     return dialogRef;
   }
 
+
   ngOnInit(): void {
   }
 
@@ -67,20 +68,22 @@ export class BookingComponent implements OnInit {
       return e;
     });
     this.openDialog().afterClosed().subscribe(
-      () => {
-        this.booking = true;
-        this.bookTicketGQL.mutate({
-          input: {
-            trip: this.trip.id,
-            passengers: JSON.stringify(this.passengerInfo),
-          }
-        }).subscribe(
-          (data) => {
-            this.booking = false;
-            this.bookingOrder = data.data.bookTicket.order.id;
-            this.router.navigate(['booking/payment/' + this.bookingOrder]);
-          }
-        );
+      (confirmation) => {
+        if (confirmation){
+          this.booking = true;
+          this.bookTicketGQL.mutate({
+            input: {
+              trip: this.trip.id,
+              passengers: JSON.stringify(this.passengerInfo),
+            }
+          }).subscribe(
+            (data) => {
+              this.booking = false;
+              this.bookingOrder = data.data.bookTicket.order.id;
+              this.router.navigate(['booking/payment/' + this.bookingOrder]);
+            }
+          );
+        }
       }
     );
   }

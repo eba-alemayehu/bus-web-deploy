@@ -14,8 +14,8 @@
   </div>
   </ng-container>
   <mat-dialog-actions align="end">
-    <button [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Cancel</button>
-    <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Proceed to Payment</a>
+    <button cdkFocusInitial mat-flat-button color="primary" (click)="matDialogRef.close(false)">Cancel</button>
+    <a  cdkFocusInitial mat-flat-button color="primary" (click)="matDialogRef.close(true)">Proceed to Payment</a>
   </mat-dialog-actions>
 </mat-dialog-content>
 

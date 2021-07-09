@@ -14,6 +14,7 @@ export class TicktersComponent implements OnInit {
   @ViewChild('usersTable') usersTable;
 
   ticketerCarrierId;
+  ticketOfficeId;
   constructor(
     private activatedRoute: ActivatedRoute,
     private carrierTicketerGQL: CarrierTicketerGQL,
@@ -21,6 +22,7 @@ export class TicktersComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (params) => {
         this.ticketerCarrierId = params.id;
+        this.ticketOfficeId = params.ticketOffice;
       }
     );
   }
@@ -39,7 +41,7 @@ export class TicktersComponent implements OnInit {
   private ticketerActtion(user, remove: boolean): void {
         this.carrierTicketerGQL.mutate({
           input: {
-            carrier: this.ticketerCarrierId,
+            ticketOffice: this.ticketOfficeId,
             user: user.id,
             remove: remove
           }
