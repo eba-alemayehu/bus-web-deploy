@@ -15,10 +15,12 @@ export class FormComponent implements OnInit {
   public carrier;
   mode: string;
   private tripId: string;
+  backUrl: any;
 
   constructor(private activatedRoute: ActivatedRoute, private carrierGQL: CarrierGQL, private router: Router,
               translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
+    this.backUrl = this.activatedRoute.snapshot.queryParams.backUrl;
     this.activatedRoute.params.subscribe(
       (params) => {
         this.mode = params.mode;

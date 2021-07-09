@@ -1,3 +1,8 @@
-<h1>Are you sure you want to cancle this trip</h1>
-<button mat-flat-button (click)="cancelTrip()">Yes</button>
-<button mat-flat-button (click)="cancel()">No</button>
+<div  *ngIf="!cancelled">
+  <h1>Are you sure you want to cancel this trip</h1>
+  <button mat-flat-button (click)="cancelTrip()">Yes</button>
+  <button mat-flat-button (click)="cancel()">No</button>
+
+</div>
+
+<h1 *ngIf="cancelled">Trip canceled</h1>

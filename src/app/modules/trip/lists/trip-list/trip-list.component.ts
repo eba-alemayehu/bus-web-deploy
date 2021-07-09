@@ -113,7 +113,9 @@ export class TripListComponent implements OnInit {
 
   cancel(trip: any): void {
     // this.matDialog.open(DeleteTripComponent, {width: '144px'});
-    this.router.navigate([this.router.url, 'form', 'cancel', trip.node.id]);
+    this.router.navigate([this.router.url, 'form', 'cancel', trip.node.id], {
+      queryParams: {backUrl: this.router.url.toString()}
+    });
   }
 
   changeDate(trip: any): void {
