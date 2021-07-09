@@ -40,6 +40,7 @@ export class TripFormComponent implements OnInit {
   allDestinationCity = [];
   busSeatConfigurations$: Observable<any>;
   busSeatConfiguration: any;
+  todayDate = new Date();
 
 
   constructor(
