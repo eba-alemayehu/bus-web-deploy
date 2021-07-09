@@ -29,8 +29,8 @@ export class UsersTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.usersGQL.watch({
-      carrierticketer_TicketOffice_Carrier: this.ticketerCarrierId,
-      carrierticketer_TicketOffice: this.ticketOffice
+      carrierticketerTicketOfficeCarrier: this.ticketerCarrierId,
+      carrierticketerTicketOffice: this.ticketOffice
     }).valueChanges.pipe(map((response) => response.data.busUsers)).subscribe(
       (users) => {
         this.users = users.edges.map(e => e.node);
@@ -42,7 +42,9 @@ export class UsersTableComponent implements AfterViewInit, OnInit {
 
   setUsersData(): void {
     this.dataSource = new UsersTableDataSource(this.users);
-    this.ngAfterViewInit();
+    if (this.dataSource){
+      this.ngAfterViewInit();
+    }
   }
 
   ngAfterViewInit(): void {

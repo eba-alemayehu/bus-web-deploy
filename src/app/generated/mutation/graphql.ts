@@ -344,6 +344,28 @@ export type BusSeatConfigurationSeatNodeTicketSetArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 export type BusSeatConfigurationSeatNodeConnection = {
@@ -380,6 +402,28 @@ export type BusStopNodeTicketSetArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 export type BusStopNodeConnection = {
@@ -573,6 +617,28 @@ export type BusUserNodeTicketSetArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1520,6 +1586,28 @@ export type PaymentOrderNodeTicketSetArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 export type PaymentOrderNodeConnection = {
@@ -1693,6 +1781,28 @@ export type QueryTicketsArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1706,6 +1816,28 @@ export type QueryMyTicketsArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 
@@ -2398,6 +2530,28 @@ export type TripNodeTicketSetArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 export type TripNodeConnection = {
@@ -2666,6 +2820,28 @@ export type UserNodeTicketSetArgs = {
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   trip_Carrier?: Maybe<Scalars['ID']>;
   trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_DepartureTime?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Gte?: Maybe<Scalars['DateTime']>;
+  trip_DepartureTime_Lte?: Maybe<Scalars['DateTime']>;
+  trip_Route_LeavingFrom?: Maybe<Scalars['ID']>;
+  trip_Route_LeavingFrom_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Route_Destination?: Maybe<Scalars['ID']>;
+  trip_Route_Destination_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  phone_Icontains?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  phone_Startswith?: Maybe<Scalars['String']>;
+  firstName_Icontains?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  firstName_Startswith?: Maybe<Scalars['String']>;
+  lastName_Icontains?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastName_Startswith?: Maybe<Scalars['String']>;
+  ticketNumber_Icontains?: Maybe<Scalars['String']>;
+  ticketNumber?: Maybe<Scalars['String']>;
+  ticketNumber_Startswith?: Maybe<Scalars['String']>;
+  busStop?: Maybe<Scalars['ID']>;
+  busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  user?: Maybe<Scalars['ID']>;
 };
 
 

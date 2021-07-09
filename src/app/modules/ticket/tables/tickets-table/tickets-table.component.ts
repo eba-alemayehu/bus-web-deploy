@@ -6,6 +6,7 @@ import {TicketsTableDataSource} from './tickets-table-datasource';
 import * as XLSX from 'xlsx';
 import {TicketsGQL} from '../../../../generated/graphql';
 import {map} from 'rxjs/operators';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-tickets-table',
@@ -15,6 +16,7 @@ import {map} from 'rxjs/operators';
 export class TicketsTableComponent implements AfterViewInit, OnInit {
   @Input() tripId;
   @Input() carrier;
+  @Input() user;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
@@ -29,7 +31,9 @@ export class TicketsTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.ticketsGQL.watch({
-      trip: this.tripId
+      trip: this.tripId,
+      carrier: this.carrier,
+      user: this.user
     }).valueChanges.pipe(map(response => response.data.tickets)).subscribe(
       (tickets) => {
         this.tickets = tickets.edges.map(e => e.node);

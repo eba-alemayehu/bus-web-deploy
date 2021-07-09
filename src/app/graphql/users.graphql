@@ -1,13 +1,13 @@
 query Users(
   $phoneContains: String,
   $phone: String,
-  $carrierticketer_TicketOffice_Carrier: ID,
-  $carrierticketer_TicketOffice: ID
+  $carrierticketerTicketOfficeCarrier: ID,
+  $carrierticketerTicketOffice: ID
 ){
   busUsers(
     phone_Icontains: $phoneContains, phone: $phone,
-    carrierticketer_TicketOffice: $carrierticketer_TicketOffice,
-    carrierticketer_TicketOffice_Carrier: $carrierticketer_TicketOffice_Carrier){
+    carrierticketer_TicketOffice: $carrierticketerTicketOffice,
+    carrierticketer_TicketOffice_Carrier: $carrierticketerTicketOfficeCarrier){
     edges{
       node{
         id

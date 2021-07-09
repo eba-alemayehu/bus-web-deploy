@@ -7,6 +7,7 @@
     <app-users-table [ticketerCarrierId]="ticketerCarrierId" [ticketOffice]="ticketOfficeId" #usersTable>
       <ng-template let-row>
         <button mat-icon-button (click)="removeTicketer(row)" color="warn"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button [routerLink]="'tickets/'+row.id">Tickets <mat-icon>launch</mat-icon></button>
       </ng-template>
     </app-users-table>
   </mat-card>
