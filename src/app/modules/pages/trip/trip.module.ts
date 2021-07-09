@@ -11,30 +11,27 @@ import {BusSeatConfigurationModule} from '../../bus/component/bus-seat-configura
 import {SelectBusDialogModule} from '../../bus/dialog/select-bus-dialog/select-bus-dialog.module';
 import {TripDatetimeModule} from '../../trip/components/trip-datetime/trip-datetime.module';
 import {LangModule} from '../../../lang.module';
-import {TripsTableModule} from "../../trip/tables/trips-table/trips-table.module";
-import {TicketsModule} from "../../ticket/ticket.module";
-import {TicketsTableModule} from "../../ticket/tables/tickets-table/tickets-table.module";
-import {MatIconModule} from '@angular/material/icon';
-import { CancelTripComponent } from './cancel-trip/cancel-trip.component';
+import {TripsTableModule} from '../../trip/tables/trips-table/trips-table.module';
+import {TicketsModule} from '../../ticket/ticket.module';
+import {TicketsTableModule} from '../../ticket/tables/tickets-table/tickets-table.module';
 
 
 @NgModule({
   declarations: [TripComponent],
-  imports: [
-    CommonModule,
-    TripRoutingModule,
-    MatCardModule,
-    FlexModule,
-    BusTumbModule,
-    MatButtonModule,
-    BusSeatConfigurationModule,
-    SelectBusDialogModule,
-    TripDatetimeModule,
-    LangModule,
-    TripsTableModule,
-    TicketsModule,
-    TicketsTableModule,
-    MatIconModule
-  ]
+    imports: [
+        CommonModule,
+        TripRoutingModule,
+        MatCardModule,
+        FlexModule,
+        BusTumbModule,
+        MatButtonModule,
+        BusSeatConfigurationModule,
+        SelectBusDialogModule,
+        TripDatetimeModule,
+        LangModule,
+        TripsTableModule,
+        TicketsModule,
+        TicketsTableModule
+    ]
 })
 export class TripModule { }

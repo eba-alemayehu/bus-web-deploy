@@ -13,6 +13,7 @@ import {QRCodeModule} from 'angularx-qrcode';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {LangModule} from '../../lang.module';
+import {ShimmerModule} from "../common/shimmer/shimmer.module";
 
 
 
@@ -33,7 +34,8 @@ import {LangModule} from '../../lang.module';
         QRCodeModule,
         MatButtonModule,
         MatDialogModule,
-        LangModule
+        LangModule,
+        ShimmerModule
     ]
 })
 export class TicketsModule { }

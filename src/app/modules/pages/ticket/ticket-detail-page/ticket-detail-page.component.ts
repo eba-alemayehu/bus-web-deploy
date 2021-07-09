@@ -9,7 +9,8 @@ import {echo} from '../../../../util/print';
   styleUrls: ['./ticket-detail-page.component.scss']
 })
 export class TicketDetailPageComponent implements OnInit {
-  trip: any;
+  ticket: any;
+  loading;
 
 
   constructor(private activatedRoute: ActivatedRoute, private myTicket: MyTicketGQL) {
@@ -18,12 +19,14 @@ export class TicketDetailPageComponent implements OnInit {
       myTicket.watch({ id: params.id}).valueChanges.subscribe(
         (response) => {
           echo(response);
-          this.trip = response.data;
+          this.ticket = response.data.ticket;
+          this.loading = response.loading;
         });
     });
   }
 
   ngOnInit(): void {
+    this.loading = true;
   }
 
 }

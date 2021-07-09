@@ -1,3 +1,10 @@
 <div style="padding:8px" *ngFor="let ticket of tickets">
   <app-ticket [ticket]="ticket.node"></app-ticket>
 </div>
+
+<ng-container *ngIf = "loading">
+<div  style="padding:8px" *ngFor="let ticket of [1,2,3,4]">
+  <app-ticket [loading]="loading"></app-ticket>
+</div>
+</ng-container>
+
