@@ -7,6 +7,7 @@ import {TripDatetimeModule} from '../trip-datetime/trip-datetime.module';
 import {PriceModule} from '../../../common/price/price.module';
 import {MatCardModule} from '@angular/material/card';
 import {ShimmerModule} from "../../../common/shimmer/shimmer.module";
+import {CarrierTumbModule} from "../../../carrier/component/carrier-tumb/carrier-tumb.module";
 
 
 
@@ -15,14 +16,15 @@ import {ShimmerModule} from "../../../common/shimmer/shimmer.module";
     exports: [
         TripListItemComponent
     ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    MatButtonModule,
-    TripDatetimeModule,
-    PriceModule,
-    MatCardModule,
-    ShimmerModule
-  ]
+    imports: [
+        CommonModule,
+        FlexModule,
+        MatButtonModule,
+        TripDatetimeModule,
+        PriceModule,
+        MatCardModule,
+        ShimmerModule,
+        CarrierTumbModule
+    ]
 })
 export class TripListItemModule { }

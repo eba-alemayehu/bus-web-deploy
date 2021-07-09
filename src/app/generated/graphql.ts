@@ -3634,7 +3634,7 @@ export type TripsQuery = (
       { __typename?: 'TripNodeEdge' }
       & { node?: Maybe<(
         { __typename?: 'TripNode' }
-        & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'createdAt'>
+        & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'price' | 'createdAt'>
         & { bus?: Maybe<(
           { __typename?: 'BusNode' }
           & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
@@ -4888,6 +4888,7 @@ export const TripsDocument = gql`
         id
         departureTime
         arrivalTime
+        price
         bus {
           id
           plateNumber

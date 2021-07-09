@@ -25,6 +25,7 @@ query Trips(
         id
         departureTime
         arrivalTime
+        price
         bus{
           id
           plateNumber

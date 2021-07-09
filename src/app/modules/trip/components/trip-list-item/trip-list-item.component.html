@@ -1,11 +1,8 @@
 <div fxLayout="row" style="max-width: 900px; margin:auto" *ngIf="!loading">
-  <div fxLayout="column">
-    <img src="/assets/yenabus.png" style="width: 60px;align-self: center; padding-top: 2rem"/>
-    <mat-card-title style="font-size: 1.1em; text-align: center; margin:auto">{{trip?.carrier.name}}</mat-card-title>
-  </div>
   <div fxLayout="column" style="margin-left: 2em">
-    <app-trip-datetime [trip]="trip"></app-trip-datetime>
-    <div>
+    <app-carrier-tumb *ngIf="trip" [carrier]="trip?.carrier"></app-carrier-tumb>
+    <app-trip-datetime [trip]="trip" style="margin-top: 1.5em"></app-trip-datetime>
+    <div style="margin-top: 1.5em">
       <i style="background: #fff1ff; color: #12005e; padding: .3em 1em; margin: 2em; border-radius: 6px">{{trip?.busSeatConfiguration.busseatconfigurationseatSet.edges.length | json}}
         seats</i>
     </div>
@@ -13,7 +10,7 @@
   <span class="spacer"></span>
   <div fxLayout="column" style="justify-content: space-between;">
     <div fxLayout="row-reverse">
-      <app-price [price]="2300"></app-price>
+      <app-price [price]="trip?.price"></app-price>
     </div>
     <ng-content select="[buttons]"></ng-content>
   </div>
@@ -22,12 +19,8 @@
 <!--   shimmer-->
 
 <div fxLayout="row" style="max-width: 900px; margin:auto" *ngIf="loading">
-  <div fxLayout="column">
-    <app-custom-shimmer [width]="60" [height]="60" [circle]="true"
-                        [style]="'align-self: center; padding-top: 2rem'"></app-custom-shimmer>
-    <app-custom-shimmer [width]="80" [height]="16" [style]="'text-align: center; margin:auto'"></app-custom-shimmer>
-  </div>
   <div fxLayout="column" style="margin-left: 2em">
+    <app-carrier-tumb [loading]="true"></app-carrier-tumb>
     <div fxLayout="row" style="align-items: center">
       <div fxLayout="column" class="time-city-container">
         <app-custom-shimmer [width]="60" height="16"></app-custom-shimmer>

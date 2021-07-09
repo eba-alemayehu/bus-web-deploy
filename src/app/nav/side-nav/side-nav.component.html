@@ -14,8 +14,8 @@
     <h4 matLine>{{'Carrier'| translate}}</h4>
     <!--    <p matLine class="demo-2"> {{note.updated}} </p>-->
   </mat-list-item>
-  <mat-list-item routerLink="/about">
-    <mat-icon matListIcon class="gradient-red">info</mat-icon>
+  <mat-list-item routerLink="/about" [class.active]="router.url.startsWith('/about')">
+    <mat-icon matListIcon class="gradient-gray">info</mat-icon>
     <h4 matLine>{{'About us'| translate}}</h4>
     <!--    <p matLine class="demo-2"> {{note.updated}} </p>-->
   </mat-list-item>
