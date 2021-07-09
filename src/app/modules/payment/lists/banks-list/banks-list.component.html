@@ -1,7 +1,16 @@
-<mat-grid-list [cols]="breakpoint" [rowHeight]="'140px'"  (window:resize)="onResize($event)" >
+<h1>Bank List</h1>
+<mat-grid-list *ngIf="!loading" [cols]="breakpoint" [rowHeight]="'140px'"  (window:resize)="onResize($event)" >
   <ng-container *ngFor="let bank of bankAccounts">
     <mat-grid-tile>
       <app-bank-card [orderId]="orderId" [bank]="bank.node"></app-bank-card>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
+
+<mat-grid-list *ngIf="loading" [cols]="breakpoint" [rowHeight]="'140px'"  (window:resize)="onResize($event)" >
+  <ng-container *ngFor="let bank of [1,2,3,4,5,6,7,8,9]">
+    <mat-grid-tile>
+      <app-bank-card [loading]="loading" [orderId]="orderId" [bank]="bank.node"></app-bank-card>
     </mat-grid-tile>
   </ng-container>
 </mat-grid-list>

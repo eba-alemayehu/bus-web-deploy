@@ -20,9 +20,7 @@
 <!--    </div>-->
 <!--  </ng-container>-->
 <!--</div>-->
-<h1 mat-dialog-title style="text-align:center; font-size:32px">Entered passengers information</h1>
 <mat-dialog-content class="mat-typography" style="padding:1rem 2rem; border-radius: 4rem;">
-
 <h1 mat-dialog-title style="text-align:center; font-size:32px">{{'Entered passengers information'| translate}}</h1>
 <mat-dialog-content class="mat-typography" style="padding:2rem 4rem; border-radius: 4rem;">
   <ng-container *ngFor="let passanger of data.passenger.passengers let i = index" >
@@ -37,6 +35,7 @@
   </div>
   </ng-container>
   <mat-dialog-actions align="end">
+    <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Cancel</a>
     <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Proceed to Payment</a>
   </mat-dialog-actions>
 </mat-dialog-content>

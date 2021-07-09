@@ -1,4 +1,5 @@
-<div (click)="selectedBank(bank)" class="bank-card" fxLayout="row">
+
+<div *ngIf="!loading" (click)="selectedBank(bank)" class="bank-card" fxLayout="row">
   <div fxLayout="column" style="width: 40%; justify-content: center; align-items: center">
     <img alt="" src="{{bank.bankLogo}}"
          style="width: 50px; height:50px; border-radius:50%; align-self: center;"/>
@@ -18,20 +19,20 @@
   </div>
 </div>
 
-<!--<div  class="bank-card" fxLayout="row">-->
-<!--  <div fxLayout="column" style="width: 40%; justify-content: center; align-items: center">-->
-<!--    <app-custom-shimmer width="50" height="50" circle="true" [style]="'align-self:center;'"></app-custom-shimmer>-->
-<!--    <app-custom-shimmer width="60" height="16" [style]="'text-align: center; margin-top:0.3rem;'"></app-custom-shimmer>-->
-<!--  </div>-->
-<!--  <mat-divider class="mat-divider" style="background-color:" vertical=true></mat-divider>-->
-<!--  <div fxLayout="column" style="width: 50%; margin-left:16px">-->
-<!--    <div fxLayout="column" style="margin-top: 1rem">-->
-<!--      <app-custom-shimmer width="80" height="21" [style]="'padding-top: 0.5rem; text-align: start;'"></app-custom-shimmer>-->
-<!--      <app-custom-shimmer width="80" height="14" [style]="'text-align: start;  margin-top:0.4rem;'"></app-custom-shimmer>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div style=" justify-content:end; align-self: flex-end; margin: 8px 8px;">-->
-<!--    <app-custom-shimmer width="40" height="20" [style]="'text-align: start;  margin-top:0.4rem;'"></app-custom-shimmer>-->
-<!--  </div>-->
-<!--</div>-->
+<div *ngIf="loading" class="bank-card"  fxLayout="row">
+  <div fxLayout="column" style="width: 40%; justify-content: center; align-items: center">
+    <app-custom-shimmer width="50" height="50" circle="true" [style]="'align-self:center;'"></app-custom-shimmer>
+    <app-custom-shimmer width="60" height="16" [style]="'text-align: center; margin-top:0.3rem;'"></app-custom-shimmer>
+  </div>
+  <mat-divider class="mat-divider" style="background-color:" vertical=true></mat-divider>
+  <div fxLayout="column" style="width: 50%; margin-left:16px">
+    <div fxLayout="column" style="margin-top: 1rem">
+      <app-custom-shimmer width="80" height="21" [style]="'padding-top: 0.5rem; text-align: start;'"></app-custom-shimmer>
+      <app-custom-shimmer width="80" height="14" [style]="'text-align: start;  margin-top:0.4rem;'"></app-custom-shimmer>
+    </div>
+  </div>
+  <div style=" justify-content:end; align-self: flex-end; margin: 8px 8px;">
+    <app-custom-shimmer width="40" height="20" [style]="'text-align: start;  margin-top:0.4rem;'"></app-custom-shimmer>
+  </div>
+</div>
 

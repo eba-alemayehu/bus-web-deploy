@@ -1,4 +1,4 @@
-<div *ngIf="!loading" fxLayout="column" class="container" style="background-color:white; padding-bottom: 2em; border-radius: 20px; min-width: 600px">
+<div *ngIf="!loading" fxLayout="column" class="container" style="background-color:white; padding-bottom: 2em; border-radius: 20px; width:60%; margin: 2em auto;">
   <div fxLayout="row" style="justify-content:space-around;margin-top: 16px;">
     <img src="/assets/yenabus.png" style="width: 70px; height:90px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;" alt=""/>
      <div fxLayout="column" style="margin-bottom: 1rem; align-self: flex-end ">
@@ -6,11 +6,6 @@
        <mat-card-title style="font-size: 1.3em; font-weight:400; text-align: center; padding-top:0.5em; color:gray">{{ticket.phone}}</mat-card-title>
      </div>
   </div>
-  <mat-divider  class="mat-divider" ></mat-divider>
-  <div style="text-align:center">
-    <app-qr-code ticketId={{ticket.id}}></app-qr-code>
-  </div>
-
   <mat-divider  class="mat-divider" ></mat-divider>
   <div fxLayout="row" style="justify-content:space-between; margin: 0 4em">
     <div fxLayout="column">
@@ -51,27 +46,44 @@
       <mat-card-title class="seat">{{'Seat no'| translate}}: {{ ticket.busSeatConfigurationSeat.name}}</mat-card-title>
     </div>
   </div>
+
+  <mat-divider  class="mat-divider" ></mat-divider>
+  <div style="text-align:center">
+    <app-qr-code ticketId={{ticket.id}}></app-qr-code>
+  </div>
+
   <div fxLayout="row" style="place-content: space-between">
-    <button mat-flat-button color="primary" style="margin-top: 8px; margin-right: 2em; max-height:3em">pay</button>
+
+    <div fxLayout="row" >
+      <ng-container *ngIf="ticket.order.isChecked === true;else second">
+        <button style="margin-top: 8px; margin-right: 2em; max-height:3em" mat-flat-button color="green">{{'paid'| translate}}</button>
+      </ng-container>
+      <ng-template #second>
+        <ng-container *ngIf="ticket.order.isChecked === false;else third">
+          <button style="margin-top: 8px; margin-right: 2em; max-height:3em" mat-flat-button color="grey">{{'pending...'| translate}}</button>
+        </ng-container>
+      </ng-template>
+      <ng-template #third>
+        <button style="margin-top: 8px; margin-right: 2em; max-height:3em" (click)="payNow()" mat-flat-button color="primary">{{'pay'| translate}}</button>
+      </ng-template>
+    </div>
+<!--    <button  mat-flat-button color="primary" style="margin-top: 8px; margin-right: 2em; max-height:3em">pay</button>-->
     <div fxLayout="row" style="align-self: flex-end;">
-      <button mat-flat-button color="primary" style="margin-top: 8px; margin-right: 2em; max-height:3em">Cancel</button>
-      <button mat-flat-button color="primary" style="margin-top: 8px; max-height:3em">Reschedule</button>
+<!--      <button mat-flat-button color="primary" style="margin-top: 8px; margin-right: 2em; max-height:3em">Cancel</button>-->
+<!--      <button mat-flat-button color="primary" style="margin-top: 8px; max-height:3em">Reschedule</button>-->
     </div>
   </div>
 </div>
 
 
-<div *ngIf="loading"  fxLayout="column" class="container" style="background-color:white; padding-bottom: 2em; border-radius: 20px; min-width: 600px">
+
+<div *ngIf="loading"  fxLayout="column" class="container" style="background-color:white; padding-bottom: 2em; border-radius: 20px;  width:60%; margin: 2em auto;">
   <div fxLayout="row" style="justify-content:space-around;margin-top: 16px;">
     <app-custom-shimmer [width]="80" [height]="80" [circle]="true" [style]="'align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;'"></app-custom-shimmer>
     <div fxLayout="column" style="margin-bottom: 1rem; align-self: flex-end ">
       <app-custom-shimmer [width]="100" [height]="18"></app-custom-shimmer>
       <app-custom-shimmer [width]="80" [height]="18"></app-custom-shimmer>
     </div>
-  </div>
-  <mat-divider  class="mat-divider" ></mat-divider>
-  <div style="text-align:center; align-self: center;">
-    <app-custom-shimmer [width]="256" [height]="256"></app-custom-shimmer>
   </div>
 
   <mat-divider  class="mat-divider" ></mat-divider>
@@ -84,7 +96,6 @@
       <app-custom-shimmer [width]="90" [height]="40" [style]="'text-align: center;'"></app-custom-shimmer>
       </div>
   </div>
-
   <div fxLayout="row" style="justify-content:space-between; margin: 1rem 4em">
     <div fxLayout="column">
       <app-custom-shimmer [width]="80" [height]="24" [style]="'text-align: center;'"></app-custom-shimmer>
@@ -95,7 +106,6 @@
       <app-custom-shimmer [width]="120" [height]="32" [style]="'text-align: center;'"></app-custom-shimmer>
     </div>
   </div>
-
 
   <div fxLayout="row" style="justify-content:space-between; margin: 1rem 4em">
     <div fxLayout="column">
@@ -118,12 +128,15 @@
     </div>
   </div>
 
-
+  <mat-divider  class="mat-divider" ></mat-divider>
+  <div style="text-align:center; align-self: center;">
+    <app-custom-shimmer [width]="256" [height]="256"></app-custom-shimmer>
+  </div>
   <div fxLayout="row" style="place-content: space-between">
     <app-custom-shimmer [width]="70" [height]="30" [style]="'margin-top: 8px; margin-right: 2em; max-height:3em'"></app-custom-shimmer>
     <div fxLayout="row" style="align-self: flex-end;">
-    <app-custom-shimmer [width]="80" [height]="30" [style]="'margin-top: 8px; margin-right: 2em; max-height:3em'"></app-custom-shimmer>
-    <app-custom-shimmer [width]="80" [height]="30" [style]="'margin-top: 8px; max-height:3em'"></app-custom-shimmer>
+<!--    <app-custom-shimmer [width]="80" [height]="30" [style]="'margin-top: 8px; margin-right: 2em; max-height:3em'"></app-custom-shimmer>-->
+<!--    <app-custom-shimmer [width]="80" [height]="30" [style]="'margin-top: 8px; max-height:3em'"></app-custom-shimmer>-->
     </div>
   </div>
 </div>
