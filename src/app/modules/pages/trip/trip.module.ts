@@ -15,6 +15,7 @@ import {TripsTableModule} from "../../trip/tables/trips-table/trips-table.module
 import {TicketsModule} from "../../ticket/ticket.module";
 import {TicketsTableModule} from "../../ticket/tables/tickets-table/tickets-table.module";
 import {MatIconModule} from '@angular/material/icon';
+import { CancelTripComponent } from './cancel-trip/cancel-trip.component';
 
 
 @NgModule({

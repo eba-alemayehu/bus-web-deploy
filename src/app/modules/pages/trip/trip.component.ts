@@ -67,22 +67,24 @@ export class TripComponent implements OnInit {
     );
   }
 
-  edit(): void {
+  edit(tripId): void {
     console.log('edit');
+    this.router.navigate(['trip', 'edit', tripId]);
   }
 
-  cancel(): void {
-    this.cancelTripMutation.mutate(
-      {
-        input: {
-          trip: this.trip.id
-        }
-      }).subscribe(value => {
-      this.cancelled = true;
-      console.log("trip canceled");
-      // this.router.navigate([this.backUrl]);
+  cancel(tripId): void {
+    // this.cancelTripMutation.mutate(
+    //   {
+    //     input: {
+    //       trip: this.trip.id
+    //     }
+    //   }).subscribe(value => {
+    //   this.cancelled = true;
+    //   console.log("trip canceled");
+    //   // this.router.navigate([this.backUrl]);
+    //
+    // });
 
-    });
-
+    this.router.navigate(['trip', 'cancel', tripId]);
   }
 }

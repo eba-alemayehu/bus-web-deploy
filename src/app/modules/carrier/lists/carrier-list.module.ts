@@ -5,6 +5,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {CarrierTumbModule} from '../component/carrier-tumb/carrier-tumb.module';
 import {RouterModule} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
+import {TicketOfficeFormModule} from '../forms/ticket-office-form/ticket-office-form.module';
 
 
 
@@ -13,12 +14,13 @@ import {MatCardModule} from '@angular/material/card';
   exports: [
     CarrierListComponent
   ],
-  imports: [
-    CommonModule,
-    FlexModule,
-    CarrierTumbModule,
-    RouterModule,
-    MatCardModule
-  ]
+    imports: [
+        CommonModule,
+        FlexModule,
+        CarrierTumbModule,
+        RouterModule,
+        MatCardModule,
+        TicketOfficeFormModule
+    ]
 })
 export class CarrierListModule { }

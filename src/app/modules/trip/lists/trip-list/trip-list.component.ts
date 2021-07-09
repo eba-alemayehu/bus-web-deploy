@@ -6,9 +6,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
 import {throwError} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import {EditTripComponent} from '../../dialog/edit-trip/edit-trip.component';
-import {DeleteTripComponent} from '../../dialog/delete-trip/delete-trip.component';
-import {ChangeTripDateComponent} from '../../dialog/change-trip-date/change-trip-date.component';
 import {Router} from '@angular/router';
 
 @Component({
