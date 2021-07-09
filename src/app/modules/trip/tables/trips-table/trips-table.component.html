@@ -1,5 +1,8 @@
 <div class="mat-elevation-z0">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <div style="float: right;">
+    <button mat-flat-button color="primary" (click)="generateReport()" style="margin: 16px">Generate Trip List</button>
+  </div>
+  <table id="trip-table" mat-table class="full-width-table" matSort aria-label="Elements">
     <!-- Id Column -->
     <ng-container matColumnDef="carrier">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Carrier</th>
