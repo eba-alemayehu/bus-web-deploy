@@ -1,0 +1,19 @@
+query TicketOffices($carrier: ID){
+  ticketOffices(carrier: $carrier){
+    edges{
+      node{
+        id
+        carrier{
+          id
+          name
+          logo
+        }
+        name
+        city{
+          id
+          name
+        }
+      }
+    }
+  }
+}

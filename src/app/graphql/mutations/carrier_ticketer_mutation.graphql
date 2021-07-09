@@ -1,10 +1,17 @@
 mutation CarrierTicketer($input: CarrierTicketerMutationInput!){
   carrierTicketer(input: $input){
     carrierTicketer{
-      carrier{
+      ticketOffice{
         id
-        name
-        logo
+        city{
+          id
+          name
+        }
+        carrier{
+          id
+          name
+          logo
+        }
       }
       user{
         id

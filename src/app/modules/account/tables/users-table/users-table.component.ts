@@ -14,6 +14,7 @@ import {map} from 'rxjs/operators';
 export class UsersTableComponent implements AfterViewInit, OnInit {
   @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
   @Input() ticketerCarrierId = null;
+  @Input() ticketOffice = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
@@ -28,7 +29,8 @@ export class UsersTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.usersGQL.watch({
-      ticketerCarrier: this.ticketerCarrierId
+      carrierticketer_TicketOffice_Carrier: this.ticketerCarrierId,
+      carrierticketer_TicketOffice: this.ticketOffice
     }).valueChanges.pipe(map((response) => response.data.busUsers)).subscribe(
       (users) => {
         this.users = users.edges.map(e => e.node);

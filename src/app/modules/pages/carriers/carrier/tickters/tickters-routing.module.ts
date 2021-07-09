@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TicktersComponent } from './tickters.component';
 
-const routes: Routes = [{ path: '', component: TicktersComponent }];
+const routes: Routes = [{ path: '', component: TicktersComponent }, { path: ':ticketOffice', component: TicktersComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
