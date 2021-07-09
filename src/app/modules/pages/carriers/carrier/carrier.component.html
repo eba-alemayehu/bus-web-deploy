@@ -36,7 +36,7 @@
   <div fxLayout="row" style="justify-content: space-between" class="row2">
     <mat-card style="flex: 1; ">
       <h2>Tickets chart</h2>
-      <app-main-dashboard-chart></app-main-dashboard-chart>
+      <app-main-dashboard-chart *ngIf="carrier" [carrier]="carrier?.id"></app-main-dashboard-chart>
     </mat-card>
     <mat-card style="flex: 2">
       <h2>Recent trips</h2>

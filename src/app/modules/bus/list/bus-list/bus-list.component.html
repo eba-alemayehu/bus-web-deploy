@@ -1,4 +1,4 @@
-<div fxLayout="row-wrap" style="justify-content: center;flex-flow: wrap">
+<div fxLayout="row-wrap"  *ngIf="( buses$ | async)?.length > 0  && !loading" style="justify-content: center;flex-flow: wrap; margin-bottom: 2.5em">
   <mat-card
     style="margin: .5em 1.5em" *ngFor="let bus of buses$ | async"
     (click)="_selected(bus.node)"
@@ -9,7 +9,18 @@
     <app-bus-tumb [add]="true"></app-bus-tumb>
   </mat-card>
 </div>
+<div fxLayout="column" *ngIf="( buses$ | async)?.length == 0  && !loading">
+  <div fxLayout="column" style="align-items: center">
+    <svg-icon src="assets/no_data.svg" [svgStyle]="{width: '180px', height: '180px'}" ></svg-icon>
+    <h2 class="text-secondary">No buses registered</h2>
+  </div>
+  <div fxLayout="row" style="justify-content: center">
+    <mat-card style="margin: .5em 1.5em; align-items: center; justify-content: center" routerLink="form" *ngIf="!loading">
+      <app-bus-tumb [add]="true"></app-bus-tumb>
+    </mat-card>
+  </div>
 
+</div>
 <div fxLayout="row-wrap" *ngIf="loading" style="justify-content: center;flex-flow: wrap">
   <mat-card
     style="margin: .5em 1.5em" *ngFor="let bus of [1, 2, 3, 4, 5]"

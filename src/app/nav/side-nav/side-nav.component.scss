@@ -1,0 +1,8 @@
+.mat-list-item{
+  border-radius: 0 1.4em 1.4em 0;
+}
+
+.mat-list-item.active{
+  background: rgba(230, 236, 230, 0.8);
+  font-weight: 600;
+}

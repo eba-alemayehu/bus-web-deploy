@@ -11,7 +11,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {AgmCoreModule} from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -33,9 +32,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDpbI9jHY-LAddRmmCji-UW_5S45MNZ55M'
-    }),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyDpbI9jHY-LAddRmmCji-UW_5S45MNZ55M'
+    // }),
     MatExpansionModule,
   ]
 })
