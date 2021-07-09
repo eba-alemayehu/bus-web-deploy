@@ -11,14 +11,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
-import { WeakDateComponent } from './weak-date/weak-date.component';
 import {LangModule} from '../../../../lang.module';
+import {MatCardModule} from '@angular/material/card';
+import {WeekDateModule} from "./weak-date/week-date.module";
 
 
 @NgModule({
-  declarations: [TripSearchFormComponent, WeakDateComponent],
+  declarations: [TripSearchFormComponent],
   exports: [
-    TripSearchFormComponent
+    TripSearchFormComponent,
   ],
     imports: [
         CommonModule,
@@ -33,7 +34,9 @@ import {LangModule} from '../../../../lang.module';
         GridModule,
         MatRadioModule,
         MatSelectModule,
-        LangModule
+        LangModule,
+        MatCardModule,
+        WeekDateModule,
     ],
   providers: [
     MatDatepickerModule,

@@ -1,13 +1,14 @@
 <div fxLayout="column">
-  <div style="padding-top: 20px">
+  <mat-card style="padding-top: 20px">
     <app-trip-search-form
       layout="row"
       [input]="tripSearchQuery"
+      [hideDateInput]="true"
       (formSubmit)="searchChanged($event)"
       (formChanged)="searchChanged($event)"
     >
     </app-trip-search-form>
-  </div>
+  </mat-card>
   <div class="width60">
       <app-trip-list
         [leavingFrom]="tripSearchQuery.leavingFrom"
