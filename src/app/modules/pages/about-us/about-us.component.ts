@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-us.component.scss']
 })
 export class AboutUsComponent implements OnInit {
-    lng:number = 38.7855773;
-    lat:number = 8.9900393;
+    lng = 38.7855773;
+    lat = 8.9900393;
 
   constructor() { }
 
