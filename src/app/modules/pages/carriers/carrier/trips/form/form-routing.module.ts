@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FormComponent } from './form.component';
 
-const routes: Routes = [{ path: '', component: FormComponent }];
+const routes: Routes = [{ path: ':mode/:tripId', component: FormComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

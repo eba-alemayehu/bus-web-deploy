@@ -1,4 +1,4 @@
-query Tickets {
+query Ticket {
     tickets(first: 5) {
         edges {
             node {

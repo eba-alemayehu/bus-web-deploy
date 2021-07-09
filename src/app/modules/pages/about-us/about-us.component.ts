@@ -9,7 +9,6 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export class AboutUsComponent implements OnInit {
     lng:number = 38.7855773;
     lat:number = 8.9900393;
-
   constructor() { }
 
   ngOnInit(): void {

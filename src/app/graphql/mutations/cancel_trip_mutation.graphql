@@ -1,0 +1,7 @@
+mutation CancelTrip($input: CancelTripMutationInput!){
+  cancelTrip(input:$input){
+    trip{
+      id
+    }
+  }
+}

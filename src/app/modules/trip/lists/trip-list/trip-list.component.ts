@@ -5,6 +5,11 @@ import {echo} from '../../../../util/print';
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
 import {throwError} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {EditTripComponent} from '../../dialog/edit-trip/edit-trip.component';
+import {DeleteTripComponent} from '../../dialog/delete-trip/delete-trip.component';
+import {ChangeTripDateComponent} from '../../dialog/change-trip-date/change-trip-date.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trip-list',
@@ -24,7 +29,7 @@ export class TripListComponent implements OnInit {
   $pageInfo = null;
 
   private $pageSize: number | null = 7;
-  constructor(private tripsGQL: TripsGQL, translate: TranslateService , private storage: StorageService) {
+  constructor(private tripsGQL: TripsGQL, translate: TranslateService , private storage: StorageService, private matDialog: MatDialog, private router: Router) {
     translate.use(this.storage.getLanguage('lang'));
   }
 
@@ -98,5 +103,21 @@ export class TripListComponent implements OnInit {
       console.log('scrolling');
     }
     return;
+  }
+
+  edit(trip: any): void {
+    // this.matDialog.open(EditTripComponent, {width: '144px'});
+    this.router.navigate([this.router.url, 'form', 'edit', trip.node.id]);
+
+  }
+
+  cancel(trip: any): void {
+    // this.matDialog.open(DeleteTripComponent, {width: '144px'});
+    this.router.navigate([this.router.url, 'form', 'cancel', trip.node.id]);
+  }
+
+  changeDate(trip: any): void {
+    // this.matDialog.open(ChangeTripDateComponent, {width: '144px'});
+    this.router.navigate([this.router.url, 'form', 'changedate', trip.node.id]);
   }
 }
