@@ -1598,6 +1598,7 @@ export type QueryCountStatArgs = {
   endDate?: Maybe<Scalars['DateTime']>;
   start?: Maybe<Scalars['Int']>;
   end?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 

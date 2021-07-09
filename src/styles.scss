@@ -95,6 +95,17 @@ h1,.mat-h1,.mat-headline{
   @include clip
 }
 
+.gradient-gray{
+  background-image: linear-gradient(to top right, #bdc3c7  0%, #2c3e50  100%);
+  @include clip
+}
+
+
+.gradient-pink{
+  background-image: linear-gradient(to top right, #ec008c  0%, #fc6767  100%);
+  @include clip
+}
+
 // layout
 
 .width60{

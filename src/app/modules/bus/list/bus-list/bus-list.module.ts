@@ -5,6 +5,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {BusTumbModule} from '../../component/bus-tumb/bus-tumb.module';
 import {MatCardModule} from '@angular/material/card';
 import {RouterModule} from '@angular/router';
+import {AngularSvgIconModule} from "angular-svg-icon";
 
 
 
@@ -18,7 +19,8 @@ import {RouterModule} from '@angular/router';
         FlexModule,
         BusTumbModule,
         MatCardModule,
-        RouterModule
+        RouterModule,
+      AngularSvgIconModule.forRoot(),
     ]
 })
 export class BusListModule { }

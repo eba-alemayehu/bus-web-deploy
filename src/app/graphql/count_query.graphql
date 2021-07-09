@@ -1,5 +1,5 @@
-query Count($startDate: DateTime, $endDate: DateTime){
-  countStat(startDate: $startDate, endDate: $endDate){
+query Count($startDate: DateTime, $endDate: DateTime, $carrier: ID){
+  countStat(startDate: $startDate, endDate: $endDate, carrier: $carrier){
     users{
       date
       count

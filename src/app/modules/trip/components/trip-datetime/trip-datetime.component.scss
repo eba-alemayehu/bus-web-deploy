@@ -1,19 +1,23 @@
 .time{
   font-weight: 600;
   font-size: 1.6em;
-  padding: 0.75rem;
+  padding: 0.5rem;
 }
 .time-city-container{
-  margin: 1em 1em;
+  text-align: center;
+  .mat-card-subtitle{
+    margin-bottom: 0.25rem;
+  }
+  //margin: 1em 1em;
 }
 .duration:after,
 .duration:before{
-  content:"\00a0\00a0\00a0\00a0\00a0\00a0";
+  content:"\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
   text-decoration:line-through;
 }
 @media (max-width: 780px) {
   .duration:before{
-    content:"\00a0\00a0\00a0\00a0\00a0\00a0";
+    content:"\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
   }
 }
 @media (max-width: 480px) {

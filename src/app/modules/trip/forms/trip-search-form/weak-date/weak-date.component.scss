@@ -1,19 +1,30 @@
 .weak-day-btn {
   margin-bottom: 16px;
   padding: 4px;
-  background: whitesmoke;
+  background: white;
+  opacity: 1;
   width: 24px;
   border-radius: 16px;
 }
 
-.weak-day-num{
+.weak-day-num {
   margin: 0;
   padding: 0;
-  height: 24px;
-  font-weight: 700;
+  font-size: 1.4em;
+  font-weight: 800;
 }
-.weak-day-name{
+
+.weak-day-name {
   margin: 0;
   padding: 0;
-  height: 32px;
+  font-size: .9em;
+  height: 24px;
+}
+
+.week-date-container {
+  .mat-card {
+    width: 62px;
+    padding: 0.8em;
+    border-radius: 1rem;
+  }
 }
