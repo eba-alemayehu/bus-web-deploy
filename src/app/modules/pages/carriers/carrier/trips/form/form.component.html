@@ -1,7 +1,6 @@
 <mat-card>
   <h1 style="text-align: center">{{'Trip'| translate}}</h1>
   <app-trip-form *ngIf="mode == 'add'" [carrier]="carrier" (submitted)="submitted($event)" [editMode]="false"></app-trip-form>
-  <app-edit-trip-form *ngIf="mode == 'edit'" [tripId]="tripId"></app-edit-trip-form>
   <app-cancel-trip-form *ngIf="mode == 'cancel'" [tripId]="tripId" [backUrl]="backUrl"></app-cancel-trip-form>
   <app-change-trip-date-form *ngIf="mode == 'changedate'" [tripId]="tripId"></app-change-trip-date-form>
 </mat-card>

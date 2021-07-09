@@ -14,8 +14,8 @@ import {RouteModule} from '../../trip/components/route/route.module';
 import {RouteListModule} from '../../trip/lists/route-list/route-list.module';
 import {CarrierListModule} from '../../carrier/lists/carrier-list.module';
 import {LangModule} from '../../../lang.module';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [HomeComponent],
