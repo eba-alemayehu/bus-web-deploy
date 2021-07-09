@@ -13,12 +13,18 @@ import {StorageService} from '../../../../../../core/service/storage.service';
 })
 export class FormComponent implements OnInit {
   public carrier;
+  mode: string;
+  private tripId: string;
+  backUrl: any;
 
   constructor(private activatedRoute: ActivatedRoute, private carrierGQL: CarrierGQL, private router: Router,
               translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
+    this.backUrl = this.activatedRoute.snapshot.queryParams.backUrl;
     this.activatedRoute.params.subscribe(
       (params) => {
+        this.mode = params.mode;
+        this.tripId = params.tripId;
         this.carrierGQL.watch({id: params.id, getTrips: false}).valueChanges.pipe(map(response => response.data.carrier)).subscribe(
           (carrier) => this.carrier = carrier
         );

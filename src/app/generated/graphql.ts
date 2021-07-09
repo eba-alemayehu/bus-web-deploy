@@ -1598,6 +1598,7 @@ export type QueryCountStatArgs = {
   endDate?: Maybe<Scalars['DateTime']>;
   start?: Maybe<Scalars['Int']>;
   end?: Maybe<Scalars['Int']>;
+  carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3169,6 +3170,7 @@ export type CitiesQuery = (
 export type CountQueryVariables = Exact<{
   startDate?: Maybe<Scalars['DateTime']>;
   endDate?: Maybe<Scalars['DateTime']>;
+  carrier?: Maybe<Scalars['ID']>;
 }>;
 
 
@@ -3632,7 +3634,7 @@ export type TripsQuery = (
       { __typename?: 'TripNodeEdge' }
       & { node?: Maybe<(
         { __typename?: 'TripNode' }
-        & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'createdAt'>
+        & Pick<TripNode, 'id' | 'departureTime' | 'arrivalTime' | 'price' | 'createdAt'>
         & { bus?: Maybe<(
           { __typename?: 'BusNode' }
           & Pick<BusNode, 'id' | 'plateNumber' | 'busNumber'>
@@ -4214,8 +4216,8 @@ export const CitiesDocument = gql`
     }
   }
 export const CountDocument = gql`
-    query Count($startDate: DateTime, $endDate: DateTime) {
-  countStat(startDate: $startDate, endDate: $endDate) {
+    query Count($startDate: DateTime, $endDate: DateTime, $carrier: ID) {
+  countStat(startDate: $startDate, endDate: $endDate, carrier: $carrier) {
     users {
       date
       count
@@ -4886,6 +4888,7 @@ export const TripsDocument = gql`
         id
         departureTime
         arrivalTime
+        price
         bus {
           id
           plateNumber

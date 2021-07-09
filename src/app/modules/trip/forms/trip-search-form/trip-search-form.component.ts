@@ -18,13 +18,14 @@ export class TripSearchFormComponent implements OnInit {
   @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
   @Output() formChanged: EventEmitter<any> = new EventEmitter<any>();
   @Input() layout = 'column';
+  @Input() hideDateInput = false;
   todayDate = new Date();
 
   @Input('input') set input(value) {
     this.tripFomGroup.patchValue(value);
     this.tripFomGroup.controls.departureDate.setValue(new Date(value.departureDate).toISOString());
     this.tripFomGroup.controls.roundTrip.setValue(value.roundTrip === 'true');
-    this.passengers = value.passengers;
+    this.passengers = (isNaN(parseInt(value.passengers, 10))) ? 1 : value.passengers;
   }
 
   tripFomGroup = this.formBuilder.group({
@@ -33,7 +34,7 @@ export class TripSearchFormComponent implements OnInit {
     roundTrip: [false],
     departureDate: ['', Validators.required],
     returnDate: [''],
-    roundTripDepartureDate: ['', ],
+    roundTripDepartureDate: ['',],
   });
   passengers = 1;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -53,7 +54,7 @@ export class TripSearchFormComponent implements OnInit {
   allDestinationCity = [];
 
   constructor(private formBuilder: FormBuilder, private breakpointObserver: BreakpointObserver, private citiesGQL: CitiesGQL,
-              translate: TranslateService , private storage: StorageService
+              translate: TranslateService, private storage: StorageService
   ) {
     translate.use(this.storage.getLanguage('lang'));
     this.citiesGQL.watch({}).valueChanges.subscribe(
@@ -84,7 +85,7 @@ export class TripSearchFormComponent implements OnInit {
     this.getWeakDays();
   }
 
-  getWeakDays = (length: number = 5 ) => {
+  getWeakDays = (length: number = 5) => {
     for (let i = 0; i < length; i++) {
       this.days.push({
         day: moment().add(i, 'days').format('dddd').slice(0, 3).toUpperCase(),
@@ -94,8 +95,7 @@ export class TripSearchFormComponent implements OnInit {
     }
   }
 
-  changeDepartureDate = (selectedDate, $event) => {
-    $event.preventDefault();
+  changeDepartureDate = (selectedDate) => {
     this.tripFomGroup.controls.departureDate.setValue(selectedDate);
   }
 
@@ -106,7 +106,7 @@ export class TripSearchFormComponent implements OnInit {
   _submit(): void {
     const input = this.tripFomGroup.value;
     input.passengers = this.passengers;
-    if (this.tripFomGroup.invalid){
+    if (this.tripFomGroup.invalid) {
       return;
     }
     this.formSubmit.emit(input);

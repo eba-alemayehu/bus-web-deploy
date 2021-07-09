@@ -1,9 +1,14 @@
 .mat-grid-tile{
   .mat-icon{
-    margin-left: 4px;
+    margin-left: 5px;
   }
   .mat-grid-tile>span{
     font-weight: 600;
     font-size: 1em;
+  }
+  .mat-icon{
+    font-size: 1.2em;
+    width: 1.2em;
+    height: 1.2em;
   }
 }

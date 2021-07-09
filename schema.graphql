@@ -685,7 +685,7 @@ type PaymentOrderNodeEdge {
 }
 
 type Query {
-  countStat(startDate: DateTime, endDate: DateTime, start: Int, end: Int): TotalCount
+  countStat(startDate: DateTime, endDate: DateTime, start: Int, end: Int, carrier: ID): TotalCount
   notifications(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection
   userNotifications(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection
   notification(id: ID!): NotificationNode

@@ -4,8 +4,8 @@ import {map, shareReplay, tap} from 'rxjs/operators';
 import {echo} from '../../../../util/print';
 import {ReserveTicketGQL, ReserveTicketMutation} from '../../../../generated/mutation/graphql';
 import {FetchResult} from 'apollo-link';
-import {Observable} from "rxjs";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {Observable} from 'rxjs';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 enum Orientation {
   ROW = 'row',

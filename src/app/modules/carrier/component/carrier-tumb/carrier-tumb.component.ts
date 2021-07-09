@@ -7,7 +7,7 @@ import {CarrierNode, CarrierNodeEdge} from '../../../../generated/graphql';
   styleUrls: ['./carrier-tumb.component.scss']
 })
 export class CarrierTumbComponent implements OnInit {
-  @Input() carrier: CarrierNodeEdge;
+  @Input() carrier: CarrierNode;
   @Input() loading = false;
 
   constructor() { }

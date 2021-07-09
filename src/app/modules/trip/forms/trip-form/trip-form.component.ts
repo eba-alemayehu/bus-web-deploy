@@ -22,6 +22,7 @@ import {StorageService} from '../../../../core/service/storage.service';
 })
 export class TripFormComponent implements OnInit {
   @Input() carrier;
+  @Input() editMode = false;
   @Output() submitted: EventEmitter<any> = new EventEmitter<any>();
   tripFomGroup = this.formBuilder.group({
     leavingFrom: ['', Validators.required],

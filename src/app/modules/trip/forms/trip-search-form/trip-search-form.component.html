@@ -69,7 +69,7 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div fxLayout="row" style="justify-content: space-between">
+      <div fxLayout="row" style="justify-content: space-between" [hidden]="hideDateInput">
         <mat-form-field appearance="outline">
           <mat-label>{{'Departure date'| translate}}</mat-label>
           <input matInput [min]="todayDate" required [matDatepicker]="departureDatePicker" formControlName="departureDate">
@@ -86,16 +86,17 @@
           <mat-datepicker #returnDatePicker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div fxLayout="row" style="justify-content: space-around">
-        <div *ngFor="let date of days">
-          <button (click)="changeDepartureDate(date.date, $event)" class="weak-day-btn" mat-raised-button>
-            <p class="weak-day-num">
-              {{date.day}}
-            </p>
-            <p class="weak-day-name">
-              {{date.dateNum}}
-            </p>
-          </button>
+      <div fxLayout="column">
+        <app-weak-date (dateChanged)="changeDepartureDate($event)"></app-weak-date>
+<!--        <div *ngFor="let date of days">-->
+<!--          <button (click)="changeDepartureDate(date.date, $event)" class="weak-day-btn" mat-raised-button>-->
+<!--            <p class="weak-day-num">-->
+<!--              {{date.day}}-->
+<!--            </p>-->
+<!--            <p class="weak-day-name">-->
+<!--              {{date.dateNum}}-->
+<!--            </p>-->
+<!--          </button>-->
         </div>
       </div>
       <div fxLayout="row" style="justify-content: center" *ngIf="layout !== 'row'">
@@ -110,7 +111,7 @@
       <div fxLayout="row-reverse" *ngIf="layout !== 'row'">
         <button mat-flat-button type="submit" color="primary">{{'Search'| translate}}</button>
       </div>
-    </div>
+
     <div fxLayout="row" style="justify-content: center" *ngIf="layout === 'row'">
       <button mat-icon-button (click)="subtractPassenger()" type="button" >
         <mat-icon>remove</mat-icon>

@@ -1,21 +1,21 @@
 <mat-nav-list>
-  <mat-list-item>
+  <mat-list-item routerLink="/home" [class.active]="router.url.startsWith('/home')">
     <mat-icon matListIcon class="gradient-blue">home</mat-icon>
     <h4 matLine>{{'Home'| translate}}</h4>
 <!--    <p matLine class="demo-2"> {{note.updated}} </p>-->
   </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon class="gradient-purple">dashboard</mat-icon>
-    <h4 matLine>{{'Dashboard'| translate}}</h4>
-    <!--    <p matLine class="demo-2"> {{note.updated}} </p>-->
-  </mat-list-item>
-  <mat-list-item routerLink="/carrier">
-    <mat-icon matListIcon class="gradient-red">directions_bus</mat-icon>
+<!--  <mat-list-item>-->
+<!--    <mat-icon matListIcon class="gradient-purple">dashboard</mat-icon>-->
+<!--    <h4 matLine>{{'Dashboard'| translate}}</h4>-->
+<!--    &lt;!&ndash;    <p matLine class="demo-2"> {{note.updated}} </p>&ndash;&gt;-->
+<!--  </mat-list-item>-->
+  <mat-list-item routerLink="/carrier" [class.active]="router.url.startsWith('/carrier')">
+    <mat-icon matListIcon class="gradient-green">directions_bus</mat-icon>
     <h4 matLine>{{'Carrier'| translate}}</h4>
     <!--    <p matLine class="demo-2"> {{note.updated}} </p>-->
   </mat-list-item>
-  <mat-list-item routerLink="/about">
-    <mat-icon matListIcon class="gradient-red">info</mat-icon>
+  <mat-list-item routerLink="/about" [class.active]="router.url.startsWith('/about')">
+    <mat-icon matListIcon class="gradient-gray">info</mat-icon>
     <h4 matLine>{{'About Us'| translate}}</h4>
     <!--    <p matLine class="demo-2"> {{note.updated}} </p>-->
   </mat-list-item>
