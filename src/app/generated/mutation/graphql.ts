@@ -342,6 +342,8 @@ export type BusSeatConfigurationSeatNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type BusSeatConfigurationSeatNodeConnection = {
@@ -376,6 +378,8 @@ export type BusStopNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type BusStopNodeConnection = {
@@ -567,6 +571,8 @@ export type BusUserNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -669,7 +675,6 @@ export type CarrierNode = Node & {
   nameTg?: Maybe<Scalars['String']>;
   logo?: Maybe<Scalars['String']>;
   admins: BusUserNodeConnection;
-  ticketOffice: CityNodeConnection;
   ratings: BusUserNodeConnection;
   carrierphoneSet: CarrierPhoneNodeConnection;
   carrieradminSet: CarrierAdminNodeConnection;
@@ -700,17 +705,6 @@ export type CarrierNodeAdminsArgs = {
   phone_Icontains?: Maybe<Scalars['String']>;
   carrierticketer_TicketOffice_Carrier?: Maybe<Scalars['ID']>;
   carrierticketer_TicketOffice?: Maybe<Scalars['ID']>;
-};
-
-
-export type CarrierNodeTicketOfficeArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  name_Icontains?: Maybe<Scalars['String']>;
 };
 
 
@@ -967,7 +961,6 @@ export type CityNode = Node & {
   nameTg?: Maybe<Scalars['String']>;
   region: RegionNode;
   busstopSet: BusStopNodeConnection;
-  TicketOffice: CarrierNodeConnection;
   ticketofficeSet: TicketOfficeNodeConnection;
   leavingFrom: RouteNodeConnection;
   destination: RouteNodeConnection;
@@ -976,15 +969,6 @@ export type CityNode = Node & {
 
 
 export type CityNodeBusstopSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-
-export type CityNodeTicketOfficeArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -1534,6 +1518,8 @@ export type PaymentOrderNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type PaymentOrderNodeConnection = {
@@ -1705,6 +1691,8 @@ export type QueryTicketsArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -1716,6 +1704,8 @@ export type QueryMyTicketsArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -2406,6 +2396,8 @@ export type TripNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type TripNodeConnection = {
@@ -2672,6 +2664,8 @@ export type UserNodeTicketSetArgs = {
   last?: Maybe<Scalars['Int']>;
   trip?: Maybe<Scalars['ID']>;
   trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  trip_Carrier?: Maybe<Scalars['ID']>;
+  trip_Carrier_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 

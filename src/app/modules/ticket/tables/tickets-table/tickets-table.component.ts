@@ -14,6 +14,7 @@ import {map} from 'rxjs/operators';
 })
 export class TicketsTableComponent implements AfterViewInit, OnInit {
   @Input() tripId;
+  @Input() carrier;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
