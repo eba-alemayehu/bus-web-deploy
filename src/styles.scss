@@ -85,8 +85,13 @@ h1,.mat-h1,.mat-headline{
   @include clip
 }
 
-.gradient-red{
+.gradient-green{
   background-image: linear-gradient(to top right, #1D976C  0%, #93F9B9  100%);
+  @include clip
+}
+
+.gradient-yellow{
+  background-image: linear-gradient(to top right, #C02425  0%, #F0CB35  100%);
   @include clip
 }
 

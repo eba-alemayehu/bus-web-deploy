@@ -11,34 +11,32 @@ import {echo} from "../../../../util/print";
   styleUrls: ['./main-dashboard-chart.component.scss']
 })
 export class MainDashboardChartComponent implements OnInit {
-  public lineChartData: ChartDataSets[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-  ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartData: ChartDataSets[] = [];
+  public lineChartLabels: Label[] = [];
   public lineChartOptions: ChartOptions = {
     responsive: true,
   };
-  public lineChartColors: Color[] = [
-    {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.3)',
-    },
-  ];
+  public lineChartColors: Color[] = [];
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
   constructor(private countGQL: CountGQL) {
+  }
+
+  ngOnInit(): void {
     this.countGQL.watch({}).valueChanges.pipe(
       map(response => response.data.countStat),
     ).subscribe(
       (response) => {
-        echo(response);
+        this.lineChartLabels = response.tickets.map(e => new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric'  }).format(new Date(e.date)));
+        this.lineChartData.push({
+          data: response.tickets.map(e => e.count),
+          borderColor: 'green',
+          backgroundColor: 'rgba(0,255,0,0.3)',
+          label: 'Tickets'});
       }
     );
-  }
-
-  ngOnInit(): void {
   }
 
 }
