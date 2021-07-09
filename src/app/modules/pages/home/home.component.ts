@@ -12,17 +12,22 @@ import {StorageService} from '../../../core/service/storage.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router, translate: TranslateService , private storage: StorageService) {
+  constructor(public router: Router, translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }
 
   ngOnInit(): void {
   }
 
-  search($event: any): void {
-    echo($event);
+  search(query: any): void {
     this.router.navigate(['trip/search/'], {
-      queryParams: $event
+      queryParams: query
+    });
+  }
+  searchFromRoute(route): void{
+    this.search({
+      leavingFrom: route.leavingFrom.id,
+      destination: route.destination.id,
     });
   }
 }

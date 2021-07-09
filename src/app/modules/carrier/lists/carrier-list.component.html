@@ -1,6 +1,6 @@
 <div fxLayout="row" style="justify-content: center">
-  <mat-card fxLayout="column" style="padding: 1em 2em; margin: 0 1em" *ngFor="let carrier of carriers$ | async">
-    <app-carrier-tumb [carrier]="carrier" (click)="onCarrierClick(carrier)"></app-carrier-tumb>
+  <mat-card fxLayout="column" style="padding: 2em; margin: 0 1em" *ngFor="let carrier of carriers$ | async">
+    <app-carrier-tumb [carrier]="carrier.node" (click)="onCarrierClick(carrier)"></app-carrier-tumb>
   </mat-card>
 </div>
 

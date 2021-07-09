@@ -8,7 +8,7 @@
   </div>
   <div fxLayout="column" class="home-row">
     <h1>Routes</h1>
-    <app-route-list></app-route-list>
+    <app-route-list (onSelect)="searchFromRoute($event)"></app-route-list>
   </div>
   <div fxLayout="column" class="home-row">
     <h1>Carriers</h1>

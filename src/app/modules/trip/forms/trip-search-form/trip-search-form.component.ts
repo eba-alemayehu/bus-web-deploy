@@ -23,8 +23,10 @@ export class TripSearchFormComponent implements OnInit {
 
   @Input('input') set input(value) {
     this.tripFomGroup.patchValue(value);
-    this.tripFomGroup.controls.departureDate.setValue(new Date(value.departureDate).toISOString());
-    this.tripFomGroup.controls.roundTrip.setValue(value.roundTrip === 'true');
+    if (value.departureDate) {
+      this.tripFomGroup.controls.departureDate.setValue(new Date(value.departureDate).toISOString());
+      this.tripFomGroup.controls.roundTrip.setValue(value.roundTrip === 'true');
+    }
     this.passengers = (isNaN(parseInt(value.passengers, 10))) ? 1 : value.passengers;
   }
 
@@ -34,7 +36,7 @@ export class TripSearchFormComponent implements OnInit {
     roundTrip: [false],
     departureDate: ['', Validators.required],
     returnDate: [''],
-    roundTripDepartureDate: ['',],
+    roundTripDepartureDate: [''],
   });
   passengers = 1;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
