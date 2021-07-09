@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteTripComponent } from './delete-trip.component';
+import { TicketOfficeComponent } from './ticket-office.component';
 
-describe('DeleteTripComponent', () => {
-  let component: DeleteTripComponent;
-  let fixture: ComponentFixture<DeleteTripComponent>;
+describe('TicketOfficeComponent', () => {
+  let component: TicketOfficeComponent;
+  let fixture: ComponentFixture<TicketOfficeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteTripComponent ]
+      declarations: [ TicketOfficeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteTripComponent);
+    fixture = TestBed.createComponent(TicketOfficeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
