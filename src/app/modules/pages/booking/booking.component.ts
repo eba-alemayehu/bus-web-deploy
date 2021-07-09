@@ -59,6 +59,7 @@ export class BookingComponent implements OnInit {
   }
 
   bookTicket(): void {
+
     this.passengerInfo.passengers.map(e => {
       const name = e.name.split(' ');
       e.firstName = name[0];

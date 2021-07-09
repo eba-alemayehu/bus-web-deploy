@@ -58,6 +58,6 @@ export class PassengersInfoFormComponent implements OnInit {
   }
 
   submit(): void {
-
+    if (!this.passengerInfoFormGroup.valid) { return; }
   }
 }

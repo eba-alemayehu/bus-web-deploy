@@ -1,25 +1,4 @@
-<!--<div style="text-align: center">-->
-<!--  <h1 style="font-size:24px">Entered Passengers Information.</h1>-->
-<!--</div>-->
-<!--<div fxLayout="row" style="margin: 16px">-->
-<!--  <ng-container *ngFor="let d of data.passengers">-->
-<!--&lt;!&ndash;    <div>&ndash;&gt;-->
-<!--&lt;!&ndash;      <p style="font-size: medium">Passengers 1</p>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--    <div fxLayout="row">-->
-<!--      <p class="name">Full Name: </p>-->
-<!--      <p class="value">Muluken Bogale</p>-->
-<!--    </div>-->
-<!--    <div fxLayout="row">-->
-<!--      <p class="name">Phone Number: </p>-->
-<!--      <p class="value">+251986088963</p>-->
-<!--    </div>-->
-<!--    <div fxLayout="row">-->
-<!--      <p class="name">Boarding: </p>-->
-<!--      <p class="value">Megenagn</p>-->
-<!--    </div>-->
-<!--  </ng-container>-->
-<!--</div>-->
+
 <mat-dialog-content class="mat-typography" style="padding:1rem 2rem; border-radius: 4rem;">
 <h1 mat-dialog-title style="text-align:center; font-size:32px">{{'Entered passengers information'| translate}}</h1>
 <mat-dialog-content class="mat-typography" style="padding:2rem 4rem; border-radius: 4rem;">
@@ -35,7 +14,7 @@
   </div>
   </ng-container>
   <mat-dialog-actions align="end">
-    <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Cancel</a>
+    <button [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Cancel</button>
     <a [mat-dialog-close]="true" cdkFocusInitial mat-flat-button color="primary">Proceed to Payment</a>
   </mat-dialog-actions>
 </mat-dialog-content>
