@@ -6,7 +6,6 @@ import { FormComponent } from './form.component';
 import {TripFormModule} from '../../../../../trip/forms/trip-form/trip-form.module';
 import {MatCardModule} from '@angular/material/card';
 import {LangModule} from '../../../../../../lang.module';
-import {EditTripFormModule} from '../../../../../trip/forms/edit-trip-form/edit-trip-form.module';
 import {CancelTripFormModule} from '../../../../../trip/forms/cancel-trip-form/cancel-trip-form.module';
 import {ChangeTripDateFormModule} from '../../../../../trip/forms/change-trip-date-form/change-trip-date-form.module';
 
@@ -19,7 +18,6 @@ import {ChangeTripDateFormModule} from '../../../../../trip/forms/change-trip-da
     TripFormModule,
     MatCardModule,
     LangModule,
-    EditTripFormModule,
     CancelTripFormModule,
     ChangeTripDateFormModule
   ]

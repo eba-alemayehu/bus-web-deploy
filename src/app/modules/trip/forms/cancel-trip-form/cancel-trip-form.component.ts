@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CancelTripGQL} from '../../../../generated/mutation/graphql';
 
 @Component({
@@ -8,12 +8,16 @@ import {CancelTripGQL} from '../../../../generated/mutation/graphql';
   styleUrls: ['./cancel-trip-form.component.scss']
 })
 export class CancelTripFormComponent implements OnInit {
-  @Input() tripId;
-  @Input() backUrl;
+  @Input() tripId = null;
+  @Input() backUrl = null;
   cancelled= false;
-  constructor(private router: Router, private cancelTripMutation: CancelTripGQL) { }
+  constructor(private router: Router, private cancelTripMutation: CancelTripGQL, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log('inside cancel');
+    if(this.activatedRoute.snapshot.params.id){
+      this.tripId = this.activatedRoute.snapshot.params.id;
+    }
   }
 
   cancelTrip(): void {

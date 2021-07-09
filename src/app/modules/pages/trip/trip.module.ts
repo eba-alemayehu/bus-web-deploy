@@ -14,24 +14,26 @@ import {LangModule} from '../../../lang.module';
 import {TripsTableModule} from "../../trip/tables/trips-table/trips-table.module";
 import {TicketsModule} from "../../ticket/ticket.module";
 import {TicketsTableModule} from "../../ticket/tables/tickets-table/tickets-table.module";
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [TripComponent],
-    imports: [
-        CommonModule,
-        TripRoutingModule,
-        MatCardModule,
-        FlexModule,
-        BusTumbModule,
-        MatButtonModule,
-        BusSeatConfigurationModule,
-        SelectBusDialogModule,
-        TripDatetimeModule,
-        LangModule,
-        TripsTableModule,
-        TicketsModule,
-        TicketsTableModule
-    ]
+  imports: [
+    CommonModule,
+    TripRoutingModule,
+    MatCardModule,
+    FlexModule,
+    BusTumbModule,
+    MatButtonModule,
+    BusSeatConfigurationModule,
+    SelectBusDialogModule,
+    TripDatetimeModule,
+    LangModule,
+    TripsTableModule,
+    TicketsModule,
+    TicketsTableModule,
+    MatIconModule
+  ]
 })
 export class TripModule { }

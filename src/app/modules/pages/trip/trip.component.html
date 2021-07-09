@@ -29,4 +29,9 @@
     <h1 style="text-align: center;font-size:2em;">Trip Ticket</h1>
     <app-tickets-table [fileName]="fileName" *ngIf="trip" [tripId]="trip.id"></app-tickets-table>
   </div>
+
+<div fxLayout="row" style="justify-content: center">
+  <button mat-flat-button color="primary" (click)="edit()"><mat-icon>edit</mat-icon>{{'Edit trip'| translate}}</button>
+  <button mat-flat-button color="primary" (click)="cancel()"><mat-icon>cancel</mat-icon>{{'Cancel trip'| translate}}</button>
+</div>
 </div>
