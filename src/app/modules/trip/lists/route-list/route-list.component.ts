@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {RoutesGQL} from "../../../../generated/graphql";
-import {map} from "rxjs/operators";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {RoutesGQL} from '../../../../generated/graphql';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-route-list',
@@ -10,6 +10,7 @@ import {map} from "rxjs/operators";
 export class RouteListComponent implements OnInit {
   @Input() routes: any[] | null = null;
   @Input() order: string;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
   routes$;
 
   constructor(private routesGQL: RoutesGQL) {
