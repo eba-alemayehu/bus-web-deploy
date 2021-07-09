@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { TicketsTableDataSource, TicketsTableItem } from './tickets-table-datasource';
+import {AfterViewInit, Component, OnInit, ViewChild, Input} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTable} from '@angular/material/table';
+import {TicketsTableDataSource} from './tickets-table-datasource';
 import * as XLSX from 'xlsx';
+import {TicketsGQL} from '../../../../generated/graphql';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-tickets-table',
@@ -11,17 +13,34 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./tickets-table.component.scss']
 })
 export class TicketsTableComponent implements AfterViewInit, OnInit {
+  @Input() tripId;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<TicketsTableItem>;
+  @ViewChild(MatTable) table: MatTable<any>;
   @Input() fileName: string;
   dataSource: TicketsTableDataSource;
-
+  tickets: any[] = [];
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'firstName', 'lastName', 'phone', 'seat', 'boardingFrom' ];
+  displayedColumns = ['ticket_number', 'name', 'phone', 'seat', 'destination', 'leavingFrom'];
 
-  ngOnInit() {
-    this.dataSource = new TicketsTableDataSource();
+  constructor(private ticketsGQL: TicketsGQL) {
+  }
+
+  ngOnInit(): void {
+    this.ticketsGQL.watch({
+      trip: this.tripId
+    }).valueChanges.pipe(map(response => response.data.tickets)).subscribe(
+      (tickets) => {
+        this.tickets = tickets.edges.map(e => e.node);
+        this.setTicketsData();
+      }
+    );
+    this.setTicketsData();
+  }
+
+  setTicketsData(): void {
+    this.dataSource = new TicketsTableDataSource(this.tickets);
+    this.ngAfterViewInit();
   }
 
   generateReport(): void {
@@ -37,7 +56,7 @@ export class TicketsTableComponent implements AfterViewInit, OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;

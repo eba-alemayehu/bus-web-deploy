@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ContentChild, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
@@ -12,6 +12,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./users-table.component.scss']
 })
 export class UsersTableComponent implements AfterViewInit, OnInit {
+  @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
   @Input() ticketerCarrierId = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -20,7 +21,7 @@ export class UsersTableComponent implements AfterViewInit, OnInit {
   dataSource: UsersTableDataSource;
   users = [];
 
-  displayedColumns = ['name', 'phone'];
+  displayedColumns = ['name', 'phone', 'buttons'];
 
   constructor(private usersGQL: UsersGQL) {
   }
@@ -50,6 +51,11 @@ export class UsersTableComponent implements AfterViewInit, OnInit {
 
   addNewUser(user): void{
     this.users.push(user);
+    this.setUsersData();
+  }
+
+  removeUser(user): void{
+    this.users = this.users.filter(e => e.id !== user.id);
     this.setUsersData();
   }
 }

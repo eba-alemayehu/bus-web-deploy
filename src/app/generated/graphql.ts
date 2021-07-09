@@ -338,6 +338,8 @@ export type BusSeatConfigurationSeatNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type BusSeatConfigurationSeatNodeConnection = {
@@ -370,6 +372,8 @@ export type BusStopNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type BusStopNodeConnection = {
@@ -578,6 +582,8 @@ export type BusUserNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -916,6 +922,7 @@ export type CarrierTicketerMutationInput = {
   carrier: Scalars['ID'];
   user?: Maybe<Scalars['ID']>;
   userPhone?: Maybe<Scalars['String']>;
+  remove?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -1083,6 +1090,12 @@ export type CreateAnonymousUserMutationPayload = {
   token?: Maybe<Scalars['String']>;
   refreshToken?: Maybe<Scalars['String']>;
   clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DateCountType = {
+  __typename?: 'DateCountType';
+  date?: Maybe<Scalars['String']>;
+  count?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1519,6 +1532,8 @@ export type PaymentOrderNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type PaymentOrderNodeConnection = {
@@ -1535,6 +1550,7 @@ export type PaymentOrderNodeEdge = {
 
 export type Query = {
   __typename?: 'Query';
+  countStat?: Maybe<TotalCount>;
   notifications?: Maybe<NotificationNodeConnection>;
   userNotifications?: Maybe<UserNotificationNodeConnection>;
   notification?: Maybe<NotificationNode>;
@@ -1574,6 +1590,14 @@ export type Query = {
   me?: Maybe<UserNode>;
   user?: Maybe<UserNode>;
   users?: Maybe<UserNodeConnection>;
+};
+
+
+export type QueryCountStatArgs = {
+  startDate?: Maybe<Scalars['DateTime']>;
+  endDate?: Maybe<Scalars['DateTime']>;
+  start?: Maybe<Scalars['Int']>;
+  end?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1676,6 +1700,8 @@ export type QueryTicketsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -1685,6 +1711,8 @@ export type QueryMyTicketsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -2221,6 +2249,14 @@ export enum TicketState {
   Declined = 'DECLINED'
 }
 
+export type TotalCount = {
+  __typename?: 'TotalCount';
+  users?: Maybe<Array<Maybe<DateCountType>>>;
+  tickets?: Maybe<Array<Maybe<DateCountType>>>;
+  usersTotal?: Maybe<Scalars['Int']>;
+  ticketsTotal?: Maybe<Scalars['Int']>;
+};
+
 export type TripLocationMutationInput = {
   trip: Scalars['ID'];
   time: Scalars['DateTime'];
@@ -2316,6 +2352,8 @@ export type TripNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type TripNodeConnection = {
@@ -2599,6 +2637,8 @@ export type UserNodeTicketSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  trip?: Maybe<Scalars['ID']>;
+  trip_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -3126,6 +3166,27 @@ export type CitiesQuery = (
   )> }
 );
 
+export type CountQueryVariables = Exact<{
+  startDate?: Maybe<Scalars['DateTime']>;
+  endDate?: Maybe<Scalars['DateTime']>;
+}>;
+
+
+export type CountQuery = (
+  { __typename?: 'Query' }
+  & { countStat?: Maybe<(
+    { __typename?: 'TotalCount' }
+    & Pick<TotalCount, 'ticketsTotal' | 'usersTotal'>
+    & { users?: Maybe<Array<Maybe<(
+      { __typename?: 'DateCountType' }
+      & Pick<DateCountType, 'date' | 'count'>
+    )>>>, tickets?: Maybe<Array<Maybe<(
+      { __typename?: 'DateCountType' }
+      & Pick<DateCountType, 'date' | 'count'>
+    )>>> }
+  )> }
+);
+
 export type UserCreateAnonimusUserMutationVariables = Exact<{
   input: CreateAnonymousUserMutationInput;
 }>;
@@ -3388,7 +3449,9 @@ export type TicketMuationMutation = (
   )> }
 );
 
-export type TicketsQueryVariables = Exact<{ [key: string]: never; }>;
+export type TicketsQueryVariables = Exact<{
+  trip?: Maybe<Scalars['ID']>;
+}>;
 
 
 export type TicketsQuery = (
@@ -4150,6 +4213,33 @@ export const CitiesDocument = gql`
       super(apollo);
     }
   }
+export const CountDocument = gql`
+    query Count($startDate: DateTime, $endDate: DateTime) {
+  countStat(startDate: $startDate, endDate: $endDate) {
+    users {
+      date
+      count
+    }
+    tickets {
+      date
+      count
+    }
+    ticketsTotal
+    usersTotal
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountGQL extends Apollo.Query<CountQuery, CountQueryVariables> {
+    document = CountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UserCreateAnonimusUserDocument = gql`
     mutation UserCreateAnonimusUser($input: CreateAnonymousUserMutationInput!) {
   createAnonymousUser(input: $input) {
@@ -4558,8 +4648,8 @@ export const TicketMuationDocument = gql`
     }
   }
 export const TicketsDocument = gql`
-    query Tickets {
-  tickets(first: 5) {
+    query Tickets($trip: ID) {
+  tickets(first: 60, trip: $trip) {
     edges {
       node {
         id

@@ -167,7 +167,7 @@ type BusSeatConfigurationSeatNode implements Node {
   windowSeat: Boolean!
   row: Int!
   col: Int!
-  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection!
   isLocked: Boolean
 }
 
@@ -188,7 +188,7 @@ type BusStopNode implements Node {
   longitude: Decimal
   name: String!
   city: CityNode!
-  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection!
 }
 
 type BusStopNodeConnection {
@@ -231,7 +231,7 @@ type BusUserNode implements Node {
   triplocationSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID): TripLocationNodeConnection!
   orderedBy(offset: Int, before: String, after: String, first: Int, last: Int, orderedBy: ID, transactionId: String, bankAccount: ID, verifiedBy: ID, verification: Boolean, isChecked: Boolean, bankAccount_Carrier: ID): PaymentOrderNodeConnection!
   paymentorderSet(offset: Int, before: String, after: String, first: Int, last: Int, orderedBy: ID, transactionId: String, bankAccount: ID, verifiedBy: ID, verification: Boolean, isChecked: Boolean, bankAccount_Carrier: ID): PaymentOrderNodeConnection!
-  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection!
   notificationSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection!
   usernotificationSet(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection!
   password: String!
@@ -383,6 +383,7 @@ input CarrierTicketerMutationInput {
   carrier: ID!
   user: ID
   userPhone: String
+  remove: Boolean
   clientMutationId: String
 }
 
@@ -486,6 +487,11 @@ type CreateAnonymousUserMutationPayload {
   token: String
   refreshToken: String
   clientMutationId: String
+}
+
+type DateCountType {
+  date: String
+  count: Int
 }
 
 scalar DateTime
@@ -665,7 +671,7 @@ type PaymentOrderNode implements Node {
   verifiedBy: BusUserNode
   verification: Boolean
   isChecked: Boolean
-  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection!
 }
 
 type PaymentOrderNodeConnection {
@@ -679,6 +685,7 @@ type PaymentOrderNodeEdge {
 }
 
 type Query {
+  countStat(startDate: DateTime, endDate: DateTime, start: Int, end: Int): TotalCount
   notifications(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection
   userNotifications(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection
   notification(id: ID!): NotificationNode
@@ -688,8 +695,8 @@ type Query {
   trips(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, carrier_In: [ID], bulkRef: String, departureTime: DateTime, departureTime_Gte: DateTime, departureTime_Lte: DateTime, route_LeavingFrom: ID, route_Destination: ID, route_Routeprice_Price: Float, route_Routeprice_Price_Lte: Float, route_Routeprice_Price_Gte: Float): TripNodeConnection
   trip(id: ID!): TripNode
   myCrewTrips(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID, carrier_In: [ID], bulkRef: String, departureTime: DateTime, departureTime_Gte: DateTime, departureTime_Lte: DateTime, route_LeavingFrom: ID, route_Destination: ID, route_Routeprice_Price: Float, route_Routeprice_Price_Lte: Float, route_Routeprice_Price_Gte: Float): TripNodeConnection
-  tickets(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection
-  myTickets(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection
+  tickets(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection
+  myTickets(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection
   ticket(id: ID!): TicketNode
   bankAccounts(offset: Int, before: String, after: String, first: Int, last: Int, carrier: ID): BankAccountNodeConnection
   bankAccount(id: ID!): BankAccountNode
@@ -951,6 +958,13 @@ enum TicketState {
   DECLINED
 }
 
+type TotalCount {
+  users: [DateCountType]
+  tickets: [DateCountType]
+  usersTotal: Int
+  ticketsTotal: Int
+}
+
 input TripLocationMutationInput {
   trip: ID!
   time: DateTime!
@@ -1018,7 +1032,7 @@ type TripNode implements Node {
   startedAt: DateTime
   endedAt: DateTime
   triplocationSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID): TripLocationNodeConnection!
-  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection!
   price: Decimal
   seats: [TripSeatType]
 }
@@ -1132,7 +1146,7 @@ type UserNode implements Node {
   triplocationSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID): TripLocationNodeConnection!
   orderedBy(offset: Int, before: String, after: String, first: Int, last: Int, orderedBy: ID, transactionId: String, bankAccount: ID, verifiedBy: ID, verification: Boolean, isChecked: Boolean, bankAccount_Carrier: ID): PaymentOrderNodeConnection!
   paymentorderSet(offset: Int, before: String, after: String, first: Int, last: Int, orderedBy: ID, transactionId: String, bankAccount: ID, verifiedBy: ID, verification: Boolean, isChecked: Boolean, bankAccount_Carrier: ID): PaymentOrderNodeConnection!
-  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int): TicketNodeConnection!
+  ticketSet(offset: Int, before: String, after: String, first: Int, last: Int, trip: ID, trip_In: [ID]): TicketNodeConnection!
   notificationSet(offset: Int, before: String, after: String, first: Int, last: Int, title: String, body: String): NotificationNodeConnection!
   usernotificationSet(offset: Int, before: String, after: String, first: Int, last: Int, user: ID): UserNotificationNodeConnection!
   pk: Int

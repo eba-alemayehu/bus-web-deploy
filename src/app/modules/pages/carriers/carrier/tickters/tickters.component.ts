@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ContentChild, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TripDriverOrAssistantAddDialogComponent} from '../../../../trip/dialog/trip-driver-or-assistant-add-dialog/trip-driver-or-assistant-add-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -29,18 +29,31 @@ export class TicktersComponent implements OnInit {
   }
   addTicketer(): void{
     this.matDialog.open(TripDriverOrAssistantAddDialogComponent, {
-      width: '360px',
-    }).afterClosed().subscribe(
-      (user) => {
+    width: '360px',
+  }).afterClosed().subscribe(
+    (user) => {
+    this.ticketerActtion(user, false); }
+    );
+  }
+
+  private ticketerActtion(user, remove: boolean): void {
         this.carrierTicketerGQL.mutate({
           input: {
             carrier: this.ticketerCarrierId,
             user: user.id,
+            remove: remove
           }
         }).subscribe((response) => {
-          this.usersTable.addNewUser(response.data.carrierTicketer.carrierTicketer.user);
+          const $user = response.data.carrierTicketer.carrierTicketer.user;
+          if (remove){
+            this.usersTable.removeUser($user);
+          }else{
+            this.usersTable.addNewUser($user);
+          }
         });
-      }
-    );
+  }
+
+  removeTicketer(user): void {
+    this.ticketerActtion(user, true);
   }
 }

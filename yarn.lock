@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@agm/core@^3.0.0-beta.0":
+  "integrity" "sha512-KNmKbe89Nen7s7+mX63RgX88jBfajUZCFqkHIQ8Fd+Lf/ko/IY6yw4kPh0iYGxgPVPjpsHJ06GZ5m3ZxpEVX9A=="
+  "resolved" "https://registry.npmjs.org/@agm/core/-/core-3.0.0-beta.0.tgz"
+  "version" "3.0.0-beta.0"
+  dependencies:
+    "tslib" "^2.0.0"
+
 "@angular-devkit/architect@0.1002.3":
   "integrity" "sha512-7ainXRNO1njZ6bBbJXGpMzCh0OYrzuIRe/+zRj0ncV1YfEsJb2yWBuiza0+y2Ljco7hdd4wr+7eJm7cfn+NvAw=="
   "resolved" "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1002.3.tgz"
@@ -182,7 +189,7 @@
     "universal-analytics" "0.4.23"
     "uuid" "8.3.0"
 
-"@angular/common@^10.0.0", "@angular/common@^10.0.0 || ^11.0.0-0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/common@^8.2.14", "@angular/common@>=10.0.0", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0", "@angular/common@>=7.0.0", "@angular/common@>=7.2.0", "@angular/common@>=9.0.0", "@angular/common@~10.2.0", "@angular/common@~9.0.0", "@angular/common@10.2.4":
+"@angular/common@^10.0.0", "@angular/common@^10.0.0 || ^11.0.0-0", "@angular/common@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/common@^8.2.14", "@angular/common@^9.1.0 || ^10.0.0", "@angular/common@>=10.0.0", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0", "@angular/common@>=7.0.0", "@angular/common@>=7.2.0", "@angular/common@>=9.0.0", "@angular/common@~10.2.0", "@angular/common@~9.0.0", "@angular/common@10.2.4":
   "integrity" "sha512-bBfsLJNDQaC2OI1mReDJuSZ/uBb7Pf3HVpRmlQKNIPllIxqX1hLH8I3Plodrns9m32JMJ6FMsQthcP0KMdRCJA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-10.2.4.tgz"
   "version" "10.2.4"
@@ -220,7 +227,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@^10.0.0", "@angular/core@^10.0.0 || ^11.0.0-0", "@angular/core@^10.0.2", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@^8.2.14", "@angular/core@>=10.0.0", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0", "@angular/core@>=6.1.0 <13.0.0", "@angular/core@>=7.0.0", "@angular/core@>=7.2.0", "@angular/core@>=8.0.0", "@angular/core@~10.2.0", "@angular/core@~9.0.0", "@angular/core@10.2.4":
+"@angular/core@^10.0.0", "@angular/core@^10.0.0 || ^11.0.0-0", "@angular/core@^10.0.2", "@angular/core@^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@^8.2.14", "@angular/core@^9.1.0 || ^10.0.0", "@angular/core@>=10.0.0", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0", "@angular/core@>=6.1.0 <13.0.0", "@angular/core@>=7.0.0", "@angular/core@>=7.2.0", "@angular/core@>=8.0.0", "@angular/core@~10.2.0", "@angular/core@~9.0.0", "@angular/core@10.2.4":
   "integrity" "sha512-5xpAvmZwD9nZ8eWx10urjibqEeePGEiFXVMEn3IaJWgfdOcMmeSoioW9JUllT3w85+DlNVWbRbhz0YfE9a4jyw=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-10.2.4.tgz"
   "version" "10.2.4"
@@ -1721,6 +1728,11 @@
   dependencies:
     "any-observable" "^0.3.0"
 
+"@scarf/scarf@^1.1.0":
+  "integrity" "sha512-VGbKDbk1RFIaSmdVb0cNjjWJoRWRI/Weo23AjRCC2nryO0iAS8pzsToJfPVPtVs74WHw4L1UTADNdIYRLkirZQ=="
+  "resolved" "https://registry.npmjs.org/@scarf/scarf/-/scarf-1.1.1.tgz"
+  "version" "1.1.1"
+
 "@schematics/angular@^7.3.5":
   "integrity" "sha512-R/oBE5Nbs/meMVqLLFjeVf3G+ROJAPtRbiJ+22EZ6V63RQfLbW37zX+z3Wv7yD9URtYE7X9Ojtz9WEfmSzBPUg=="
   "resolved" "https://registry.npmjs.org/@schematics/angular/-/angular-7.3.10.tgz"
@@ -1784,6 +1796,11 @@
   dependencies:
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/googlemaps@^3.39.8":
+  "integrity" "sha512-ZWNoz/O8MPEpiajvj7QiqCY8tTLFNqNZ/a+s+zTV58wFVNAvvqV4bdGfnsjTb5Cs4V6wEsLrX8XRhmnyYJ2Tdg=="
+  "resolved" "https://registry.npmjs.org/@types/googlemaps/-/googlemaps-3.43.3.tgz"
+  "version" "3.43.3"
 
 "@types/http-proxy-agent@^2.0.2":
   "integrity" "sha512-2S6IuBRhqUnH1/AUx9k8KWtY3Esg4eqri946MnxTG5HwehF1S5mqLln8fcyMiuQkY72p2gH3W+rIPqp5li0LyQ=="
@@ -7733,6 +7750,14 @@
   "resolved" "https://registry.npmjs.org/ngx-bootstrap/-/ngx-bootstrap-6.2.0.tgz"
   "version" "6.2.0"
 
+"ngx-infinite-scroll@^10.0.1":
+  "integrity" "sha512-7is0eJZ9kJPsaHohRmMhJ/QFHAW9jp9twO5HcHRvFM/Yl/R8QCiokgjwmH0/CR3MuxUanxfHZMfO3PbYTwlBEg=="
+  "resolved" "https://registry.npmjs.org/ngx-infinite-scroll/-/ngx-infinite-scroll-10.0.1.tgz"
+  "version" "10.0.1"
+  dependencies:
+    "@scarf/scarf" "^1.1.0"
+    "opencollective-postinstall" "^2.0.2"
+
 "ngx-lottie@^7.0.1":
   "integrity" "sha512-zvRYZJ6RVpGOZK8Msg9DnXxmMwl7Bu8/Xvy03R5pyP8nfOv8a8vhjofM5xt/EFh3Fcecnt9uXA9byR41nMcQOQ=="
   "resolved" "https://registry.npmjs.org/ngx-lottie/-/ngx-lottie-7.0.1.tgz"
@@ -8118,6 +8143,11 @@
   dependencies:
     "is-docker" "^2.0.0"
     "is-wsl" "^2.1.1"
+
+"opencollective-postinstall@^2.0.2":
+  "integrity" "sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q=="
+  "resolved" "https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz"
+  "version" "2.0.3"
 
 "opn@^5.5.0":
   "integrity" "sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA=="
