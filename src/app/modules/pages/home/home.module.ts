@@ -14,23 +14,27 @@ import {RouteModule} from '../../trip/components/route/route.module';
 import {RouteListModule} from '../../trip/lists/route-list/route-list.module';
 import {CarrierListModule} from '../../carrier/lists/carrier-list.module';
 import {LangModule} from '../../../lang.module';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [HomeComponent],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        FlexModule,
-        MatCardModule,
-        TripSearchFormModule,
-        TripFormModule,
-        TripModule,
-        NgxShimmerLoadingModule,
-        ShimmerModule,
-        RouteModule,
-        RouteListModule,
-        CarrierListModule,
-        LangModule,
-    ]
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    FlexModule,
+    MatCardModule,
+    TripSearchFormModule,
+    TripFormModule,
+    TripModule,
+    NgxShimmerLoadingModule,
+    ShimmerModule,
+    RouteModule,
+    RouteListModule,
+    CarrierListModule,
+    LangModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+  ]
 })
 export class HomeModule { }

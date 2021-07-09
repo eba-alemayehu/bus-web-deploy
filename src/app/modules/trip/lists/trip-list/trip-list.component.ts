@@ -59,8 +59,8 @@ export class TripListComponent implements OnInit {
         bulkRef: this.uuid,
         leavingFrom: this.leavingFrom,
         destination: this.destination,
-        departureTime_Gte: (this.departureDate === null) ? null : new Date(this.departureDate).toISOString(),
-        departureTime_Lte: (this.departureDate === null) ? null : departureDateTo.toISOString(),
+        departureTime_Gte: (!this.departureDate) ? null : new Date(this.departureDate).toISOString(),
+        departureTime_Lte: (!this.departureDate) ? null : departureDateTo.toISOString(),
         first: this.$pageSize,
         after: (this.$pageInfo) ? this.$pageInfo.endCursor : null,
       }).valueChanges
