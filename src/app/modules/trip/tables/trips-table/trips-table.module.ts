@@ -4,6 +4,7 @@ import { TripsTableComponent } from './trips-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -16,7 +17,8 @@ import { MatSortModule } from '@angular/material/sort';
         CommonModule,
         MatTableModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        MatButtonModule
     ]
 })
 export class TripsTableModule { }

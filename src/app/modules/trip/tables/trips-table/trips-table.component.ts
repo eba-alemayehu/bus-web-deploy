@@ -5,6 +5,7 @@ import {MatTable} from '@angular/material/table';
 import {TripsTableDataSource} from './trips-table-datasource';
 import {TripsGQL} from '../../../../generated/graphql';
 import {map} from 'rxjs/operators';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-trips-table',
@@ -19,6 +20,8 @@ export class TripsTableComponent implements AfterViewInit, OnInit {
   @Input() departureTime;
   @Input() departureTimeGte;
   @Input() departureTimeLte;
+
+  fileName = 'trip_list.xlsx';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -58,5 +61,18 @@ export class TripsTableComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  generateReport(): void {
+    /* pass here the table id */
+    const element = document.getElementById('trip-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
   }
 }
