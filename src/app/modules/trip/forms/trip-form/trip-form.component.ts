@@ -24,7 +24,14 @@ export class TripFormComponent implements OnInit {
   @Input() carrier;
   @Input() editMode = false;
   @Output() submitted: EventEmitter<any> = new EventEmitter<any>();
+  @Input('trip') set trip(value){
+    const trip = value;
+    trip.leavingFrom = trip.route.leavingFrom.id;
+    trip.destination = trip.route.destination.id;
+    this.tripFomGroup.patchValue(value);
+  }
   tripFomGroup = this.formBuilder.group({
+    id: [''],
     leavingFrom: ['', Validators.required],
     destination: ['', Validators.required],
     departureDatetime: ['', Validators.required],

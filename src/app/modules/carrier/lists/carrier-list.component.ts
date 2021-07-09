@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CarrierNode, CarriersGQL, CarriersQuery} from '../../../generated/graphql';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
-import {Router} from "@angular/router";
-import {emit} from "cluster";
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-carrier-list',
