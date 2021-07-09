@@ -1,2 +1,8 @@
 <h1 style="font-size:32px; padding: 16px; text-align:center ">{{'Your tickets.'| translate}}</h1>
-<app-ticket-list [tickets]="tickets"></app-ticket-list>
+
+
+<app-ticket-list  [tickets]="tickets" [loading]="loading"></app-ticket-list>
+
+<!--<ng-container *ngIf="loading">-->
+<!--   -->
+<!--</ng-container>-->

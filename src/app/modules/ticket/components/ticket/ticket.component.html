@@ -1,91 +1,94 @@
-<div fxLayout="row" (click)="openDialog()" class="ticket-card" style="max-width: 800px; justify-content: space-evenly; margin:auto; background-color:white;">
-  <div fxLayout="column" class="personal-info" style="width: 17%">
-    <img src="/assets/yenabus.png" style="width: 40px; height:60px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;" alt=""/>
-    <mat-card-title style="font-size: 1em; font-weight:700; text-align: center; ">{{ticket.firstName | titlecase}} {{ticket.lastName | titlecase}}</mat-card-title>
-    <mat-card-title style="font-size: 1.1em; font-weight:400; text-align: center;">{{ticket.phone}}</mat-card-title>
-  </div>
-  <mat-divider  class="mat-divider" vertical = true ></mat-divider>
-  <div fxLayout="column" style="margin-left: 2em; width: 70%">
-    <div fxLayout="row">
-      <img src="/assets/yenabus.png" style="width: 40px;align-self: center; padding-top: 0.3rem; padding-right: 0.5rem" alt=""/>
-      <mat-card-title style="font-size: 1.2em; font-weight:700; padding-top: 0.3rem; align-self: center; text-align: center; ">{{ticket.trip.carrier.name | titlecase}}</mat-card-title>
-    </div>
-    <div fxLayout="row" style="align-items: center">
-      <div fxLayout="column" class="time-city-container">
-        <span class="mat-card-subtitle" style="align-self: center; font-size:18px;">{{ticket.trip.route.leavingFrom.name | titlecase }}</span>
-        <span class="time">{{ticket.trip.departureTime | date:'shortTime' }}</span>
-        <span style="align-self: center; font-size:16px;">{{ticket.trip.departureTime | date:'fullDate' }}</span>
-      </div>
-      <span class="duration" style="color: darkblue; font-size:18px;">4h3m</span>
-      <div fxLayout="column" class="time-city-container">
-        <span class="mat-card-subtitle" style="align-self: center; font-size:18px">{{ticket.trip.route.destination.name | titlecase}}</span>
-        <span class="time">{{ticket.trip.arrivalTime | date:'shortTime' }}</span>
-        <span style="align-self: center; font-size:16px">{{ticket.trip.arrivalTime | date:'fullDate' }}</span>
-      </div>
-    </div>
 
-  </div>
-  <div fxLayout="column" style="width:13% ; place-content: space-around">
-    <div fxLayout="row">
-      <button mat-icon-button>
-        <img src="/assets/seat.svg" width="60%" alt="">
-      </button>
-      <h2>{{ ticket.busSeatConfigurationSeat.name}}</h2>
-      <button mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
-      </button>
+  <div fxLayout="row" *ngIf="!loading" (click)="ticketDetail()" class="ticket-card" style="max-width: 800px; justify-content: space-evenly; margin:auto; background-color:white;">
+    <div fxLayout="column" class="personal-info" style="width: 17%">
+      <img src="/assets/yenabus.png" style="width: 40px; height:60px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;" alt=""/>
+      <mat-card-title style="font-size: 1em; font-weight:700; text-align: center; ">{{ticket.firstName | titlecase}} {{ticket.lastName | titlecase}}</mat-card-title>
+      <mat-card-title style="font-size: 1.1em; font-weight:400; text-align: center;">{{ticket.phone}}</mat-card-title>
     </div>
-    <div fxLayout="row" >
-      <ng-container *ngIf="ticket.order.isChecked === true;else second">
-        <button mat-flat-button color="green">{{'paid'| translate}}</button>
-      </ng-container>
-      <ng-template #second>
-        <ng-container *ngIf="ticket.order.isChecked === false;else third">
-          <button mat-flat-button color="grey">{{'pending...'| translate}}</button>
+    <mat-divider  class="mat-divider" vertical = true ></mat-divider>
+    <div fxLayout="column" style="margin-left: 2em; width: 70%">
+      <div fxLayout="row">
+        <img src="/assets/yenabus.png" style="width: 40px;align-self: center; padding-top: 0.3rem; padding-right: 0.5rem" alt=""/>
+        <mat-card-title style="font-size: 1.2em; font-weight:700; padding-top: 0.3rem; align-self: center; text-align: center; ">{{ticket.trip.carrier.name | titlecase}}</mat-card-title>
+      </div>
+      <div fxLayout="row" style="align-items: center">
+        <div fxLayout="column" class="time-city-container">
+          <span class="mat-card-subtitle" style="align-self: center; font-size:18px;">{{ticket.trip.route.leavingFrom.name | titlecase }}</span>
+          <span class="time">{{ticket.trip.departureTime | date:'shortTime' }}</span>
+          <span style="align-self: center; font-size:16px;">{{ticket.trip.departureTime | date:'fullDate' }}</span>
+        </div>
+        <span class="duration" style="color: darkblue; font-size:18px;">4h3m</span>
+        <div fxLayout="column" class="time-city-container">
+          <span class="mat-card-subtitle" style="align-self: center; font-size:18px">{{ticket.trip.route.destination.name | titlecase}}</span>
+          <span class="time">{{ticket.trip.arrivalTime | date:'shortTime' }}</span>
+          <span style="align-self: center; font-size:16px">{{ticket.trip.arrivalTime | date:'fullDate' }}</span>
+        </div>
+      </div>
+
+    </div>
+    <div fxLayout="column" style="width:13% ; place-content: space-around">
+      <div fxLayout="row">
+        <button mat-icon-button>
+          <img src="/assets/seat.svg" width="60%" alt="">
+        </button>
+        <h2>{{ ticket.busSeatConfigurationSeat.name}}</h2>
+        <button mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+      <div fxLayout="row" >
+        <ng-container *ngIf="ticket.order.isChecked === true;else second">
+          <button mat-flat-button color="green">{{'paid'| translate}}</button>
         </ng-container>
-      </ng-template>
-      <ng-template #third>
-        <button mat-flat-button color="primary">{{'pay'| translate}}</button>
-      </ng-template>
-<!--      <div ngIf(!(ticket.order.isChecked))>-->
-<!--        <button mat-flat-button color="primary">pending</button>-->
-<!--      </div>-->
+        <ng-template #second>
+          <ng-container *ngIf="ticket.order.isChecked === false;else third">
+            <button mat-flat-button color="grey">{{'pending...'| translate}}</button>
+          </ng-container>
+        </ng-template>
+        <ng-template #third>
+          <button mat-flat-button color="primary">{{'pay'| translate}}</button>
+        </ng-template>
+        <!--      <div ngIf(!(ticket.order.isChecked))>-->
+        <!--        <button mat-flat-button color="primary">pending</button>-->
+        <!--      </div>-->
+      </div>
     </div>
   </div>
-</div>
 
-<!--<div fxLayout="row"  class="ticket-card" style="max-width: 800px; justify-content: space-evenly; margin:auto; background-color:rgb(206 206 206);">-->
-<!--  <div fxLayout="column" class="personal-info" style="width: 17%">-->
-<!--    <app-custom-shimmer width="60" height="60" circle="true" [style]="'align-self: center; padding-top: 1rem; padding-bottom: 0.3rem'"></app-custom-shimmer>-->
-<!--    <app-custom-shimmer width="90" height="16"  [style]="'align-self: center;'"></app-custom-shimmer>-->
-<!--    <app-custom-shimmer width="70" height="14"  [style]="'align-self: center;'"></app-custom-shimmer>-->
-<!--    </div>-->
-<!--  <mat-divider  class="mat-divider" vertical = true ></mat-divider>-->
-<!--  <div fxLayout="column" style="margin-left: 2em; width: 70%">-->
-<!--    <div fxLayout="row">-->
-<!--      <app-custom-shimmer width="40" height="40" circle="true" [style]="'align-self: center; padding-top: 0.3rem; padding-right: 0.5rem'"></app-custom-shimmer>-->
-<!--      <app-custom-shimmer width="90" height="24"  [style]="'align-self: center; text-align: center'"></app-custom-shimmer>-->
-<!--    </div>-->
-<!--    <div fxLayout="row" style="align-items: center">-->
-<!--      <div fxLayout="column" class="time-city-container">-->
-<!--        <app-custom-shimmer width="100" height="18" [style]="'align-self: center;'"></app-custom-shimmer>-->
-<!--        <app-custom-shimmer width="85" height="28" [style]="'padding: 2px 0.5rem 2px 0.5rem ;align-self: center;'"></app-custom-shimmer>-->
-<!--        <app-custom-shimmer width="160" height="16" [style]="'align-self: center;'"></app-custom-shimmer>-->
-<!--      </div>-->
-<!--      <app-custom-shimmer width="80" height="18" [style]="''"></app-custom-shimmer>-->
-<!--      <div fxLayout="column" class="time-city-container">-->
-<!--        <app-custom-shimmer width="100" height="18" [style]="'align-self: center;'"></app-custom-shimmer>-->
-<!--        <app-custom-shimmer width="85" height="28" [style]="'padding: 2px 0.5rem 2px 0.5rem ;align-self: center;'"></app-custom-shimmer>-->
-<!--        <app-custom-shimmer width="160" height="16" [style]="'align-self: center;'"></app-custom-shimmer>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div fxLayout="column" style="width:13%">-->
-<!--    <div fxLayout="row" style="margin-top:8px;">-->
-<!--      <app-custom-shimmer width="30" height="24" [style]="'margin: 0px 8px'"></app-custom-shimmer>-->
-<!--      <app-custom-shimmer width="16" height="24"></app-custom-shimmer>-->
-<!--      <app-custom-shimmer width="30" height="24" [style]="'margin: 0px 8px'"></app-custom-shimmer>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+  <div fxLayout="row" *ngIf="loading"  class="ticket-card" style="max-width: 800px; justify-content: space-evenly; margin:auto; background-color:white;">
+    <div fxLayout="column" class="personal-info" style="width: 17%">
+      <app-custom-shimmer width="60" height="60" circle="true" [style]="'align-self: center; padding-top: 1rem; padding-bottom: 0.3rem'"></app-custom-shimmer>
+      <app-custom-shimmer width="90" height="16"  [style]="'align-self: center;'"></app-custom-shimmer>
+      <app-custom-shimmer width="70" height="14"  [style]="'align-self: center;'"></app-custom-shimmer>
+      </div>
+    <mat-divider  class="mat-divider" vertical = true ></mat-divider>
+    <div fxLayout="column" style="margin-left: 2em; width: 70%">
+      <div fxLayout="row">
+        <app-custom-shimmer width="40" height="40" circle="true" [style]="'align-self: center; padding-top: 0.3rem; padding-right: 0.5rem'"></app-custom-shimmer>
+        <app-custom-shimmer width="90" height="24"  [style]="'align-self: center; text-align: center'"></app-custom-shimmer>
+      </div>
+      <div fxLayout="row" style="align-items: center">
+        <div fxLayout="column" class="time-city-container">
+          <app-custom-shimmer width="100" height="18" [style]="'align-self: center;'"></app-custom-shimmer>
+          <app-custom-shimmer width="85" height="28" [style]="'padding: 2px 0.5rem 2px 0.5rem ;align-self: center;'"></app-custom-shimmer>
+          <app-custom-shimmer width="160" height="16" [style]="'align-self: center;'"></app-custom-shimmer>
+        </div>
+        <app-custom-shimmer width="80" height="18" [style]="''"></app-custom-shimmer>
+        <div fxLayout="column" class="time-city-container">
+          <app-custom-shimmer width="100" height="18" [style]="'align-self: center;'"></app-custom-shimmer>
+          <app-custom-shimmer width="85" height="28" [style]="'padding: 2px 0.5rem 2px 0.5rem ;align-self: center;'"></app-custom-shimmer>
+          <app-custom-shimmer width="160" height="16" [style]="'align-self: center;'"></app-custom-shimmer>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" style="width:13%">
+      <div fxLayout="row" style="margin-top:8px;">
+        <app-custom-shimmer width="30" height="24" [style]="'margin: 0px 8px'"></app-custom-shimmer>
+        <app-custom-shimmer width="16" height="24"></app-custom-shimmer>
+        <app-custom-shimmer width="30" height="24" [style]="'margin: 0px 8px'"></app-custom-shimmer>
+      </div>
+    </div>
+  </div>
+
+
 

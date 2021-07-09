@@ -3,6 +3,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
+import {echo} from '../../../../util/print';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-ticket',
@@ -11,20 +13,14 @@ import {StorageService} from '../../../../core/service/storage.service';
 })
 export class TicketComponent implements OnInit {
   @Input() ticket;
-  constructor( public dialog: MatDialog, translate: TranslateService , private storage: StorageService) {
+  @Input() loading;
+
+  constructor( public router: Router, translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }
-
-  openDialog = () => {
-    const dialogRef = this.dialog.open(TicketDetailComponent, {
-      data: {
-        ticket: this.ticket
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  ticketDetail = () => {
+    echo('clicked');
+    this.router.navigate(['/ticket/' + this.ticket.id ]);
   }
   ngOnInit(): void {
   }
