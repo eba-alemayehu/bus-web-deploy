@@ -2915,6 +2915,22 @@ export type CancelTicketMutation = (
   )> }
 );
 
+export type CancelTripMutationVariables = Exact<{
+  input: CancelTripMutationInput;
+}>;
+
+
+export type CancelTripMutation = (
+  { __typename?: 'Mutation' }
+  & { cancelTrip?: Maybe<(
+    { __typename?: 'CancelTripMutationPayload' }
+    & { trip?: Maybe<(
+      { __typename?: 'TripNode' }
+      & Pick<TripNode, 'id'>
+    )> }
+  )> }
+);
+
 export type CarrierTicketerMutationVariables = Exact<{
   input: CarrierTicketerMutationInput;
 }>;
@@ -3434,6 +3450,26 @@ export const CancelTicketDocument = gql`
   })
   export class CancelTicketGQL extends Apollo.Mutation<CancelTicketMutation, CancelTicketMutationVariables> {
     document = CancelTicketDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CancelTripDocument = gql`
+    mutation CancelTrip($input: CancelTripMutationInput!) {
+  cancelTrip(input: $input) {
+    trip {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CancelTripGQL extends Apollo.Mutation<CancelTripMutation, CancelTripMutationVariables> {
+    document = CancelTripDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
