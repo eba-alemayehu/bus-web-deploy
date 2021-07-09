@@ -1,4 +1,4 @@
-<form [formGroup]="passengerInfoFormGroup" (ngSubmit)="submit()">
+<form [formGroup]="passengerInfoFormGroup">
   <ng-container *ngFor="let userFormGroup of passengers.controls; let i = index">
     <h4>{{'Passenger'| translate}} {{i+1}}</h4>
     <div [formGroup]="userFormGroup" fxLayout="row">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div [formGroup]="userFormGroup" class="passenger-input-container">
-      <mat-radio-group formControlName="busStop">
+      <mat-radio-group required formControlName="busStop">
         <ng-container *ngFor="let t of trip?.route.leavingFrom.busstopSet.edges">
            <mat-radio-button class="boarding-check-box" value={{t.node.id}}>{{t.node.name}}</mat-radio-button>
         </ng-container>

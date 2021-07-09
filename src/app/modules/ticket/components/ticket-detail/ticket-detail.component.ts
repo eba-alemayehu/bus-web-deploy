@@ -1,8 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Input} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {echo} from "../../../../util/print";
+import {echo} from '../../../../util/print';
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -11,16 +12,18 @@ import {StorageService} from '../../../../core/service/storage.service';
 })
 export class TicketDetailComponent implements OnInit {
 
-  ticket: any;
+  @Input() ticket;
+  @Input() loading;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, translate: TranslateService , private storage: StorageService) {
+  constructor( private router: Router, translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }
 
+  payNow(): void{
+     this.router.navigate(['/booking/payment/' + this.ticket.order.id]);
+  }
+
   ngOnInit(): void {
-    this.ticket = this.data.ticket;
-    echo('passed data');
-    echo(this.data);
   }
 
 }

@@ -1,0 +1,30 @@
+<form [formGroup]="ticketOfficeForm" (ngSubmit)="submit()">
+<div fxLayout="column">
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input type="text" placeholder="Name" formControlName="name" name="name" matInput>
+    <mat-error *ngIf="ticketOfficeForm.controls['name'].hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{'Cities'| translate}}</mat-label>
+    <mat-select formControlName="city">
+      <mat-option *ngFor="let city of cities" [value]="city.node.id">
+        {{city.node.name}}
+      </mat-option>
+    </mat-select>
+    <mat-icon matPrefix color="accent">place</mat-icon>
+    <mat-error *ngIf="ticketOfficeForm.controls['city'].hasError('required')">
+      {{'City is required.'| translate}}
+    </mat-error>
+  </mat-form-field>
+
+  <div fxLayout="row">
+    <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
+  </div>
+
+</div>
+</form>

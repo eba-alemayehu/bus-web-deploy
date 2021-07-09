@@ -17,6 +17,9 @@ export class PassengersInfoFormComponent implements OnInit {
   @Input() passengerInfo;
   @Output() passengerInfoChange: EventEmitter<any> = new EventEmitter<any>();
 
+  @Input() isValid;
+  @Output() isValidChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @Input('selectedSeats') set selectedSeats(seats) {
     seats.forEach((e) => {
       this.addPassenger(e);
@@ -33,6 +36,7 @@ export class PassengersInfoFormComponent implements OnInit {
     });
     this.passengerInfoFormGroup.valueChanges.subscribe(
       (value) => {
+        this.isValidChange.emit(!this.passengerInfoFormGroup.invalid);
         this.passengerInfoChange.emit(value);
       });
   }
@@ -58,6 +62,6 @@ export class PassengersInfoFormComponent implements OnInit {
   }
 
   submit(): void {
-
+    if (!this.passengerInfoFormGroup.valid) { return; }
   }
 }

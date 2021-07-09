@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-edit-trip',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTripComponent implements OnInit {
 
-  constructor() { }
+  tripId;
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.tripId = this.activatedRoute.snapshot.params.id;
   }
 
 }

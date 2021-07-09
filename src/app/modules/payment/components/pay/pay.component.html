@@ -23,9 +23,11 @@
     </mat-form-field>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <div fxLayout="row">
+<mat-dialog-actions style="place-content: flex-end;">
+  <div fxLayout="row"  >
 <!--  [mat-dialog-close]="true"-->
+    <button  type="submit" cdkFocusInitial mat-flat-button color="primary" [mat-dialog-close]="true">
+      {{'Cancel'| translate}}</button>
   <button  type="submit" cdkFocusInitial mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="transactionForm.invalid">
     {{'Submit'| translate}}</button>
   </div>

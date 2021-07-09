@@ -11,6 +11,7 @@ import {PayDialogComponent} from '../../dialogs/pay-dialog/pay-dialog.component'
 })
 export class BankCardComponent implements OnInit {
   @Input() bank;
+  @Input() loading;
   @Input() orderId;
   constructor(public dialog: MatDialog, ) {
   }

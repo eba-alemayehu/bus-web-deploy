@@ -1,12 +1,13 @@
-<div class="width60">
+<div class="width60" >
   <mat-card [class.loading]="booking">
     <app-passengers-info-form
       [selectedSeats]="selectedSeats"
       [trip]="trip"
+      [(isValid)]="isValid"
       [(passengerInfo)]="passengerInfo"></app-passengers-info-form>
   </mat-card>
-  <div fxLayout="row-reverse" [class.loading]="booking">
-    <button mat-flat-button color="primary" (click)="bookTicket()" [class.spinner]="booking" [disabled]="booking">
+  <div style="margin: 1em" fxLayout="row-reverse" [class.loading]="booking">
+    <button mat-flat-button color="primary" (click)="bookTicket()" [class.spinner]="booking" [disabled]="booking || !isValid">
       {{'Book Ticket'| translate}}
     </button>
 
