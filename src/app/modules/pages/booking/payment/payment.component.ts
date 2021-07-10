@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {BankAccountsGQL, CitiesGQL} from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -13,7 +13,11 @@ export class PaymentComponent implements OnInit {
   bankAccounts: any;
   breakpoint: any;
 
-  constructor( private bankAccountsGQL: BankAccountsGQL, private city: CitiesGQL, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private bankAccountsGQL: BankAccountsGQL,
+    private city: CitiesGQL,
+    private route: Router,
+    private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe(params => {
       this.orderId = params;
     });
@@ -31,5 +35,7 @@ export class PaymentComponent implements OnInit {
   onResize = (event) => {
     this.breakpoint = (event.target.innerWidth <= 1200) ? 1 : 4;
   }
-
+  payLater(): void {
+    this.route.navigate(['/booking/success'], { queryParamsHandling: 'merge' });
+  }
 }

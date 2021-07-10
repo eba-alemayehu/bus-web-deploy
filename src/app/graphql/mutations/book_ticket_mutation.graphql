@@ -1,5 +1,6 @@
 mutation BookTicket($input: BookTicketMutationInput!) {
     bookTicket(input: $input){
+      bulkRef
         order{
             id
             price

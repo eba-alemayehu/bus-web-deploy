@@ -112,6 +112,7 @@ export type BookTicketMutationPayload = {
   __typename?: 'BookTicketMutationPayload';
   tickets?: Maybe<Array<Maybe<TicketNode>>>;
   order?: Maybe<PaymentOrderNode>;
+  bulkRef?: Maybe<Scalars['String']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -366,6 +367,8 @@ export type BusSeatConfigurationSeatNodeTicketSetArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type BusSeatConfigurationSeatNodeConnection = {
@@ -424,6 +427,8 @@ export type BusStopNodeTicketSetArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type BusStopNodeConnection = {
@@ -639,6 +644,8 @@ export type BusUserNodeTicketSetArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -1608,6 +1615,8 @@ export type PaymentOrderNodeTicketSetArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type PaymentOrderNodeConnection = {
@@ -1803,6 +1812,8 @@ export type QueryTicketsArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -1838,6 +1849,8 @@ export type QueryMyTicketsArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -2367,6 +2380,7 @@ export type TicketNode = Node & {
   lockedAt?: Maybe<Scalars['DateTime']>;
   lockedUntil?: Maybe<Scalars['DateTime']>;
   boardedAt?: Maybe<Scalars['DateTime']>;
+  bulkRef?: Maybe<Scalars['String']>;
   isLocked?: Maybe<Scalars['Boolean']>;
   state?: Maybe<TicketState>;
 };
@@ -2552,6 +2566,8 @@ export type TripNodeTicketSetArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type TripNodeConnection = {
@@ -2842,6 +2858,8 @@ export type UserNodeTicketSetArgs = {
   busStop?: Maybe<Scalars['ID']>;
   busStop_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   user?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
+  bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -3683,6 +3701,7 @@ export type TicketsQueryVariables = Exact<{
   trip?: Maybe<Scalars['ID']>;
   user?: Maybe<Scalars['ID']>;
   carrier?: Maybe<Scalars['ID']>;
+  bulkRef?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -4913,8 +4932,14 @@ export const TicketOfficesDocument = gql`
     }
   }
 export const TicketsDocument = gql`
-    query Tickets($trip: ID, $user: ID, $carrier: ID) {
-  tickets(first: 60, trip: $trip, trip_Carrier: $carrier, user: $user) {
+    query Tickets($trip: ID, $user: ID, $carrier: ID, $bulkRef: String) {
+  tickets(
+    first: 60
+    trip: $trip
+    trip_Carrier: $carrier
+    user: $user
+    bulkRef: $bulkRef
+  ) {
     edges {
       node {
         id

@@ -32,9 +32,7 @@ export class BanksListComponent implements OnInit {
     this.breakpoint = (event.target.innerWidth <= 1200) ? 1 : 3;
   }
 
-  payLater(): void {
-    this.route.navigate(['/ticket']);
-  }
+
 
 
 }

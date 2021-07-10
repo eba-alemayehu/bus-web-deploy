@@ -42,7 +42,7 @@ export class PayComponent implements OnInit {
       (response) => {
         echo(response.data);
         this.close.emit(true);
-        this.router.navigate(['booking/success']);
+        this.router.navigate(['booking/success'],  { queryParamsHandling: 'merge' });
       }
     );
   }
