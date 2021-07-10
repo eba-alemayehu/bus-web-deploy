@@ -3,8 +3,8 @@ import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TicketsGQL} from '../../../../generated/graphql';
-import {map} from "rxjs/operators";
-import {Observable, observable, of} from "rxjs";
+import {map} from 'rxjs/operators';
+import {Observable, observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-success',

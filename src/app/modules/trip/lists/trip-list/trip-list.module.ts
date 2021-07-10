@@ -10,6 +10,7 @@ import {TripModule} from '../../trip.module';
 import {LangModule} from '../../../../lang.module';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatIconModule} from '@angular/material/icon';
+import {NotFoundModule} from "../../../common/not-found/not-found.module";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {MatIconModule} from '@angular/material/icon';
         LangModule,
         InfiniteScrollModule,
         MatIconModule,
+        NotFoundModule,
     ]
 })
 export class TripListModule { }

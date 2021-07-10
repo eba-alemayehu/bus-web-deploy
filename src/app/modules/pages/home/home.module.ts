@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {FilterFormModule} from "../../trip/forms/filter-form/filter-form.module";
 import {SearchFormModule} from "../../trip/forms/search-form/search-form.module";
+import {NotFoundModule} from "../../common/not-found/not-found.module";
 
 @NgModule({
   declarations: [HomeComponent],
@@ -39,6 +40,7 @@ import {SearchFormModule} from "../../trip/forms/search-form/search-form.module"
         MatDatepickerModule,
         FilterFormModule,
         SearchFormModule,
+        NotFoundModule,
     ]
 })
 export class HomeModule { }

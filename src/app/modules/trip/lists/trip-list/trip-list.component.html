@@ -28,5 +28,9 @@
     </app-trip-list-item>
   </mat-card>
 </div>
+
+  <div *ngIf="trips.length === 0">
+    <app-not-found [message]="'No Trip Found'"></app-not-found>
+  </div>
 </div>
 
