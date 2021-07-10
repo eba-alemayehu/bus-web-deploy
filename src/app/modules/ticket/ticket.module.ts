@@ -14,6 +14,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {LangModule} from '../../lang.module';
 import {ShimmerModule} from "../common/shimmer/shimmer.module";
+import {TripDatetimeModule} from "../trip/components/trip-datetime/trip-datetime.module";
+import {CarrierTumbModule} from "../carrier/component/carrier-tumb/carrier-tumb.module";
+import {PriceModule} from "../common/price/price.module";
 
 
 
@@ -24,18 +27,21 @@ import {ShimmerModule} from "../common/shimmer/shimmer.module";
         TicketDetailComponent,
 
     ],
-    imports: [
-        CommonModule,
-        TicketRoutingModule,
-        TripModule,
-        FlexModule,
-        MatCardModule,
-        MatDividerModule,
-        QRCodeModule,
-        MatButtonModule,
-        MatDialogModule,
-        LangModule,
-        ShimmerModule
-    ]
+  imports: [
+    CommonModule,
+    TicketRoutingModule,
+    TripModule,
+    FlexModule,
+    MatCardModule,
+    MatDividerModule,
+    QRCodeModule,
+    MatButtonModule,
+    MatDialogModule,
+    LangModule,
+    ShimmerModule,
+    TripDatetimeModule,
+    CarrierTumbModule,
+    PriceModule
+  ]
 })
 export class TicketsModule { }

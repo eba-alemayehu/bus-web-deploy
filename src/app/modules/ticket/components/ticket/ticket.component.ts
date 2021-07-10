@@ -4,7 +4,7 @@ import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
 import {echo} from '../../../../util/print';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ticket',

@@ -3720,9 +3720,19 @@ export type TicketsQuery = (
         ), busSeatConfigurationSeat: (
           { __typename?: 'BusSeatConfigurationSeatNode' }
           & Pick<BusSeatConfigurationSeatNode, 'id' | 'name'>
-        ), trip: (
+        ), order?: Maybe<(
+          { __typename?: 'PaymentOrderNode' }
+          & Pick<PaymentOrderNode, 'id' | 'price' | 'verification' | 'isChecked' | 'transactionId' | 'verifiedAt'>
+          & { orderedBy: (
+            { __typename?: 'BusUserNode' }
+            & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+          ), verifiedBy?: Maybe<(
+            { __typename?: 'BusUserNode' }
+            & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'phone'>
+          )> }
+        )>, trip: (
           { __typename?: 'TripNode' }
-          & Pick<TripNode, 'price' | 'departureTime'>
+          & Pick<TripNode, 'price' | 'departureTime' | 'arrivalTime'>
           & { route: (
             { __typename?: 'RouteNode' }
             & { leavingFrom: (
@@ -4957,6 +4967,26 @@ export const TicketsDocument = gql`
           id
           name
         }
+        order {
+          id
+          price
+          orderedBy {
+            id
+            firstName
+            lastName
+            phone
+          }
+          verification
+          isChecked
+          transactionId
+          verifiedAt
+          verifiedBy {
+            id
+            firstName
+            lastName
+            phone
+          }
+        }
         trip {
           route {
             leavingFrom {
@@ -4976,6 +5006,7 @@ export const TicketsDocument = gql`
           }
           price
           departureTime
+          arrivalTime
           carrier {
             id
             name

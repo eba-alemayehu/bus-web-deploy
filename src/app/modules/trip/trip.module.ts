@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {LangModule} from '../../lang.module';
+import {CarrierTumbModule} from "../carrier/component/carrier-tumb/carrier-tumb.module";
 
 
 // tslint:disable-next-line:typedef
@@ -42,7 +43,8 @@ export function playerFactory() {
         ShimmerModule,
         MatTableModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        CarrierTumbModule
     ]
 })
 export class TripModule { }

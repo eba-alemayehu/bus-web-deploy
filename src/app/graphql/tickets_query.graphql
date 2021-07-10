@@ -1,59 +1,80 @@
 query Tickets($trip: ID, $user: ID, $carrier: ID, $bulkRef: String) {
-    tickets(first: 60, trip: $trip, trip_Carrier: $carrier, user: $user, bulkRef: $bulkRef) {
-        edges {
-            node {
-                id
-                user {
-                    id
-                    firstName
-                    lastName
-                    phone
-                }
-                ticketNumber
-                firstName
-                lastName
-                phone
-                busSeatConfigurationSeat {
-                    id
-                    name
-                }
-                trip {
-                    route {
-                        leavingFrom {
-                            id
-                            name
-                            nameAm
-                            nameOr
-                            nameTg
-                        }
-                        destination {
-                            id
-                            name
-                            nameAm
-                            nameOr
-                            nameTg
-                        }
-                    }
-                    price
-                    departureTime
-                    carrier {
-                        id
-                        name
-                        nameAm
-                        nameOr
-                        nameTg
-                        logo
-                        busSet{
-                            edges{
-                                node{
-                                    id
-                                    plateNumber
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+  tickets(first: 60, trip: $trip, trip_Carrier: $carrier, user: $user, bulkRef: $bulkRef) {
+    edges {
+      node {
+        id
+        user {
+          id
+          firstName
+          lastName
+          phone
         }
+        ticketNumber
+        firstName
+        lastName
+        phone
+        busSeatConfigurationSeat {
+          id
+          name
+        }
+        order{
+          id
+          price
+          orderedBy{
+            id
+            firstName
+            lastName
+            phone
+          }
+          verification
+          isChecked
+          transactionId
+          verifiedAt
+          verifiedBy{
+            id
+            firstName
+            lastName
+            phone
+          }
+        }
+        trip {
+          route {
+            leavingFrom {
+              id
+              name
+              nameAm
+              nameOr
+              nameTg
+            }
+            destination {
+              id
+              name
+              nameAm
+              nameOr
+              nameTg
+            }
+          }
+          price
+          departureTime
+          arrivalTime
+          carrier {
+            id
+            name
+            nameAm
+            nameOr
+            nameTg
+            logo
+            busSet{
+              edges{
+                node{
+                  id
+                  plateNumber
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }
