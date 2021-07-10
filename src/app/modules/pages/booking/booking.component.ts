@@ -20,6 +20,7 @@ export class BookingComponent implements OnInit {
   bookingOrder: any;
   booking = false;
   isValid: boolean;
+
   // tslint:disable-next-line:max-line-length
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,7 +28,7 @@ export class BookingComponent implements OnInit {
     private bookTicketGQL: BookTicketGQL,
     public dialog: MatDialog,
     private router: Router,
-    translate: TranslateService ,
+    translate: TranslateService,
     private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
     this.activatedRoute.params.subscribe(
@@ -69,7 +70,7 @@ export class BookingComponent implements OnInit {
     });
     this.openDialog().afterClosed().subscribe(
       (confirmation) => {
-        if (confirmation){
+        if (confirmation) {
           this.booking = true;
           this.bookTicketGQL.mutate({
             input: {
@@ -80,7 +81,12 @@ export class BookingComponent implements OnInit {
             (data) => {
               this.booking = false;
               this.bookingOrder = data.data.bookTicket.order.id;
-              this.router.navigate(['booking/payment/' + this.bookingOrder]);
+              this.router.navigate(['booking/payment/' + this.bookingOrder], {
+                  queryParams: {
+                    bulkRef: data.data.bookTicket.bulkRef
+                  },
+                }
+              );
             }
           );
         }
