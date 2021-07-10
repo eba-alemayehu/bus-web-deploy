@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {BankAccountsGQL, CitiesGQL} from '../../../../generated/graphql';
 import {echo} from '../../../../util/print';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-banks-list',
@@ -13,7 +14,7 @@ export class BanksListComponent implements OnInit {
   breakpoint: any;
   loading;
 
-  constructor( private bankAccountsGQL: BankAccountsGQL, private city: CitiesGQL) {
+  constructor( private route: Router, private bankAccountsGQL: BankAccountsGQL, private city: CitiesGQL) {
     this.bankAccountsGQL.watch({}).valueChanges.subscribe(
       (response) => {
         this.bankAccounts = response.data.bankAccounts.edges;
@@ -27,8 +28,12 @@ export class BanksListComponent implements OnInit {
     this.loading = true;
   }
 
-  onResize = (event) => {
+  onResize(event): void {
     this.breakpoint = (event.target.innerWidth <= 1200) ? 1 : 3;
+  }
+
+  payLater(): void {
+    this.route.navigate(['/ticket']);
   }
 
 

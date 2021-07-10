@@ -13,7 +13,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {LangModule} from '../../../../lang.module';
 import {MatCardModule} from '@angular/material/card';
-import {WeekDateModule} from "./weak-date/week-date.module";
+import {WeekDateModule} from './weak-date/week-date.module';
 
 
 @NgModule({

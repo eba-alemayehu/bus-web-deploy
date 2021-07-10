@@ -9,7 +9,7 @@ import {CancelTripGQL} from '../../../../generated/mutation/graphql';
 })
 export class CancelTripFormComponent implements OnInit {
   @Input() tripId = null;
-  cancelled= false;
+  cancelled = false;
   constructor(private router: Router, private cancelTripMutation: CancelTripGQL, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class CancelTripFormComponent implements OnInit {
     }
     }).subscribe(value => {
       this.cancelled = true;
-      console.log("trip canceled");
+      console.log('trip canceled');
       // this.router.navigate([this.backUrl]);
 
     });

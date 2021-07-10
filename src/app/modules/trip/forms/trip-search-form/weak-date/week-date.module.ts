@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {WeakDateComponent} from './weak-date.component';
-import {MatCardModule} from "@angular/material/card";
-import {FlexModule} from "@angular/flex-layout";
-import {MatRippleModule} from "@angular/material/core";
+import {MatCardModule} from '@angular/material/card';
+import {FlexModule} from '@angular/flex-layout';
+import {MatRippleModule} from '@angular/material/core';
 
 
 

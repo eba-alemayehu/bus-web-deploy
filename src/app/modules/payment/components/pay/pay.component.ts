@@ -5,6 +5,7 @@ import {PaymentConfirmationRequestGQL} from '../../../../generated/mutation/grap
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pay',
@@ -18,8 +19,9 @@ export class PayComponent implements OnInit {
   transactionForm = this.formBuilder.group({
     transactionId: ['', Validators.required],
   });
+  loading: boolean;
   // tslint:disable-next-line:max-line-length
-  constructor(private formBuilder: FormBuilder, private router: Router, private paymentConfirmationRequestMutation: PaymentConfirmationRequestGQL,
+  constructor(private formBuilder: FormBuilder, public matDialogRef: MatDialogRef<any>, private router: Router, private paymentConfirmationRequestMutation: PaymentConfirmationRequestGQL,
               translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }

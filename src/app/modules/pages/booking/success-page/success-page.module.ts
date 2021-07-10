@@ -8,6 +8,7 @@ import {LottieModule} from 'ngx-lottie';
 import player from 'lottie-web';
 import {TripModule} from "../../../trip/trip.module";
 import {LangModule} from '../../../../lang.module';
+import {MatButtonModule} from "@angular/material/button";
 
 // tslint:disable-next-line:typedef
 export function playerFactory() {
@@ -23,7 +24,8 @@ export function playerFactory() {
         FlexModule,
         LottieModule.forRoot({player: playerFactory}),
         TripModule,
-        LangModule
+        LangModule,
+        MatButtonModule
     ]
 })
 export class SuccessPageModule { }

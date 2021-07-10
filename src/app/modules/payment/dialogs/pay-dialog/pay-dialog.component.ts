@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {echo} from '../../../../util/print';
 
 @Component({
@@ -9,7 +9,7 @@ import {echo} from '../../../../util/print';
 })
 export class PayDialogComponent implements OnInit {
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public matDialogRef: MatDialogRef<any>) { }
 
   ngOnInit(): void {
     echo(this.data);

@@ -1,4 +1,8 @@
+<div fxLayout="column">
 <h1>Bank List</h1>
+  <div style="align-self: flex-end">
+    <button mat-flat-button color="primary" (click)="payLater()" style="margin: 16px">Pay Later</button>
+  </div>
 <mat-grid-list *ngIf="!loading" [cols]="breakpoint" [rowHeight]="'140px'"  (window:resize)="onResize($event)" >
   <ng-container *ngFor="let bank of bankAccounts">
     <mat-grid-tile>
@@ -14,3 +18,5 @@
     </mat-grid-tile>
   </ng-container>
 </mat-grid-list>
+
+</div>

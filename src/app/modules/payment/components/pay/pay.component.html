@@ -26,9 +26,9 @@
 <mat-dialog-actions style="place-content: flex-end;">
   <div fxLayout="row"  >
 <!--  [mat-dialog-close]="true"-->
-    <button  type="submit" cdkFocusInitial mat-flat-button color="primary" [mat-dialog-close]="true">
+    <button  type="submit" cdkFocusInitial mat-flat-button color="primary" (click)="matDialogRef.close(false)">
       {{'Cancel'| translate}}</button>
-  <button  type="submit" cdkFocusInitial mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="transactionForm.invalid">
+  <button  type="submit" cdkFocusInitial mat-flat-button color="primary" (click)="matDialogRef.close(true)" [disabled]="transactionForm.invalid">
     {{'Submit'| translate}}</button>
   </div>
 </mat-dialog-actions>

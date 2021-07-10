@@ -135,7 +135,7 @@ export class TripSearchFormComponent implements OnInit {
   swapCities(): void {
     const leavingFromCityValue = this.tripFomGroup.value.leavingFrom;
     const destinationCityValue = this.tripFomGroup.value.destination;
-    this.tripFomGroup.controls['destination'].setValue(leavingFromCityValue);
-    this.tripFomGroup.controls['leavingFrom'].setValue(destinationCityValue);
+    this.tripFomGroup.controls.destination.setValue(leavingFromCityValue);
+    this.tripFomGroup.controls.leavingFrom.setValue(destinationCityValue);
   }
 }

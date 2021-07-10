@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {echo} from '../../../../../util/print';
-import {StorageService} from "../../../../../core/service/storage.service";
+import {StorageService} from '../../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-weak-date',
@@ -22,7 +22,7 @@ export class WeakDateComponent implements OnInit {
       this.days.push({
         day: new Intl.DateTimeFormat(this.storage.getLanguage('lang'), {weekday: 'short'}).format(date),
         dateNum: new Intl.DateTimeFormat(this.storage.getLanguage('lang'), {day: 'numeric'}).format(date),
-        date: date,
+        date,
       });
     }
   }

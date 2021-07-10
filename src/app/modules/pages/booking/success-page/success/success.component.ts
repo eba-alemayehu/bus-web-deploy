@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-success',
@@ -15,9 +16,13 @@ export class SuccessComponent implements OnInit {
     console.log(animationItem);
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  redirectToTickets(): void{
+    this.router.navigate([]);
   }
 
 }

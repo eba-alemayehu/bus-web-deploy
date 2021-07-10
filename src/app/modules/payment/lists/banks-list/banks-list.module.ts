@@ -6,6 +6,8 @@ import {BookingModule} from '../../../pages/booking/booking.module';
 import {BankCardModule} from '../../components/bank-card/bank-card.module';
 import {LottieModule} from 'ngx-lottie';
 import {playerFactory} from '../../../trip/trip.module';
+import {MatButtonModule} from "@angular/material/button";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 
@@ -19,6 +21,8 @@ import {playerFactory} from '../../../trip/trip.module';
     MatGridListModule,
     BookingModule,
     BankCardModule,
+    MatButtonModule,
+    FlexLayoutModule,
 
   ]
 })
