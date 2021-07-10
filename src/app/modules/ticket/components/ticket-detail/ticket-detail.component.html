@@ -1,7 +1,7 @@
 <div *ngIf="!loading" fxLayout="column" class="container"
      style="background-color:white; padding: 2em; border-radius: 20px; width:60%; margin: 2em auto;">
   <div fxLayout="row" style="justify-content:space-around;margin-top: 16px;">
-    <img src="/assets/yenabus.png"
+    <img src="/assets/avatar.jpg"
          style="width: 70px; height:90px; align-self: center; padding-top: 1rem; padding-bottom: 0.3rem; border-radius:50%;"
          alt=""/>
     <div fxLayout="column" style="margin-bottom: 1rem; align-self: flex-end ">
@@ -34,7 +34,7 @@
   <!--  date -->
   <div fxLayout="row" style="justify-content:space-between; margin: 1rem 5em">
     <div fxLayout="column">
-      <b>Ticket no: {{ticket?.ticketNumber}}</b>
+      Ticket no: <b>{{ticket?.ticketNumber}}</b>
     </div>
     <div fxLayout="column">
       <app-price [price]="ticket.order.price"></app-price>
@@ -44,7 +44,13 @@
   <mat-divider class="mat-divider"></mat-divider>
   <div style="text-align:center">
     <app-qr-code *ngIf="ticket?.ticketNumber!=null" [ticketId]="ticket?.ticketNumber"></app-qr-code>
-    <mat-card-title *ngIf="ticket.ticketNumber==null" class="gradient-yellow">Unpaid</mat-card-title>
+    <div style="padding: 2em">
+      <mat-card-title
+        *ngIf="ticket.ticketNumber==null"
+        class="gradient-yellow"
+        style="border: 1px solid orange; padding: 0.5em; margin-top: 1em; border-radius: 10px;">Unpaid</mat-card-title>
+    </div>
+
   </div>
 
   <div fxLayout="row-reverse" style="place-content: space-between">
