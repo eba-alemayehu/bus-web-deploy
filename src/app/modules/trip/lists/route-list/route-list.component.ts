@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RoutesGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-route-list',
@@ -10,6 +10,7 @@ import {map} from 'rxjs/operators';
 export class RouteListComponent implements OnInit {
   @Input() routes: any[] | null = null;
   @Input() order: string;
+  @Input() loading = true;
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   routes$;
 
@@ -19,7 +20,9 @@ export class RouteListComponent implements OnInit {
   ngOnInit(): void {
     this.routes$ = this.routesGQL.watch({
       order: this.order
-    }).valueChanges.pipe(map(({data}) => data.routes.edges.map(e => e.node)));
+    }).valueChanges.pipe(
+      tap((response) => this.loading = response.loading),
+      map(({data}) => data.routes.edges.map(e => e.node)));
   }
 
 }

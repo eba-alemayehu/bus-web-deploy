@@ -3,12 +3,16 @@ query TicketOffices($carrier: ID){
     edges{
       node{
         id
+        name
+        phone
+        latitude
+        longitude
         carrier{
           id
           name
           logo
         }
-        name
+
         city{
           id
           name

@@ -3858,7 +3858,7 @@ export type TicketOfficesQuery = (
       { __typename?: 'TicketOfficeNodeEdge' }
       & { node?: Maybe<(
         { __typename?: 'TicketOfficeNode' }
-        & Pick<TicketOfficeNode, 'id' | 'name'>
+        & Pick<TicketOfficeNode, 'id' | 'name' | 'phone' | 'latitude' | 'longitude'>
         & { carrier: (
           { __typename?: 'CarrierNode' }
           & Pick<CarrierNode, 'id' | 'name' | 'logo'>
@@ -5127,12 +5127,15 @@ export const TicketOfficesDocument = gql`
     edges {
       node {
         id
+        name
+        phone
+        latitude
+        longitude
         carrier {
           id
           name
           logo
         }
-        name
         city {
           id
           name

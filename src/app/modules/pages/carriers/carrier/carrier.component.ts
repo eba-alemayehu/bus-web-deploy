@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {map} from "rxjs/operators";
-import {ActivatedRoute} from "@angular/router";
-import {CarrierGQL} from "../../../../generated/graphql";
-import {TranslateService} from "@ngx-translate/core";
+import {Component, OnInit} from '@angular/core';
+import {map} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {CarrierGQL} from '../../../../generated/graphql';
+import {TranslateService} from '@ngx-translate/core';
+import {CarrierGuard} from '../../../../guards/auth/carrier.guard';
 
 @Component({
   selector: 'app-carrier',
@@ -11,8 +12,12 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class CarrierComponent implements OnInit {
   carrier;
-  constructor(private activatedRouter: ActivatedRoute, private carrierGQL: CarrierGQL,
-              translate: TranslateService) {
+
+  constructor(
+    public activatedRouter: ActivatedRoute,
+    private carrierGQL: CarrierGQL,
+    public carrierGuard: CarrierGuard,
+    translate: TranslateService) {
     this.activatedRouter.params.subscribe(
       (params) => {
         this.carrierGQL

@@ -245,6 +245,9 @@ export class AuthService {
     return this.decodeToken()?.hasResumeProfile;
   }
 
+  carriers(): any {
+    return this.decodeToken()?.carriers;
+  }
   // userVerified(): boolean {
   //   return (this.emailVerifiedAt() || this.phoneVerifiedAt()) || this.decodeToken()?.isUnregistered;
   // }

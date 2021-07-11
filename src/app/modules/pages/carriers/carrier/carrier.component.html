@@ -7,7 +7,13 @@
       <app-carrier-tumb [carrier]="carrier" size="large"></app-carrier-tumb>
       <div></div>
     </div>
-    <button mat-stroked-button routerLink="/carrier/dashboard/{{carrier?.id}}"><mat-icon>dashboard</mat-icon> Dashboard</button>
+    <button
+      *ngIf="carrierGuard.canActivate(activatedRouter.snapshot, null)"
+      mat-stroked-button
+      routerLink="/carrier/dashboard/{{carrier?.id}}">
+      <mat-icon>dashboard</mat-icon>
+      Dashboard
+    </button>
   </div>
   <div fxLayout="column">
     <mat-tab-group mat-align-tabs="center">
@@ -15,6 +21,13 @@
       <mat-tab label="Trips">
         <ng-template matTabContent>
           <app-trip-list [carrier]="carrier?.id"></app-trip-list>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Ticket offices">
+        <ng-template matTabContent>
+          <div fxLayout="column" style="margin: 0 2em">
+            <app-ticket-offices-map style="height: 990px"></app-ticket-offices-map>
+          </div>
         </ng-template>
       </mat-tab>
     </mat-tab-group>

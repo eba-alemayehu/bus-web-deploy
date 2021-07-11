@@ -2,4 +2,7 @@
   <mat-card *ngFor="let route of routes$ | async" class="route-card" (click)="onSelect.emit(route)">
     <app-route [route]="route"></app-route>
   </mat-card>
+  <mat-card *ngFor="let route of [0,1,2,3,4,5]" class="route-card">
+    <app-route [loading]="loading"></app-route>
+  </mat-card>
 </div>

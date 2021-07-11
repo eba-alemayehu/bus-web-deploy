@@ -10,6 +10,13 @@
     </mat-grid-list>
   </mat-grid-tile>
   <!-- <mat-grid-tile>2</mat-grid-tile> -->
-  <mat-grid-tile [colspan]="2" class="route-name"><span>{{route.leavingFrom.name}}</span></mat-grid-tile>
-  <mat-grid-tile [colspan]="2" class="route-name"><span>{{route.destination.name}}</span></mat-grid-tile>
+  <mat-grid-tile [colspan]="2" class="route-name">
+    <span *ngIf="!loading">{{route?.leavingFrom.name}}</span>
+    <app-custom-shimmer *ngIf="loading" width="120" height="24"></app-custom-shimmer>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2" class="route-name">
+    <span *ngIf="!loading" >{{route?.destination.name}}</span>
+    <app-custom-shimmer *ngIf="loading" width="120" height="24"></app-custom-shimmer>
+  </mat-grid-tile>
 </mat-grid-list>
+

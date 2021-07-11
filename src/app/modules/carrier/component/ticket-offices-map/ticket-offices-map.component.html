@@ -1,0 +1,33 @@
+<div fxLayout="column">
+  <agm-map
+    style="height: 990px"
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="true"
+    [zoomControl]="true"
+  >
+
+    <agm-marker
+      *ngFor="let office of offices$ | async"
+      [latitude]="office.latitude"
+      [longitude]="office.longitude"
+      (markerClick)="clickedMarker(office)"
+    >
+
+      <agm-info-window>
+        <b>{{office.name}}</b>
+        <span class="secondary">{{office.phone}}</span>
+      </agm-info-window>
+
+    </agm-marker>
+
+    <!--      <agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
+    <!--                  [radius]="5000"-->
+    <!--                  [fillColor]="'red'"-->
+    <!--                  [circleDraggable]="true"-->
+    <!--                  [editable]="true">-->
+    <!--      </agm-circle>-->
+
+  </agm-map>
+</div>
