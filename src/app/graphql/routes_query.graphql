@@ -1,9 +1,10 @@
-query Routes($order: String) {
-    routes(order: $order){
+query Routes($order: String, $carrier: ID) {
+    routes(order: $order, routeprice_Carrier: $carrier){
         edges{
             node{
                 id
                 distance
+                price
                 leavingFrom{
                     id
                     name

@@ -1,0 +1,42 @@
+mutation RoutePriceMutation($input: RoutePriceMutationInput!){
+  routePrice(input: $input){
+    routePrice{
+      id
+      carrier{
+        id
+        name
+        logo
+      }
+      price
+      route{
+        leavingFrom{
+          id
+          name
+        }
+        destination{
+          id
+          name
+        }
+      }
+    }
+    routePriceReverse{
+      id
+      carrier{
+        id
+        name
+        logo
+      }
+      price
+      route{
+        leavingFrom{
+          id
+          name
+        }
+        destination{
+          id
+          name
+        }
+      }
+    }
+  }
+}

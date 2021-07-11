@@ -9,6 +9,7 @@ import {CitiesGQL} from '../../../../../generated/graphql';
 })
 export class SelectRouteComponent implements OnInit {
   $route;
+  @Input() orientation = 'horizontal';
 
   @Input('route') set route(value) {
     if (value) {

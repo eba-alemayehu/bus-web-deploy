@@ -1,0 +1,17 @@
+<form [formGroup]="carrierRouteFormGroup" (ngSubmit)="submit()" [class.loading]="loading">
+  <h1>Route</h1>
+
+  <app-select-route
+    [route]="{
+        leavingFrom: carrierRouteFormGroup.value.leavingFrom,
+        destination: carrierRouteFormGroup.value.destination
+    }"
+    (routeChanged)="routeChanged($event)" orientation="vertical"></app-select-route>
+  <mat-form-field appearance="outline" style="width: 100%">
+    <mat-label>Price</mat-label>
+    <input matInput type="number" formControlName="price" min="0">
+  </mat-form-field>
+  <div fxLayout="row-reverse">
+    <button mat-flat-button color="primary">Submit</button>
+  </div>
+</form>

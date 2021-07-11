@@ -1,0 +1,17 @@
+<mat-card style="margin-top: 2em;">
+  <div fxLayout="row" style="justify-content: space-between">
+    <h1>Carrier routes</h1>
+    <button mat-flat-button color="primary" (click)="openFormDialog()">Add Routes</button>
+  </div>
+  <app-routes-table
+    #routesTable
+    [carrier]="activatedRoute.snapshot.params.id"
+  >
+    <ng-template let-row>
+      <button mat-button (click)="openFormDialog(row.leavingFrom.id, row.destination.id)">
+       <mat-icon>edit</mat-icon> Edit
+      </button>
+    </ng-template>
+
+  </app-routes-table>
+</mat-card>

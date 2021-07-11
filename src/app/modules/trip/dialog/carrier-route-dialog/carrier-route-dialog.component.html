@@ -1,0 +1,14 @@
+<div fxLayout="row-reverse">
+  <button mat-icon-button mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<app-carrier-route-form
+  [carrier]="data.carrier"
+  [route]="{
+  leavingFrom: data.leavingFrom,
+  destination: data.destination
+}"
+
+  (carrierRouteSubmit)="matDialogRef.close($event)"></app-carrier-route-form>
+

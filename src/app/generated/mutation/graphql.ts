@@ -489,6 +489,7 @@ export type BusUserNode = Node & {
   carrierratingSet: CarrierRatingNodeConnection;
   drivers: BusNodeConnection;
   assistants: BusNodeConnection;
+  routepriceSet: RoutePriceNodeConnection;
   tripSet: TripNodeConnection;
   triplocationSet: TripLocationNodeConnection;
   orderedBy: PaymentOrderNodeConnection;
@@ -567,6 +568,15 @@ export type BusUserNodeAssistantsArgs = {
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
   busSeatConfiguration?: Maybe<Scalars['ID']>;
+};
+
+
+export type BusUserNodeRoutepriceSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -887,6 +897,7 @@ export type CarrierNodeRouteSetArgs = {
   last?: Maybe<Scalars['Int']>;
   leavingFrom?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
+  routeprice_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1098,6 +1109,7 @@ export type CityNodeLeavingFromArgs = {
   last?: Maybe<Scalars['Int']>;
   leavingFrom?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
+  routeprice_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1109,6 +1121,7 @@ export type CityNodeDestinationArgs = {
   last?: Maybe<Scalars['Int']>;
   leavingFrom?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
+  routeprice_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1120,6 +1133,7 @@ export type CityNodeRouteSetArgs = {
   last?: Maybe<Scalars['Int']>;
   leavingFrom?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
+  routeprice_Carrier?: Maybe<Scalars['ID']>;
 };
 
 export type CityNodeConnection = {
@@ -1198,13 +1212,13 @@ export type DeleteAccountPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type EbaTripMutationInput = {
+export type EndTripMutationInput = {
   trip: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type EbaTripMutationPayload = {
-  __typename?: 'EbaTripMutationPayload';
+export type EndTripMutationPayload = {
+  __typename?: 'EndTripMutationPayload';
   trip?: Maybe<TripNode>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -1217,8 +1231,9 @@ export type Mutation = {
   changeTripBus?: Maybe<ChangeTripBusMutationPayload>;
   cancelTrip?: Maybe<CancelTripMutationPayload>;
   startTrip?: Maybe<StartTripMutationPayload>;
-  endTrip?: Maybe<EbaTripMutationPayload>;
+  endTrip?: Maybe<EndTripMutationPayload>;
   tripLocation?: Maybe<TripLocationMutationPayload>;
+  routePrice?: Maybe<RoutePriceMutationPayload>;
   bookTicket?: Maybe<BookTicketMutationPayload>;
   reserveTicket?: Maybe<ReserveTicketMutationPayload>;
   cancelTicket?: Maybe<CancelTicketMutationPayload>;
@@ -1280,12 +1295,17 @@ export type MutationStartTripArgs = {
 
 
 export type MutationEndTripArgs = {
-  input: EbaTripMutationInput;
+  input: EndTripMutationInput;
 };
 
 
 export type MutationTripLocationArgs = {
   input: TripLocationMutationInput;
+};
+
+
+export type MutationRoutePriceArgs = {
+  input: RoutePriceMutationInput;
 };
 
 
@@ -1773,6 +1793,7 @@ export type QueryRoutesArgs = {
   last?: Maybe<Scalars['Int']>;
   leavingFrom?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
+  routeprice_Carrier?: Maybe<Scalars['ID']>;
 };
 
 
@@ -2285,6 +2306,7 @@ export type RouteNode = Node & {
   crossingCities: CityNodeConnection;
   routepriceSet: RoutePriceNodeConnection;
   tripSet: TripNodeConnection;
+  price?: Maybe<Scalars['Decimal']>;
 };
 
 
@@ -2348,6 +2370,21 @@ export type RouteNodeEdge = {
   cursor: Scalars['String'];
 };
 
+export type RoutePriceMutationInput = {
+  leavingFrom: Scalars['ID'];
+  destination: Scalars['ID'];
+  price: Scalars['ID'];
+  carrier: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type RoutePriceMutationPayload = {
+  __typename?: 'RoutePriceMutationPayload';
+  routePrice?: Maybe<RoutePriceNode>;
+  routePriceReverse?: Maybe<RoutePriceNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type RoutePriceNode = Node & {
   __typename?: 'RoutePriceNode';
   id: Scalars['ID'];
@@ -2355,6 +2392,7 @@ export type RoutePriceNode = Node & {
   route: RouteNode;
   carrier: CarrierNode;
   price: Scalars['Decimal'];
+  createdBy: BusUserNode;
 };
 
 export type RoutePriceNodeConnection = {
@@ -2778,6 +2816,7 @@ export type UserNode = Node & {
   carrierratingSet: CarrierRatingNodeConnection;
   drivers: BusNodeConnection;
   assistants: BusNodeConnection;
+  routepriceSet: RoutePriceNodeConnection;
   tripSet: TripNodeConnection;
   triplocationSet: TripLocationNodeConnection;
   orderedBy: PaymentOrderNodeConnection;
@@ -2856,6 +2895,15 @@ export type UserNodeAssistantsArgs = {
   last?: Maybe<Scalars['Int']>;
   carrier?: Maybe<Scalars['ID']>;
   busSeatConfiguration?: Maybe<Scalars['ID']>;
+};
+
+
+export type UserNodeRoutepriceSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3470,6 +3518,51 @@ export type ReserveTicketMutation = (
       ), user: (
         { __typename?: 'BusUserNode' }
         & Pick<BusUserNode, 'id' | 'firstName' | 'lastName' | 'email' | 'phone'>
+      ) }
+    )> }
+  )> }
+);
+
+export type RoutePriceMutationMutationVariables = Exact<{
+  input: RoutePriceMutationInput;
+}>;
+
+
+export type RoutePriceMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { routePrice?: Maybe<(
+    { __typename?: 'RoutePriceMutationPayload' }
+    & { routePrice?: Maybe<(
+      { __typename?: 'RoutePriceNode' }
+      & Pick<RoutePriceNode, 'id' | 'price'>
+      & { carrier: (
+        { __typename?: 'CarrierNode' }
+        & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+      ), route: (
+        { __typename?: 'RouteNode' }
+        & { leavingFrom: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name'>
+        ), destination: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name'>
+        ) }
+      ) }
+    )>, routePriceReverse?: Maybe<(
+      { __typename?: 'RoutePriceNode' }
+      & Pick<RoutePriceNode, 'id' | 'price'>
+      & { carrier: (
+        { __typename?: 'CarrierNode' }
+        & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+      ), route: (
+        { __typename?: 'RouteNode' }
+        & { leavingFrom: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name'>
+        ), destination: (
+          { __typename?: 'CityNode' }
+          & Pick<CityNode, 'id' | 'name'>
+        ) }
       ) }
     )> }
   )> }
@@ -4128,6 +4221,61 @@ export const ReserveTicketDocument = gql`
   })
   export class ReserveTicketGQL extends Apollo.Mutation<ReserveTicketMutation, ReserveTicketMutationVariables> {
     document = ReserveTicketDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RoutePriceMutationDocument = gql`
+    mutation RoutePriceMutation($input: RoutePriceMutationInput!) {
+  routePrice(input: $input) {
+    routePrice {
+      id
+      carrier {
+        id
+        name
+        logo
+      }
+      price
+      route {
+        leavingFrom {
+          id
+          name
+        }
+        destination {
+          id
+          name
+        }
+      }
+    }
+    routePriceReverse {
+      id
+      carrier {
+        id
+        name
+        logo
+      }
+      price
+      route {
+        leavingFrom {
+          id
+          name
+        }
+        destination {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RoutePriceMutationGQL extends Apollo.Mutation<RoutePriceMutationMutation, RoutePriceMutationMutationVariables> {
+    document = RoutePriceMutationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -1,8 +1,9 @@
-<div fxLayout="row" >
-  <form [formGroup]="routeFromGroup">
+<form [formGroup]="routeFromGroup">
+  <div [fxLayout]="(orientation=='horizontal')?'row': 'column'">
     <mat-form-field appearance="outline">
       <mat-label>{{'Leaving from'| translate}}</mat-label>
-      <mat-select formControlName="leavingFrom" (opened)="leavingFromCitiesOpened(); searchFieldOfStudy.focus()" required>
+      <mat-select formControlName="leavingFrom" (opened)="leavingFromCitiesOpened(); searchFieldOfStudy.focus()"
+                  required>
         <mat-option disabled>
           <input
             type="text"
@@ -29,12 +30,19 @@
         {{'Leaving from city is required.'| translate}}
       </mat-error>
     </mat-form-field>
-    <button mat-icon-button type="button" style="margin-top: .5em" (click)="swapCities()">
+    <button mat-icon-button type="button" class="exchange-horizontal" (click)="swapCities()" *ngIf="orientation=='horizontal'">
       <mat-icon>compare_arrows</mat-icon>
     </button>
-    <mat-form-field appearance="outline" >
+    <div fxLayout="row-reverse" *ngIf="orientation=='vertical'">
+      <button mat-icon-button type="button" class="exchange-vertical mat-elevation-z1" (click)="swapCities()">
+        <mat-icon>import_export</mat-icon>
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline">
       <mat-label>{{'Destination'| translate}}</mat-label>
-      <mat-select formControlName="destination" required (opened)="destinationCitiesOpened(); searchFieldOfStudy.focus()">
+      <mat-select formControlName="destination" required
+                  (opened)="destinationCitiesOpened(); searchFieldOfStudy.focus()">
         <mat-option disabled>
           <input
             type="text"
@@ -63,5 +71,6 @@
         {{'Destination city is required.'| translate}}
       </mat-error>
     </mat-form-field>
-  </form>
-</div>
+  </div>
+</form>
+
