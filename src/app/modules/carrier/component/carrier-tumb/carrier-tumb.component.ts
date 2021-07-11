@@ -9,6 +9,7 @@ import {CarrierNode, CarrierNodeEdge} from '../../../../generated/graphql';
 export class CarrierTumbComponent implements OnInit {
   @Input() carrier: CarrierNode;
   @Input() loading = false;
+  @Input() size = 'small';
 
   constructor() { }
 

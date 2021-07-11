@@ -6,6 +6,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {FlexModule} from "@angular/flex-layout";
+import {FilterFormModule} from "../../../trip/forms/filter-form/filter-form.module";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 
@@ -20,7 +23,10 @@ import {MatIconModule} from "@angular/material/icon";
         MatPaginatorModule,
         MatSortModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        FlexModule,
+        FilterFormModule,
+        MatDividerModule
     ]
 })
 export class TicketsTableModule { }

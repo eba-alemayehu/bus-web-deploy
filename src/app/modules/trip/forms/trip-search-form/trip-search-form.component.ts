@@ -20,9 +20,15 @@ export class TripSearchFormComponent implements OnInit {
   @Input() layout = 'column';
   @Input() hideDateInput = false;
   todayDate = new Date();
+  route;
 
   @Input('input') set input(value) {
     this.tripFomGroup.patchValue(value);
+    this.route = {
+      leavingFrom: this.tripFomGroup.value.leavingFrom,
+      destination: this.tripFomGroup.value.destination
+    };
+
     if (value.departureDate) {
       this.tripFomGroup.controls.departureDate.setValue(new Date(value.departureDate).toISOString());
       this.tripFomGroup.controls.roundTrip.setValue(value.roundTrip === 'true');
@@ -55,19 +61,13 @@ export class TripSearchFormComponent implements OnInit {
   allLeavingFromCity = [];
   allDestinationCity = [];
 
-  constructor(private formBuilder: FormBuilder, private breakpointObserver: BreakpointObserver, private citiesGQL: CitiesGQL,
+  constructor(private formBuilder: FormBuilder,
+              private breakpointObserver: BreakpointObserver,
+              private citiesGQL: CitiesGQL,
               translate: TranslateService, private storage: StorageService
   ) {
     translate.use(this.storage.getLanguage('lang'));
-    this.citiesGQL.watch({}).valueChanges.subscribe(
-      (response) => {
-        const cities = response.data.cities.edges;
-        this.leavingFromCity = cities;
-        this.allLeavingFromCity = cities;
-        this.destinationCity = cities;
-        this.allDestinationCity = cities;
-      }
-    );
+
   }
 
   ngOnInit(): void {
@@ -122,20 +122,7 @@ export class TripSearchFormComponent implements OnInit {
     this.passengers += 1;
   }
 
-  leavingFromCitiesOpened(): void {
-    this.leavingFromCity = this.allLeavingFromCity.filter((e) => e.node.id !== this.tripFomGroup.value.destination);
-    this.leavingFromCityFilter.setValue('');
-  }
-
-  destinationCitiesOpened(): void {
-    this.destinationCity = this.allDestinationCity.filter((e) => e.node.id !== this.tripFomGroup.value.leavingFrom);
-    this.destinationCityFilter.setValue('');
-  }
-
-  swapCities(): void {
-    const leavingFromCityValue = this.tripFomGroup.value.leavingFrom;
-    const destinationCityValue = this.tripFomGroup.value.destination;
-    this.tripFomGroup.controls.destination.setValue(leavingFromCityValue);
-    this.tripFomGroup.controls.leavingFrom.setValue(destinationCityValue);
+  routeChanged(route): void {
+    this.tripFomGroup.patchValue(route);
   }
 }

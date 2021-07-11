@@ -11,12 +11,13 @@ import {StorageService} from '../../../core/service/storage.service';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) {
+  }
 
   decodeToken(): any {
     const helper = new JwtHelperService();
     if (!!!localStorage.getItem('token')) {
-     return null;
+      return null;
     }
     try {
       return helper.decodeToken(localStorage.getItem('token'));
@@ -24,6 +25,7 @@ export class AuthService {
       return null;
     }
   }
+
   // valid_email(str): boolean {
   //   const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   //   return (mailformat.test(str));
@@ -197,6 +199,7 @@ export class AuthService {
       }
     });
   }
+
   //
   // private clearRegisteredUser(): void{
   //   this.storage.deleteToken();
@@ -216,21 +219,32 @@ export class AuthService {
   roles(): any {
     return this.decodeToken() !== null ? JSON.parse(this.decodeToken()?.roles) : [];
   }
+
+  isRegistered(): boolean {
+    const tokenDecoded = this.decodeToken();
+    return (tokenDecoded) ? tokenDecoded.isRegistered : false;
+  }
+
   emailVerifiedAt(): any {
     return this.decodeToken()?.emailVerifiedAt;
   }
+
   phoneVerifiedAt(): any {
     return this.decodeToken()?.phoneVerifiedAt;
   }
+
   email(): any {
     return this.decodeToken()?.email;
   }
+
   phone(): any {
     return this.decodeToken()?.phone;
   }
+
   hasResumeProfile(): any {
     return this.decodeToken()?.hasResumeProfile;
   }
+
   // userVerified(): boolean {
   //   return (this.emailVerifiedAt() || this.phoneVerifiedAt()) || this.decodeToken()?.isUnregistered;
   // }

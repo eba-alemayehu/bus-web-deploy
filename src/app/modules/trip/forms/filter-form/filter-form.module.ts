@@ -11,6 +11,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
+import {MatNativeDateModule} from "@angular/material/core";
+import {SelectRouteModule} from "../trip-search-form/select-route/select-route.module";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 
@@ -30,7 +33,10 @@ import {MatInputModule} from "@angular/material/input";
     ReactiveFormsModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatInputModule
+    MatInputModule,
+    MatNativeDateModule,
+    SelectRouteModule,
+    MatCheckboxModule,
   ]
 })
 export class FilterFormModule { }

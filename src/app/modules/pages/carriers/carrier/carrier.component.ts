@@ -1,10 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {map} from 'rxjs/operators';
-import {CarrierGQL, CarrierNode} from '../../../../generated/graphql';
-import {Observable} from 'rxjs';
-import {TranslateService} from '@ngx-translate/core';
-import {StorageService} from '../../../../core/service/storage.service';
+import { Component, OnInit } from '@angular/core';
+import {map} from "rxjs/operators";
+import {ActivatedRoute} from "@angular/router";
+import {CarrierGQL} from "../../../../generated/graphql";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-carrier',
@@ -12,11 +10,9 @@ import {StorageService} from '../../../../core/service/storage.service';
   styleUrls: ['./carrier.component.scss']
 })
 export class CarrierComponent implements OnInit {
-  carrier: any;
-
+  carrier;
   constructor(private activatedRouter: ActivatedRoute, private carrierGQL: CarrierGQL,
-              translate: TranslateService , private storage: StorageService) {
-    translate.use(this.storage.getLanguage('lang'));
+              translate: TranslateService) {
     this.activatedRouter.params.subscribe(
       (params) => {
         this.carrierGQL

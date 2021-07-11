@@ -4,71 +4,7 @@
 <div fxLayout="column">
   <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto">
     <div  style="flex-flow: wrap">
-      <div fxLayout="row" >
-        <mat-form-field appearance="outline">
-          <mat-label>{{'Leaving from'| translate}}</mat-label>
-          <mat-select formControlName="leavingFrom" (opened)="leavingFromCitiesOpened(); searchFieldOfStudy.focus()" required>
-            <mat-option disabled>
-              <input
-                type="text"
-                [formControl]="leavingFromCityFilter"
-                #searchFieldOfStudy
-                [placeholder]="'Search'| translate"
-                style="
-              color: black;
-              width: 95%;
-              padding: .5em;
-            "/>
-            </mat-option>
-            <mat-option
-              *ngFor="let city of leavingFromCity"
-              [value]="city.node.id"
-              [disabled]="city.node.id === tripFomGroup.value.destination"
-              [hidden]="city.node.id === tripFomGroup.value.destination"
-            >
-              {{city.node.name}}
-            </mat-option>
-          </mat-select>
-          <mat-icon matPrefix color="accent">place</mat-icon>
-          <mat-error *ngIf="tripFomGroup.controls['leavingFrom'].hasError('required')">
-            {{'Leaving from city is required.'| translate}}
-          </mat-error>
-        </mat-form-field>
-        <button mat-icon-button type="button" style="margin-top: .5em" (click)="swapCities()">
-          <mat-icon>compare_arrows</mat-icon>
-        </button>
-        <mat-form-field appearance="outline" >
-          <mat-label>{{'Destination'| translate}}</mat-label>
-          <mat-select formControlName="destination" required (opened)="destinationCitiesOpened(); searchFieldOfStudy.focus()">
-            <mat-option disabled>
-              <input
-                type="text"
-                [formControl]="destinationCityFilter"
-                #searchFieldOfStudy
-                [placeholder]="'Search'| translate"
-                style="
-                outline: none;
-              color: black;
-              width: 95%;
-              padding: .5em;
-            "/>
-            </mat-option>
-
-            <mat-option
-              *ngFor="let city of destinationCity"
-              [value]="city.node.id"
-              [disabled]="city.node.id === tripFomGroup.value.leavingFrom"
-              [hidden]="city.node.id === tripFomGroup.value.leavingFrom"
-            >
-              {{city.node.name}}
-            </mat-option>
-          </mat-select>
-          <mat-icon matPrefix color="accent">place</mat-icon>
-          <mat-error *ngIf="tripFomGroup.controls['destination'].hasError('required')">
-            {{'Destination city is required.'| translate}}
-          </mat-error>
-        </mat-form-field>
-      </div>
+      <app-select-route (routeChanged)="routeChanged($event)" [route]="route"></app-select-route>
       <div fxLayout="row" style="justify-content: space-between" [hidden]="hideDateInput">
         <mat-form-field appearance="outline">
           <mat-label>{{'Departure date'| translate}}</mat-label>

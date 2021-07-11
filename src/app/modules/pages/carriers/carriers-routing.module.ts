@@ -5,6 +5,7 @@ import { CarriersComponent } from './carriers.component';
 
 const routes: Routes = [
   { path: '', component: CarriersComponent },
+  { path: 'dashboard/:id', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: ':id', loadChildren: () => import('./carrier/carrier.module').then(m => m.CarrierModule) },
 ];
 

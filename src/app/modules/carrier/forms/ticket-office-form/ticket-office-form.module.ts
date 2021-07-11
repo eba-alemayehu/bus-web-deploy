@@ -9,6 +9,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {NgxMatIntlTelInputModule} from "ngx-mat-intl-tel-input";
+import {AgmCoreModule} from "@agm/core";
 
 
 
@@ -26,7 +28,9 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMatIntlTelInputModule,
+    AgmCoreModule
   ]
 })
 export class TicketOfficeFormModule { }

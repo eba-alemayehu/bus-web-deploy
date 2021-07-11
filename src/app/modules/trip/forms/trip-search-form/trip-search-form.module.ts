@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {LangModule} from '../../../../lang.module';
 import {MatCardModule} from '@angular/material/card';
 import {WeekDateModule} from './weak-date/week-date.module';
+import {SelectRouteModule} from "./select-route/select-route.module";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {WeekDateModule} from './weak-date/week-date.module';
         LangModule,
         MatCardModule,
         WeekDateModule,
+        SelectRouteModule,
     ],
   providers: [
     MatDatepickerModule,

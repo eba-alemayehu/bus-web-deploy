@@ -1,5 +1,28 @@
-query Tickets($trip: ID, $user: ID, $carrier: ID, $bulkRef: String) {
-  tickets(first: 60, trip: $trip, trip_Carrier: $carrier, user: $user, bulkRef: $bulkRef) {
+query Tickets(
+  $trip: ID,
+  $user: ID,
+  $carrier: ID,
+  $bulkRef: String,
+  $tripRouteLeavingFrom: ID,
+  $tripRouteDestination: ID,
+  $tripDepartureTimeGte: DateTime,
+  $tripDepartureTimeLte: DateTime,
+  $isBooked: Boolean,
+  $isPaid: Boolean,
+) {
+  tickets(
+    first: 60,
+    trip: $trip,
+    trip_Carrier:
+    $carrier,
+    user: $user,
+    trip_Route_LeavingFrom: $tripRouteLeavingFrom,
+    trip_Route_Destination: $tripRouteDestination,
+    trip_DepartureTime_Gte: $tripDepartureTimeGte,
+    trip_DepartureTime_Lte: $tripDepartureTimeLte,
+    bookedAt_Isnull: $isBooked,
+    order_VerifiedAt_Isnull: $isPaid,
+    bulkRef: $bulkRef) {
     edges {
       node {
         id

@@ -41,7 +41,7 @@ export class TripListComponent implements OnInit {
     this.loading = true;
     // this.trips$ = this.tripsGQL.watch(
     //   {
-    //     carrier: (typeof (this.carrier) === 'string') ? this.carrier : this.carrier?.id,
+    //     dashboard: (typeof (this.dashboard) === 'string') ? this.dashboard : this.dashboard?.id,
     //     bulkRef: this.uuid,
     //     leavingFrom: this.leavingFrom,
     //     destination: this.destination,

@@ -3,29 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { CarrierRoutingModule } from './carrier-routing.module';
 import { CarrierComponent } from './carrier.component';
-import {FlexModule} from '@angular/flex-layout';
-import {MatCardModule} from '@angular/material/card';
-import {ShimmerModule} from '../../../common/shimmer/shimmer.module';
-import {LangModule} from '../../../../lang.module';
-import {MainStatModule} from '../../../carrier/component/dashboard/main-stat/main-stat.module';
-import {TripsTableModule} from '../../../trip/tables/trips-table/trips-table.module';
-import {MainDashboardChartModule} from "../../../carrier/charts/main-dashboard-chart/main-dashboard-chart.module";
-import {LinksListModule} from "../../../carrier/component/dashboard/links-list/links-list.module";
+import {FlexModule} from "@angular/flex-layout";
+import {CarrierTumbModule} from "../../../carrier/component/carrier-tumb/carrier-tumb.module";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTabsModule} from "@angular/material/tabs";
+import {TripListModule} from "../../../trip/lists/trip-list/trip-list.module";
 
 
 @NgModule({
   declarations: [CarrierComponent],
-    imports: [
-        CommonModule,
-        CarrierRoutingModule,
-        FlexModule,
-        MatCardModule,
-        ShimmerModule,
-        MainStatModule,
-        TripsTableModule,
-        LangModule,
-        MainDashboardChartModule,
-        LinksListModule
-    ]
+  imports: [
+    CommonModule,
+    CarrierRoutingModule,
+    FlexModule,
+    CarrierTumbModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
+    TripListModule
+  ]
 })
 export class CarrierModule { }

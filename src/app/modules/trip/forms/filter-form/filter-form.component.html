@@ -1,112 +1,51 @@
-<mat-card style=" text-align: center; background: rgba(255, 255, 255, 0.5);">
-  <div fxLayout="column">
-    <h1>filter</h1>
-    <div fxLayout="column">
-      <form [formGroup]="filterFormGroup" (ngSubmit)="submit()" style="margin: auto;">
-        <div  style="flex-flow: wrap">
-          <div fxLayout="row" style="place-content: space-between;">
-            <mat-form-field appearance="outline">
-              <mat-label>{{'Leaving from'| translate}}</mat-label>
-              <mat-select formControlName="leavingFrom" (opened)="leavingFromCitiesOpened(); searchFieldOfStudy.focus()">
-                <mat-option disabled>
-                  <input
-                    type="text"
-                    [formControl]="leavingFromCityFilter"
-                    #searchFieldOfStudy
-                    [placeholder]="'Search'| translate"
-                    style="
-              color: black;
-              width: 95%;
-              padding: .5em;
-            "/>
-                </mat-option>
-                <mat-option
-                  *ngFor="let city of leavingFromCity"
-                  [value]="city.node.id"
-                  [disabled]="city.node.id === filterFormGroup.value.destination"
-                  [hidden]="city.node.id === filterFormGroup.value.destination"
-                >
-                  {{city.node.name}}
-                </mat-option>
-              </mat-select>
-              <mat-icon matPrefix color="accent">place</mat-icon>
-            </mat-form-field>
-            <mat-form-field appearance="outline" >
-              <mat-label>{{'Destination'| translate}}</mat-label>
-              <mat-select formControlName="destination"  (opened)="destinationCitiesOpened(); searchFieldOfStudy.focus()">
-                <mat-option disabled>
-                  <input
-                    type="text"
-                    [formControl]="destinationCityFilter"
-                    #searchFieldOfStudy
-                    [placeholder]="'Search'| translate"
-                    style="
-                outline: none;
-              color: black;
-              width: 95%;
-              padding: .5em;
-            "/>
-                </mat-option>
-
-                <mat-option
-                  *ngFor="let city of destinationCity"
-                  [value]="city.node.id"
-                  [disabled]="city.node.id === filterFormGroup.value.leavingFrom"
-                  [hidden]="city.node.id === filterFormGroup.value.leavingFrom"
-                >
-                  {{city.node.name}}
-                </mat-option>
-              </mat-select>
-              <mat-icon matPrefix color="accent">place</mat-icon>
-            </mat-form-field>
-          </div>
-          <div fxLayout="row" style="justify-content: space-between">
-            <mat-form-field appearance="outline" style="margin-right:0.5em">
-              <mat-label>Date range</mat-label>
-              <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate formControlName="startDate" placeholder="Start date">
-                <input matEndDate formControlName="endDate" placeholder="End date">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>{{'Boarding '| translate}}</mat-label>
-              <mat-select formControlName="boardingFrom" (opened)="leavingFromCitiesOpened(); searchFieldOfStudy.focus()">
-                <mat-option disabled>
-                  <input
-                    type="text"
-                    [formControl]="boardingFrom"
-                    #searchFieldOfStudy
-                    [placeholder]="'Search'| translate"
-                    style="
-              color: black;
-              width: 95%;
-              padding: .5em;
-            "/>
-                </mat-option>
-                <mat-option
-                  *ngFor="let city of leavingFromCity"
-                  [value]="city.node.id"
-                  [disabled]="city.node.id === filterFormGroup.value.destination"
-                  [hidden]="city.node.id === filterFormGroup.value.destination"
-                >
-                  {{city.node.name}}
-                </mat-option>
-              </mat-select>
-              <mat-icon matPrefix color="accent">place</mat-icon>
-            </mat-form-field>
-          </div>
-
-          <div fxLayout="row-reverse">
-              <button style="height:3em; margin: 1em" mat-flat-button type="submit" color="primary">Filter</button>
-            </div>
-        </div>
-
-      </form>
+<div fxLayout="column">
+  <form [formGroup]="filterFormGroup" (ngSubmit)="submit()" style="margin: auto;">
+    <div style="flex-flow: wrap">
+      <div fxLayout="row" style="place-content: space-between;">
+        <app-select-route (routeChanged)="routeChanged($event)"></app-select-route>
+      </div>
+      <div fxLayout="row" style="justify-content: space-between">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate formControlName="startDate" placeholder="Start date">
+            <input matEndDate formControlName="endDate" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>{{'Boarding '| translate}}</mat-label>-->
+<!--          <mat-select formControlName="boardingFrom" (opened)="leavingFromCitiesOpened(); searchFieldOfStudy.focus()">-->
+<!--            <mat-option disabled>-->
+<!--              <input-->
+<!--                type="text"-->
+<!--                [formControl]="boardingFrom"-->
+<!--                #searchFieldOfStudy-->
+<!--                [placeholder]="'Search'| translate"-->
+<!--                style="-->
+<!--              color: black;-->
+<!--              width: 95%;-->
+<!--              padding: .5em;-->
+<!--            "/>-->
+<!--            </mat-option>-->
+<!--            <mat-option-->
+<!--              *ngFor="let city of leavingFromCity"-->
+<!--              [value]="city.node.id"-->
+<!--              [disabled]="city.node.id === filterFormGroup.value.destination"-->
+<!--              [hidden]="city.node.id === filterFormGroup.value.destination"-->
+<!--            >-->
+<!--              {{city.node.name}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--          <mat-icon matPrefix color="accent">place</mat-icon>-->
+<!--        </mat-form-field>-->
+      </div>
+      <div fxLayout="row" style="justify-content: space-between">
+        <mat-checkbox formControlName="isBooked">Booked</mat-checkbox>
+<!--        <mat-checkbox formControlName="isBooked">Unpaid</mat-checkbox>-->
+        <mat-checkbox formControlName="isPaid" >Paid</mat-checkbox>
+      </div>
     </div>
-  </div>
-
-
-
-</mat-card>
+  </form>
+</div>

@@ -1,30 +1,68 @@
 <form [formGroup]="ticketOfficeForm" (ngSubmit)="submit()">
-<div fxLayout="column">
+  <div fxLayout="column">
+    <h1>Ticket office</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input type="text" placeholder="Name" formControlName="name" name="name" matInput>
+      <mat-error *ngIf="ticketOfficeForm.controls['name'].hasError('required')">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'Phone'| translate}}</mat-label>
+      <ngx-mat-intl-tel-input
+        inputPlaceholder="911223344"
+        [preferredCountries]="['et', 'us']"
+        [enablePlaceholder]="true"
+        [enableSearch]="true"
+        name="phone"
+        formControlName="phone">
+      </ngx-mat-intl-tel-input>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'Cities'| translate}}</mat-label>
+      <mat-select formControlName="city">
+        <mat-option *ngFor="let city of cities" [value]="city.node.id">
+          {{city.node.name}}
+        </mat-option>
+      </mat-select>
+      <mat-icon matPrefix color="accent">place</mat-icon>
+      <mat-error *ngIf="ticketOfficeForm.controls['city'].hasError('required')">
+        {{'City is required.'| translate}}
+      </mat-error>
+    </mat-form-field>
+    {{this.ticketOfficeForm.value.latitude | json}}
+    <agm-map
+      style="height: 480px"
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false"
+      [zoomControl]="false"
+      (mapClick)="mapClicked($event)">
+      <!--        (markerClick)="clickedMarker(m.label, i)"-->
+      <agm-marker
+        *ngIf="this.ticketOfficeForm.value.latitude != null && this.ticketOfficeForm.value.longitude != null"
+        [latitude]="this.ticketOfficeForm.value.latitude"
+        [longitude]="this.ticketOfficeForm.value.longitude">
 
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input type="text" placeholder="Name" formControlName="name" name="name" matInput>
-    <mat-error *ngIf="ticketOfficeForm.controls['name'].hasError('required')">
-      Name is required
-    </mat-error>
-  </mat-form-field>
+        <agm-info-window>
+          <strong>InfoWindow content</strong>
+        </agm-info-window>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{'Cities'| translate}}</mat-label>
-    <mat-select formControlName="city">
-      <mat-option *ngFor="let city of cities" [value]="city.node.id">
-        {{city.node.name}}
-      </mat-option>
-    </mat-select>
-    <mat-icon matPrefix color="accent">place</mat-icon>
-    <mat-error *ngIf="ticketOfficeForm.controls['city'].hasError('required')">
-      {{'City is required.'| translate}}
-    </mat-error>
-  </mat-form-field>
+      </agm-marker>
 
-  <div fxLayout="row">
-    <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
+<!--      <agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
+<!--                  [radius]="5000"-->
+<!--                  [fillColor]="'red'"-->
+<!--                  [circleDraggable]="true"-->
+<!--                  [editable]="true">-->
+<!--      </agm-circle>-->
+
+    </agm-map>
+    <div fxLayout="row-reverse" style="margin-top: 2em">
+      <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
+    </div>
+
   </div>
-
-</div>
 </form>

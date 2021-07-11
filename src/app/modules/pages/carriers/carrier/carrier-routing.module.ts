@@ -3,14 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CarrierComponent } from './carrier.component';
 
-const routes: Routes = [
-  { path: '', component: CarrierComponent },
-  { path: 'trips', loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule) },
-  { path: 'buses', loadChildren: () => import('./buses/buses.module').then(m => m.BusesModule) },
-  { path: 'payments', loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule) },
-  { path: 'ticketers', loadChildren: () => import('./tickters/tickters.module').then(m => m.TicktersModule) },
-  { path: 'ticket-offices', loadChildren: () => import('./ticket-offices/ticket-offices.module').then(m => m.TicketOfficesModule) },
-  { path: 'reports', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule) }];
+const routes: Routes = [{ path: '', component: CarrierComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

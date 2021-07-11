@@ -1,58 +1,22 @@
 <div fxLayout="column">
-  <div fxLayout="row" style="justify-content: center">
-    <h1>{{carrier?.name}}</h1>
-    <app-custom-shimmer width="100" height="32" *ngIf="!carrier?.name"></app-custom-shimmer>
+  <div fxLayout="row">
+    <img src="assets/images/bus_banner.jpg" style="width: 100%; border-radius: 25px"/>
   </div>
-  <div fxLayout="row wrap" style="justify-content: space-around;">
-    <app-main-stat
-      iconClass="gradient-purple"
-      icon="commute"
-      title="Trip"
-      subText="Carrier trips"
-      routerLink="trips"
-    ></app-main-stat>
-    <app-main-stat
-      iconClass="gradient-green"
-      icon="directions_bus"
-      title="Buses"
-      subText="Manage buses"
-      routerLink="buses"
-    ></app-main-stat>
-    <app-main-stat
-      iconClass="gradient-yellow"
-      icon="attach_money"
-      title="Payments"
-      subText="Manage payments"
-      routerLink="payments"
-    ></app-main-stat>
-    <app-main-stat
-      iconClass="gradient-blue"
-      icon="manage_accounts"
-      title="Other"
-      subText="Different settings"
-      routerLink="reports"
-    ></app-main-stat>
+  <div fxLayout="row" style="margin-top: 2em; justify-content: space-between">
+    <div fxLayout="column">
+      <app-carrier-tumb [carrier]="carrier" size="large"></app-carrier-tumb>
+      <div></div>
+    </div>
+    <button mat-stroked-button routerLink="/carrier/dashboard/{{carrier?.id}}"><mat-icon>dashboard</mat-icon> Dashboard</button>
   </div>
-  <div fxLayout="row" style="justify-content: space-between" class="row2">
-
-    <mat-card style="flex: 2">
-      <h2>Recent trips</h2>
-      <app-trips-table
-        *ngIf="carrier"
-        [displayedColumns]="['departureTime', 'leavingFrom', 'destination']"
-        [carrier]="carrier.id"></app-trips-table>
-    </mat-card>
-    <mat-card style="flex: 1; ">
-      <h2>Tickets chart</h2>
-      <app-main-dashboard-chart *ngIf="carrier" [carrier]="carrier?.id"></app-main-dashboard-chart>
-    </mat-card>
-  </div>
-  <div fxLayout="row" class="row3">
-    <mat-card style="width: 100%">
-      <app-links-list></app-links-list>
-    </mat-card>
-    <mat-card style="width: 100%">
-      <app-links-list></app-links-list>
-    </mat-card>
+  <div fxLayout="column">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Home"></mat-tab>
+      <mat-tab label="Trips">
+        <ng-template matTabContent>
+          <app-trip-list [carrier]="carrier?.id"></app-trip-list>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

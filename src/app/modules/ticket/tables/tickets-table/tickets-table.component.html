@@ -1,8 +1,15 @@
-<div class="mat-elevation-z0">
-  <div style="float: right;">
+<div class="mat-elevation-z0" fxLayout="column">
+  <div fxLayout="row" style="justify-content: space-between">
+    <button mat-button (click)="openedFilter= !openedFilter"> Filter <mat-icon>filter_alt</mat-icon></button>
     <button mat-flat-button color="primary" (click)="generateReport()" style="margin: 16px">Generate Passengers List</button>
   </div>
 
+  <div fxLayout="row" style="justify-content: space-around;" [hidden]="!openedFilter">
+    <mat-divider></mat-divider>
+    <div style="margin-top: 2em">
+      <app-filter-form (filterParamsChange)="filter($event)"></app-filter-form>
+    </div>
+  </div>
   <table id="tickets-table" mat-table class="full-width-table" matSort aria-label="Elements">
 
     <ng-container matColumnDef="ticket_number">

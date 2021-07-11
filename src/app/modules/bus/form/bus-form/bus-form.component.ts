@@ -46,7 +46,7 @@ export class BusFormComponent implements OnInit {
     echo(input);
     this.busMutation.mutate({input: input}).subscribe(
       (bus) => {
-        this.route.navigate(['/carrier/' + this.carrier.id + '/buses']);
+        this.route.navigate(['/dashboard/' + this.carrier.id + '/buses']);
       }
     );
   }

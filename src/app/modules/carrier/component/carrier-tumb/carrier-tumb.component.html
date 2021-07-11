@@ -3,8 +3,14 @@
   <app-custom-shimmer [width]="80" [height]="16" style="margin-left: 1.2em"></app-custom-shimmer>
 </div>
 <div fxLayout="row" *ngIf="!loading" style="justify-content: right; align-items: center;">
-  <img src="assets/carrier.svg" style="width: 30px; margin-bottom: 1em; " alt="">
-  <h3 style="margin-left: 1.2em"><b>{{carrier.name}}</b></h3>
+  <img
+    src="assets/carrier.svg"
+    alt="carrier logo"
+    [class.small-img]="size=='small'"
+    [class.large-img]="size=='large'"
+  />
+  <h3 *ngIf="size=='small'" style="margin-left: 1.2em"><b>{{carrier.name}}</b></h3>
+  <h1 *ngIf="size=='large'" style="margin-left: 1.2em" class="large">{{carrier.name}}</h1>
 </div>
 
 <!--<div fxLayout="column">-->

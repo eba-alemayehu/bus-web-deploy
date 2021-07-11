@@ -13,7 +13,7 @@ export class AuthenticationDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  close(): void {
-    this.matDialogRef.close();
+  close(result): void {
+    this.matDialogRef.close(result);
   }
 }

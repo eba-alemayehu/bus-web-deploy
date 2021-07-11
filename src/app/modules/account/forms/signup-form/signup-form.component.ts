@@ -135,7 +135,7 @@ export class SignupFormComponent implements OnInit {
         this.storage.setToken(data.user.token, data.user.refreshToken) : throwError('Some error occured'))
     ).subscribe(
       (response) => {
-        this.signup.emit();
+        this.signup.emit(true);
       }
     );
   }

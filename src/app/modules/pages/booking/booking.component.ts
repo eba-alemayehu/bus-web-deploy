@@ -7,6 +7,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {PassengerInfoPreviewComponent} from '../../booking/passenger-info-preview/passenger-info-preview.component';
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../core/service/storage.service';
+import {AuthenticationDialogComponent} from '../../account/dialogs/authentication-dialog/authentication-dialog.component';
+import {addWarning} from '@angular-devkit/build-angular/src/utils/webpack-diagnostics';
+import {RegisteredUserGuard} from '../../../guards/auth/registered-user.guard';
 
 @Component({
   selector: 'app-booking',
@@ -28,6 +31,7 @@ export class BookingComponent implements OnInit {
     private bookTicketGQL: BookTicketGQL,
     public dialog: MatDialog,
     private router: Router,
+    private registeredGuard: RegisteredUserGuard,
     translate: TranslateService,
     private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
@@ -60,7 +64,17 @@ export class BookingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  bookTicket(): void {
+  login(): any {
+    return this.dialog.open(AuthenticationDialogComponent, {
+      width: '480px'
+    }).afterClosed().toPromise();
+  }
+
+  async bookTicket(): Promise<any> {
+    if (!this.registeredGuard.canActivate(null, null)) {
+      const auth = await this.login();
+      if (!auth) return;
+    }
 
     this.passengerInfo.passengers.map(e => {
       const name = e.name.split(' ');
@@ -93,4 +107,6 @@ export class BookingComponent implements OnInit {
       }
     );
   }
+
+
 }

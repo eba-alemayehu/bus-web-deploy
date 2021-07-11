@@ -1,0 +1,19 @@
+query TicketOffice($ticketOffice: ID!){
+  ticketOffice(id: $ticketOffice){
+    id
+    carrier{
+      id
+      name
+      logo
+    }
+    name
+    phone
+    city{
+      id
+      name
+      latitude
+      longitude
+    }
+  }
+}
+

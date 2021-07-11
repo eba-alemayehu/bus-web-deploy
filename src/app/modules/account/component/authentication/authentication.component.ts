@@ -26,11 +26,11 @@ export class AuthenticationComponent implements OnInit {
     this.cancel.emit();
   }
 
-  login(): void {
-    this.cancel.emit();
+  login(loggedIn): void {
+    this.cancel.emit(loggedIn);
   }
 
-  signup(): void {
+  signup(loggedIn): void {
     this.cancel.emit();
   }
 }

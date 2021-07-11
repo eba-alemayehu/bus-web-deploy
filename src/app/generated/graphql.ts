@@ -369,6 +369,16 @@ export type BusSeatConfigurationSeatNodeTicketSetArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 export type BusSeatConfigurationSeatNodeConnection = {
@@ -429,6 +439,16 @@ export type BusStopNodeTicketSetArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 export type BusStopNodeConnection = {
@@ -646,6 +666,16 @@ export type BusUserNodeTicketSetArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1199,6 +1229,7 @@ export type Mutation = {
   carrier?: Maybe<CarrierMutationPayload>;
   carrierRating?: Maybe<CarrierRatingMutationPayload>;
   carrierTicketer?: Maybe<CarrierTicketerMutationPayload>;
+  ticketOffice?: Maybe<TicketOfficeMutationPayload>;
   busSeatConfiguration?: Maybe<BusSeatConfigurationMutationPayload>;
   busSeatConfigurationSeat?: Maybe<BusSeatConfigurationSeatMutationPayload>;
   bus?: Maybe<BusMutationPayload>;
@@ -1305,6 +1336,11 @@ export type MutationCarrierRatingArgs = {
 
 export type MutationCarrierTicketerArgs = {
   input: CarrierTicketerMutationInput;
+};
+
+
+export type MutationTicketOfficeArgs = {
+  input: TicketOfficeMutationInput;
 };
 
 
@@ -1617,6 +1653,16 @@ export type PaymentOrderNodeTicketSetArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 export type PaymentOrderNodeConnection = {
@@ -1814,6 +1860,16 @@ export type QueryTicketsArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1851,6 +1907,16 @@ export type QueryMyTicketsArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -2380,6 +2446,7 @@ export type TicketNode = Node & {
   lockedAt?: Maybe<Scalars['DateTime']>;
   lockedUntil?: Maybe<Scalars['DateTime']>;
   boardedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
   bulkRef?: Maybe<Scalars['String']>;
   isLocked?: Maybe<Scalars['Boolean']>;
   state?: Maybe<TicketState>;
@@ -2397,6 +2464,23 @@ export type TicketNodeEdge = {
   cursor: Scalars['String'];
 };
 
+export type TicketOfficeMutationInput = {
+  id?: Maybe<Scalars['ID']>;
+  name: Scalars['String'];
+  phone: Scalars['String'];
+  carrier: Scalars['ID'];
+  city: Scalars['ID'];
+  latitude?: Maybe<Scalars['Decimal']>;
+  longitude?: Maybe<Scalars['Decimal']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type TicketOfficeMutationPayload = {
+  __typename?: 'TicketOfficeMutationPayload';
+  ticketOffice?: Maybe<TicketOfficeNode>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type TicketOfficeNode = Node & {
   __typename?: 'TicketOfficeNode';
   id: Scalars['ID'];
@@ -2404,6 +2488,7 @@ export type TicketOfficeNode = Node & {
   latitude?: Maybe<Scalars['Decimal']>;
   longitude?: Maybe<Scalars['Decimal']>;
   name: Scalars['String'];
+  phone: Scalars['String'];
   carrier: CarrierNode;
   city: CityNode;
   carrierticketerSet: CarrierTicketerNodeConnection;
@@ -2568,6 +2653,16 @@ export type TripNodeTicketSetArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 export type TripNodeConnection = {
@@ -2860,6 +2955,16 @@ export type UserNodeTicketSetArgs = {
   user?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
   bulkRef_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  bookedAt?: Maybe<Scalars['DateTime']>;
+  bookedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  bookedAt_Gte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Lte?: Maybe<Scalars['DateTime']>;
+  bookedAt_Isnull?: Maybe<Scalars['Boolean']>;
+  order_VerifiedAt?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_In?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  order_VerifiedAt_Gte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Lte?: Maybe<Scalars['DateTime']>;
+  order_VerifiedAt_Isnull?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -3671,6 +3776,26 @@ export type TicketMuationMutation = (
   )> }
 );
 
+export type TicketOfficeQueryVariables = Exact<{
+  ticketOffice: Scalars['ID'];
+}>;
+
+
+export type TicketOfficeQuery = (
+  { __typename?: 'Query' }
+  & { ticketOffice?: Maybe<(
+    { __typename?: 'TicketOfficeNode' }
+    & Pick<TicketOfficeNode, 'id' | 'name' | 'phone'>
+    & { carrier: (
+      { __typename?: 'CarrierNode' }
+      & Pick<CarrierNode, 'id' | 'name' | 'logo'>
+    ), city: (
+      { __typename?: 'CityNode' }
+      & Pick<CityNode, 'id' | 'name' | 'latitude' | 'longitude'>
+    ) }
+  )> }
+);
+
 export type TicketOfficesQueryVariables = Exact<{
   carrier?: Maybe<Scalars['ID']>;
 }>;
@@ -3702,6 +3827,12 @@ export type TicketsQueryVariables = Exact<{
   user?: Maybe<Scalars['ID']>;
   carrier?: Maybe<Scalars['ID']>;
   bulkRef?: Maybe<Scalars['String']>;
+  tripRouteLeavingFrom?: Maybe<Scalars['ID']>;
+  tripRouteDestination?: Maybe<Scalars['ID']>;
+  tripDepartureTimeGte?: Maybe<Scalars['DateTime']>;
+  tripDepartureTimeLte?: Maybe<Scalars['DateTime']>;
+  isBooked?: Maybe<Scalars['Boolean']>;
+  isPaid?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -4909,6 +5040,37 @@ export const TicketMuationDocument = gql`
       super(apollo);
     }
   }
+export const TicketOfficeDocument = gql`
+    query TicketOffice($ticketOffice: ID!) {
+  ticketOffice(id: $ticketOffice) {
+    id
+    carrier {
+      id
+      name
+      logo
+    }
+    name
+    phone
+    city {
+      id
+      name
+      latitude
+      longitude
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class TicketOfficeGQL extends Apollo.Query<TicketOfficeQuery, TicketOfficeQueryVariables> {
+    document = TicketOfficeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const TicketOfficesDocument = gql`
     query TicketOffices($carrier: ID) {
   ticketOffices(carrier: $carrier) {
@@ -4942,12 +5104,18 @@ export const TicketOfficesDocument = gql`
     }
   }
 export const TicketsDocument = gql`
-    query Tickets($trip: ID, $user: ID, $carrier: ID, $bulkRef: String) {
+    query Tickets($trip: ID, $user: ID, $carrier: ID, $bulkRef: String, $tripRouteLeavingFrom: ID, $tripRouteDestination: ID, $tripDepartureTimeGte: DateTime, $tripDepartureTimeLte: DateTime, $isBooked: Boolean, $isPaid: Boolean) {
   tickets(
     first: 60
     trip: $trip
     trip_Carrier: $carrier
     user: $user
+    trip_Route_LeavingFrom: $tripRouteLeavingFrom
+    trip_Route_Destination: $tripRouteDestination
+    trip_DepartureTime_Gte: $tripDepartureTimeGte
+    trip_DepartureTime_Lte: $tripDepartureTimeLte
+    bookedAt_Isnull: $isBooked
+    order_VerifiedAt_Isnull: $isPaid
     bulkRef: $bulkRef
   ) {
     edges {

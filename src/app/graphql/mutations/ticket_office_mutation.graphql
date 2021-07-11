@@ -1,0 +1,11 @@
+mutation TicketOffice($input: TicketOfficeMutationInput!){
+  ticketOffice(input: $input){
+    ticketOffice{
+      carrier{
+        id
+        name
+      }
+      id
+    }
+  }
+}
