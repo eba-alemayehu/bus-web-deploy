@@ -6,10 +6,10 @@ import { SuccessComponent } from './success.component';
 import {FlexModule} from '@angular/flex-layout';
 import {LottieModule} from 'ngx-lottie';
 import player from 'lottie-web';
-import {TripModule} from "../../../trip/trip.module";
+import {TripModule} from '../../../trip/trip.module';
 import {LangModule} from '../../../../lang.module';
-import {MatButtonModule} from "@angular/material/button";
-import {TicketsModule} from "../../../ticket/ticket.module";
+import {MatButtonModule} from '@angular/material/button';
+import {TicketsModule} from '../../../ticket/ticket.module';
 
 // tslint:disable-next-line:typedef
 export function playerFactory() {
