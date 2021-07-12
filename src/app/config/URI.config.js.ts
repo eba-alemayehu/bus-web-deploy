@@ -1,6 +1,6 @@
 import {isDevMode} from '@angular/core';
 
-let _SERVER_URI = 'http://api.gozo.com/';
+let _SERVER_URI = 'https://hrkylbniai.execute-api.us-west-2.amazonaws.com/dev/';
 
 if (isDevMode()){
     // _SERVER_URI   = 'https://hrkylbniai.execute-api.us-west-2.amazonaws.com/dev/';
