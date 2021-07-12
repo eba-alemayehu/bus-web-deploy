@@ -4,7 +4,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
 import {RoutesTableDataSource} from './routes-table-datasource';
 import {RoutesGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {CarrierRouteDialogComponent} from '../../dialog/carrier-route-dialog/carrier-route-dialog.component';
 
@@ -20,6 +20,8 @@ export class RoutesTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
   @Input() carrier = null;
   dataSource: RoutesTableDataSource;
+
+  loading = true;
   routes = [];
 
   displayedColumns = ['from', 'to', 'price', 'buttons'];
@@ -31,7 +33,9 @@ export class RoutesTableComponent implements AfterViewInit, OnInit {
     this.routesGQL.watch({
       carrier: this.carrier,
     }).valueChanges
-      .pipe(map(e => e.data.routes.edges))
+      .pipe(
+        tap(request => this.loading = request.loading),
+        map(e => e.data.routes.edges))
       .subscribe(
         (routes) => {
           this.routes = routes.map(e => e.node);

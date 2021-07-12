@@ -1,5 +1,5 @@
 <div fxLayout="column">
-  <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto">
+  <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" [class.loading]="loading" style="margin: auto">
     <div fxLayout="row">
       <mat-form-field appearance="outline">
         <mat-label>{{'Leaving from'| translate}}</mat-label>
@@ -106,7 +106,7 @@
     </div>
     <div fxLayout="row">
       <span class="spacer"></span>
-      <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="tripFomGroup.invalid">{{'Submit'| translate}}</button>
     </div>
   </form>
 </div>

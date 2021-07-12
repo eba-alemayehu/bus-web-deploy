@@ -51,6 +51,7 @@ export class TripFormComponent implements OnInit {
   busSeatConfiguration: any;
   todayDate = new Date();
 
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,6 +61,7 @@ export class TripFormComponent implements OnInit {
     private citiesGQL: CitiesGQL,
     translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
+    this.loading = true;
     this.busSeatConfigurations$ = busSeatConfigurationGQL
       .watch({}).valueChanges
       .pipe(map((response) => response.data.busSeatConfigurations.edges));
@@ -70,6 +72,7 @@ export class TripFormComponent implements OnInit {
         this.allLeavingFromCity = cities;
         this.destinationCity = cities;
         this.allDestinationCity = cities;
+        this.loading = false;
       }
     );
   }
