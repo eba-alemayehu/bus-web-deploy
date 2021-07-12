@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from "@angular/flex-layout";
 import {LangModule} from '../../../../lang.module';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -22,7 +23,8 @@ import {LangModule} from '../../../../lang.module';
         MatIconModule,
         MatButtonModule,
         FlexModule,
-        LangModule
+        LangModule,
+        MatDialogModule
     ]
 })
 export class ValidatePaymentDialogModule { }

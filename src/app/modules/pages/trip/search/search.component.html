@@ -4,17 +4,18 @@
       layout="row"
       [input]="tripSearchQuery"
       [hideDateInput]="true"
+      [orientation]="(isHandset$| async)?'vertical': 'horizontal'"
       (formSubmit)="searchChanged($event)"
       (formChanged)="searchChanged($event)"
     >
     </app-trip-search-form>
   </mat-card>
   <div class="width60">
-      <app-trip-list
-        [leavingFrom]="tripSearchQuery?.leavingFrom"
-        [destination]="tripSearchQuery?.destination"
-        [departureDate]="tripSearchQuery?.departureDate"
-      >
-      </app-trip-list>
-    </div>
+    <app-trip-list
+      [leavingFrom]="tripSearchQuery?.leavingFrom"
+      [destination]="tripSearchQuery?.destination"
+      [departureDate]="tripSearchQuery?.departureDate"
+    >
+    </app-trip-list>
+  </div>
 </div>

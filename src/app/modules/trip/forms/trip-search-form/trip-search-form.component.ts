@@ -19,6 +19,7 @@ export class TripSearchFormComponent implements OnInit {
   @Output() formChanged: EventEmitter<any> = new EventEmitter<any>();
   @Input() layout = 'column';
   @Input() hideDateInput = false;
+  @Input() orientation = 'horizontal';
   todayDate = new Date();
   route;
 
