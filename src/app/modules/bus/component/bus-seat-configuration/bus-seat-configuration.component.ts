@@ -19,14 +19,19 @@ enum Orientation {
 })
 export class BusSeatConfigurationComponent implements OnInit {
   @Input() orientation = Orientation.ROW;
+  loadingSeatConf = true;
+  select = true;
 
   @Input('busSeatConfiguration') set busSeatConfiguration(value) {
     if (!value?.id) {
       return;
     }
+    this.select = false;
     this.busSeatConfigurationGQL
       .watch({id: value.id}).valueChanges
-      .pipe(map((response) => response.data.busSeatConfiguration.busseatconfigurationseatSet.edges))
+      .pipe(
+        tap((response) => this.loadingSeatConf = response.loading),
+        map((response) => response.data.busSeatConfiguration.busseatconfigurationseatSet.edges))
       .subscribe(
         (busSeatConfigurationSeats) => {
           this.seats = busSeatConfigurationSeats.map(
@@ -49,6 +54,7 @@ export class BusSeatConfigurationComponent implements OnInit {
       pollInterval: 4000
     }).valueChanges
       .pipe(
+        tap((response) => this.loadingSeatConf = response.loading),
         tap((response) => this._trip = response.data.trip),
         map((response) => response.data.trip.seats),
         tap(seats => {
@@ -140,27 +146,21 @@ export class BusSeatConfigurationComponent implements OnInit {
   }
 
   private setSeatStyle(seat: TripSeatType): any {
-    const seatStyle: any = {
-      'width.px': 36,
-      fill: 'url(#available)',
-    };
-
-    if (this.orientation === Orientation.ROW) {
-      seatStyle.transform = 'rotate(-90deg)';
-    }
     if (seat.isLockedByMe && !seat.isBookedByMe) {
-      seatStyle.fill = 'url(#selected)';
+      return 'selected';
     } else if (seat.isLocked || seat.isBookedByMe) {
-      seatStyle.fill = 'url(#reserved)';
+      return 'reserved';
     } else if (seat.isSold === true) {
-      seatStyle.fill = 'url(#booked)';
+      return 'booked';
     } else {
-      seatStyle.fill = 'url(#available)';
+      return 'available';
     }
-    return seatStyle;
   }
 
   selectSeat(seat): void {
+    if (!this.select) {
+      return;
+    }
     this.loading.push(seat.busSeatConfigurationSeat.id);
     this.reserveTicketGQL.mutate({
       input: {
@@ -209,5 +209,13 @@ export class BusSeatConfigurationComponent implements OnInit {
     } else {
       return 'unselected';
     }
+  }
+
+  range(s, e): any {
+    const arr = [];
+    for (let x = s; x < e; x++) {
+      arr.push(x);
+    }
+    return arr;
   }
 }

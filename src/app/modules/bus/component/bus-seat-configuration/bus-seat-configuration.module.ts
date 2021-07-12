@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { BusSeatConfigurationComponent } from './bus-seat-configuration.component';
 import {FlexModule} from '@angular/flex-layout';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import {MatIconModule} from "@angular/material/icon";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {SeatModule} from '../seat/seat.module';
+import {ShimmerModule} from "../../../common/shimmer/shimmer.module";
 
 
 
@@ -18,7 +20,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     FlexModule,
     AngularSvgIconModule.forRoot(),
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SeatModule,
+    ShimmerModule,
   ]
 })
 export class BusSeatConfigurationModule { }

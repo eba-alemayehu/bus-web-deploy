@@ -11,7 +11,10 @@ import {LangModule} from '../../../../lang.module';
 
 
 @NgModule({
-  declarations: [SeatComponent],
+    declarations: [SeatComponent],
+    exports: [
+        SeatComponent
+    ],
     imports: [
         CommonModule,
         SeatRoutingModule,

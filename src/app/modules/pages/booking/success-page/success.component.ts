@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TicketsGQL} from '../../../../generated/graphql';
+import {MyTicketsGQL, TicketsGQL} from '../../../../generated/graphql';
 import {map} from 'rxjs/operators';
 import {Observable, observable, of} from 'rxjs';
 
@@ -29,6 +29,7 @@ export class SuccessComponent implements OnInit {
   ngOnInit(): void {
     this.tickets$ = this.ticketsGQL.watch({
       bulkRef: this.activatedRoute.snapshot.queryParamMap.get('bulkRef'),
+      order: this.activatedRoute.snapshot.queryParamMap.get('orderId'),
     }).valueChanges.pipe(map((response) => {
       this.loading = response.loading;
       return response.data.tickets.edges;

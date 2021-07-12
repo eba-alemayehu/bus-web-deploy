@@ -1,11 +1,10 @@
-<div fxLayout="column">
+<div fxLayout="column" *ngIf="!loadingSeatConf">
   <table style="width: 100%">
     <tr *ngIf="orientation === 'column'">
       <td [style.width]="100/col.length + '%'">
         <div style="display: flex; justify-content: space-around">
           <img src="/assets/wheel.svg" style="width: 3em;">
         </div>
-
       </td>
     </tr>
     <tr *ngFor="let r of (orientation === 'row')? row: col" style="width: 100%">
@@ -20,47 +19,40 @@
       <td [style.padding-left]="'.8em'" *ngIf="orientation === 'row' && r === row.length-1" style="margin-right: 2em">
       </td>
       <td *ngFor="let c of (orientation === 'row')? col: row" [style.width]="100/col.length + '%'"
-          (click)="selectSeat(seat(r, c).seat)"
+          (click)="selectSeat(seat(r, c)?.seat)"
       >
         <div class="flex-col" *ngIf="seat(r, c)" style="cursor: pointer">
-          <div class="seat-container">
-            <div class="seat-name" [style.margin-right]="(orientation === 'row')?'10px': 0">
-              <span
-                *ngIf="loading.indexOf(seat(r,c).seat.busSeatConfigurationSeat.id) <= -1">{{seat(r, c).seat.busSeatConfigurationSeat.name}}</span>
-              <mat-spinner class="mat-spinner-color" diameter="20" style="stroke: white;"
-                           *ngIf="loading.indexOf(seat(r,c).seat.busSeatConfigurationSeat.id) > -1"></mat-spinner>
-
-            </div>
-            <div class="seat-icon">
-              <svg-icon
-                [style.opacity]="loading.indexOf(seat(r,c).seat.busSeatConfigurationSeat.id) > -1 ? 0.6: 1"
-                src="assets/bus_seat.svg"
-                [svgStyle]="seat(r, c).style"></svg-icon>
-            </div>
-
-          </div>
+          <app-seat
+            [name]="seat(r, c)?.seat.busSeatConfigurationSeat.name"
+            [state]="seat(r, c).style"
+            [loading]="loading.indexOf(seat(r,c)?.seat.busSeatConfigurationSeat.id) > -1"
+          ></app-seat>
         </div>
       </td>
     </tr>
   </table>
 </div>
-<svg xmlns="http://www.w3.org/2000/svg" style="height: 0;width: 0">
-  <linearGradient id="reserved" gradientTransform="rotate(65)">
-    <stop offset="0" stop-color="#F9D423"/>
-    <stop offset="1" stop-color="#e65c00"/>
-  </linearGradient>
-  <linearGradient id="selected" gradientTransform="rotate(65)">
-    <stop offset="0" stop-color="#52c234"/>
-    <stop offset="1" stop-color="#061700"/>
-  </linearGradient>
-  <linearGradient id="booked" gradientTransform="rotate(65)">
-    <stop offset="0" stop-color="rgba(0, 0, 0, .2)"/>
-    <stop offset="1" stop-color="rgba(0, 0, 0, .3)"/>
-  </linearGradient>
-  <linearGradient id="available" gradientTransform="rotate(65)">
-    <stop offset="0" stop-color="rgba(0, 0, 0, .5)"/>
-    <stop offset="1" stop-color="rgba(0, 0, 0, .7)"/>
-  </linearGradient>
-</svg>
-<!--static const reserved_seats = [Color(0xffF9D423), Color(0xffe65c00)];-->
-<!--static const selected_seats = [Color(0xff52c234), Color(0xff061700)];-->
+<div [fxLayout]="(orientation === 'column')?'column': 'row'" *ngIf="loadingSeatConf">
+  <div style="display: flex; justify-content: flex-start; flex: 1">
+    <img src="/assets/wheel.svg" style="width: 3em;height: 3em;
+    align-self: flex-end;margin-bottom: 1em">
+  </div>
+  <table style="width: 100%; flex: 10">
+    <tr *ngFor="let r of range(0, (orientation !== 'column')?5: 12)">
+      <td *ngFor="let c of range(0, (orientation !== 'column')?12:5)">
+        <div *ngIf="(orientation !== 'column')">
+          <app-custom-shimmer
+            *ngIf="r != 2 || c == 11"
+            width="36"
+            height="36"></app-custom-shimmer>
+        </div>
+        <div *ngIf="(orientation === 'column')">
+          <app-custom-shimmer
+            *ngIf="c != 2 || r == 11"
+            width="36"
+            height="36"></app-custom-shimmer>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

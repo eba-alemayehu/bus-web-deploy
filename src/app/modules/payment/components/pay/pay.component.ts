@@ -20,9 +20,10 @@ export class PayComponent implements OnInit {
     transactionId: ['', Validators.required],
   });
   loading: boolean;
+
   // tslint:disable-next-line:max-line-length
   constructor(private formBuilder: FormBuilder, public matDialogRef: MatDialogRef<any>, private router: Router, private paymentConfirmationRequestMutation: PaymentConfirmationRequestGQL,
-              translate: TranslateService , private storage: StorageService) {
+              translate: TranslateService, private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }
 
@@ -31,8 +32,10 @@ export class PayComponent implements OnInit {
   }
 
   submit(): void {
-    if (!this.transactionForm.valid) { return; }
-    this.paymentConfirmationRequestMutation.mutate( {
+    if (!this.transactionForm.valid) {
+      return;
+    }
+    this.paymentConfirmationRequestMutation.mutate({
       input: {
         paymentOrderId: this.orderId.orderId,
         bankAccountId: this.bank.id,
@@ -42,7 +45,11 @@ export class PayComponent implements OnInit {
       (response) => {
         echo(response.data);
         this.close.emit(true);
-        this.router.navigate(['booking/success'],  { queryParamsHandling: 'merge' });
+        this.router.navigate(['booking/success'], {
+          queryParamsHandling: 'merge', queryParams: {
+            orderId: this.orderId.orderId
+          }
+        });
       }
     );
   }

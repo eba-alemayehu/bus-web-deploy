@@ -1,0 +1,35 @@
+<div class="seat-container">
+  <div class="seat-name" [style.margin-right]="(orientation === 'row')?'10px': 0">
+              <span
+                *ngIf="!loading">{{name}}</span>
+    <mat-spinner class="mat-spinner-color" diameter="20" style="stroke: white;"
+                 *ngIf="loading"></mat-spinner>
+
+  </div>
+  <div class="seat-icon">
+    <svg-icon
+      [style.opacity]="loading ? 0.6: 1"
+      src="assets/bus_seat.svg"
+      [svgStyle]="style"></svg-icon>
+  </div>
+
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="height: 0;width: 0">
+  <linearGradient id="reserved" gradientTransform="rotate(65)">
+    <stop offset="0" stop-color="#F9D423"/>
+    <stop offset="1" stop-color="#e65c00"/>
+  </linearGradient>
+  <linearGradient id="selected" gradientTransform="rotate(65)">
+    <stop offset="0" stop-color="#52c234"/>
+    <stop offset="1" stop-color="#061700"/>
+  </linearGradient>
+  <linearGradient id="booked" gradientTransform="rotate(65)">
+    <stop offset="0" stop-color="rgba(0, 0, 0, .2)"/>
+    <stop offset="1" stop-color="rgba(0, 0, 0, .3)"/>
+  </linearGradient>
+  <linearGradient id="available" gradientTransform="rotate(65)">
+    <stop offset="0" stop-color="rgba(0, 0, 0, .5)"/>
+    <stop offset="1" stop-color="rgba(0, 0, 0, .7)"/>
+  </linearGradient>
+</svg>

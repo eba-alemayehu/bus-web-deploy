@@ -9,6 +9,7 @@ query Tickets(
   $tripDepartureTimeLte: DateTime,
   $isBooked: Boolean,
   $isPaid: Boolean,
+  $order: ID
 ) {
   tickets(
     first: 60,
@@ -22,6 +23,7 @@ query Tickets(
     trip_DepartureTime_Lte: $tripDepartureTimeLte,
     bookedAt_Isnull: $isBooked,
     order_VerifiedAt_Isnull: $isPaid,
+    order: $order,
     bulkRef: $bulkRef) {
     edges {
       node {
