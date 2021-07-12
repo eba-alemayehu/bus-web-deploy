@@ -1,3 +1,6 @@
+<div *ngIf="trips.length === 0 && !loading">
+  <app-not-found [message]="'No Trip Found'"></app-not-found>
+</div>
 <div
   class="flex-col"
   id="tender-list-col"
@@ -13,7 +16,11 @@
   <mat-card fxLayout="row" *ngFor="let trip of trips" (click)="onSelect(trip)" style="margin-bottom: 1em">
     <app-trip-list-item [trip]="trip.node" style="width: 100%; margin: auto">
       <div buttons fxLayout="row" class="tbuttons">
-        <button mat-flat-button color="primary" routerLink="/booking/seat/{{trip.node.id}}">{{'Book ticket'| translate}}</button>
+        <button
+          *ngIf="bookButton"
+          mat-flat-button
+          color="primary"
+          routerLink="/booking/seat/{{trip.node.id}}">{{'Book ticket'| translate}}</button>
 <!--        <button mat-flat-button color="primary" (click)="edit(trip)"><mat-icon>edit</mat-icon>{{'Edit trip'| translate}}</button>-->
 <!--        <button mat-flat-button color="primary" (click)="cancel(trip)"><mat-icon>cancle</mat-icon>{{'Cancel trip'| translate}}</button>-->
 <!--        <button mat-flat-button color="primary" (click)="changeDate(trip)"><mat-icon>time</mat-icon>{{'Change trip date'| translate}}</button>-->
@@ -29,8 +36,6 @@
   </mat-card>
 </div>
 
-  <div *ngIf="trips.length === 0">
-    <app-not-found [message]="'No Trip Found'"></app-not-found>
-  </div>
+
 </div>
 

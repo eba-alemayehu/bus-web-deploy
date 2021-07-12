@@ -80,6 +80,7 @@ export class TripFormComponent implements OnInit {
     private citiesGQL: CitiesGQL,
     translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
+    this.loading = true;
     this.busSeatConfigurations$ = busSeatConfigurationGQL
       .watch({}).valueChanges
       .pipe(map((response) => response.data.busSeatConfigurations.edges));

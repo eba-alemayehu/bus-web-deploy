@@ -1,0 +1,32 @@
+<div fxLayout="column">
+  <agm-map
+    style="height: 990px"
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="true"
+    [zoomControl]="true"
+  >
+
+    <agm-marker
+      *ngFor="let bus of buses$ | async"
+      [latitude]="bus.location?.latitude"
+      [longitude]="bus.location?.longitude"
+    >
+
+      <agm-info-window>
+        <b>{{bus.busNumber}}</b>
+        <span class="secondary">{{bus.phone}}</span>
+      </agm-info-window>
+
+    </agm-marker>
+
+    <!--      <agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
+    <!--                  [radius]="5000"-->
+    <!--                  [fillColor]="'red'"-->
+    <!--                  [circleDraggable]="true"-->
+    <!--                  [editable]="true">-->
+    <!--      </agm-circle>-->
+
+  </agm-map>
+</div>

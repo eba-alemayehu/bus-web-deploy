@@ -130,6 +130,13 @@ export type BusDriverMutationPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type BusLocationType = {
+  __typename?: 'BusLocationType';
+  latitude?: Maybe<Scalars['Decimal']>;
+  longitude?: Maybe<Scalars['Decimal']>;
+  time?: Maybe<Scalars['DateTime']>;
+};
+
 export type BusMutationInput = {
   plateNumber?: Maybe<Scalars['String']>;
   busNumber?: Maybe<Scalars['String']>;
@@ -157,6 +164,7 @@ export type BusNode = Node & {
   drivers: BusUserNodeConnection;
   assistants: BusUserNodeConnection;
   tripSet: TripNodeConnection;
+  location?: Maybe<BusLocationType>;
 };
 
 
@@ -2586,9 +2594,9 @@ export type TripLocationNode = Node & {
   __typename?: 'TripLocationNode';
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
+  latitude?: Maybe<Scalars['Decimal']>;
+  longitude?: Maybe<Scalars['Decimal']>;
   time: Scalars['DateTime'];
-  lat: Scalars['Decimal'];
-  long: Scalars['Decimal'];
   trip: TripNode;
   user: BusUserNode;
 };

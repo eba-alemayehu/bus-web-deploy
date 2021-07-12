@@ -10,6 +10,7 @@ import {onError} from '@apollo/client/link/error';
 import {tap} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {StorageService} from './core/service/storage.service';
+import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist';
 
 const uri = GRAPHQL_URL;
 let isRefreshing = false;
@@ -101,7 +102,10 @@ export function createApollo(httpLink: HttpLink, injector: Injector): any {
   });
   const link = ApolloLink.from([basic, auth, error, httpLink.create({uri})]);
   const cache = new InMemoryCache();
-
+  // await persistCache({
+  //   cache,
+  //   storage: new LocalStorageWrapper(window.localStorage),
+  // });
   return {
     link,
     cache

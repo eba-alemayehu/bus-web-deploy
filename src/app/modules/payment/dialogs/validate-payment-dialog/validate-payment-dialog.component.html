@@ -1,21 +1,42 @@
-<h2 class="mat-h2">{{'Validate payment'| translate}}</h2>
-<h3 style="text-align: center">{{paymentOrder.bankAccount.bank.name}}</h3>
-<div fxLayout="row" style="justify-content: center; padding: 1em">
-  <div>{{paymentOrder.orderedBy.name}}</div>
-  <div style="font-weight: 600;font-size: 1.5em">{{paymentOrder.price}} {{'ETB'| translate}}</div>
+<div fxLayout="column">
+  <div fxLayout="row-reverse">
+    <button mat-icon-button mat-dialog-close>close</button>
+  </div>
 </div>
-<div fxLayout="column" style="text-align: center; width: 100%">
-  <b>{{'Transaction Id'| translate}}</b>
-  <i style="font-size: 1.5em;padding: 0.5em">{{paymentOrder.transactionId}}</i>
+
+<div [class.loading]="loading">
+  <h2 class="mat-h2">{{'Validate payment'| translate}}</h2>
+  <h3 style="text-align: center">{{paymentOrder.bankAccount.bank.name}}</h3>
+  <div fxLayout="row" style="justify-content: center; padding: 1em">
+    <div>{{paymentOrder.orderedBy.name}}</div>
+    <div style="font-weight: 600;font-size: 1.5em">{{paymentOrder.price}} {{'ETB'| translate}}</div>
+  </div>
+  <div fxLayout="column" style="text-align: center; width: 100%">
+    <b>{{'Transaction Id'| translate}}</b>
+    <i style="font-size: 1.5em;padding: 0.5em">{{paymentOrder.transactionId}}</i>
     <mat-form-field id="transactionId"
-      style="text-align: center" appearance="outline">
+                    style="text-align: center" appearance="outline">
       <input matInput type="text" [ngModel]="transactionId.control" (ngModelChange)="onChange($event)" style="font-size: 1.5em"/>
-      <mat-icon *ngIf="this.transactionId.error" matSuffix>error</mat-icon>
-      <mat-icon *ngIf="!this.transactionId.error" matSuffix>success</mat-icon>
+      <mat-icon *ngIf="this.transactionId.error === true" matSuffix style="color: darkred">error</mat-icon>
+      <mat-icon *ngIf="this.transactionId.error === false" matSuffix style="color: green">done</mat-icon>
     </mat-form-field>
+  </div>
+  <div fxLayout="row" style="justify-content: space-around; margin-top: 0.5em">
+    <div>
+      <button
+        [class.loading]="this.transactionId.error === true"
+        [disabled]="this.transactionId.error === true"
+        mat-flat-button
+        (click)="confirm(false)"
+        color="warn">{{'Deny'| translate}}</button></div>
+    <div>
+      <button mat-flat-button
+              [class.loading]="this.transactionId.error === true"
+              [disabled]="this.transactionId.error === true"
+              (click)="confirm(true)"
+              color="primary">{{'Confirm'| translate}}</button>
+    </div>
+  </div>
 </div>
-<div fxLayout="row" style="justify-content: space-around; margin-top: 0.5em">
-  <div><button mat-flat-button (click)="confirm(false)" color="warn">{{'Deny'| translate}}</button></div>
-  <div><button mat-flat-button (click)="confirm(true)" style="background-color: green; color: white">{{'Confirm'| translate}}</button></div>
-</div>
+
 
