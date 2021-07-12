@@ -41,6 +41,7 @@
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-link": "^1.2.14",
     "apollo-link-error": "^1.1.13",
+    "apollo3-cache-persist": "^0.10.0",
     "bootstrap": "4.1.1",
     "chart.js": "^2.9.4",
     "graphql": "^15.0.0",

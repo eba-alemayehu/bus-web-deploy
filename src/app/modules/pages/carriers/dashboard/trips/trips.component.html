@@ -7,6 +7,7 @@
 </div>
 <div fxLayout="column">
   <app-trip-list
+    [bookButton]="false"
     [carrier]="carrierId"
     (selected)="tripClick($event)"></app-trip-list>
 </div>

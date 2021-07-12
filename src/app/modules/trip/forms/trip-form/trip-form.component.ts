@@ -53,6 +53,7 @@ export class TripFormComponent implements OnInit {
   busSeatConfiguration: any;
   todayDate = new Date();
 
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -84,6 +85,7 @@ export class TripFormComponent implements OnInit {
         this.allLeavingFromCity = cities;
         this.destinationCity = cities;
         this.allDestinationCity = cities;
+        this.loading = false;
       }
     );
   }

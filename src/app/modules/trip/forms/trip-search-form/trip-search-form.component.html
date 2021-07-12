@@ -4,7 +4,10 @@
 <div fxLayout="column">
   <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto">
     <div  style="flex-flow: wrap">
-      <app-select-route (routeChanged)="routeChanged($event)" [route]="route"></app-select-route>
+      <app-select-route
+        [orientation]="orientation"
+        (routeChanged)="routeChanged($event)"
+        [route]="route"></app-select-route>
       <div fxLayout="row" style="justify-content: space-between" [hidden]="hideDateInput">
         <mat-form-field appearance="outline">
           <mat-label>{{'Departure date'| translate}}</mat-label>

@@ -10,9 +10,8 @@
 
     <agm-marker
       *ngFor="let bus of buses$ | async"
-      [latitude]="bus.location.latitude"
-      [longitude]="bus.location.longitude"
-
+      [latitude]="bus.location?.latitude"
+      [longitude]="bus.location?.longitude"
     >
 
       <agm-info-window>

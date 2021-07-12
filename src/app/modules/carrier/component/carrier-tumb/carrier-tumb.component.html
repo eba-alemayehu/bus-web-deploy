@@ -9,8 +9,8 @@
     [class.small-img]="size=='small'"
     [class.large-img]="size=='large'"
   />
-  <h3 *ngIf="size=='small'" style="margin-left: 1.2em"><b>{{carrier.name}}</b></h3>
-  <h1 *ngIf="size=='large'" style="margin-left: 1.2em" class="large">{{carrier.name}}</h1>
+  <h3 *ngIf="size=='small'" style="margin-left: 1.2em"><b>{{carrier?.name}}</b></h3>
+  <h1 *ngIf="size=='large'" style="margin-left: 1.2em" class="large">{{carrier?.name}}</h1>
 </div>
 
 <!--<div fxLayout="column">-->

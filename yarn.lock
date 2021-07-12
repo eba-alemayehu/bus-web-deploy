@@ -281,7 +281,7 @@
   dependencies:
     "tslib" "^2.0.0"
 
-"@apollo/client@^3.0.0":
+"@apollo/client@^3.0.0", "@apollo/client@^3.2.5":
   "integrity" "sha512-1wLVqRpujzbLRWmFPnRCDK65xapOe2txY0sTI+BaqEbumMUVNS3vxojT6hRHf9ODFEK+F6MLrud2HGx0mB3eQw=="
   "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.3.12.tgz"
   "version" "3.3.12"
@@ -2437,6 +2437,11 @@
     "fast-json-stable-stringify" "^2.0.0"
     "ts-invariant" "^0.4.0"
     "tslib" "^1.10.0"
+
+"apollo3-cache-persist@^0.10.0":
+  "integrity" "sha512-3W558cKQ9OymUaLMD3Mv8FuUmIDu/GP6aJA+5iLH6fw5MxG4dwF09fFz8NBHn/qfa/zrxv8AtDzKehZUPm107A=="
+  "resolved" "https://registry.npmjs.org/apollo3-cache-persist/-/apollo3-cache-persist-0.10.0.tgz"
+  "version" "0.10.0"
 
 "app-root-path@^3.0.0":
   "integrity" "sha512-qMcx+Gy2UZynHjOHOIXPNvpf+9cjvk3cWrBBK7zg4gH9+clobJRb9NGzcT7mQTcV/6Gm/1WelUtqxVXnNlrwcw=="

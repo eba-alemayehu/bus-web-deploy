@@ -13,13 +13,14 @@ import {Router} from '@angular/router';
   templateUrl: './trip-list.component.html',
   styleUrls: ['./trip-list.component.scss']
 })
-export class TripListComponent implements OnInit {
+export class TripListComponent implements OnInit, OnChanges {
   @Input() carrier = null;
   @Input() uuid = null;
   @Input() leavingFrom = null;
   @Input() destination = null;
   @Input() departureDate = null;
   @Input() loading = true;
+  @Input() bookButton = true;
   requesting = false;
   @Output() selected: EventEmitter<any> = new EventEmitter<any>();
   trips = [];
@@ -34,10 +35,9 @@ export class TripListComponent implements OnInit {
     this.loadTrips();
   }
 
-  private loadTrips(): void {
+  loadTrips(): void {
     const departureDate = new Date(this.departureDate);
     const departureDateTo = new Date(departureDate.setDate(departureDate.getDate() + 1));
-    console.log('loadtrips');
     this.loading = true;
     // this.trips$ = this.tripsGQL.watch(
     //   {
@@ -93,11 +93,10 @@ export class TripListComponent implements OnInit {
 
 
   onScroll(): void{
-    if(this.$pageInfo.hasNextPage && this.$pageInfo && !this.requesting){
+    if (this.$pageInfo.hasNextPage && this.$pageInfo && !this.requesting){
       this.requesting = true;
       this.loading = true;
       this.loadTrips();
-      console.log('scrolling');
     }
     return;
   }
@@ -118,5 +117,10 @@ export class TripListComponent implements OnInit {
   changeDate(trip: any): void {
     // this.matDialog.open(ChangeTripDateComponent, {width: '144px'});
     this.router.navigate([this.router.url, 'form', 'changedate', trip.node.id]);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.trips = [];
+    this.loadTrips();
   }
 }
