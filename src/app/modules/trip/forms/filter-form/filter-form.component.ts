@@ -3,6 +3,8 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {echo} from '../../../../util/print';
 import {CitiesGQL} from '../../../../generated/graphql';
 import {map} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-filter-form',
@@ -33,8 +35,13 @@ export class FilterFormComponent implements OnInit {
 
   allLeavingFromCity = [];
   allDestinationCity = [];
+  loading = false;
 
-  constructor(private formBuilder: FormBuilder, private citiesGQL: CitiesGQL) { }
+  constructor(private formBuilder: FormBuilder, private citiesGQL: CitiesGQL,
+              translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
+  }
 
   leavingFromCitiesOpened(): void {
     this.leavingFromCity = this.allLeavingFromCity.filter((e) => e.node.id !== this.filterFormGroup.value.destination);
@@ -52,10 +59,12 @@ export class FilterFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.citiesGQL.watch().valueChanges.pipe((map(response => response.data.cities.edges)))
       .subscribe((cites) => {
         this.allLeavingFromCity = cites.map(e => e.node);
         this.allDestinationCity = cites.map(e => e.node);
+        this.loading = false;
       });
     this.filterFormGroup.valueChanges.subscribe(
       (filter) => {

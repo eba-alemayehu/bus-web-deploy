@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoutePriceMutationGQL} from '../../../../generated/mutation/graphql';
 import {echo} from '../../../../util/print';
 import {tap} from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class CarrierRouteFormComponent implements OnInit {
   }
 
   loading = false;
-  carrierRouteFormGroup: any;
+  carrierRouteFormGroup: FormGroup;
 
   constructor(private fromBuilder: FormBuilder, private routePriceMutationGQL: RoutePriceMutationGQL) {
     this.carrierRouteFormGroup = this.fromBuilder.group({

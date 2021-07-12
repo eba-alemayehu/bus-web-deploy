@@ -27,6 +27,7 @@ export class PassengersInfoFormComponent implements OnInit {
   }
 
   @Input() trip;
+  loading= false;
 
   constructor(private formBuilder: FormBuilder, private bookTicketMutation: BookTicketGQL,
               translate: TranslateService , private storage: StorageService) {
@@ -34,10 +35,12 @@ export class PassengersInfoFormComponent implements OnInit {
     this.passengerInfoFormGroup = this.formBuilder.group({
       passengers: this.formBuilder.array([])
     });
+    this.loading = true;
     this.passengerInfoFormGroup.valueChanges.subscribe(
       (value) => {
         this.isValidChange.emit(!this.passengerInfoFormGroup.invalid);
         this.passengerInfoChange.emit(value);
+        this.loading = false;
       });
   }
 

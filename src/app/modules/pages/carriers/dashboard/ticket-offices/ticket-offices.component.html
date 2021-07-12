@@ -1,18 +1,18 @@
 <mat-card style="margin-top: 1em">
-  <h1 style="text-align: center">Ticket offices</h1>
+  <h1 style="text-align: center">{{'Ticket offices'| translate}}</h1>
   <div fxLayout="row-reverse">
-    <button mat-flat-button color="primary" routerLink="form">Add ticket offices</button>
+    <button mat-flat-button color="primary" routerLink="form">{{'Add ticket offices'| translate}}</button>
   </div>
   <app-ticket-offices-table>
     <ng-template let-row>
       <button mat-flat-button
               [routerLink]="'/carrier/dashboard/'+(activatedRoute.params | async).id + '/ticketers/' + row.id">
-        Open
+        {{'Open'| translate}}
         <mat-icon>launch</mat-icon>
       </button>
       <button mat-flat-button [routerLink]="'form/' + row.id">
         <mat-icon>edit</mat-icon>
-        Edit
+        {{'Edit'| translate}}
       </button>
     </ng-template>
   </app-ticket-offices-table>

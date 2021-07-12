@@ -8,6 +8,7 @@ import {FlexModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {LangModule} from '../../../../../lang.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {MatIconModule} from "@angular/material/icon";
         FlexModule,
         MatCardModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        LangModule
     ]
 })
 export class TicktersModule { }

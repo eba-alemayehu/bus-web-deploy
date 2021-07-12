@@ -28,6 +28,8 @@ export class PaymentsTableComponent implements AfterViewInit, OnInit {
   }
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['bank', 'orderedBy', 'price', 'transactionId', 'verify'];
+  loading = true;
+  notFound = false;
   constructor(translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }
@@ -39,6 +41,7 @@ export class PaymentsTableComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+    this.loading = false;
   }
   private setDataSource(data): void{
       this.dataSource = new PaymentsTableDataSource(data);

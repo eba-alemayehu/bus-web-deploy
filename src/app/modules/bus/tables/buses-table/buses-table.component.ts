@@ -4,7 +4,9 @@ import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
 import {BusesTableDataSource} from './buses-table-datasource';
 import {BusesGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-buses-table',
@@ -19,19 +21,24 @@ export class BusesTableComponent implements AfterViewInit, OnInit {
   dataSource: BusesTableDataSource;
   buses = [];
   displayedColumns = ['icon', 'busNumber', 'plateNumber'];
+  loading = true;
+  notFound = false;
 
-  constructor(private busesGQL: BusesGQL) {
+  constructor(private busesGQL: BusesGQL, translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
   }
 
   ngOnInit(): void {
     this.busesGQL.watch({
       carrier: this.carrier
-    }).valueChanges.pipe(
+    }).valueChanges.pipe(tap(response => this.loading = response.loading ),
       map(response => response.data.buses.edges)
     ).subscribe(
       (buses) => {
         this.buses = buses.map(e => e.node);
         this.setBusesData();
+        this.notFound = (this.buses.length) < 1;
       }
     );
   }

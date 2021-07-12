@@ -9,6 +9,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class ChangeTripDateFormComponent implements OnInit {
   changeTimeFormGroup: FormGroup;
   @Input() tripId;
+  loading = false;
   constructor() { }
 
   ngOnInit(): void {

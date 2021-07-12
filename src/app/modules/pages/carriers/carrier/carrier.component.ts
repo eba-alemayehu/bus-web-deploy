@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CarrierGQL} from '../../../../generated/graphql';
 import {TranslateService} from '@ngx-translate/core';
 import {CarrierGuard} from '../../../../guards/auth/carrier.guard';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-carrier',
@@ -17,7 +18,9 @@ export class CarrierComponent implements OnInit {
     public activatedRouter: ActivatedRoute,
     private carrierGQL: CarrierGQL,
     public carrierGuard: CarrierGuard,
-    translate: TranslateService) {
+    translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
     this.activatedRouter.params.subscribe(
       (params) => {
         this.carrierGQL

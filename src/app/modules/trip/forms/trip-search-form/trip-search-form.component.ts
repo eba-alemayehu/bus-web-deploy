@@ -22,7 +22,7 @@ export class TripSearchFormComponent implements OnInit {
   @Input() orientation = 'horizontal';
   todayDate = new Date();
   route;
-
+  loading = false;
   @Input('input') set input(value) {
     this.tripFomGroup.patchValue(value);
     this.route = {

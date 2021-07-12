@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {TripGQL} from '../../../../../generated/graphql';
 import {map, tap} from 'rxjs/operators';
 import {echo} from '../../../../../util/print';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-reports',
@@ -13,7 +15,9 @@ export class ReportsComponent implements OnInit {
 
   fileName: string;
   // TODO: trip id
-  constructor(public activatedRoute: ActivatedRoute, private tripGQL: TripGQL) {
+  constructor(public activatedRoute: ActivatedRoute, private tripGQL: TripGQL,
+              translate: TranslateService , private storageService: StorageService) {
+    translate.use(this.storageService.getLanguage('lang'));
     this.activatedRoute.params.subscribe(
       (params) => {
         echo(params.id);

@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BusesGQL} from '../../../../generated/graphql';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-bus-list',
@@ -17,7 +19,9 @@ export class BusListComponent implements OnInit {
 
   buses$: Observable<any>;
 
-  constructor(private busesGQL: BusesGQL) {
+  constructor(private busesGQL: BusesGQL, translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
   }
 
   ngOnInit(): void {

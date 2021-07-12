@@ -9,19 +9,21 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {CarrierRouteDialogModule} from "../../../../trip/dialog/carrier-route-dialog/carrier-route-dialog.module";
 import {MatIconModule} from "@angular/material/icon";
+import {LangModule} from '../../../../../lang.module';
 
 
 @NgModule({
   declarations: [RoutesComponent],
-  imports: [
-    CommonModule,
-    RoutesRoutingModule,
-    MatCardModule,
-    RoutesTableModule,
-    FlexModule,
-    MatButtonModule,
-    CarrierRouteDialogModule,
-    MatIconModule
-  ]
+    imports: [
+        CommonModule,
+        RoutesRoutingModule,
+        MatCardModule,
+        RoutesTableModule,
+        FlexModule,
+        MatButtonModule,
+        CarrierRouteDialogModule,
+        MatIconModule,
+        LangModule
+    ]
 })
 export class RoutesModule { }

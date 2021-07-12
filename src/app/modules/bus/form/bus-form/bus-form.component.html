@@ -1,4 +1,4 @@
-<form [formGroup]="busForm" (ngSubmit)="submit()">
+<form [formGroup]="busForm" (ngSubmit)="submit()" [class.loading]="loading">
   <div fxLayout="row" style="justify-content: space-evenly">
     <mat-form-field appearance="outline">
       <mat-label>{{'Bus number'| translate}}</mat-label>
@@ -33,6 +33,6 @@
   <div fxLayout="row">
     <span class="spacer">
     </span>
-    <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="busForm.invalid">{{'Submit'| translate}}</button>
   </div>
 </form>
