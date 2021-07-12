@@ -6,7 +6,7 @@ import {
   BusesGQL,
   BusSeatConfigurationGQL,
   BusSeatConfigurationsGQL,
-  CitiesGQL,
+  CitiesGQL, RoutesGQL,
   TripMutationGQL,
   TripsGQL
 } from '../../../../generated/graphql';
@@ -14,6 +14,7 @@ import {echo} from '../../../../util/print';
 import {map} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 
 @Component({
   selector: 'app-trip-form',
@@ -31,6 +32,7 @@ export class TripFormComponent implements OnInit {
     trip.destination = trip.route.destination.id;
     this.tripFomGroup.patchValue(value);
   }
+  tripRoutes: any;
   tripFomGroup = this.formBuilder.group({
     id: [''],
     leavingFrom: ['', Validators.required],
@@ -58,8 +60,20 @@ export class TripFormComponent implements OnInit {
     private busesGQL: BusesGQL,
     private busSeatConfigurationGQL: BusSeatConfigurationsGQL,
     private citiesGQL: CitiesGQL,
+    private routesGQL: RoutesGQL,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
+    this.activatedRoute.params.subscribe(
+      (params) => {
+        this.routesGQL.watch({carrier: params.id }).valueChanges.subscribe(
+          (response) => {
+            this.tripRoutes = response.data.routes.edges.filter(route => route.node.price != null);
+          }
+        );
+      });
+
     this.busSeatConfigurations$ = busSeatConfigurationGQL
       .watch({}).valueChanges
       .pipe(map((response) => response.data.busSeatConfigurations.edges));
@@ -77,37 +91,54 @@ export class TripFormComponent implements OnInit {
   ngOnInit(): void {
     this.leavingFromCityFilter.valueChanges.subscribe(
       (value) => {
-        this.leavingFromCity = this.allLeavingFromCity.filter( e => e.node.name.toLowerCase().startsWith(value.toLowerCase()));
+        this.leavingFromCity = this.leavingFromCity.filter( e => e.node.name.toLowerCase().startsWith(value.toLowerCase()));
       }
     );
     this.destinationCityFilter.valueChanges.subscribe(
       (value) => {
-        this.destinationCity = this.allDestinationCity.filter( e => e.node.name.toLowerCase().startsWith(value.toLowerCase()));
+        this.destinationCity = this.destinationCity.filter( e => e.node.name.toLowerCase().startsWith(value.toLowerCase()));
       }
     );
   }
 
   _submit(): void {
-    const value = this.tripFomGroup.value;
-    value.carrier = this.carrier.id;
-    value.busSeatConfiguration = this.busSeatConfiguration.node.id;
-    this.tripMutationGQL.mutate({
-      input: this.tripFomGroup.value
-    }).subscribe(
-      (response) => {
-        this.submitted.emit(response.data.trip);
-        echo(response.data.trip);
+    echo(this.tripRoutes);
+    echo(this.tripFomGroup.value.leavingFrom);
+    this.tripRoutes.map(route => {
+      if (route.node.leavingFrom.id !== this.tripFomGroup.value.leavingFrom){
+        this.tripFomGroup.controls.leavingFrom.setErrors({leavingFrom: 'the Route price is not setted!'});
+        this.tripFomGroup.controls.destination.setErrors({destination: 'the Route price is not setted!'});
+        return;
+      }else if (route.node.destination.id !== this.tripFomGroup.value.destination){
+        this.tripFomGroup.controls.leavingFrom.setErrors({leavingFrom: 'the Route price is not setted!'});
+        this.tripFomGroup.controls.destination.setErrors({destination: 'the Route price is not setted!'});
+        return;
       }
-    );
-  }
+      else{
+        const value = this.tripFomGroup.value;
+        value.carrier = this.carrier.id;
+        value.busSeatConfiguration = this.busSeatConfiguration.node.id;
+        this.tripMutationGQL.mutate({
+          input: this.tripFomGroup.value
+        }).subscribe(
+          (response) => {
+            this.submitted.emit(response.data.trip);
+            echo(response.data.trip);
+          }
+        );
+      }
+    });
+    return;
+ }
 
   leavingFromCitiesOpened(): void {
-    this.leavingFromCity = this.allLeavingFromCity;
+    this.leavingFromCity = this.allLeavingFromCity.filter((e) => e.node.id !== this.tripFomGroup.value.destination);
+    echo(this.leavingFromCity);
     this.leavingFromCityFilter.setValue('');
   }
 
   destinationCitiesOpened(): void {
-    this.destinationCity = this.allDestinationCity;
+    this.destinationCity = this.allDestinationCity.filter((e) => e.node.id !== this.tripFomGroup.value.leavingFrom);
     this.destinationCityFilter.setValue('');
   }
 

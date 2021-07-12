@@ -17,6 +17,7 @@ import {ShimmerModule} from "../common/shimmer/shimmer.module";
 import {TripDatetimeModule} from "../trip/components/trip-datetime/trip-datetime.module";
 import {CarrierTumbModule} from "../carrier/component/carrier-tumb/carrier-tumb.module";
 import {PriceModule} from "../common/price/price.module";
+import {NotFoundModule} from "../common/not-found/not-found.module";
 
 
 
@@ -27,21 +28,22 @@ import {PriceModule} from "../common/price/price.module";
         TicketDetailComponent,
 
     ],
-  imports: [
-    CommonModule,
-    TicketRoutingModule,
-    TripModule,
-    FlexModule,
-    MatCardModule,
-    MatDividerModule,
-    QRCodeModule,
-    MatButtonModule,
-    MatDialogModule,
-    LangModule,
-    ShimmerModule,
-    TripDatetimeModule,
-    CarrierTumbModule,
-    PriceModule
-  ]
+    imports: [
+        CommonModule,
+        TicketRoutingModule,
+        TripModule,
+        FlexModule,
+        MatCardModule,
+        MatDividerModule,
+        QRCodeModule,
+        MatButtonModule,
+        MatDialogModule,
+        LangModule,
+        ShimmerModule,
+        TripDatetimeModule,
+        CarrierTumbModule,
+        PriceModule,
+        NotFoundModule
+    ]
 })
 export class TicketsModule { }

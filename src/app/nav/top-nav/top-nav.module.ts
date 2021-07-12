@@ -13,6 +13,7 @@ import {RouterModule} from '@angular/router';
 import {LangModule} from '../../lang.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from "@angular/material/list";
 
 
 
@@ -21,20 +22,21 @@ import {MatSelectModule} from '@angular/material/select';
     exports: [
         TopNavComponent
     ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    ProfilePicModule,
-    FlexModule,
-    AuthenticationDialogModule,
-    MatSnackBarModule,
-    RouterModule,
-    LangModule,
-    MatFormFieldModule,
-    MatSelectModule,
-  ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        ProfilePicModule,
+        FlexModule,
+        AuthenticationDialogModule,
+        MatSnackBarModule,
+        RouterModule,
+        LangModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatListModule,
+    ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ]

@@ -24,6 +24,9 @@
         <mat-error *ngIf="tripFomGroup.controls['leavingFrom'].hasError('required')">
           {{'Leaving from city is required.'| translate}}
         </mat-error>
+        <mat-error *ngIf="tripFomGroup.controls['leavingFrom'].hasError('leavingFrom')">
+          {{'Route price is not specified!.'| translate}}
+        </mat-error>
       </mat-form-field>
       <button mat-icon-button>
         <mat-icon>compare_arrows</mat-icon>
@@ -51,6 +54,9 @@
         <mat-icon matPrefix color="accent">place</mat-icon>
         <mat-error *ngIf="tripFomGroup.controls['destination'].hasError('required')">
           {{'Destination city is required.'| translate}}
+        </mat-error>
+        <mat-error *ngIf="tripFomGroup.controls['destination'].hasError('destination')">
+          {{'Route price is not specified!.'| translate}}
         </mat-error>
       </mat-form-field>
     </div>
@@ -106,7 +112,7 @@
     </div>
     <div fxLayout="row">
       <span class="spacer"></span>
-      <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
+      <button mat-flat-button color="primary" [disabled]="tripFomGroup.invalid" type="submit">{{'Submit'| translate}}</button>
     </div>
   </form>
 </div>

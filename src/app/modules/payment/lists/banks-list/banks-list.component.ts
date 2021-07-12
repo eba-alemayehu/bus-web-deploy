@@ -31,8 +31,4 @@ export class BanksListComponent implements OnInit {
   onResize(event): void {
     this.breakpoint = (event.target.innerWidth <= 1200) ? 1 : 3;
   }
-
-
-
-
 }
