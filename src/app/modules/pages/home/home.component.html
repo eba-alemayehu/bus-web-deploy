@@ -8,11 +8,11 @@
     </mat-card>
   </div>
   <div fxLayout="column" class="home-row">
-    <h1>Routes</h1>
+    <h1>{{'Routes'| translate}}</h1>
     <app-route-list (onSelect)="searchFromRoute($event)"></app-route-list>
   </div>
   <div fxLayout="column" class="home-row">
-    <h1>Carriers</h1>
-    <app-carrier-list goto="/carrier/"></app-carrier-list>
+    <h1>{{'Carriers'| translate}}</h1>
+    <app-carrier-list goto="/carrier"></app-carrier-list>
   </div>
 </div>

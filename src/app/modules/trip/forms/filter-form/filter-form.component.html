@@ -1,5 +1,5 @@
 <div fxLayout="column">
-  <form [formGroup]="filterFormGroup" (ngSubmit)="submit()" style="margin: auto;">
+  <form [formGroup]="filterFormGroup" (ngSubmit)="submit()" style="margin: auto;" [class.loading]="loading">
     <div style="flex-flow: wrap">
       <div fxLayout="row" style="place-content: space-between;">
         <app-select-route (routeChanged)="routeChanged($event)"></app-select-route>
@@ -8,8 +8,8 @@
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Date range</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate formControlName="startDate" placeholder="Start date">
-            <input matEndDate formControlName="endDate" placeholder="End date">
+            <input matStartDate formControlName="startDate" [placeholder]="'Start date' | translate">
+            <input matEndDate formControlName="endDate" [placeholder]="'End date'| translate">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>

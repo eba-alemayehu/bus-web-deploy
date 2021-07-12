@@ -1,1 +1,2 @@
-<app-trip-form></app-trip-form>
+<h1>{{'Edit trip'| translate}}</h1>
+<app-trip-form [id]="tripId" [editMode]="true" (submitted)="submitted($event)"></app-trip-form>

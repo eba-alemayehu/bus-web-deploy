@@ -9,6 +9,7 @@ import {TicketOfficesTableModule} from "../../../../carrier/tables/ticket-office
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {FlexModule} from "@angular/flex-layout";
+import {LangModule} from '../../../../../lang.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {FlexModule} from "@angular/flex-layout";
         TicketOfficesTableModule,
         MatButtonModule,
         MatIconModule,
-        FlexModule
+        FlexModule,
+        LangModule
     ]
 })
 export class TicketOfficesModule { }

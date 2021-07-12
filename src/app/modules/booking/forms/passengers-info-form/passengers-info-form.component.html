@@ -1,4 +1,4 @@
-<form [formGroup]="passengerInfoFormGroup">
+<form [formGroup]="passengerInfoFormGroup" [class.loading]="loading">
   <ng-container *ngFor="let userFormGroup of passengers.controls; let i = index">
     <h4>{{'Passenger'| translate}} {{i+1}}</h4>
     <div [formGroup]="userFormGroup" fxLayout="row">

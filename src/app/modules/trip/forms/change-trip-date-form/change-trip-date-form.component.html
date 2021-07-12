@@ -1,7 +1,7 @@
 <div fxLayout="column">
   <h1>Change trip date</h1>
   <h2></h2>
-  <form [formGroup]="changeTimeFormGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="changeTimeFormGroup" (ngSubmit)="onSubmit()" [class.loading]="loading">
     <div fxLayout="row">
       <mat-form-field appearance="outline" fxFill>
         <mat-label>{{'Departure time'| translate}}</mat-label>

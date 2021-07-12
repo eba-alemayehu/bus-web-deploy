@@ -7,43 +7,43 @@
     <app-main-stat
       iconClass="gradient-purple"
       icon="commute"
-      title="Trip"
-      subText="Carrier trips"
+      [title]="'Trip'| translate"
+      [subText]="'Carrier trips'| translate"
       routerLink="trips"
     ></app-main-stat>
     <app-main-stat
       iconClass="gradient-green"
       icon="directions_bus"
-      title="Buses"
-      subText="Manage buses"
+      [title]="'Buses'| translate"
+      [subText]="'Manage buses'| translate"
       routerLink="buses"
     ></app-main-stat>
     <app-main-stat
       iconClass="gradient-yellow"
       icon="attach_money"
-      title="Payments"
-      subText="Manage payments"
+      [title]="'Payments'| translate"
+      [subText]="'Manage payments'| translate"
       routerLink="payments"
     ></app-main-stat>
     <app-main-stat
       iconClass="gradient-blue"
       icon="confirmation_number"
-      title="Tickets"
-      subText="Different settings"
+      [title]="'Tickets'| translate"
+      [subText]="'Different settings'| translate"
       routerLink="reports"
     ></app-main-stat>
   </div>
   <div fxLayout="row" style="justify-content: space-between" class="row2">
 
     <mat-card style="flex: 2">
-      <h2>Recent trips</h2>
+      <h2>{{'Recent trips'| translate}}</h2>
       <app-trips-table
         *ngIf="carrier"
         [displayedColumns]="['departureTime', 'leavingFrom', 'destination']"
         [carrier]="carrier.id"></app-trips-table>
     </mat-card>
     <mat-card style="flex: 1; ">
-      <h2>Tickets chart</h2>
+      <h2>{{'Tickets chart'| translate}}</h2>
       <app-main-dashboard-chart *ngIf="carrier" [carrier]="carrier?.id"></app-main-dashboard-chart>
     </mat-card>
   </div>

@@ -10,6 +10,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTabsModule} from "@angular/material/tabs";
 import {TripListModule} from "../../../trip/lists/trip-list/trip-list.module";
 import {TicketOfficesMapModule} from "../../../carrier/component/ticket-offices-map/ticket-offices-map.module";
+import {LangModule} from '../../../../lang.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {TicketOfficesMapModule} from "../../../carrier/component/ticket-offices-
     MatIconModule,
     MatTabsModule,
     TripListModule,
-    TicketOfficesMapModule
+    TicketOfficesMapModule,
+    LangModule
   ]
 })
 export class CarrierModule { }

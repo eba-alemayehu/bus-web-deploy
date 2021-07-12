@@ -1,10 +1,14 @@
-<div style="padding:8px" *ngFor="let ticket of tickets">
-  <app-ticket [ticket]="ticket.node"></app-ticket>
-</div>
-
 <ng-container *ngIf = "loading">
 <div  style="padding:8px" *ngFor="let ticket of [1,2,3,4]">
   <app-ticket [loading]="loading"></app-ticket>
 </div>
 </ng-container>
+
+<ng-container *ngIf = "!loading && tickets.length === 0">
+  <app-not-found [message]="'You dont have any ticket Yet.'"></app-not-found>
+</ng-container>
+
+<div style="padding:8px" *ngFor="let ticket of tickets">
+  <app-ticket [ticket]="ticket.node"></app-ticket>
+</div>
 

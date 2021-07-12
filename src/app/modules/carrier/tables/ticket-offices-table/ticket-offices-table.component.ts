@@ -4,7 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { TicketOfficesTableDataSource } from './ticket-offices-table-datasource';
 import {TicketOfficesGQL, UsersGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-ticket-offices-table',
@@ -21,17 +23,23 @@ export class TicketOfficesTableComponent implements AfterViewInit, OnInit {
   ticketOffices = [];
 
   displayedColumns = ['name', 'city', 'buttons'];
+  loading = true;
+  notFound = false;
 
-  constructor(private ticketOfficesGQL: TicketOfficesGQL) {
+  constructor(private ticketOfficesGQL: TicketOfficesGQL,
+              translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
   }
 
   ngOnInit(): void {
     this.ticketOfficesGQL.watch({
       carrier: this.carrier
-    }).valueChanges.pipe(map((response) => response.data.ticketOffices)).subscribe(
+    }).valueChanges.pipe(tap(response => this.loading = response.loading ),map((response) => response.data.ticketOffices)).subscribe(
       (users) => {
         this.ticketOffices = users.edges.map(e => e.node);
         this.setUsersData();
+        this.notFound = (this.ticketOffices.length) < 1;
       }
     );
     this.setUsersData();

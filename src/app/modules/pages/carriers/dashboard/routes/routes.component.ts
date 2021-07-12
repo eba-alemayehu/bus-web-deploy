@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CarrierRouteDialogComponent} from '../../../../trip/dialog/carrier-route-dialog/carrier-route-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-routes',
@@ -11,7 +13,11 @@ import {MatDialog} from '@angular/material/dialog';
 export class RoutesComponent implements OnInit {
   @ViewChild('routesTable') routesTable;
 
-  constructor(public activatedRoute: ActivatedRoute, public matDialog: MatDialog) { }
+  constructor(public activatedRoute: ActivatedRoute, public matDialog: MatDialog,
+              translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
+  }
 
   ngOnInit(): void {
   }

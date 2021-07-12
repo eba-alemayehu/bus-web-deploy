@@ -9,6 +9,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {FlexModule} from "@angular/flex-layout";
 import {FilterFormModule} from "../../../trip/forms/filter-form/filter-form.module";
 import {MatDividerModule} from "@angular/material/divider";
+import {LangModule} from '../../../../lang.module';
+import {NotFoundModule} from '../../../common/not-found/not-found.module';
+import {TableShimmerModule} from '../../../common/table-shimmer/table-shimmer.module';
 
 
 
@@ -17,16 +20,19 @@ import {MatDividerModule} from "@angular/material/divider";
   exports: [
     TicketsTableComponent
   ],
-    imports: [
-        CommonModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatButtonModule,
-        MatIconModule,
-        FlexModule,
-        FilterFormModule,
-        MatDividerModule
-    ]
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    MatIconModule,
+    FlexModule,
+    FilterFormModule,
+    MatDividerModule,
+    LangModule,
+    NotFoundModule,
+    TableShimmerModule
+  ]
 })
 export class TicketsTableModule { }

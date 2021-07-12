@@ -4,8 +4,10 @@ import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
 import {TripsTableDataSource} from './trips-table-datasource';
 import {TripsGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import * as XLSX from 'xlsx';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-trips-table',
@@ -30,8 +32,12 @@ export class TripsTableComponent implements AfterViewInit, OnInit {
   trips = [];
 
   @Input() displayedColumns = ['carrier', 'departureTime', 'leavingFrom', 'destination'];
+  loading= true;
+  notFound= false;
 
-  constructor(private tripsGql: TripsGQL) {
+  constructor(private tripsGql: TripsGQL, translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
   }
 
   ngOnInit(): void {
@@ -43,11 +49,12 @@ export class TripsTableComponent implements AfterViewInit, OnInit {
       bulkRef: this.bulkRef,
       leavingFrom: this.leavingFrom,
       destination: this.destination,
-    }).valueChanges.pipe(
+    }).valueChanges.pipe(tap(response => this.loading = response.loading ),
       map(response => response.data.trips.edges)
     ).subscribe(trips => {
-      this.trips = trips.map(e => e.node);;
+      this.trips = trips.map(e => e.node);
       this.setTipsData();
+      this.notFound = (this.trips.length) < 1 ;
     });
     this.setTipsData();
   }

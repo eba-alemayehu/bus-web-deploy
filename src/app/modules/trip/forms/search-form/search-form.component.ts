@@ -12,6 +12,7 @@ export class SearchFormComponent implements OnInit {
   constructor() { }
 
   keyWords = new FormControl();
+  loading: false;
 
   ngOnInit(): void {
   }
