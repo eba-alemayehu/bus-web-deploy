@@ -1,7 +1,7 @@
 <mat-card>
   <mat-tab-group>
     <mat-tab label="Tickets">
-      <app-tickets-table [fileName]="fileName" [carrier]="(activatedRoute.params | async).id"></app-tickets-table>
+      <app-tickets-table [fileName]="'passengers-list.xlsx'" [carrier]="(activatedRoute.params | async).id"></app-tickets-table>
     </mat-tab>
     <mat-tab label="Second"> Content 2 </mat-tab>
     <mat-tab label="Third"> Content 3 </mat-tab>
