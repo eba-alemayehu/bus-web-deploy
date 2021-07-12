@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'ticketers', loadChildren: () => import('./tickters/tickters.module').then(m => m.TicktersModule) },
   { path: 'ticket-offices', loadChildren: () => import('./ticket-offices/ticket-offices.module').then(m => m.TicketOfficesModule) },
   { path: 'reports', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule) },
-  { path: 'routes', loadChildren: () => import('./routes/routes.module').then(m => m.RoutesModule) }];
+  { path: 'routes', loadChildren: () => import('./routes/routes.module').then(m => m.RoutesModule) },
+  { path: 'tracking', loadChildren: () => import('./tracking/tracking.module').then(m => m.TrackingModule) }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

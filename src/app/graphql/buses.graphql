@@ -5,6 +5,11 @@ query Buses($carrier: ID!){
         id
         busNumber
         plateNumber
+        location{
+          latitude
+          longitude
+          time
+        }
         carrier{
           id
           name
