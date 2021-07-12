@@ -34,12 +34,13 @@ export class MainDashboardChartComponent implements OnInit {
     ).subscribe(
       (response) => {
         this.lineChartLabels = response.tickets.map(
-          e => new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric'  }).format(new Date(e.date)));
-        this.lineChartData.push({
+          e => new Intl.DateTimeFormat('en', {month: 'short', day: 'numeric'}).format(new Date(e.date)));
+        this.lineChartData.unshift({
           data: response.tickets.map(e => e.count),
           borderColor: 'green',
           backgroundColor: 'rgba(0,255,0,0.3)',
-          label: 'Tickets'});
+          label: 'Tickets'
+        });
       }
     );
   }
