@@ -5,6 +5,7 @@ import {PaymentOrdersGQL} from '../../../../generated/graphql';
 import {ValidatePaymentGQL} from "../../../../generated/mutation/graphql";
 import {TranslateService} from '@ngx-translate/core';
 import {StorageService} from '../../../../core/service/storage.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-validate-payment-dialog',
@@ -14,14 +15,16 @@ import {StorageService} from '../../../../core/service/storage.service';
 export class ValidatePaymentDialogComponent implements OnInit {
   transactionId = {
     control: '',
-    error: false
+    error: null
   };
   paymentOrder = null;
+  loading = false;
   constructor(
     private formBuilder: FormBuilder,
     private matDialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private validatePaymentGQL: ValidatePaymentGQL,
+    private matSnackBar: MatSnackBar,
     translate: TranslateService , private storage: StorageService) {
     translate.use(this.storage.getLanguage('lang'));
   }
@@ -38,9 +41,12 @@ export class ValidatePaymentDialogComponent implements OnInit {
       paymentOrderId: this.paymentOrder.id,
       verification: $verification
     };
+    this.loading = true;
     this.validatePaymentGQL.mutate({ input: input}).subscribe(
       (order) => {
+        this.matSnackBar.open('Payment verified', null, {duration: 3000});
         this.matDialogRef.close(order);
+        this.loading = false;
       }
     );
   }
