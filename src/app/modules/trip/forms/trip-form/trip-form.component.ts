@@ -6,7 +6,7 @@ import {
   BusesGQL,
   BusSeatConfigurationGQL,
   BusSeatConfigurationsGQL,
-  CitiesGQL,
+  CitiesGQL, TripGQL,
   TripMutationGQL,
   TripsGQL
 } from '../../../../generated/graphql';
@@ -22,14 +22,32 @@ import {StorageService} from '../../../../core/service/storage.service';
 })
 export class TripFormComponent implements OnInit {
   @Input() carrier;
-  @Input() tripId;
   @Input() editMode = false;
   @Output() submitted: EventEmitter<any> = new EventEmitter<any>();
-  @Input('trip') set trip(value){
-    const trip = value;
-    trip.leavingFrom = trip.route.leavingFrom.id;
-    trip.destination = trip.route.destination.id;
-    this.tripFomGroup.patchValue(value);
+  @Input('id') set trip(value){
+    if(value){
+      this.tripGQL.watch({
+        id: value
+      }).valueChanges.pipe(map(response => response.data.trip))
+        .subscribe(trip => {
+          console.log('trip');
+          console.log(trip);
+          this.tripFomGroup.patchValue({
+            id: value,
+            leavingFrom: trip.route.leavingFrom.id,
+            destination: trip.route.destination.id,
+            departureDatetime: trip.departureTime,
+            arrivalDatetime: trip.arrivalTime,
+            reputation: 3
+          });
+          console.log(this.tripFomGroup.value);
+
+        });
+    }
+    // const trip = value;
+    // trip.leavingFrom = trip.route.leavingFrom.id;
+    // trip.destination = trip.route.destination.id;
+    // this.tripFomGroup.patchValue(value);
   }
   tripFomGroup = this.formBuilder.group({
     id: [''],
@@ -50,10 +68,12 @@ export class TripFormComponent implements OnInit {
   busSeatConfigurations$: Observable<any>;
   busSeatConfiguration: any;
   todayDate = new Date();
+  loading = false;
 
 
   constructor(
     private formBuilder: FormBuilder,
+    private tripGQL: TripGQL,
     private tripMutationGQL: TripMutationGQL,
     private busesGQL: BusesGQL,
     private busSeatConfigurationGQL: BusSeatConfigurationsGQL,
@@ -63,6 +83,7 @@ export class TripFormComponent implements OnInit {
     this.busSeatConfigurations$ = busSeatConfigurationGQL
       .watch({}).valueChanges
       .pipe(map((response) => response.data.busSeatConfigurations.edges));
+    this.loading = true;
     this.citiesGQL.watch({}).valueChanges.subscribe(
       (response) => {
         const cities = response.data.cities.edges;
@@ -70,6 +91,7 @@ export class TripFormComponent implements OnInit {
         this.allLeavingFromCity = cities;
         this.destinationCity = cities;
         this.allDestinationCity = cities;
+        this.loading = false;
       }
     );
   }
@@ -89,14 +111,16 @@ export class TripFormComponent implements OnInit {
 
   _submit(): void {
     const value = this.tripFomGroup.value;
-    value.carrier = this.carrier.id;
-    value.busSeatConfiguration = this.busSeatConfiguration.node.id;
+    value.carrier = this.carrier?.id;
+    value.busSeatConfiguration = this.busSeatConfiguration?.node.id;
+    this.loading = true;
     this.tripMutationGQL.mutate({
       input: this.tripFomGroup.value
     }).subscribe(
       (response) => {
         this.submitted.emit(response.data.trip);
         echo(response.data.trip);
+        this.loading = false;
       }
     );
   }

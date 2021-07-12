@@ -4,9 +4,11 @@ import {MatSort} from '@angular/material/sort';
 import {MatTable} from '@angular/material/table';
 import {RoutesTableDataSource} from './routes-table-datasource';
 import {RoutesGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {CarrierRouteDialogComponent} from '../../dialog/carrier-route-dialog/carrier-route-dialog.component';
+import {StorageService} from '../../../../core/service/storage.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-routes-table',
@@ -23,19 +25,25 @@ export class RoutesTableComponent implements AfterViewInit, OnInit {
   routes = [];
 
   displayedColumns = ['from', 'to', 'price', 'buttons'];
+  loading = true;
+  notFound = false;
 
-  constructor(private routesGQL: RoutesGQL, private matDialog: MatDialog) {
+  constructor(private routesGQL: RoutesGQL, private matDialog: MatDialog,
+              translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
   }
 
   ngOnInit(): void {
     this.routesGQL.watch({
       carrier: this.carrier,
     }).valueChanges
-      .pipe(map(e => e.data.routes.edges))
+      .pipe(tap(response => this.loading = response.loading ),map(e => e.data.routes.edges))
       .subscribe(
         (routes) => {
           this.routes = routes.map(e => e.node);
           this.setRoutesData();
+          this.notFound = (this.routes.length) < 1;
         }
       );
     this.setRoutesData();

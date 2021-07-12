@@ -12,6 +12,6 @@
     <input matInput type="number" formControlName="price" min="0">
   </mat-form-field>
   <div fxLayout="row-reverse">
-    <button mat-flat-button color="primary">Submit</button>
+    <button mat-flat-button color="primary" [disabled]="this.carrierRouteFormGroup.invalid">Submit</button>
   </div>
 </form>

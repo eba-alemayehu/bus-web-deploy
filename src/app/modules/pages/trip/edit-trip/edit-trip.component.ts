@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TripGQL} from '../../../../generated/graphql';
 
 @Component({
   selector: 'app-edit-trip',
@@ -9,10 +10,14 @@ import {ActivatedRoute} from '@angular/router';
 export class EditTripComponent implements OnInit {
 
   tripId;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  trip;
+  constructor(private activatedRoute: ActivatedRoute, private tripGQL: TripGQL, private router: Router) { }
 
   ngOnInit(): void {
     this.tripId = this.activatedRoute.snapshot.params.id;
   }
 
+  submitted($event: any) {
+    this.router.navigate(['/']);
+  }
 }

@@ -2,7 +2,7 @@
 <!--[class.align-items]="layout === 'row' && !(isHandset$ | async)"-->
 
 <div fxLayout="column">
-  <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto">
+  <form [formGroup]="tripFomGroup" (ngSubmit)="_submit()" style="margin: auto" [class.loading]="loading">
     <div  style="flex-flow: wrap">
       <app-select-route (routeChanged)="routeChanged($event)" [route]="route"></app-select-route>
       <div fxLayout="row" style="justify-content: space-between" [hidden]="hideDateInput">
@@ -45,7 +45,7 @@
         </button>
       </div>
       <div fxLayout="row-reverse" *ngIf="layout !== 'row'">
-        <button mat-flat-button type="submit" color="primary">{{'Search'| translate}}</button>
+        <button mat-flat-button type="submit" color="primary" [disabled]="tripFomGroup.invalid">{{'Search'| translate}}</button>
       </div>
 
     <div fxLayout="row" style="justify-content: center" *ngIf="layout === 'row'">

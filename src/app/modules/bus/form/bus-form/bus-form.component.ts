@@ -20,6 +20,7 @@ export class BusFormComponent implements OnInit {
     busNumber: ['', Validators.required],
     plateNumber: ['', Validators.required],
   });
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,9 +45,11 @@ export class BusFormComponent implements OnInit {
     input.busSeatConfiguration = this.busSeatConfiguration.node.id;
     input.carrier = this.carrier.id;
     echo(input);
+    this.loading = true;
     this.busMutation.mutate({input: input}).subscribe(
       (bus) => {
         this.route.navigate(['/dashboard/' + this.carrier.id + '/buses']);
+        this.loading = false;
       }
     );
   }

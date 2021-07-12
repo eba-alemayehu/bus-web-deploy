@@ -1,32 +1,34 @@
 <div class="mat-elevation-z0">
   <div style="float: right;">
-    <button mat-flat-button color="primary" (click)="generateReport()" style="margin: 16px">Generate Trip List</button>
+    <button mat-flat-button color="primary" (click)="generateReport()" style="margin: 16px">{{'Generate Trip List'| translate}}</button>
   </div>
-  <table id="trip-table" mat-table class="full-width-table" matSort aria-label="Elements">
+  <table id="trip-table" mat-table class="full-width-table" matSort aria-label="Elements" [class.loading]="loading">
     <!-- Id Column -->
     <ng-container matColumnDef="carrier">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Carrier</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Carrier'| translate}}</th>
       <td mat-cell *matCellDef="let row">{{row.carrier.name}}</td>
     </ng-container>
     <!-- Id Column -->
     <ng-container matColumnDef="departureTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Departure Time</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Departure Time'| translate}}</th>
       <td mat-cell *matCellDef="let row">{{row.departureTime | date:'medium'}}</td>
     </ng-container>
     <!-- Id Column -->
     <ng-container matColumnDef="leavingFrom">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Leaving From</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Leaving From'| translate}}</th>
       <td mat-cell *matCellDef="let row">{{row.route.leavingFrom.name}}</td>
     </ng-container>
     <!-- Id Column -->
     <ng-container matColumnDef="destination">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Destination</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Destination'| translate}}</th>
       <td mat-cell *matCellDef="let row">{{row.route.destination.name}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <app-not-found *ngIf="notFound" [message]="'no trips found'| translate"></app-not-found>
+  <app-table-shimmer height="25" width="750" *ngIf="loading"></app-table-shimmer>
 
   <mat-paginator #paginator
       [length]="dataSource?.data.length"

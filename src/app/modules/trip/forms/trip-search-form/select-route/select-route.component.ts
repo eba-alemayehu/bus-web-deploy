@@ -31,8 +31,10 @@ export class SelectRouteComponent implements OnInit {
 
   allLeavingFromCity = [];
   allDestinationCity = [];
+  loading= false;
 
   constructor(private formBuilder: FormBuilder, private citiesGQL: CitiesGQL) {
+    this.loading = true;
     this.citiesGQL.watch({}).valueChanges.subscribe(
       (response) => {
         const cities = response.data.cities.edges;
@@ -44,6 +46,7 @@ export class SelectRouteComponent implements OnInit {
           this.routeFromGroup.patchValue(this.$route);
           this.$route = false;
         }
+        this.loading = false;
       }
     );
     this.routeFromGroup = this.formBuilder.group({

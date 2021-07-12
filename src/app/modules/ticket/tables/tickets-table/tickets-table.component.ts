@@ -5,9 +5,11 @@ import {MatTable} from '@angular/material/table';
 import {TicketsTableDataSource} from './tickets-table-datasource';
 import * as XLSX from 'xlsx';
 import {TicketsGQL} from '../../../../generated/graphql';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {ActivatedRoute} from "@angular/router";
 import {echo} from "../../../../util/print";
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-tickets-table',
@@ -28,8 +30,13 @@ export class TicketsTableComponent implements AfterViewInit, OnInit {
   filterParams;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['ticket_number', 'name', 'phone', 'seat', 'destination', 'leavingFrom'];
+  loading = true;
+  notFound = false;
 
-  constructor(private ticketsGQL: TicketsGQL) {
+  constructor(private ticketsGQL: TicketsGQL,
+              translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
   }
 
   ngOnInit(): void {
@@ -56,10 +63,11 @@ export class TicketsTableComponent implements AfterViewInit, OnInit {
       tripDepartureTimeLte: tripDepartureTimeLte,
       isBooked: isBooked,
       isPaid: isPaid
-    }).valueChanges.pipe(map(response => response.data.tickets)).subscribe(
+    }).valueChanges.pipe(tap(response => this.loading = response.loading ),map(response => response.data.tickets)).subscribe(
       (tickets) => {
         this.tickets = tickets.edges.map(e => e.node);
         this.setTicketsData();
+        this.notFound = (this.tickets.length) < 1;
       }
     );
   }

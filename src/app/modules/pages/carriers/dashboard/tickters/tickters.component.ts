@@ -4,6 +4,8 @@ import {TripDriverOrAssistantAddDialogComponent} from '../../../../trip/dialog/t
 import {MatDialog} from '@angular/material/dialog';
 import {echo} from '../../../../../util/print';
 import {CarrierTicketerGQL, CarrierTicketerMutation} from '../../../../../generated/mutation/graphql';
+import {TranslateService} from '@ngx-translate/core';
+import {StorageService} from '../../../../../core/service/storage.service';
 
 @Component({
   selector: 'app-tickters',
@@ -18,7 +20,10 @@ export class TicktersComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private carrierTicketerGQL: CarrierTicketerGQL,
-    private matDialog: MatDialog) {
+    private matDialog: MatDialog,
+    translate: TranslateService , private storageService: StorageService
+  ) {
+    translate.use(this.storageService.getLanguage('lang'));
     this.activatedRoute.params.subscribe(
       (params) => {
         this.ticketerCarrierId = params.id;

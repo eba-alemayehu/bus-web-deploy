@@ -1,11 +1,11 @@
-<form [formGroup]="ticketOfficeForm" (ngSubmit)="submit()">
+<form [formGroup]="ticketOfficeForm" (ngSubmit)="submit()" [class.loading]="loading">
   <div fxLayout="column">
-    <h1>Ticket office</h1>
+    <h1>{{'Ticket office'| translate}}</h1>
     <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
-      <input type="text" placeholder="Name" formControlName="name" name="name" matInput>
+      <mat-label>{{'Name'| translate}}</mat-label>
+      <input type="text" [placeholder]="'Name'| translate" formControlName="name" name="name" matInput>
       <mat-error *ngIf="ticketOfficeForm.controls['name'].hasError('required')">
-        Name is required
+        {{'Name is required'| translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -47,7 +47,7 @@
         [longitude]="this.ticketOfficeForm.value.longitude">
 
         <agm-info-window>
-          <strong>InfoWindow content</strong>
+          <strong>{{'InfoWindow content'| translate}}</strong>
         </agm-info-window>
 
       </agm-marker>
@@ -61,7 +61,7 @@
 
     </agm-map>
     <div fxLayout="row-reverse" style="margin-top: 2em">
-      <button mat-flat-button color="primary" type="submit">{{'Submit'| translate}}</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="this.ticketOfficeForm.invalid">{{'Submit'| translate}}</button>
     </div>
 
   </div>

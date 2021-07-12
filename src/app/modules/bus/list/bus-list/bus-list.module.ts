@@ -6,6 +6,7 @@ import {BusTumbModule} from '../../component/bus-tumb/bus-tumb.module';
 import {MatCardModule} from '@angular/material/card';
 import {RouterModule} from '@angular/router';
 import {AngularSvgIconModule} from "angular-svg-icon";
+import {LangModule} from '../../../../lang.module';
 
 
 
@@ -20,7 +21,8 @@ import {AngularSvgIconModule} from "angular-svg-icon";
         BusTumbModule,
         MatCardModule,
         RouterModule,
-      AngularSvgIconModule.forRoot(),
+        AngularSvgIconModule.forRoot(),
+        LangModule,
     ]
 })
 export class BusListModule { }

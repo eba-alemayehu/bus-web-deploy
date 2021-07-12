@@ -16,8 +16,10 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./ticket-office-form.component.scss']
 })
 export class TicketOfficeFormComponent implements OnInit {
+  loading = false;
   @Input('id') set id(value) {
     if (value) {
+      this.loading = true;
       this.ticketOfficeGQLQuery.watch({
         ticketOffice: value,
       }).valueChanges.pipe(map(response => response.data.ticketOffice)).subscribe(
@@ -32,6 +34,7 @@ export class TicketOfficeFormComponent implements OnInit {
             latitude: ticketOffice.city.latitude,
             longitude: ticketOffice.city.longitude,
           });
+          this.loading = false;
         }
       );
     }

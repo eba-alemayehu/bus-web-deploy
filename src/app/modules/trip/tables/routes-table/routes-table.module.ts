@@ -4,6 +4,9 @@ import { RoutesTableComponent } from './routes-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {LangModule} from '../../../../lang.module';
+import {NotFoundModule} from '../../../common/not-found/not-found.module';
+import {TableShimmerModule} from '../../../common/table-shimmer/table-shimmer.module';
 
 
 
@@ -16,7 +19,10 @@ import { MatSortModule } from '@angular/material/sort';
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    LangModule,
+    NotFoundModule,
+    TableShimmerModule
   ]
 })
 export class RoutesTableModule { }

@@ -21,7 +21,7 @@ export class TripSearchFormComponent implements OnInit {
   @Input() hideDateInput = false;
   todayDate = new Date();
   route;
-
+  loading = false;
   @Input('input') set input(value) {
     this.tripFomGroup.patchValue(value);
     this.route = {
