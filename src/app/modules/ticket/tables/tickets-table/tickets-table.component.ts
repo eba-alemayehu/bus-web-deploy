@@ -6,8 +6,8 @@ import {TicketsTableDataSource} from './tickets-table-datasource';
 import * as XLSX from 'xlsx';
 import {TicketsGQL} from '../../../../generated/graphql';
 import {map} from 'rxjs/operators';
-import {ActivatedRoute} from "@angular/router";
-import {echo} from "../../../../util/print";
+import {ActivatedRoute} from '@angular/router';
+import {echo} from '../../../../util/print';
 
 @Component({
   selector: 'app-tickets-table',
